@@ -1,0 +1,17 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (NO subir al repo — contiene contraseñas)
+.env
+
+# Imágenes subidas por usuarios
+bellaveste/backend/uploads/*
+!bellaveste/backend/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
