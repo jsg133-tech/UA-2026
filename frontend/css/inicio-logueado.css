@@ -1,0 +1,343 @@
+:root {
+    --vino: #5a0d16;
+    --vino-oscuro: #3d0a11;
+    --claro: #f4ece4;
+    --fondo: #d9d8de;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Cormorant Garamond", serif;
+    background:
+        radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
+        linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
+    padding: 18px 14px 30px;
+}
+
+/* CONTENEDOR APP */
+.contenedor-app {
+    width: min(100%, 390px);
+    margin: 0 auto;
+    background: #efe4dc;
+    border: 1px solid #ccbcb1;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 26px rgba(69, 32, 41, 0.25);
+}
+
+/* BARRA SUPERIOR */
+.barra-superior {
+    background: linear-gradient(120deg, #4d0c15, #5f1120);
+    color: #f4e9df;
+}
+
+.fila-marca {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px 12px;
+}
+
+.boton-icono {
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.marca {
+    text-align: center;
+}
+
+.marca h1 {
+    font-family: "Cinzel", serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 1.6rem;
+}
+
+.marca p {
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    opacity: .75;
+}
+
+.iconos-acciones {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+/* USUARIO */
+.usuario-barra {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    background: rgba(240, 214, 196, 0.85);
+    color: #674249;
+}
+
+.nombre-usuario {
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* SECCIONES */
+.colecciones,
+.outfit-dia {
+    padding: 14px 14px 0;
+    text-align: center;
+}
+
+.colecciones h2,
+.outfit-dia h2 {
+    font-family: "Cinzel", serif;
+    font-size: 1.4rem;
+    color: #6d303e;
+    position: relative;
+}
+
+.colecciones h2::before,
+.colecciones h2::after,
+.outfit-dia h2::before,
+.outfit-dia h2::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: rgba(118,60,72,.45);
+}
+
+.colecciones h2::before,
+.outfit-dia h2::before { left:0; }
+
+.colecciones h2::after,
+.outfit-dia h2::after { right:0; }
+
+.colecciones p,
+.outfit-dia p {
+    font-size: .9rem;
+    color: #6f4a52;
+    margin-bottom: 12px;
+}
+
+/* CATEGORIAS */
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+}
+
+.categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.categoria img {
+    width: 70px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.categoria span {
+    font-family: "Cinzel", serif;
+    font-size: .75rem;
+}
+
+/* TARJETA OUTFIT */
+.tarjeta-outfit {
+    background: linear-gradient(160deg,#f4e7de,#e6d7ce);
+    border-radius: 10px;
+    margin-top: 6px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 10px;
+    position: relative;
+}
+
+.imagen-outfit img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.info-outfit {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-outfit h3 {
+    font-family: "Cinzel", serif;
+    font-size: 1.3rem;
+    color: #6a2f3d;
+}
+
+.mini-galeria {
+    display: grid;
+    grid-template-columns: 24px 1fr 24px;
+    align-items: center;
+}
+
+.mini-galeria button {
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+}
+
+.mini-galeria img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ETIQUETAS */
+.etiquetas {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #c8b6ac;
+    border-bottom: 1px solid #c8b6ac;
+    padding: 3px 0;
+}
+
+.etiquetas span {
+    font-family: "Cinzel", serif;
+    font-size: .7rem;
+}
+
+/* AUTOR */
+.autor {
+    margin-top: auto;
+    background: #d1bbb0;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px 4px 4px;
+}
+
+.autor img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.fecha {
+    position: absolute;
+    left: 10px;
+    bottom: 6px;
+    font-size: .8rem;
+}
+
+/* BOTON FINAL */
+.boton-armario {
+    display: block;
+    margin-top: 18px;
+    background: linear-gradient(90deg,#4d0c15,#5f1120);
+    color: #f8eee8;
+    text-decoration: none;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 1.8rem;
+    padding: 9px;
+}
+
+/* TABLET */
+@media (min-width:768px){
+    .contenedor-app{
+        width:430px;
+    }
+
+    .imagen-outfit img{
+        height:170px;
+    }
+}
+
+/* =========================
+   DISEÑO ORDENADOR
+   ========================= */
+@media (min-width: 1024px){
+
+    body{
+        padding:0;
+    }
+
+    /* ocupa toda la pantalla */
+    .contenedor-app{
+        width:100%;
+        max-width:none;
+        margin:0;
+        border:none;
+        border-radius:0;
+        box-shadow:none;
+    }
+
+    /* más aire lateral */
+    .colecciones,
+    .outfit-dia{
+        padding:40px 60px;
+    }
+
+    /* DOS OUTFITS EN FILA */
+    .outfit-dia{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:40px;
+        align-items:start;
+    }
+
+    /* título ocupa toda la fila */
+    .outfit-dia h2,
+    .outfit-dia p{
+        grid-column:1 / -1;
+        text-align:center;
+    }
+
+    /* tarjetas más grandes */
+    .tarjeta-outfit{
+        width:100%;
+        grid-template-columns: 1.3fr 1fr;
+        padding:18px;
+    }
+
+    .imagen-outfit img{
+        height:260px;
+    }
+
+    .mini-galeria img{
+        height:110px;
+    }
+
+    /* botón inferior ancho completo */
+    .boton-armario{
+        width:100%;
+        margin-top:40px;
+        font-size:2rem;
+    }
+
+}
