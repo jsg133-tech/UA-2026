@@ -2,6 +2,10 @@
 
 Aplicación de armario personal de moda, orientada a móviles. Permite registrarse, iniciar sesión y gestionar outfits con foto, talla, color y temporada, organizados por categorías.
 
+> 🌐 **API pública desplegada en Railway:**
+> **`https://ua-2026-production.up.railway.app`**
+> Funciona para todos los compañeros sin necesidad de correr nada localmente.
+
 ---
 
 ## 🗂️ Estructura del proyecto
@@ -33,8 +37,8 @@ bellaveste/
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/carmenvalle/UA.git
-cd UA/bellaveste/backend
+git clone https://github.com/jsg133-tech/UA-2026.git
+cd UA-2026/bellaveste/backend
 ```
 
 ### 2. Instalar dependencias
@@ -108,6 +112,8 @@ MongoDB Compass te permite ver y editar la base de datos visualmente.
 ---
 
 ## 📡 Endpoints de la API
+
+Base URL: `https://ua-2026-production.up.railway.app`
 
 | Método | Ruta | Auth | Descripción |
 |--------|------|------|-------------|
