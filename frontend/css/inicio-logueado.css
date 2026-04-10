@@ -20,15 +20,63 @@ body {
     padding: 18px 14px 30px;
 }
 
+nav {
+    background-color: #5a0d16;
+    position: relative;
+}
+
+/* icono hamburguesa */
+nav label {
+    display: block;
+    font-size: 1.8rem;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* menú */
+nav ul {
+    list-style: none;
+    position: fixed;          /* 👈 CLAVE */
+    top: 0;
+    left: -100%;              /* 👈 oculto */
+    width: 260px;
+    height: 100vh;
+    background: #5a0d16;
+
+    display: flex;
+    flex-direction: column;   /* 👈 vertical */
+    align-items: flex-start;
+
+    padding: 60px 20px;
+    gap: 20px;
+
+    transition: 0.3s;
+    z-index: 999;
+}
+
+nav ul li {
+    width: 100%;
+}
+
+nav ul li a {
+    display: block;
+    width: 100%;
+    color: #f4e9df;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+    color: #d6bfa6;
+}
+
 /* CONTENEDOR APP */
 .contenedor-app {
-    width: min(100%, 390px);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
     background: #efe4dc;
-    border: 1px solid #ccbcb1;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 8px 26px rgba(69, 32, 41, 0.25);
 }
 
 /* BARRA SUPERIOR */
@@ -107,6 +155,19 @@ body {
     text-align: center;
 }
 
+.outfit-dia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px;
+}
+
+.outfit-dia h2,
+.outfit-dia p {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
 .colecciones h2,
 .outfit-dia h2 {
     font-family: "Cinzel", serif;
@@ -124,14 +185,18 @@ body {
     top: 50%;
     width: 30%;
     height: 1px;
-    background: rgba(118,60,72,.45);
+    background: rgba(118, 60, 72, .45);
 }
 
 .colecciones h2::before,
-.outfit-dia h2::before { left:0; }
+.outfit-dia h2::before {
+    left: 0;
+}
 
 .colecciones h2::after,
-.outfit-dia h2::after { right:0; }
+.outfit-dia h2::after {
+    right: 0;
+}
 
 .colecciones p,
 .outfit-dia p {
@@ -143,8 +208,10 @@ body {
 /* CATEGORIAS */
 .categorias {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+    width: 100%;
+    margin-top: 50px;
 }
 
 .categoria {
@@ -155,7 +222,7 @@ body {
 }
 
 .categoria img {
-    width: 70px;
+    width: 100px;
     aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
@@ -168,7 +235,7 @@ body {
 
 /* TARJETA OUTFIT */
 .tarjeta-outfit {
-    background: linear-gradient(160deg,#f4e7de,#e6d7ce);
+    background: linear-gradient(160deg, #f4e7de, #e6d7ce);
     border-radius: 10px;
     margin-top: 6px;
     padding: 10px;
@@ -207,6 +274,9 @@ body {
     border: none;
     background: transparent;
     font-size: 1.4rem;
+    color: #6a2f3d;
+    cursor: pointer;
+    width: 5px;
 }
 
 .mini-galeria img {
@@ -258,7 +328,7 @@ body {
 .boton-armario {
     display: block;
     margin-top: 18px;
-    background: linear-gradient(90deg,#4d0c15,#5f1120);
+    background: linear-gradient(90deg, #4d0c15, #5f1120);
     color: #f8eee8;
     text-decoration: none;
     text-align: center;
@@ -267,77 +337,183 @@ body {
     padding: 9px;
 }
 
+#chkMenu {
+    display: none;
+}
+
+/* abrir menú */
+#chkMenu:checked+ul {
+    left: 0;
+}
+
 /* TABLET */
-@media (min-width:768px){
-    .contenedor-app{
-        width:430px;
+@media (min-width:768px) {
+    .contenedor-app {
+        width: 430px;
     }
 
-    .imagen-outfit img{
-        height:170px;
+    .imagen-outfit img {
+        height: 170px;
     }
+
 }
 
 /* =========================
    DISEÑO ORDENADOR
    ========================= */
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
 
-    body{
-        padding:0;
+    body {
+        padding: 0;
     }
 
     /* ocupa toda la pantalla */
-    .contenedor-app{
-        width:100%;
-        max-width:none;
-        margin:0;
-        border:none;
-        border-radius:0;
-        box-shadow:none;
+    .contenedor-app {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
     }
 
     /* más aire lateral */
     .colecciones,
-    .outfit-dia{
-        padding:40px 60px;
+    .outfit-dia {
+        padding: 40px 60px;
     }
 
     /* DOS OUTFITS EN FILA */
-    .outfit-dia{
-        display:grid;
+    .outfit-dia {
+        display: grid;
         grid-template-columns: 1fr 1fr;
-        gap:40px;
-        align-items:start;
+        gap: 40px;
+        align-items: start;
     }
 
     /* título ocupa toda la fila */
     .outfit-dia h2,
-    .outfit-dia p{
-        grid-column:1 / -1;
-        text-align:center;
+    .outfit-dia p {
+        grid-column: 1 / -1;
+        text-align: center;
     }
 
     /* tarjetas más grandes */
-    .tarjeta-outfit{
-        width:100%;
+    .tarjeta-outfit {
+        width: 100%;
         grid-template-columns: 1.3fr 1fr;
-        padding:18px;
+        padding: 18px;
     }
 
-    .imagen-outfit img{
-        height:260px;
+    .imagen-outfit img {
+        height: 260px;
     }
 
-    .mini-galeria img{
-        height:110px;
+    .mini-galeria img {
+        height: 110px;
     }
 
     /* botón inferior ancho completo */
-    .boton-armario{
-        width:100%;
-        margin-top:40px;
-        font-size:2rem;
+    .boton-armario {
+        width: 100%;
+        margin-top: 40px;
+        font-size: 2rem;
     }
 
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 0;
+    }
+
+    .contenedor-app {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    /* SECCIONES MÁS COMPACTAS */
+    .colecciones,
+    .outfit-dia {
+        padding: 15px 12px;
+    }
+
+    /* CATEGORÍAS MÁS PEQUEÑAS */
+    .categorias {
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .categoria img {
+        width: 70px;
+    }
+
+    .categoria span {
+        font-size: 0.6rem;
+    }
+
+    /* OUTFITS MÁS COMPACTOS */
+    .outfit-dia {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* TARJETA MÁS PEQUEÑA */
+    .tarjeta-outfit {
+        grid-template-columns: 1fr 1fr; /* 👈 vuelve a horizontal */
+        padding: 8px;
+        gap: 8px;
+    }
+
+    /* IMAGEN MÁS BAJA */
+    .imagen-outfit img {
+        height: 120px;
+    }
+
+    /* INFO MÁS COMPACTA */
+    .info-outfit {
+        gap: 4px;
+    }
+
+    .info-outfit h3 {
+        font-size: 0.9rem;
+    }
+
+    /* MINI GALERÍA MÁS PEQUEÑA */
+    .mini-galeria img {
+        height: 60px;
+    }
+
+    .mini-galeria button {
+        font-size: 1rem;
+    }
+
+    /* ETIQUETAS MÁS PEQUEÑAS */
+    .etiquetas span {
+        font-size: 0.55rem;
+    }
+
+    /* AUTOR MÁS PEQUEÑO */
+    .autor {
+        padding: 2px 6px;
+    }
+
+    .autor img {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* FECHA MÁS DISCRETA */
+    .fecha {
+        font-size: 0.6rem;
+    }
+
+    /* BOTÓN FINAL */
+    .boton-armario {
+        font-size: 1.2rem;
+        padding: 10px;
+        margin-top: 15px;
+    }
 }

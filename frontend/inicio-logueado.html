@@ -8,20 +8,36 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/inicio-logueado.css">
+    <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
 </head>
 
 <body>
-
-<main class="contenedor-app">
-
     <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
 
-            <button class="boton-icono">☰</button>
+            <nav>
+                <label for="chkMenu"><i class="icon-menu"></i></label>
+                <input type="checkbox" id="chkMenu">
+
+                <ul id="menu">
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
+                    <li><a href="./colecciones.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                    <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><i class="icon-moon"></i>DARK MODE</li>
+                    <li><i class="icon-setting"></i>SETTING</li>
+                </ul>
+
+            </nav>
 
             <div class="marca">
                 <h1>BELLAVESTE</h1>
@@ -29,115 +45,116 @@
             </div>
 
             <div class="iconos-acciones">
-                <span>🔍</span>
-                <span>👤</span>
+                <button class="boton-icono"><i class="icon-search"></i></button>
+                <button class="boton-icono"><i class="icon-login"></i></button>
             </div>
-
         </div>
 
         <div class="usuario-barra">
             <span class="nombre-usuario">MIRANDA WANDA</span>
-            <img class="avatar" src="images/Tulipanes.jfif" alt="Usuario">
+            <img class="avatar" src="images/perfil.jfif" alt="Usuario">
         </div>
     </header>
 
-    <!-- COLECCIONES -->
-    <section class="colecciones">
-        <h2>COLECCIONES</h2>
-        <p>DISCOVER FASHION YOUR WAY</p>
+    <main class="contenedor-app">
+        <!-- COLECCIONES -->
+        <section class="colecciones">
+            <h2>COLECCIONES</h2>
+            <p>DISCOVER FASHION YOUR WAY</p>
 
-        <div class="categorias">
-            <article class="categoria">
-                <img src="images/fondo.jpg" alt="">
-                <span>SEASON</span>
+            <div class="categorias">
+                <article class="categoria">
+                    <img src="images/temporada.jfif" alt="">
+                    <span>SEASON</span>
+                </article>
+
+                <article class="categoria">
+                    <img src="images/color.jfif" alt="">
+                    <span>COLOR</span>
+                </article>
+
+                <article class="categoria">
+                    <img src="images/ocasion.jfif" alt="">
+                    <span>MOOD</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- OUTFIT -->
+        <section class="outfit-dia">
+            <h2>OUTFIT</h2>
+            <p>WHAT WILL YOU WEAR TODAY?</p>
+
+            <article class="tarjeta-outfit">
+
+                <div class="imagen-outfit">
+                    <img src="images/fondo-ord.jfif" alt="">
+                </div>
+
+                <div class="info-outfit">
+
+                    <h3>COFFEE CHIC</h3>
+
+                    <div class="mini-galeria">
+                        <button><i class="icon-left-open"></i></button>
+                        <img src="images/tacón.jfif" alt="">
+                        <button><i class="icon-right-open"></i></button>
+                    </div>
+
+                    <div class="etiquetas">
+                        <span>AUTUMN</span>
+                        <span>CASUAL</span>
+                    </div>
+
+                    <div class="autor">
+                        <img src="images/perfil.jfif" alt="">
+                        <span>Carla García</span>
+                    </div>
+
+                </div>
+
+                <time class="fecha">12 de febrero de 2026</time>
+
             </article>
 
-            <article class="categoria">
-                <img src="images/Tulipanes.jfif" alt="">
-                <span>COLOR</span>
+            <article class="tarjeta-outfit">
+
+                <div class="imagen-outfit">
+                    <img src="images/fondo-ord.jfif" alt="">
+                </div>
+
+                <div class="info-outfit">
+
+                    <h3>COFFEE CHIC</h3>
+
+                    <div class="mini-galeria">
+                        <button><i class="icon-left-open"></i></button>
+                        <img src="images/fondo.jpg" alt="">
+                        <button><i class="icon-right-open"></i></button>
+                    </div>
+
+                    <div class="etiquetas">
+                        <span>AUTUMN</span>
+                        <span>CASUAL</span>
+                    </div>
+
+                    <div class="autor">
+                        <img src="images/Tulipanes.jfif" alt="">
+                        <span>Carla García</span>
+                    </div>
+
+                </div>
+
+                <time class="fecha">12 de febrero de 2026</time>
+
             </article>
+        </section>
 
-            <article class="categoria">
-                <img src="images/fondo-ord.jfif" alt="">
-                <span>MOOD</span>
-            </article>
-        </div>
-    </section>
+        <!-- BOTON FINAL -->
+        <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
 
-    <!-- OUTFIT -->
-    <section class="outfit-dia">
-        <h2>OUTFIT</h2>
-        <p>WHAT WILL YOU WEAR TODAY?</p>
-
-        <article class="tarjeta-outfit">
-
-            <div class="imagen-outfit">
-                <img src="images/fondo-ord.jfif" alt="">
-            </div>
-
-            <div class="info-outfit">
-
-                <h3>COFFEE CHIC</h3>
-
-                <div class="mini-galeria">
-                    <button>‹</button>
-                    <img src="images/fondo.jpg" alt="">
-                    <button>›</button>
-                </div>
-
-                <div class="etiquetas">
-                    <span>AUTUMN</span>
-                    <span>CASUAL</span>
-                </div>
-
-                <div class="autor">
-                    <img src="images/Tulipanes.jfif" alt="">
-                    <span>Carla García</span>
-                </div>
-
-            </div>
-
-            <time class="fecha">12 de febrero de 2026</time>
-
-        </article>
-
-        <article class="tarjeta-outfit">
-
-            <div class="imagen-outfit">
-                <img src="images/fondo-ord.jfif" alt="">
-            </div>
-
-            <div class="info-outfit">
-
-                <h3>COFFEE CHIC</h3>
-
-                <div class="mini-galeria">
-                    <button>‹</button>
-                    <img src="images/fondo.jpg" alt="">
-                    <button>›</button>
-                </div>
-
-                <div class="etiquetas">
-                    <span>AUTUMN</span>
-                    <span>CASUAL</span>
-                </div>
-
-                <div class="autor">
-                    <img src="images/Tulipanes.jfif" alt="">
-                    <span>Carla García</span>
-                </div>
-
-            </div>
-
-            <time class="fecha">12 de febrero de 2026</time>
-
-        </article>
-    </section>
-
-    <!-- BOTON FINAL -->
-    <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
-
-</main>
+    </main>
 
 </body>
+
 </html>
