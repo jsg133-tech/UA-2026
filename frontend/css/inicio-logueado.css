@@ -37,15 +37,18 @@ nav label {
 /* menú */
 nav ul {
     list-style: none;
-    position: fixed;          /* 👈 CLAVE */
+    position: fixed;
+    /* 👈 CLAVE */
     top: 0;
-    left: -100%;              /* 👈 oculto */
+    left: -100%;
+    /* 👈 oculto */
     width: 260px;
     height: 100vh;
     background: #5a0d16;
 
     display: flex;
-    flex-direction: column;   /* 👈 vertical */
+    flex-direction: column;
+    /* 👈 vertical */
     align-items: flex-start;
 
     padding: 60px 20px;
@@ -346,6 +349,45 @@ nav ul li a:hover {
     left: 0;
 }
 
+/* ocultar checkbox */
+#chkPerfil {
+    display: none;
+}
+
+/* hacer clicable todo el bloque */
+.perfil-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* menú perfil oculto */
+.menu-perfil {
+    position: absolute;
+    right: 12px;
+    top: 95px;
+    background: #e6d7ce;
+    border-radius: 8px;
+    padding: 10px;
+    list-style: none;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* estilo del botón logout */
+.menu-perfil li a {
+    text-decoration: none;
+    color: #5a0d16;
+    font-family: "Cinzel", serif;
+    font-size: 0.9rem;
+}
+
+/* mostrar cuando está activo */
+#chkPerfil:checked ~ .menu-perfil {
+    display: block;
+}
+
 /* TABLET */
 @media (min-width:768px) {
     .contenedor-app {
@@ -439,6 +481,21 @@ nav ul li a:hover {
         padding: 15px 12px;
     }
 
+    /* ARREGLAR LÍNEAS EN MÓVIL */
+    .colecciones h2::before,
+    .colecciones h2::after,
+    .outfit-dia h2::before,
+    .outfit-dia h2::after {
+        width: 25%;
+        /* más cortas */
+    }
+
+    .colecciones h2,
+    .outfit-dia h2 {
+        font-size: 1.1rem;
+        /* opcional: más pequeño */
+    }
+
     /* CATEGORÍAS MÁS PEQUEÑAS */
     .categorias {
         gap: 8px;
@@ -462,7 +519,8 @@ nav ul li a:hover {
 
     /* TARJETA MÁS PEQUEÑA */
     .tarjeta-outfit {
-        grid-template-columns: 1fr 1fr; /* 👈 vuelve a horizontal */
+        grid-template-columns: 1fr 1fr;
+        /* 👈 vuelve a horizontal */
         padding: 8px;
         gap: 8px;
     }
