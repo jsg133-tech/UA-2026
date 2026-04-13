@@ -1,0 +1,155 @@
+:root {
+    --vino:       #5a0d16;
+    --vino-oscuro:#3d0a11;
+    --claro:      #f4ece4;
+    --beige:      #c9b2a3;
+    --texto:      #6f4a52;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Cormorant Garamond", serif;
+    background:
+        radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
+        linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── HEADER ── */
+.barra-superior { text-align: center; }
+
+.marca {
+    background: var(--vino);
+    color: var(--claro);
+    padding: 50px 20px;
+}
+
+.marca h1 {
+    font-family: "Cinzel", serif;
+    font-size: 2.6rem;
+    letter-spacing: 4px;
+}
+
+.marca p {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    opacity: 0.8;
+}
+
+.subtitulo {
+    background: var(--beige);
+    padding: 15px;
+    border-bottom: 2px solid #a98e7e;
+}
+
+.subtitulo h2 {
+    font-family: "Cinzel", serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: var(--vino);
+}
+
+/* ── CONTENEDOR ── */
+.contenedor {
+    max-width: 480px;
+    margin: 70px auto;
+    padding: 0 15px;
+    flex: 1;
+    width: 100%;
+}
+
+/* ── FORMULARIO ── */
+.formulario {
+    background: var(--beige);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── CAMPOS ── */
+.campo { display: flex; flex-direction: column; gap: 6px; }
+
+.campo label {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--vino);
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #f4ece4;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--vino-oscuro);
+    outline: none;
+    transition: 0.2s;
+    border-radius: 4px;
+}
+
+.campo input:focus {
+    background: #fff;
+    box-shadow: 0 0 0 1.5px var(--vino);
+}
+
+/* ── BOTÓN LOGIN ── */
+.boton-login {
+    width: 100%;
+    padding: 12px;
+    background: var(--vino);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: "Cinzel", serif;
+    letter-spacing: 2px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 4px;
+}
+
+.boton-login:hover    { background: var(--vino-oscuro); }
+.boton-login:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── ENLACE REGISTRO ── */
+.enlace-registro {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--texto);
+}
+
+.enlace-registro a {
+    color: var(--vino);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ── FOOTER ── */
+footer { padding: 20px; text-align: center; }
+
+.boton-armario {
+    display: block;
+    margin-top: 18px;
+    background: linear-gradient(90deg, #4d0c15, #5f1120);
+    color: #f8eee8;
+    text-decoration: none;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 1.8rem;
+    padding: 9px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .marca { padding: 35px 15px; }
+    .marca h1 { font-size: 2rem; }
+    .contenedor { margin: 40px auto; }
+    .formulario { padding: 25px; }
+}
