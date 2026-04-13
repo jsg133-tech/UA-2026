@@ -1,0 +1,140 @@
+:root {
+    --vino: #5a0d16;
+    --vino-oscuro: #3d0a11;
+    --claro: #f4ece4;
+    --fondo: #d9d8de;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Cormorant Garamond", serif;
+    background:
+        radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
+        linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
+    padding: 18px 14px 30px;
+}
+
+/* CONTENEDOR (más aire arriba y abajo) */
+.colecciones {
+    padding: 80px 20px 50px;
+    text-align: center;
+}
+
+/* TITULO */
+.colecciones h2 {
+    font-family: "Cinzel", serif;
+    font-size: 2.4rem;
+    letter-spacing: 6px;
+    color: var(--vino);
+    margin-bottom: 18px; /* 👈 separación clave */
+}
+
+/* SUBTITULO */
+.colecciones p {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: #8a6a6f;
+    margin-bottom: 50px; /* 👈 esto evita que choque con las cards */
+    text-transform: uppercase;
+}
+
+/* GRID */
+.colecciones-grid {
+    display: grid;
+    gap: 18px;
+}
+
+/* TARJETAS */
+.coleccion-card {
+    position: relative;
+    height: 200px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* IMAGEN */
+.coleccion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* OVERLAY */
+.coleccion-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.1)
+    );
+}
+
+/* TEXTO */
+.contenido {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    z-index: 2;
+    font-family: "Cinzel", serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* HOVER */
+.coleccion-card:hover img {
+    transform: scale(1.06);
+}
+
+/* RESPONSIVE */
+
+/* móvil */
+@media (max-width: 767px) {
+    .colecciones-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* tablet */
+@media (min-width: 768px) {
+    .colecciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ordenador */
+@media (min-width: 1024px) {
+    .colecciones {
+        padding: 100px 20px 70px;
+    }
+
+    .colecciones h2 {
+        font-size: 3rem;
+        letter-spacing: 8px;
+        margin-bottom: 25px;
+    }
+
+    .colecciones p {
+        margin-bottom: 70px; /* 👈 MÁS aire en desktop */
+    }
+    
+    .colecciones-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .coleccion-card {
+        height: 260px;
+    }
+}

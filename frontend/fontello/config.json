@@ -169,16 +169,46 @@
       "src": "fontawesome"
     },
     {
-      "uid": "d870630ff8f81e6de3958ecaeac532f2",
+      "uid": "d9be617b7f2fe7843118ca2d3a1b8cca",
+      "css": "down-open",
+      "code": 61444,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "b714be5a812a474811604f700dfc87ce",
       "css": "left-open",
-      "code": 59414,
+      "code": 61447,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "440e148d0e21100118eae7036bcd2067",
+      "css": "up-open",
+      "code": 61445,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "37910a1398001a5ccb541cb2a253a2c7",
+      "css": "right-open",
+      "code": 61446,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "d531ea7e8c094b73df941ed0bac921f3",
+      "css": "shopping-bag",
+      "code": 62096,
       "src": "fontawesome"
     },
     {
-      "uid": "399ef63b1e23ab1b761dfbb5591fa4da",
-      "css": "right-open",
+      "uid": "862d4faacb164c0412cb3249d43d5d39",
+      "css": "t-shirt",
+      "code": 59414,
+      "src": "linecons"
+    },
+    {
+      "uid": "26aba7edd46944209b4961670675a813",
+      "css": "cog",
       "code": 59415,
-      "src": "fontawesome"
+      "src": "websymbols"
     }
   ]
 }

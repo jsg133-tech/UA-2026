@@ -21,10 +21,15 @@
 .icon-doc:before { content: '\e813'; } /* '' */
 .icon-cancel:before { content: '\e814'; } /* '' */
 .icon-ok:before { content: '\e815'; } /* '' */
-.icon-left-open:before { content: '\e816'; } /* '' */
-.icon-right-open:before { content: '\e817'; } /* '' */
+.icon-t-shirt:before { content: '\e816'; } /* '' */
+.icon-cog:before { content: '\e817'; } /* '' */
+.icon-down-open:before { content: '\f004'; } /* '' */
+.icon-up-open:before { content: '\f005'; } /* '' */
+.icon-right-open:before { content: '\f006'; } /* '' */
+.icon-left-open:before { content: '\f007'; } /* '' */
 .icon-entrar:before { content: '\f02c'; } /* '' */
 .icon-logout:before { content: '\f02d'; } /* '' */
 .icon-folder-open:before { content: '\f115'; } /* '' */
 .icon-star-half-alt:before { content: '\f123'; } /* '' */
 .icon-copyright:before { content: '\f1f9'; } /* '' */
+.icon-shopping-bag:before { content: '\f290'; } /* '' */
