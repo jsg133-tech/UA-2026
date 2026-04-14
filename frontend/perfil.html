@@ -29,9 +29,20 @@
                 <p>SPAIN</p>
             </div>
             <div class="iconos-acciones">
-                <i class="icon-search"></i>
-                <i class="icon-shopping-bag"></i>
+                <button class="boton-icono"><i class="icon-search"></i></button>
+                <button class="boton-icono"><i class="icon-shopping-bag"></i></button>
             </div>
+        </div>
+
+        <div class="usuario-barra">
+            <input type="checkbox" id="chkPerfil">
+            <label for="chkPerfil" class="perfil-trigger">
+                <span class="nombre-usuario">MIRANDA WANDA</span>
+                <img class="avatar" src="images/perfil.jfif" alt="Usuario">
+            </label>
+            <ul class="menu-perfil">
+                <li><a href="./inicio.html">LOGOUT</a></li>
+            </ul>
         </div>
     </header>
 
@@ -43,13 +54,31 @@
 
             <div class="tarjeta-usuario">
                 <div class="avatar-grande">
-                    <img src="images/perfil.jfif" alt="Avatar">
-                    <span class="cambiar-foto"><i class="icon-picture"></i> New Photo</span>
+                    <img src="images/perfil.jfif" alt="Avatar" id="vistaPrevia">
+                    
+                    <label for="inputFoto" class="cambiar-foto" style="cursor: pointer;">
+                        <i class="icon-picture"></i> New Photo
+                    </label>
+                    <input type="file" id="inputFoto" accept="image/*" style="display: none;">
                 </div>
                 <div class="nombre-destacado">
                     MIRANDA WANDA
                 </div>
             </div>
+
+            <script>
+                document.getElementById('inputFoto').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            // Esto cambia la imagen de la pantalla por la que acabas de elegir
+                            document.getElementById('vistaPrevia').src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
 
             <form class="form-perfil">
                 <div class="campo">
@@ -81,8 +110,8 @@
             </form>
 
             <div class="botones-peligro">
-                <button class="btn-logout">LOGOUT</button>
-                <button class="btn-delete">DELETE ACCOUNT</button>
+                <button class="btn-logout" type="button">LOGOUT</button>
+                <button class="btn-delete" type="button">DELETE ACCOUNT</button>
             </div>
         </div>
     </main>
