@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="css/comun.css">
     <link rel="stylesheet" href="css/registrar.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 
 <body>
@@ -29,7 +30,12 @@
         <form class="formulario">
             <div class="campo">
                 <label for="nombre">NAME</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre" minlength="2" maxlength="60" required>
+            </div>
+
+            <div class="campo">
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" name="username" minlength="3" maxlength="20" required>
             </div>
 
             <div class="campo">

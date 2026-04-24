@@ -14,8 +14,11 @@
 
     <link rel="stylesheet" href="css/inicio-logueado.css">
     <link rel="stylesheet" href="css/comun.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
+
+    <script type="module" src="js/inicio.js"></script>
 </head>
 
 <body>
@@ -55,12 +58,12 @@
             <input type="checkbox" id="chkPerfil">
 
             <label for="chkPerfil" class="perfil-trigger">
-                <span class="nombre-usuario">MIRANDA WANDA</span>
-                <img class="avatar" src="images/perfil.jfif" alt="Usuario">
+                <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
+                <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -93,70 +96,6 @@
         <section class="outfit-dia">
             <h2>OUTFIT</h2>
             <p>WHAT WILL YOU WEAR TODAY?</p>
-
-            <article class="tarjeta-outfit">
-
-                <div class="imagen-outfit">
-                    <img src="images/fondo-ord.jfif" alt="">
-                </div>
-
-                <div class="info-outfit">
-
-                    <h3>COFFEE CHIC</h3>
-
-                    <div class="mini-galeria">
-                        <button><i class="icon-left-open"></i></button>
-                        <img src="images/tacón.jfif" alt="">
-                        <button><i class="icon-right-open"></i></button>
-                    </div>
-
-                    <div class="etiquetas">
-                        <span>AUTUMN</span>
-                        <span>CASUAL</span>
-                    </div>
-
-                    <div class="autor">
-                        <img src="images/perfil.jfif" alt="">
-                        <span>Carla García</span>
-                    </div>
-
-                </div>
-
-                <time class="fecha">12 de febrero de 2026</time>
-
-            </article>
-
-            <article class="tarjeta-outfit">
-
-                <div class="imagen-outfit">
-                    <img src="images/fondo-ord.jfif" alt="">
-                </div>
-
-                <div class="info-outfit">
-
-                    <h3>COFFEE CHIC</h3>
-
-                    <div class="mini-galeria">
-                        <button><i class="icon-left-open"></i></button>
-                        <img src="images/fondo.jpg" alt="">
-                        <button><i class="icon-right-open"></i></button>
-                    </div>
-
-                    <div class="etiquetas">
-                        <span>AUTUMN</span>
-                        <span>CASUAL</span>
-                    </div>
-
-                    <div class="autor">
-                        <img src="images/Tulipanes.jfif" alt="">
-                        <span>Carla García</span>
-                    </div>
-
-                </div>
-
-                <time class="fecha">12 de febrero de 2026</time>
-
-            </article>
         </section>
 
         <!-- BOTON FINAL -->
@@ -165,7 +104,5 @@
         </footer>
 
     </main>
-
 </body>
-
 </html>
