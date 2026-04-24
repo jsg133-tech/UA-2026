@@ -20,32 +20,32 @@ function validarFormularioRegistro() {
     const confirm = inputConfirm.value;
 
     if (!nombre || !username || !email || !password || !confirm) {
-        mostrarModal('Completa todos los campos obligatorios.', 'error', 'Campos incompletos');
+        mostrarModal('Please complete all required fields.', 'error', 'Campos incompletos');
         return false;
     }
 
     if (nombre.length < 2) {
-        mostrarModal('El nombre debe tener al menos 2 caracteres.', 'error');
+        mostrarModal('The name must have at least 2 characters.', 'error');
         return false;
     }
 
     if (!USER_REGEX.test(username)) {
-        mostrarModal('El username debe tener 3-20 caracteres y solo letras, numeros o _.', 'error');
+        mostrarModal('The username must have 3-20 characters and only letters, numbers or _.', 'error');
         return false;
     }
 
     if (!EMAIL_REGEX.test(email)) {
-        mostrarModal('Introduce un email valido.', 'error');
+        mostrarModal('Please enter a valid email address.', 'error');
         return false;
     }
 
     if (password.length < 6) {
-        mostrarModal('La contrasena debe tener al menos 6 caracteres.', 'error');
+        mostrarModal('The password must have at least 6 characters.', 'error');
         return false;
     }
 
     if (password !== confirm) {
-        mostrarModal('Las contrasenas no coinciden.', 'error');
+        mostrarModal('The passwords do not match.', 'error');
         return false;
     }
 
@@ -79,10 +79,23 @@ form.addEventListener('submit', async (e) => {
 
         if (!response.ok) throw new Error(data.error || 'Error al registrar');
 
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        mostrarModal(
+            'Te has registrado correctamente.',
+            'success',
+            'Registro completado',
+            {
+                textoBoton: 'IR A LOGIN',
+                alConfirmar: () => {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.href = 'login.html';
+                },
+            }
+        );
 
-        window.location.href = 'inicio-logueado.html';
+        form.reset();
+        boton.textContent = 'REGISTER';
+        boton.disabled = false;
 
     } catch (err) {
         mostrarModal(err.message, 'error', 'Error de registro');
