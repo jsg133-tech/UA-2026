@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Account — Bellaveste</title>
     <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello2/css/fontello.css">
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/comun.css">
@@ -13,21 +14,29 @@
 <body>
     <header class="barra-superior">
         <div class="fila-marca">
+
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
+
                 <ul id="menu">
                     <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
                     <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
                     <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                    <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><i class="icon-moon"></i>DARK MODE</li>
+                    <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
+
             </nav>
+
             <div class="marca">
                 <h1>BELLAVESTE</h1>
                 <p>SPAIN</p>
             </div>
+
             <div class="iconos-acciones">
                 <button class="boton-icono"><i class="icon-search"></i></button>
                 <button class="boton-icono"><i class="icon-shopping-bag"></i></button>
@@ -36,10 +45,12 @@
 
         <div class="usuario-barra">
             <input type="checkbox" id="chkPerfil">
+
             <label for="chkPerfil" class="perfil-trigger">
                 <span class="nombre-usuario">MIRANDA WANDA</span>
                 <img class="avatar" src="images/perfil.jfif" alt="Usuario">
             </label>
+
             <ul class="menu-perfil">
                 <li><a href="./inicio.html">LOGOUT</a></li>
             </ul>
@@ -57,7 +68,7 @@
                     <img src="images/perfil.jfif" alt="Avatar" id="vistaPrevia">
                     
                     <label for="inputFoto" class="cambiar-foto" style="cursor: pointer;">
-                        <i class="icon-picture"></i> New Photo
+                        <i class="icon-camera"></i>New Photo
                     </label>
                     <input type="file" id="inputFoto" accept="image/*" style="display: none;">
                 </div>
@@ -82,12 +93,12 @@
 
             <form class="form-perfil">
                 <div class="campo">
-                    <label><i class="icon-user"></i> NAME:</label>
+                    <label><i class="icon-user-circle"></i> NAME:</label>
                     <input type="text" placeholder="New name...">
                 </div>
 
                 <div class="campo">
-                    <label><i class="icon-user"></i> USERNAME:</label>
+                    <label><i class="icon-user-circle"></i> USERNAME:</label>
                     <input type="text" placeholder="New username...">
                 </div>
 
@@ -97,12 +108,12 @@
                 </div>
 
                 <div class="campo">
-                    <label>NEW PASSWORD</label>
+                    <label><i class="icon-key"></i> NEW PASSWORD</label> 
                     <input type="password" placeholder="New password...">
                 </div>
 
                 <div class="campo">
-                    <label>PASSWORD</label>
+                    <label><i class="icon-key"></i> PASSWORD</label>
                     <input type="password" placeholder="To confirm the changes you must put your password">
                 </div>
 
