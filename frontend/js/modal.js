@@ -2,18 +2,18 @@
  * modal.js — Componente modal reutilizable Bellaveste
  *
  * Uso:
- *   import { showModal } from './modal.js';
- *   showModal('Contraseña incorrecta', 'error');
- *   showModal('Registro exitoso', 'success');
+ *   import { mostrarModal } from './modal.js';
+ *   mostrarModal('Contrasena incorrecta', 'error');
+ *   mostrarModal('Registro exitoso', 'success');
  */
 
-// ── showModal ────────────────────────────────────────────────────────────────
+// ── mostrarModal ─────────────────────────────────────────────────────────────
 /**
  * @param {string} mensaje   - Texto a mostrar en el modal
  * @param {'error'|'success'} [tipo='error'] - Variante visual
  * @param {string} [titulo]  - Título opcional (por defecto según tipo)
  */
-export function showModal(mensaje, tipo = 'error', titulo = '') {
+export function mostrarModal(mensaje, tipo = 'error', titulo = '') {
   // Título por defecto según tipo
   if (!titulo) {
     titulo = tipo === 'success' ? 'Listo' : 'Atención';

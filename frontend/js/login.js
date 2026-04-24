@@ -1,4 +1,4 @@
-import { showModal } from './modal.js';
+import { mostrarModal } from './modal.js';
 
 const API = 'https://ua-2026-production.up.railway.app';
 
@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
   const password = inputPass.value;
 
   if (!email || !password) {
-    showModal('Por favor rellena todos los campos.', 'error');
+    mostrarModal('Por favor rellena todos los campos.', 'error');
     return;
   }
 
@@ -43,7 +43,7 @@ form.addEventListener('submit', async (e) => {
     window.location.href = 'inicio-logueado.html';
 
   } catch (err) {
-    showModal(err.message, 'error', 'Acceso denegado');
+    mostrarModal(err.message, 'error', 'Acceso denegado');
     btnLogin.textContent = 'LOGIN';
     btnLogin.disabled    = false;
   }

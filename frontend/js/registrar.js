@@ -1,23 +1,61 @@
-import { showModal } from './modal.js';
+import { mostrarModal } from './modal.js';
 
 const API = 'https://ua-2026-production.up.railway.app';
 
 const form         = document.querySelector('.formulario');
 const inputNombre  = document.getElementById('nombre');
+const inputUser    = document.getElementById('username');
 const inputEmail   = document.getElementById('email');
 const inputPass    = document.getElementById('contrasena');
 const inputConfirm = document.getElementById('confirmar-contrasena');
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const USER_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
+
+function validarFormularioRegistro() {
+    const nombre = inputNombre.value.trim();
+    const username = inputUser.value.trim();
+    const email = inputEmail.value.trim();
+    const password = inputPass.value;
+    const confirm = inputConfirm.value;
+
+    if (!nombre || !username || !email || !password || !confirm) {
+        mostrarModal('Completa todos los campos obligatorios.', 'error', 'Campos incompletos');
+        return false;
+    }
+
+    if (nombre.length < 2) {
+        mostrarModal('El nombre debe tener al menos 2 caracteres.', 'error');
+        return false;
+    }
+
+    if (!USER_REGEX.test(username)) {
+        mostrarModal('El username debe tener 3-20 caracteres y solo letras, numeros o _.', 'error');
+        return false;
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+        mostrarModal('Introduce un email valido.', 'error');
+        return false;
+    }
+
+    if (password.length < 6) {
+        mostrarModal('La contrasena debe tener al menos 6 caracteres.', 'error');
+        return false;
+    }
+
+    if (password !== confirm) {
+        mostrarModal('Las contrasenas no coinciden.', 'error');
+        return false;
+    }
+
+    return true;
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  if (inputPass.value !== inputConfirm.value) {
-    showModal('Las contraseñas no coinciden.', 'error');
-    return;
-  }
-
-  if (inputPass.value.length < 6) {
-    showModal('La contraseña debe tener al menos 6 caracteres.', 'error');
+    if (!validarFormularioRegistro()) {
     return;
   }
 
@@ -31,6 +69,7 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name:     inputNombre.value.trim(),
+                username: inputUser.value.trim(),
         email:    inputEmail.value.trim(),
         password: inputPass.value,
       }),
@@ -46,7 +85,7 @@ form.addEventListener('submit', async (e) => {
     window.location.href = 'inicio-logueado.html';
 
   } catch (err) {
-    showModal(err.message, 'error', 'Error de registro');
+    mostrarModal(err.message, 'error', 'Error de registro');
     boton.textContent = 'REGISTER';
     boton.disabled    = false;
   }
