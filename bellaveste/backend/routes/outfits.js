@@ -25,13 +25,10 @@ const upload = multer({
   },
 });
 
-// All routes require JWT
-router.use(authMiddleware);
-
 // GET /api/outfits  (optional ?category=ELEGANT)
 router.get('/', async (req, res) => {
   try {
-    const filter = { userId: req.userId };
+    const filter = {};
     if (req.query.category) filter.category = req.query.category;
     const outfits = await Outfit.find(filter).sort({ createdAt: -1 });
     res.json(outfits);
@@ -41,6 +38,8 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/outfits
+router.use(authMiddleware);
+
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { name, category, size, color, season } = req.body;

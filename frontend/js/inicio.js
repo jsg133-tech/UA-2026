@@ -51,14 +51,29 @@ function formatearFecha(value) {
 	});
 }
 
+function obtenerImagenOutfit(outfit) {
+	if (outfit.imageUrl && outfit.imageUrl.trim()) {
+		return outfit.imageUrl;
+	}
+
+	return 'images/fondo-ord.jfif';
+}
+
+function formatearTextoCampo(valor, textoPorDefecto) {
+	const texto = (valor || '').trim();
+	return texto ? texto.toUpperCase() : textoPorDefecto;
+}
+
 function crearTarjetaOutfit(outfit, userName, userAvatar) {
 	const article = document.createElement('article');
 	article.className = 'tarjeta-outfit';
 
-	const imageUrl = outfit.imageUrl || 'images/fondo-ord.jfif';
-	const title = (outfit.name || 'OUTFIT').toUpperCase();
-	const category = (outfit.category || 'SIN CATEGORIA').toUpperCase();
-	const season = (outfit.season || 'ALL SEASON').toUpperCase();
+	const imageUrl = obtenerImagenOutfit(outfit);
+	const title = formatearTextoCampo(outfit.name, 'OUTFIT');
+	const category = formatearTextoCampo(outfit.category, 'SIN CATEGORIA');
+	const season = formatearTextoCampo(outfit.season, 'SIN TEMPORADA');
+	const size = formatearTextoCampo(outfit.size, 'SIN TALLA');
+	const color = formatearTextoCampo(outfit.color, 'SIN COLOR');
 	const created = formatearFecha(outfit.createdAt);
 
 	article.innerHTML = `
@@ -75,6 +90,10 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 			<div class="etiquetas">
 				<span>${season}</span>
 				<span>${category}</span>
+			</div>
+			<div class="etiquetas">
+				<span>${size}</span>
+				<span>${color}</span>
 			</div>
 			<div class="autor">
 				<img src="${userAvatar}" alt="Autor">
@@ -94,7 +113,7 @@ function renderizarOutfits(outfits, user) {
 	if (!Array.isArray(outfits) || outfits.length === 0) {
 		const empty = document.createElement('p');
 		empty.className = 'outfits-empty';
-		empty.textContent = 'Todavia no tienes outfits creados.';
+		empty.textContent = 'You do not have any outfits created yet.';
 		outfitSectionEl.appendChild(empty);
 		return;
 	}
@@ -132,23 +151,22 @@ async function iniciarPagina() {
 	if (userFromStorage) mostrarUsuarioEnInterfaz(userFromStorage);
 
 	try {
-		const [user, outfits] = await Promise.all([
-			peticionConAutorizacion('/api/auth/me'),
-			peticionConAutorizacion('/api/outfits'),
-		]);
+		const outfits = await peticionConAutorizacion('/api/outfits');
+		renderizarOutfits(outfits, userFromStorage || {});
+	} catch (err) {
+		mostrarModal(err.message || 'Error loading homepage data.', 'error');
+		return;
+	}
 
+	try {
+		const user = await peticionConAutorizacion('/api/auth/me');
 		localStorage.setItem(USER_KEY, JSON.stringify(user));
 		mostrarUsuarioEnInterfaz(user);
-		renderizarOutfits(outfits, user);
 	} catch (err) {
 		if (/token|expired|invalid|401/i.test(err.message)) {
-			mostrarModal('Tu sesion ha caducado. Inicia sesion de nuevo.', 'error');
+			mostrarModal('Your session has expired. Please log in again.', 'error');
 			setTimeout(() => cerrarSesionYIrAInicio(), 400);
-			return;
 		}
-
-		mostrarModal(err.message || 'Error cargando datos del inicio.', 'error');
-		renderizarOutfits([], userFromStorage || {});
 	}
 }
 
