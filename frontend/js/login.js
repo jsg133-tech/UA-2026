@@ -1,11 +1,11 @@
 import { mostrarModal } from './modal.js';
 
-const API = 'https://ua-2026-production.up.railway.app';
+const API = 'https://ua-2026.onrender.com';
 
-const form       = document.getElementById('form-login');
+const form = document.getElementById('form-login');
 const inputEmail = document.getElementById('email');
-const inputPass  = document.getElementById('contrasena');
-const btnLogin   = document.getElementById('btn-login');
+const inputPass = document.getElementById('contrasena');
+const btnLogin = document.getElementById('btn-login');
 
 // Si ya hay sesión activa, ir directo a la app
 if (localStorage.getItem('token')) {
@@ -15,7 +15,7 @@ if (localStorage.getItem('token')) {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const email    = inputEmail.value.trim();
+  const email = inputEmail.value.trim();
   const password = inputPass.value;
 
   if (!email || !password) {
@@ -24,7 +24,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   btnLogin.textContent = 'LOGGING IN...';
-  btnLogin.disabled    = true;
+  btnLogin.disabled = true;
 
   try {
     const response = await fetch(`${API}/api/auth/login`, {
@@ -45,6 +45,6 @@ form.addEventListener('submit', async (e) => {
   } catch (err) {
     mostrarModal(err.message, 'error', 'Acceso denegado');
     btnLogin.textContent = 'LOGIN';
-    btnLogin.disabled    = false;
+    btnLogin.disabled = false;
   }
 });

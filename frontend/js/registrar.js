@@ -1,12 +1,12 @@
 import { mostrarModal } from './modal.js';
 
-const API = 'https://ua-2026-production.up.railway.app';
+const API = 'https://ua-2026.onrender.com';
 
-const form         = document.querySelector('.formulario');
-const inputNombre  = document.getElementById('nombre');
-const inputUser    = document.getElementById('username');
-const inputEmail   = document.getElementById('email');
-const inputPass    = document.getElementById('contrasena');
+const form = document.querySelector('.formulario');
+const inputNombre = document.getElementById('nombre');
+const inputUser = document.getElementById('username');
+const inputEmail = document.getElementById('email');
+const inputPass = document.getElementById('contrasena');
 const inputConfirm = document.getElementById('confirmar-contrasena');
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,42 +53,42 @@ function validarFormularioRegistro() {
 }
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
     if (!validarFormularioRegistro()) {
-    return;
-  }
+        return;
+    }
 
-  const boton = form.querySelector('button[type="submit"]');
-  boton.textContent = 'REGISTERING...';
-  boton.disabled    = true;
+    const boton = form.querySelector('button[type="submit"]');
+    boton.textContent = 'REGISTERING...';
+    boton.disabled = true;
 
-  try {
-    const response = await fetch(`${API}/api/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name:     inputNombre.value.trim(),
+    try {
+        const response = await fetch(`${API}/api/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: inputNombre.value.trim(),
                 username: inputUser.value.trim(),
-        email:    inputEmail.value.trim(),
-        password: inputPass.value,
-      }),
-    });
+                email: inputEmail.value.trim(),
+                password: inputPass.value,
+            }),
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (!response.ok) throw new Error(data.error || 'Error al registrar');
+        if (!response.ok) throw new Error(data.error || 'Error al registrar');
 
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
 
-    window.location.href = 'inicio-logueado.html';
+        window.location.href = 'inicio-logueado.html';
 
-  } catch (err) {
-    mostrarModal(err.message, 'error', 'Error de registro');
-    boton.textContent = 'REGISTER';
-    boton.disabled    = false;
-  }
+    } catch (err) {
+        mostrarModal(err.message, 'error', 'Error de registro');
+        boton.textContent = 'REGISTER';
+        boton.disabled = false;
+    }
 });
 
 /*
