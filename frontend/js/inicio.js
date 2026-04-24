@@ -9,6 +9,13 @@ const avatarUsuarioEl = document.getElementById('avatar-usuario');
 const outfitSectionEl = document.querySelector('.outfit-dia');
 const logoutLinkEl = document.getElementById('logout-link');
 
+const CANTIDAD_INICIAL_OUTFITS = 4;
+const CANTIDAD_POR_BOTON = 4;
+
+let outfitsCargados = [];
+let cantidadVisible = CANTIDAD_INICIAL_OUTFITS;
+let botonMostrarMas = null;
+
 function obtenerToken() {
 	return localStorage.getItem(TOKEN_KEY);
 }
@@ -107,10 +114,42 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 }
 
 function renderizarOutfits(outfits, user) {
+	outfitsCargados = Array.isArray(outfits) ? outfits : [];
+	cantidadVisible = CANTIDAD_INICIAL_OUTFITS;
+	actualizarListaOutfits(user);
+}
+
+function limpiarTarjetasOutfit() {
 	const oldCards = outfitSectionEl.querySelectorAll('.tarjeta-outfit');
 	oldCards.forEach((card) => card.remove());
 
-	if (!Array.isArray(outfits) || outfits.length === 0) {
+	const empty = outfitSectionEl.querySelector('.outfits-empty');
+	if (empty) empty.remove();
+
+	if (botonMostrarMas) {
+		botonMostrarMas.remove();
+		botonMostrarMas = null;
+	}
+}
+
+function crearBotonMostrarMas(user) {
+	const boton = document.createElement('button');
+	boton.type = 'button';
+	boton.className = 'btn-mostrar-mas';
+	boton.textContent = 'SHOW MORE OUTFITS';
+
+	boton.addEventListener('click', () => {
+		cantidadVisible += CANTIDAD_POR_BOTON;
+		actualizarListaOutfits(user);
+	});
+
+	return boton;
+}
+
+function actualizarListaOutfits(user) {
+	limpiarTarjetasOutfit();
+
+	if (!Array.isArray(outfitsCargados) || outfitsCargados.length === 0) {
 		const empty = document.createElement('p');
 		empty.className = 'outfits-empty';
 		empty.textContent = 'You do not have any outfits created yet.';
@@ -120,9 +159,16 @@ function renderizarOutfits(outfits, user) {
 
 	const userName = user?.name || 'Usuario';
 	const userAvatar = user?.avatar || 'images/perfil.jfif';
-	outfits.forEach((outfit) => {
+	const outfitsVisibles = outfitsCargados.slice(0, cantidadVisible);
+
+	outfitsVisibles.forEach((outfit) => {
 		outfitSectionEl.appendChild(crearTarjetaOutfit(outfit, userName, userAvatar));
 	});
+
+	if (cantidadVisible < outfitsCargados.length) {
+		botonMostrarMas = crearBotonMostrarMas(user);
+		outfitSectionEl.appendChild(botonMostrarMas);
+	}
 }
 
 async function peticionConAutorizacion(path) {
