@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account — Bellaveste</title>
+    <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/comun.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+<body>
+    <header class="barra-superior">
+        <div class="fila-marca">
+            <nav>
+                <label for="chkMenu"><i class="icon-menu"></i></label>
+                <input type="checkbox" id="chkMenu">
+                <ul id="menu">
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                </ul>
+            </nav>
+            <div class="marca">
+                <h1>BELLAVESTE</h1>
+                <p>SPAIN</p>
+            </div>
+            <div class="iconos-acciones">
+                <button class="boton-icono"><i class="icon-search"></i></button>
+                <button class="boton-icono"><i class="icon-shopping-bag"></i></button>
+            </div>
+        </div>
+
+        <div class="usuario-barra">
+            <input type="checkbox" id="chkPerfil">
+            <label for="chkPerfil" class="perfil-trigger">
+                <span class="nombre-usuario">MIRANDA WANDA</span>
+                <img class="avatar" src="images/perfil.jfif" alt="Usuario">
+            </label>
+            <ul class="menu-perfil">
+                <li><a href="./inicio.html">LOGOUT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="main-perfil">
+        <div class="contenedor-ajustes">
+            <div class="divisor-titulo">
+                <span>YOUR ACCOUNT</span>
+            </div>
+
+            <div class="tarjeta-usuario">
+                <div class="avatar-grande">
+                    <img src="images/perfil.jfif" alt="Avatar" id="vistaPrevia">
+                    
+                    <label for="inputFoto" class="cambiar-foto" style="cursor: pointer;">
+                        <i class="icon-picture"></i> New Photo
+                    </label>
+                    <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                </div>
+                <div class="nombre-destacado">
+                    MIRANDA WANDA
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('inputFoto').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            // Esto cambia la imagen de la pantalla por la que acabas de elegir
+                            document.getElementById('vistaPrevia').src = e.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
+
+            <form class="form-perfil">
+                <div class="campo">
+                    <label><i class="icon-user"></i> NAME:</label>
+                    <input type="text" placeholder="New name...">
+                </div>
+
+                <div class="campo">
+                    <label><i class="icon-user"></i> USERNAME:</label>
+                    <input type="text" placeholder="New username...">
+                </div>
+
+                <div class="campo">
+                    <label><i class="icon-mail"></i> E-MAIL:</label>
+                    <input type="email" value="mirandawanda@gmail.com">
+                </div>
+
+                <div class="campo">
+                    <label>NEW PASSWORD</label>
+                    <input type="password" placeholder="New password...">
+                </div>
+
+                <div class="campo">
+                    <label>PASSWORD</label>
+                    <input type="password" placeholder="To confirm the changes you must put your password">
+                </div>
+
+                <button type="submit" class="btn-update">UPDATE</button>
+            </form>
+
+            <div class="botones-peligro">
+                <button class="btn-logout" type="button">LOGOUT</button>
+                <button class="btn-delete" type="button">DELETE ACCOUNT</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+    </footer>
+</body>
+</html>
