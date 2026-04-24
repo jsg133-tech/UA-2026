@@ -5,6 +5,13 @@
     --fondo: #d9d8de;
 }
 
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,11 +20,13 @@
 
 body {
     min-height: 100vh;
+    min-height: 100dvh;
     font-family: "Cormorant Garamond", serif;
     background:
         radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
         linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
     padding: 18px 14px 30px;
+    overflow-x: hidden;
 }
 
 
@@ -226,4 +235,18 @@ nav ul li a:hover {
     font-family: "Cinzel", serif;
     font-size: 1.8rem;
     padding: 9px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    main,
+    .contenedor,
+    .contenedor-app {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
 }
