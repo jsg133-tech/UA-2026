@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
   const password = inputPass.value;
 
   if (!email || !password) {
-    mostrarModal('Por favor rellena todos los campos.', 'error');
+    mostrarModal('Please fill in all fields.', 'error');
     return;
   }
 
@@ -35,15 +35,33 @@ form.addEventListener('submit', async (e) => {
 
     const data = await response.json();
 
-    if (!response.ok) throw new Error(data.error || 'Credenciales incorrectas');
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Invalid username or password.');
+      }
+      throw new Error(data.error || 'Failed to log in.');
+    }
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
 
-    window.location.href = 'inicio-logueado.html';
+    mostrarModal(
+      'You have logged in successfully.',
+      'success',
+      'Welcome back!',
+      {
+        textoBoton: 'GO TO HOMEPAGE',
+        alConfirmar: () => {
+          window.location.href = 'inicio-logueado.html';
+        },
+      }
+    );
+
+    btnLogin.textContent = 'LOGIN';
+    btnLogin.disabled = false;
 
   } catch (err) {
-    mostrarModal(err.message, 'error', 'Acceso denegado');
+    mostrarModal(err.message, 'error', 'Access denied');
     btnLogin.textContent = 'LOGIN';
     btnLogin.disabled = false;
   }
