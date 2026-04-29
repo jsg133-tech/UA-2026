@@ -209,6 +209,18 @@
       "css": "cog",
       "code": 59415,
       "src": "websymbols"
+    },
+    {
+      "uid": "d73eceadda1f594cec0536087539afbf",
+      "css": "heart",
+      "code": 59416,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f3dc2d6d8fe9cf9ebff84dc260888cdf",
+      "css": "heart-empty",
+      "code": 59417,
+      "src": "fontawesome"
     }
   ]
 }

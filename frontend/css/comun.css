@@ -51,6 +51,9 @@ body {
     font-size: 1.4rem;
     cursor: pointer;
     padding: 0;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }
 
 .marca {

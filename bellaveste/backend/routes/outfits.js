@@ -42,14 +42,14 @@ router.use(authMiddleware);
 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
-    const { name, category, size, color, season } = req.body;
+    const { name, category, size, color, season, imageUrl: imageUrlBody } = req.body;
     if (!name || !category) {
       return res.status(400).json({ error: 'Name and category are required' });
     }
 
     const imageUrl = req.file
       ? `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
-      : '';
+      : (imageUrlBody || '');
 
     const outfit = await Outfit.create({
       name, category, size, color, season, imageUrl,

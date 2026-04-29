@@ -86,31 +86,79 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 	article.innerHTML = `
 		<div class="imagen-outfit">
 			<img src="${imageUrl}" alt="${title}">
+			<time class="fecha">${created}</time>
 		</div>
 		<div class="info-outfit">
 			<h3>${title}</h3>
-			<div class="mini-galeria">
-				<button type="button" aria-label="Imagen anterior"><i class="icon-left-open"></i></button>
-				<img src="${imageUrl}" alt="${title}">
-				<button type="button" aria-label="Imagen siguiente"><i class="icon-right-open"></i></button>
-			</div>
 			<div class="etiquetas">
 				<span>${season}</span>
 				<span>${category}</span>
-			</div>
-			<div class="etiquetas">
 				<span>${size}</span>
 				<span>${color}</span>
 			</div>
-			<div class="autor">
-				<img src="${userAvatar}" alt="Autor">
-				<span>${userName}</span>
+			<div class="outfit-footer">
+				<div class="autor">
+					<img src="${userAvatar}" alt="${userName}">
+					<span>${userName}</span>
+				</div>
+				<button class="btn-anadir-armario" title="Añadir a mi armario" type="button">
+					<i class="icon-t-shirt"></i><span>ADD CLOSET</span>
+				</button>
 			</div>
 		</div>
-		<time class="fecha">${created}</time>
 	`;
 
+	const btnAnadir = article.querySelector('.btn-anadir-armario');
+	btnAnadir.addEventListener('click', () => agregarArmario(outfit, btnAnadir));
+
 	return article;
+}
+
+async function agregarArmario(outfit, boton) {
+	const token = obtenerToken();
+	if (!token) {
+		mostrarModal('Debes iniciar sesión para guardar outfits.', 'error');
+		return;
+	}
+
+	boton.classList.add('cargando');
+	boton.disabled = true;
+
+	try {
+		const formData = new FormData();
+		formData.append('name',     outfit.name     || 'Outfit');
+		formData.append('category', outfit.category || 'CASUAL');
+		formData.append('season',   outfit.season   || '');
+		formData.append('size',     outfit.size     || '');
+		formData.append('color',    outfit.color    || '');
+		if (outfit.imageUrl) formData.append('imageUrl', outfit.imageUrl);
+
+		const respuesta = await fetch(`${API}/api/outfits`, {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${token}` },
+			body: formData,
+		});
+
+		const datos = await respuesta.json().catch(() => ({}));
+		if (!respuesta.ok) throw new Error(datos.error || 'No se pudo añadir el outfit.');
+
+		boton.classList.remove('cargando');
+		boton.classList.add('anadido');
+		boton.innerHTML = '<i class="icon-ok"></i>';
+		boton.title = 'Añadido a tu armario';
+
+		setTimeout(() => {
+			boton.classList.remove('anadido');
+			boton.innerHTML = '<i class="icon-t-shirt"></i>';
+			boton.title = 'Añadir a mi armario';
+			boton.disabled = false;
+		}, 2200);
+
+	} catch (err) {
+		boton.classList.remove('cargando');
+		boton.disabled = false;
+		mostrarModal(err.message || 'No se pudo añadir el outfit.', 'error');
+	}
 }
 
 function renderizarOutfits(outfits, user) {

@@ -48,8 +48,8 @@
             </div>
 
             <div class="iconos-acciones">
-                <button class="boton-icono"><i class="icon-search"></i></button>
-                <button class="boton-icono"><i class="icon-t-shirt"></i></button>
+                <a class="boton-icono" href="buscar.html"><i class="icon-search"></i></a>
+                <a class="boton-icono" href="armario.html"><i class="icon-shopping-bag"></i></a>
             </div>
         </div>
 
@@ -71,22 +71,8 @@
         <section class="mi-armario">
             <h2>MY CLOSET</h2>
 
-            <!-- FILTRO CATEGORÍAS -->
-            <div class="filtro-categorias">
-                <input type="checkbox" id="chkCategorias">
-                <label for="chkCategorias">
-                    CATEGORIES
-                    <i class="icon-down-open"></i>
-                </label>
-                <ul class="lista-categorias">
-                    <li>ALL</li>
-                    <li>CASUAL</li>
-                    <li>FORMAL</li>
-                    <li>SPORT</li>
-                    <li>SCHOOL</li>
-                    <li>DINNER</li>
-                </ul>
-            </div>
+            <!-- CATEGORÍAS DEL ARMARIO -->
+            <div class="categorias-bar" id="categorias-bar"></div>
 
             <!-- GRID DE OUTFITS (renderizado por armario.js) -->
             <div class="grid-armario" id="grid-armario"></div>

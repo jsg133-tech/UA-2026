@@ -115,80 +115,165 @@ body {
 
 /* TARJETA OUTFIT */
 .tarjeta-outfit {
-    background: linear-gradient(160deg, #f4e7de, #e6d7ce);
-    border-radius: 10px;
-    margin-top: 6px;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 10px;
+    background: #f7f0ea;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 16px rgba(61, 10, 17, 0.09);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-outfit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(61, 10, 17, 0.14);
+}
+
+.imagen-outfit {
     position: relative;
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
 }
 
 .imagen-outfit img {
     width: 100%;
-    height: 150px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    display: block;
 }
 
+/* FECHA — overlay sobre la imagen */
+.fecha {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #f4e9df;
+    background: rgba(45, 8, 14, 0.52);
+    padding: 2px 10px;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    letter-spacing: 0.3px;
+}
+
+/* INFO */
 .info-outfit {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
+    padding: 14px 16px 16px;
+    flex: 1;
 }
 
 .info-outfit h3 {
     font-family: "Cinzel", serif;
-    font-size: 1.3rem;
-    color: #6a2f3d;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #3d0a11;
+    letter-spacing: 0.8px;
+    line-height: 1.4;
 }
 
-.mini-galeria {
-    display: grid;
-    grid-template-columns: 24px 1fr 24px;
-    align-items: center;
-}
-
-.mini-galeria button {
-    border: none;
-    background: transparent;
-    font-size: 1.4rem;
-    color: #6a2f3d;
-    cursor: pointer;
-    width: 5px;
-}
-
-.mini-galeria img {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-/* ETIQUETAS */
+/* ETIQUETAS — pills */
 .etiquetas {
     display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #c8b6ac;
-    border-bottom: 1px solid #c8b6ac;
-    padding: 3px 0;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: none;
+    padding: 0;
 }
 
 .etiquetas span {
     font-family: "Cinzel", serif;
-    font-size: .7rem;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    color: #5a0d16;
+    background: rgba(90, 13, 22, 0.07);
+    border: 1px solid rgba(90, 13, 22, 0.18);
+    padding: 2px 9px;
+    border-radius: 999px;
+}
+
+/* FOOTER tarjeta: autor + botón */
+.outfit-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid rgba(90, 13, 22, 0.10);
 }
 
 /* AUTOR */
 .autor {
-    margin-top: auto;
-    background: #d1bbb0;
-    border-radius: 999px;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 8px 4px 4px;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.autor img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.autor span {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 0.78rem;
+    color: #7a5060;
+    letter-spacing: 0.3px;
+}
+
+/* BOTÓN ADD CLOSET */
+.btn-anadir-armario {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid #5a0d16;
+    background: transparent;
+    color: #5a0d16;
+    font-family: "Cinzel", serif;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-anadir-armario:hover {
+    background: #5a0d16;
+    color: #f4e9df;
+}
+
+.btn-anadir-armario:active {
+    transform: scale(0.97);
+}
+
+.btn-anadir-armario.cargando {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-anadir-armario.anadido {
+    background: #1e5535;
+    border-color: #1e5535;
+    color: #d4f0e0;
+    pointer-events: none;
+}
+
+@keyframes pulso-armario {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.55; }
 }
 
 .autor img {
@@ -197,12 +282,6 @@ body {
     border-radius: 50%;
 }
 
-.fecha {
-    position: absolute;
-    left: 10px;
-    bottom: 6px;
-    font-size: .8rem;
-}
 
 .outfits-empty {
     grid-column: 1 / -1;
@@ -246,8 +325,8 @@ body {
         margin: 0;
     }
 
-    .imagen-outfit img {
-        height: 170px;
+    .imagen-outfit {
+        height: 220px;
     }
 
 }
@@ -293,18 +372,8 @@ body {
     }
 
     /* tarjetas más grandes */
-    .tarjeta-outfit {
-        width: 100%;
-        grid-template-columns: 1.3fr 1fr;
-        padding: 18px;
-    }
-
-    .imagen-outfit img {
-        height: 260px;
-    }
-
-    .mini-galeria img {
-        height: 110px;
+    .imagen-outfit {
+        height: 280px;
     }
 
     /* botón inferior ancho completo */
@@ -369,55 +438,9 @@ body {
         gap: 15px;
     }
 
-    /* TARJETA MÁS PEQUEÑA */
-    .tarjeta-outfit {
-        grid-template-columns: 1fr 1fr;
-        /* 👈 vuelve a horizontal */
-        padding: 8px;
-        gap: 8px;
-    }
-
-    /* IMAGEN MÁS BAJA */
-    .imagen-outfit img {
-        height: 120px;
-    }
-
-    /* INFO MÁS COMPACTA */
-    .info-outfit {
-        gap: 4px;
-    }
-
-    .info-outfit h3 {
-        font-size: 0.9rem;
-    }
-
-    /* MINI GALERÍA MÁS PEQUEÑA */
-    .mini-galeria img {
-        height: 60px;
-    }
-
-    .mini-galeria button {
-        font-size: 1rem;
-    }
-
-    /* ETIQUETAS MÁS PEQUEÑAS */
-    .etiquetas span {
-        font-size: 0.55rem;
-    }
-
-    /* AUTOR MÁS PEQUEÑO */
-    .autor {
-        padding: 2px 6px;
-    }
-
-    .autor img {
-        width: 16px;
-        height: 16px;
-    }
-
-    /* FECHA MÁS DISCRETA */
-    .fecha {
-        font-size: 0.6rem;
+    /* TARJETA IMAGEN MÁS BAJA */
+    .imagen-outfit {
+        height: 165px;
     }
 
     /* BOTÓN FINAL */
