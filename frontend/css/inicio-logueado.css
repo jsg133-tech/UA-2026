@@ -236,8 +236,14 @@ body {
 
 /* TABLET */
 @media (min-width:768px) {
+    body {
+        padding: 0;
+    }
+
     .contenedor-app {
-        width: 430px;
+        width: 100%;
+        max-width: none;
+        margin: 0;
     }
 
     .imagen-outfit img {

@@ -15,6 +15,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/outfits', require('./routes/outfits'));
 app.use('/api/categories', require('./routes/categories'));
+app.use('/api/armario', require('./routes/armario'));
 
 // Health check
 app.get('/', (req, res) => {

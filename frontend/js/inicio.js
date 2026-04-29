@@ -157,12 +157,13 @@ function actualizarListaOutfits(user) {
 		return;
 	}
 
-	const userName = user?.name || 'Usuario';
-	const userAvatar = user?.avatar || 'images/perfil.jfif';
 	const outfitsVisibles = outfitsCargados.slice(0, cantidadVisible);
 
 	outfitsVisibles.forEach((outfit) => {
-		outfitSectionEl.appendChild(crearTarjetaOutfit(outfit, userName, userAvatar));
+		const outfitUser = outfit.userId;
+		const outfitUserName = (outfitUser?.name || 'Usuario').toUpperCase();
+		const outfitUserAvatar = outfitUser?.avatar || 'images/perfil.jfif';
+		outfitSectionEl.appendChild(crearTarjetaOutfit(outfit, outfitUserName, outfitUserAvatar));
 	});
 
 	if (cantidadVisible < outfitsCargados.length) {

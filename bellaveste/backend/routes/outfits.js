@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
   try {
     const filter = {};
     if (req.query.category) filter.category = req.query.category;
-    const outfits = await Outfit.find(filter).sort({ createdAt: -1 });
+    const outfits = await Outfit.find(filter).populate('userId', 'name avatar').sort({ createdAt: -1 });
     res.json(outfits);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

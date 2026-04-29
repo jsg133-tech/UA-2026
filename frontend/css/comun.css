@@ -82,11 +82,11 @@ nav {
 }
 
 /* icono hamburguesa */
-nav label {
+nav > label {
     display: block;
-    font-size: 1.8rem;
-    color: white;
-    padding: 10px;
+    font-size: 1.4rem;
+    color: #f4e9df;
+    padding: 3px 6px;
     cursor: pointer;
 }
 
@@ -94,24 +94,40 @@ nav label {
 nav ul {
     list-style: none;
     position: fixed;
-    /* 👈 CLAVE */
     top: 0;
     left: -100%;
-    /* 👈 oculto */
     width: 260px;
     height: 100vh;
     background: #5a0d16;
 
     display: flex;
     flex-direction: column;
-    /* 👈 vertical */
     align-items: flex-start;
 
-    padding: 60px 20px;
+    padding: 24px 20px;
     gap: 20px;
 
     transition: 0.3s;
     z-index: 999;
+}
+
+/* Header del menú: ← MENU */
+.menu-header {
+    width: 100%;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(244, 233, 223, 0.2);
+    margin-bottom: 4px;
+}
+
+.menu-header label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f4e9df;
+    font-family: "Cinzel", serif;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    cursor: pointer;
 }
 
 nav ul li {
