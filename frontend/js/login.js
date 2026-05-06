@@ -5,10 +5,11 @@ const API = 'https://ua-2026.onrender.com';
 const form = document.getElementById('form-login');
 const inputEmail = document.getElementById('email');
 const inputPass = document.getElementById('contrasena');
+const inputRecordarme = document.getElementById('recordarme');
 const btnLogin = document.getElementById('btn-login');
 
 // Si ya hay sesión activa, ir directo a la app
-if (localStorage.getItem('token')) {
+if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
   window.location.href = 'inicio-logueado.html';
 }
 
@@ -42,8 +43,18 @@ form.addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Failed to log in.');
     }
 
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+
+    if (inputRecordarme.checked) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+    } else {
+      sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('user', JSON.stringify(data.user));
+    }
 
     mostrarModal(
       'You have logged in successfully.',
