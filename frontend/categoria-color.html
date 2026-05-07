@@ -16,17 +16,15 @@
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <link rel="stylesheet" href="css/categoria-color.css">
 
-    <script type="module" src="js/inicio.js"></script>
+    <script type="module" src="js/barra-usuario.js"></script>
 </head>
 
 <body>
     <header class="barra-superior">
         <div class="fila-marca">
-
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
-
                 <ul id="menu">
                     <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
                     <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
@@ -35,10 +33,7 @@
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
                     <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
-
             </nav>
 
             <div class="marca">
@@ -54,12 +49,10 @@
 
         <div class="usuario-barra">
             <input type="checkbox" id="chkPerfil">
-
             <label for="chkPerfil" class="perfil-trigger">
                 <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
-
             <ul class="menu-perfil">
                 <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
             </ul>
@@ -73,23 +66,25 @@
         </header>
 
         <section class="grid-experiencia-color">
-            <a href="#" class="card-color" style="background-color: #1a1a1a;"><span>BLACK</span></a>
-            <a href="#" class="card-color" style="background-color: #ffffff; color: #000 !important;"><span>WHITE</span></a>
-            <a href="#" class="card-color" style="background-color: #610B0B;"><span>GARNET</span></a>
-            <a href="#" class="card-color" style="background-color: #2c3e50;"><span>NAVY</span></a>
-            <a href="#" class="card-color" style="background-color: #d4af37;"><span>GOLD</span></a>
-            <a href="#" class="card-color" style="background-color: #1e8449;"><span>EMERALD</span></a>
-            <a href="#" class="card-color" style="background-color: #e5d3b3; color: #000 !important;"><span>BEIGE</span></a>
-            <a href="#" class="card-color" style="background-color: #7d6608;"><span>OLIVE</span></a>
-            <a href="#" class="card-color" style="background-color: #8e44ad;"><span>VIOLET</span></a>
-            <a href="#" class="card-color" style="background-color: #a04000;"><span>TERRACOTTA</span></a>
-            <a href="#" class="card-color" style="background-color: #C0C0C0;"><span>GREY</span></a>
-            <a href="#" class="card-color" style="background-color: #FADADD; color: #000 !important;"><span>SOFT PINK</span></a>
+            <a href="resultado.html?tipo=color&v=BLACK" class="card-color" style="background-color: #1a1a1a;"><span>BLACK</span></a>
+            <a href="resultado.html?tipo=color&v=WHITE" class="card-color" style="background-color: #ffffff; color: #000 !important;"><span>WHITE</span></a>
+            <a href="resultado.html?tipo=color&v=GARNET" class="card-color" style="background-color: #610B0B;"><span>GARNET</span></a>
+            <a href="resultado.html?tipo=color&v=NAVY" class="card-color" style="background-color: #2c3e50;"><span>NAVY</span></a>
+            <a href="resultado.html?tipo=color&v=GOLD" class="card-color" style="background-color: #d4af37;"><span>GOLD</span></a>
+            <a href="resultado.html?tipo=color&v=EMERALD" class="card-color" style="background-color: #1e8449;"><span>EMERALD</span></a>
+            <a href="resultado.html?tipo=color&v=BEIGE" class="card-color" style="background-color: #e5d3b3; color: #000 !important;"><span>BEIGE</span></a>
+            <a href="resultado.html?tipo=color&v=OLIVE" class="card-color" style="background-color: #7d6608;"><span>OLIVE</span></a>
+            <a href="resultado.html?tipo=color&v=VIOLET" class="card-color" style="background-color: #8e44ad;"><span>VIOLET</span></a>
+            <a href="resultado.html?tipo=color&v=TERRACOTTA" class="card-color" style="background-color: #a04000;"><span>TERRACOTTA</span></a>
+            <a href="resultado.html?tipo=color&v=GREY" class="card-color" style="background-color: #C0C0C0;"><span>GREY</span></a>
+            <a href="resultado.html?tipo=color&v=SOFT PINK" class="card-color" style="background-color: #FADADD; color: #000 !important;"><span>SOFT PINK</span></a>
         </section>
 
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="./armario.html">VIRTUAL CLOSET</a>
         </footer>
     </main>
+
+    <script type="module" src="js/categorias.js"></script>
 </body>
 </html>

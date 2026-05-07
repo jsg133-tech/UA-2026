@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <link rel="stylesheet" href="css/categoria-temporada.css">
 
-    <script type="module" src="js/inicio.js"></script>
+    <script type="module" src="js/barra-usuario.js"></script>
 </head>
 
 <body>
@@ -33,8 +33,6 @@
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
                     <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
             </nav>
 
@@ -68,15 +66,17 @@
         </header>
 
         <section class="grid-experiencia-temporada">
-            <a href="#" class="card-temporada spring"><span>SPRING</span></a>
-            <a href="#" class="card-temporada summer"><span>SUMMER</span></a>
-            <a href="#" class="card-temporada autumn"><span>AUTUMN</span></a>
-            <a href="#" class="card-temporada winter"><span>WINTER</span></a>
+            <a href="resultado.html?tipo=season&v=SPRING" class="card-temporada spring"><span>SPRING</span></a>
+            <a href="resultado.html?tipo=season&v=SUMMER" class="card-temporada summer"><span>SUMMER</span></a>
+            <a href="resultado.html?tipo=season&v=AUTUMN" class="card-temporada autumn"><span>AUTUMN</span></a>
+            <a href="resultado.html?tipo=season&v=WINTER" class="card-temporada winter"><span>WINTER</span></a>
         </section>
 
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="./armario.html">VIRTUAL CLOSET</a>
         </footer>
     </main>
+    
+    <script type="module" src="js/categorias.js"></script>
 </body>
 </html>
