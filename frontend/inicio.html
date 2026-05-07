@@ -4,28 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bellaveste</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/inicio.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
 </head>
 <body>
-    <header class="encabezado">
-        <div class="marca">
-            <h1>BELLAVESTE</h1>
-            <h2>SPAIN</h2>
-        </div>
-    </header>
 
-    <main class="principal" aria-label="Portada Bellaveste">
-        <div class="acciones">
-            <a class="btn-login" href="login.html">LOGIN</a>
-            <a class="btn-register" href="registrar.html">REGISTRARSE</a>
+    <!-- NAV SUPERIOR -->
+    <nav class="nav-top">
+        <button class="nav-menu" aria-label="Menu">
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-acciones">
+            <a href="buscar.html">SEARCH</a>
+            <a href="login.html" class="nav-login">LOGIN</a>
+            <a href="registrar.html" class="nav-join">Create account</a>
         </div>
+    </nav>
+
+    <!-- HERO -->
+    <main class="hero">
+
+        <!-- Panel izquierdo -->
+        <div class="hero-panel hero-panel--izq">
+            <img src="images/foto-izquierda.jfif" alt="Bellaveste" draggable="false">
+        </div>
+
+        <!-- Panel derecho -->
+        <div class="hero-panel hero-panel--der">
+            <img src="images/foto-derecha.jfif" alt="Bellaveste" draggable="false">
+        </div>
+
+        <!-- Marca superpuesta -->
+        <div class="hero-marca" aria-hidden="true">
+            <span class="marca-texto">BELLAVESTE</span>
+        </div>
+
+        <!-- SPAIN + tagline abajo -->
+        <div class="hero-bottom">
+            <span class="hero-spain">SPAIN</span>
+            <p class="hero-tagline">Your wardrobe, <em>curated.</em></p>
+        </div>
+
     </main>
 
-    <footer class="pie">
-        <a href="acerca.html">VIRTUAL CLOSET</a>
+    <!-- BLOQUE MÓVIL: marca + botones debajo de la foto -->
+    <div class="movil-cta">
+        <div class="movil-marca">
+            <h1>BELLAVESTE</h1>
+            <p>SPAIN</p>
+        </div>
+        <p class="movil-tagline">Your wardrobe, <em>curated.</em></p>
+        <div class="movil-botones">
+            <a href="login.html" class="movil-btn-login">LOGIN</a>
+            <a href="registrar.html" class="movil-btn-register">Create an account</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-inicio">
+        <a href="inicio-logueado.html">VIRTUAL CLOSET</a>
     </footer>
+
 </body>
 </html>

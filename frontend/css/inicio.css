@@ -1,102 +1,321 @@
+/* ============================================================
+   INICIO — BELLAVESTE  ·  Editorial Split
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-    --vino: #5a0d16;
+    --vino:  #5a0d16;
     --vino-oscuro: #3d0a11;
-    --claro: #f4ece4;
-    --fondo: #d9d8de;
+    --crema: #f4ece4;
 }
 
-* {
-    box-sizing: border-box;
+html, body {
+    height: 100%;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    font-family: "Times New Roman", Georgia, serif;
-    background: linear-gradient(160deg, #eceaf2 0%, var(--fondo) 55%, #cfcdd6 100%);
+    font-family: "Cinzel", serif;
+    background: #f5f0ec;
+    display: flex;
+    flex-direction: column;
 }
 
-.encabezado {
-    background-color: var(--vino);
-    color: var(--claro);
+/* ── NAV SUPERIOR (desktop) ───────────────────────────────── */
+
+.nav-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 22px 32px;
+    pointer-events: none;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    pointer-events: auto;
+}
+
+.nav-menu span {
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: #111;
+}
+
+.nav-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+/* SEARCH — solo texto */
+.nav-acciones a:first-child {
+    font-size: 0.58rem;
+    letter-spacing: 2.5px;
+    color: #111;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.nav-acciones a:first-child:hover { opacity: 1; }
+
+/* LOGIN — botón con borde, prominente */
+.nav-acciones a.nav-login {
+    font-size: 0.6rem;
+    letter-spacing: 2.5px;
+    color: #111;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.7);
+    padding: 6px 16px;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-acciones a.nav-login:hover {
+    background: #111;
+    color: var(--crema);
+}
+
+/* JOIN — texto pequeño */
+.nav-acciones a.nav-join {
+    font-size: 0.52rem;
+    letter-spacing: 2px;
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.nav-acciones a.nav-join:hover { color: #111; }
+
+/* ── HERO ─────────────────────────────────────────────────── */
+
+.hero {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.hero-panel {
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.7s ease;
+}
+
+.hero-panel:hover img { transform: scale(1.03); }
+.hero-panel--izq { border-right: 2px solid #f5f0ec; }
+
+/* BELLAVESTE sobre las fotos */
+.hero-marca {
+    position: absolute;
+    bottom: 13%;
+    left: 0;
+    right: 0;
     text-align: center;
-    padding: 30px 16px 14px;
-    letter-spacing: 0.04em;
+    pointer-events: none;
+    user-select: none;
 }
 
-.marca h1 {
-    margin: 0;
-    font-size: clamp(2rem, 2.7vw, 2.6rem);
-    font-weight: 500;
+.marca-texto {
+    font-family: "Cinzel", serif;
+    font-weight: 300;
+    font-size: clamp(4rem, 10vw, 9rem);
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 2px 30px rgba(0,0,0,0.2);
     line-height: 1;
+    mix-blend-mode: overlay;
 }
 
-.marca h2 {
-    margin: 4px 0 0;
-    font-size: clamp(0.8rem, 1vw, 0.95rem);
-    font-weight: 500;
-    letter-spacing: 0.17em;
+/* SPAIN + tagline en la base */
+.hero-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    background: linear-gradient(transparent, rgba(0,0,0,0.2));
 }
 
-.principal {
-    display: grid;
-    place-items: center;
-    padding: 32px 16px;
-    background: url(../images/fondo.jpg) center/cover no-repeat;
+.hero-spain {
+    font-size: 0.52rem;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.7);
+}
 
-    >.acciones {
-        width: min(100%, 420px);
+.hero-tagline {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.65);
+}
+
+/* ── BLOQUE MÓVIL (oculto en desktop) ────────────────────── */
+
+.movil-cta { display: none; }
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+
+.footer-inicio {
+    text-align: center;
+    padding: 11px;
+    background: var(--vino);
+    flex-shrink: 0;
+}
+
+.footer-inicio a {
+    font-family: "Cinzel", serif;
+    font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+    letter-spacing: 0.12em;
+    color: var(--crema);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.footer-inicio a:hover { opacity: 0.7; }
+
+/* ── MÓVIL ≤ 640px ────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+    html, body { height: auto; overflow: auto; }
+
+    /* Ocultar nav desktop en móvil */
+    .nav-top { display: none; }
+
+    /* Hero = solo la foto derecha, ocupa la mitad superior */
+    .hero {
+        grid-template-columns: 1fr;
+        height: 52vh;
+        min-height: 260px;
+        flex-shrink: 0;
+    }
+
+    .hero-panel--izq { display: none; }
+
+    .hero-panel--der img { object-position: center 15%; }
+
+    /* BELLAVESTE más pequeño */
+    .marca-texto {
+        font-size: clamp(2.4rem, 12vw, 3.8rem);
+        letter-spacing: 0.08em;
+    }
+
+    .hero-bottom { padding: 14px 18px; }
+
+    /* Mostrar bloque de acciones */
+    .movil-cta {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 18px;
-
-        >.btn-login {
-            width: min(100%, 320px);
-            padding: 12px 22px;
-            border-radius: 8px;
-            border: 1px solid rgba(90, 13, 22, 0.75);
-            text-decoration: none;
-            text-align: center;
-            color: var(--vino-oscuro);
-            font-size: clamp(1.5rem, 2.2vw, 2.15rem);
-            line-height: 1;
-            background: rgba(245, 238, 232, 0.72);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-
-            &:hover {
-                transform: translateY(-2px);
-                background: rgba(245, 238, 232, 0.92);
-            }
-        }
-
-        >.btn-register {
-            color: var(--vino-oscuro);
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            letter-spacing: 0.03em;
-            font-size: clamp(1rem, 1.2vw, 1.1rem);
-        }
+        gap: 20px;
+        padding: 32px 28px 28px;
+        background:
+            radial-gradient(ellipse at 50% 0%, #fff8f3 0%, #f0e5dc 100%);
+        border-top: 1px solid rgba(90,13,22,0.08);
     }
-}
 
-.pie {
-    background-color: var(--vino);
-    text-align: center;
-    padding: 14px 10px;
+    .movil-marca {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
 
-    >a {
-        color: var(--claro);
+    .movil-marca h1 {
+        font-family: "Cinzel", serif;
+        font-weight: 400;
+        font-size: 1.6rem;
+        letter-spacing: 0.2em;
+        color: var(--vino-oscuro);
+    }
+
+    .movil-marca p {
+        font-size: 0.55rem;
+        letter-spacing: 5px;
+        color: rgba(90,13,22,0.4);
+    }
+
+    .movil-tagline {
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 1rem;
+        color: rgba(61,10,17,0.55);
+        text-align: center;
+    }
+
+    .movil-botones {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .movil-btn-login {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        text-align: center;
+        font-family: "Cinzel", serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.3em;
+        color: var(--crema);
+        background: linear-gradient(135deg, var(--vino), #7a1525);
         text-decoration: none;
-        font-size: clamp(1.4rem, 1.9vw, 1.85rem);
-        letter-spacing: 0.04em;
+        border-radius: 2px;
+        box-shadow: 0 4px 18px rgba(90,13,22,0.3);
+        transition: box-shadow 0.2s, transform 0.15s;
+    }
+
+    .movil-btn-login:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(90,13,22,0.38);
+    }
+
+    .movil-btn-register {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 0.92rem;
+        color: rgba(61,10,17,0.55);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(61,10,17,0.2);
+        padding-bottom: 1px;
+        transition: color 0.2s, border-color 0.2s;
+    }
+
+    .movil-btn-register:hover {
+        color: var(--vino-oscuro);
+        border-color: rgba(61,10,17,0.5);
     }
 }
 
-@media (min-width: 1024px) {
-    .principal {
-        background: url(../images/Tulipanes.jfif) center/cover no-repeat;
-    }
+/* ── TABLET (641–1024px) ──────────────────────────────────── */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .marca-texto { font-size: clamp(3.5rem, 9vw, 6rem); }
 }
