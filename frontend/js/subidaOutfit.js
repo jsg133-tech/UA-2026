@@ -31,8 +31,11 @@ function toJpeg(file) {
 
 // Elementos del formulario - OUTFIT
 const form = document.getElementById('form-subida');
-const inputNombre = document.getElementById('outfit-name');
-const inputFoto = document.getElementById('outfit-picture');
+const inputNombre    = document.getElementById('outfit-name');
+const inputCategory  = document.getElementById('outfit-category');
+const inputSeason    = document.getElementById('outfit-season');
+const inputColor     = document.getElementById('outfit-color');
+const inputFoto      = document.getElementById('outfit-picture');
 const previewPicture = document.getElementById('preview-picture');
 
 // Elementos del formulario - PRENDAS
@@ -298,9 +301,11 @@ form.addEventListener('submit', async (e) => {
         if (!token) throw new Error('You are not authenticated. Please log in.');
 
         const formData = new FormData();
-        formData.append('name', inputNombre.value.trim());
-        formData.append('category', 'CASUAL');
-        formData.append('image', await toJpeg(inputFoto.files[0]));
+        formData.append('name',     inputNombre.value.trim());
+        formData.append('category', inputCategory.value || 'CASUAL');
+        formData.append('season',   inputSeason.value   || '');
+        formData.append('color',    inputColor.value     || '');
+        formData.append('image',    await toJpeg(inputFoto.files[0]));
 
         for (let i = 0; i < prendasDOM.length; i++) {
             formData.append(`piece-image-${i}`, await toJpeg(prendasDOM[i].foto));

@@ -55,7 +55,7 @@ router.use(authMiddleware);
 // POST /api/outfits
 router.post('/', upload.any(), async (req, res) => {
   try {
-    const { name, category, pieces: piecesStr } = req.body;
+    const { name, category, season, color, pieces: piecesStr } = req.body;
 
     if (!name) return res.status(400).json({ error: 'Name is required' });
 
@@ -89,6 +89,8 @@ router.post('/', upload.any(), async (req, res) => {
     const outfit = await Outfit.create({
       name,
       category: category || 'CASUAL',
+      season:   season   || '',
+      color:    color    || '',
       imageUrl,
       pieces,
       userId: req.userId,
