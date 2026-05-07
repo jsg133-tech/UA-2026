@@ -8,21 +8,52 @@
 
 .seccion-header {
     text-align: center;
-    padding: 50px 20px 30px;
+    padding: 44px 20px 32px;
+    position: relative;
+    background: linear-gradient(160deg, rgba(255,248,243,0.96) 0%, rgba(237,224,215,0.92) 100%);
+    border-bottom: 1px solid rgba(90,13,22,0.1);
+    margin-bottom: 28px;
+}
+
+.seccion-header::before {
+    content: "BELLAVESTE";
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 0.45rem;
+    letter-spacing: 6px;
+    color: rgba(90,13,22,0.25);
+    white-space: nowrap;
 }
 
 .seccion-header h2 {
     font-family: 'Cinzel', serif;
-    letter-spacing: 4px;
-    font-size: 1.8rem;
-    color: #222;
+    letter-spacing: 5px;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #3d0a11;
+    margin: 0 0 14px;
+    line-height: 1.15;
+}
+
+.seccion-header h2::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #5a0d16, transparent);
+    margin: 12px auto 0;
 }
 
 .seccion-header p {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    color: #666;
-    font-size: 1.1rem;
+    color: rgba(103,66,73,0.75);
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    margin: 0;
 }
 
 .grid-experiencia-temporada {
