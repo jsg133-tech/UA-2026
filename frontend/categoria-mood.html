@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bellaveste</title>
+    <title>Bellaveste - Mood Experience</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/inicio-logueado.css">
     <link rel="stylesheet" href="css/comun.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
+    <link rel="stylesheet" href="css/categoria-mood.css">
 
     <script type="module" src="js/inicio.js"></script>
 </head>
 
 <body>
-    <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
-
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
-
                 <ul id="menu">
                     <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
                     <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
@@ -37,11 +32,10 @@
                     <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
                     <li><i class="icon-moon"></i>DARK MODE</li>
                     <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
-
             </nav>
 
             <div class="marca">
@@ -57,12 +51,10 @@
 
         <div class="usuario-barra">
             <input type="checkbox" id="chkPerfil">
-
             <label for="chkPerfil" class="perfil-trigger">
                 <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
-
             <ul class="menu-perfil">
                 <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
             </ul>
@@ -70,46 +62,23 @@
     </header>
 
     <main class="contenedor-app">
-        <!-- COLECCIONES -->
-        <section class="colecciones">
-            <h2>COLECCIONES</h2>
-            <p>DISCOVER FASHION YOUR WAY</p>
+        <header class="seccion-header">
+            <h2>SHOP BY MOOD</h2>
+            <p>Adaptive style for your attitude</p>
+        </header>
 
-            <div class="categorias">
-                <article class="categoria">
-                    <a href="categoria-temporada.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                    <img src="images/temporada.jfif" alt="Categoría Temporada">
-                    <span>SEASON</span>
-                    </a>
-                </article>
-
-                <article class="categoria">
-                    <a href="categoria-color.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                        <img src="images/color.jfif" alt="Categoría Color">
-                        <span>COLOR</span>
-                    </a>
-                </article>
-
-                <article class="categoria">
-                    <a href="categoria-mood.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                        <img src="images/ocasion.jfif" alt="Categoría Mood">
-                        <span>MOOD</span>
-                    </a>
-                </article>
-            </div>
+        <section class="grid-experiencia-mood">
+            <a href="#" class="card-mood casual"><span>CASUAL</span></a>
+            <a href="#" class="card-mood elegant"><span>ELEGANT</span></a>
+            <a href="#" class="card-mood streetwear"><span>STREETWEAR</span></a>
+            <a href="#" class="card-mood bohochic"><span>BOHO CHIC</span></a>
+            <a href="#" class="card-mood athleisure"><span>ATHLEISURE</span></a>
+            <a href="#" class="card-mood minimal"><span>MINIMAL</span></a>
         </section>
 
-        <!-- OUTFIT -->
-        <section class="outfit-dia">
-            <h2>OUTFIT</h2>
-            <p>WHAT WILL YOU WEAR TODAY?</p>
-        </section>
-
-        <!-- BOTON FINAL -->
         <footer>
             <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
         </footer>
-
     </main>
 </body>
 </html>

@@ -1,0 +1,92 @@
+/* categoria-mood.css */
+
+.contenedor-app {
+    background-color: #E6D5C9 !important;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.seccion-header {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+.seccion-header h2 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 4px;
+    font-size: 1.8rem;
+    color: #222;
+}
+
+.seccion-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.grid-experiencia-mood {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card-mood {
+    aspect-ratio: 1 / 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Rutas de las imágenes de Mood según tu captura */
+.casual { background-image: url('../images/casual.jpg'); }
+.elegant { background-image: url('../images/elegant.jpg'); }
+.streetwear { background-image: url('../images/streetwear.jpg'); }
+.bohochic { background-image: url('../images/bohochic.jpg'); }
+.athleisure { background-image: url('../images/athleisure.jpg'); }
+.minimal { background-image: url('../images/minimal.jpg'); }
+
+.card-mood span {
+    color: #ffffff; 
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    z-index: 2;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+}
+
+/* Capa oscura para legibilidad */
+.card-mood::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3); 
+    z-index: 1;
+    transition: background 0.3s;
+}
+
+.card-mood:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.card-mood:hover::before {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    margin-top: 60px;
+    padding-bottom: 20px;
+}

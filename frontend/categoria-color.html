@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bellaveste</title>
+    <title>Bellaveste - Color Experience</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/inicio-logueado.css">
     <link rel="stylesheet" href="css/comun.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
+    <link rel="stylesheet" href="css/categoria-color.css">
 
     <script type="module" src="js/inicio.js"></script>
 </head>
 
 <body>
-    <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
 
@@ -37,7 +34,7 @@
                     <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
                     <li><i class="icon-moon"></i>DARK MODE</li>
                     <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
@@ -70,46 +67,29 @@
     </header>
 
     <main class="contenedor-app">
-        <!-- COLECCIONES -->
-        <section class="colecciones">
-            <h2>COLECCIONES</h2>
-            <p>DISCOVER FASHION YOUR WAY</p>
+        <header class="seccion-header">
+            <h2>SHOP BY COLOR</h2>
+            <p>Curated tones for your personal style</p>
+        </header>
 
-            <div class="categorias">
-                <article class="categoria">
-                    <a href="categoria-temporada.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                    <img src="images/temporada.jfif" alt="Categoría Temporada">
-                    <span>SEASON</span>
-                    </a>
-                </article>
-
-                <article class="categoria">
-                    <a href="categoria-color.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                        <img src="images/color.jfif" alt="Categoría Color">
-                        <span>COLOR</span>
-                    </a>
-                </article>
-
-                <article class="categoria">
-                    <a href="categoria-mood.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
-                        <img src="images/ocasion.jfif" alt="Categoría Mood">
-                        <span>MOOD</span>
-                    </a>
-                </article>
-            </div>
+        <section class="grid-experiencia-color">
+            <a href="#" class="card-color" style="background-color: #1a1a1a;"><span>BLACK</span></a>
+            <a href="#" class="card-color" style="background-color: #ffffff; color: #000 !important;"><span>WHITE</span></a>
+            <a href="#" class="card-color" style="background-color: #610B0B;"><span>GARNET</span></a>
+            <a href="#" class="card-color" style="background-color: #2c3e50;"><span>NAVY</span></a>
+            <a href="#" class="card-color" style="background-color: #d4af37;"><span>GOLD</span></a>
+            <a href="#" class="card-color" style="background-color: #1e8449;"><span>EMERALD</span></a>
+            <a href="#" class="card-color" style="background-color: #e5d3b3; color: #000 !important;"><span>BEIGE</span></a>
+            <a href="#" class="card-color" style="background-color: #7d6608;"><span>OLIVE</span></a>
+            <a href="#" class="card-color" style="background-color: #8e44ad;"><span>VIOLET</span></a>
+            <a href="#" class="card-color" style="background-color: #a04000;"><span>TERRACOTTA</span></a>
+            <a href="#" class="card-color" style="background-color: #C0C0C0;"><span>GREY</span></a>
+            <a href="#" class="card-color" style="background-color: #FADADD; color: #000 !important;"><span>SOFT PINK</span></a>
         </section>
 
-        <!-- OUTFIT -->
-        <section class="outfit-dia">
-            <h2>OUTFIT</h2>
-            <p>WHAT WILL YOU WEAR TODAY?</p>
-        </section>
-
-        <!-- BOTON FINAL -->
         <footer>
             <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
         </footer>
-
     </main>
 </body>
 </html>
