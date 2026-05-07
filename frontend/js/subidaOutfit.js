@@ -343,7 +343,7 @@ form.addEventListener('submit', async (e) => {
         
         // Éxito - redireccionar automáticamente
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'armario.html';
         }, 1500);
 
     } catch (err) {
