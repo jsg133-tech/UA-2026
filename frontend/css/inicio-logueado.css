@@ -38,8 +38,8 @@ body {
 .outfit-dia {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding: 40px;
+    gap: 12px;
+    padding: 16px 14px;
 }
 
 .outfit-dia h2,
@@ -132,11 +132,13 @@ body {
 .imagen-outfit {
     position: relative;
     width: 100%;
-    height: 200px;
+    aspect-ratio: 3 / 4;
     flex-shrink: 0;
 }
 
 .imagen-outfit img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -314,10 +316,8 @@ body {
 }
 
 /* TABLET */
-@media (min-width:768px) {
-    body {
-        padding: 0;
-    }
+@media (min-width: 768px) {
+    body { padding: 0; }
 
     .contenedor-app {
         width: 100%;
@@ -325,8 +325,10 @@ body {
         margin: 0;
     }
 
-    .imagen-outfit {
-        height: 220px;
+    .outfit-dia {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 20px;
     }
 
 }
@@ -356,24 +358,21 @@ body {
         padding: 40px 60px;
     }
 
-    /* DOS OUTFITS EN FILA */
+    /* TRES OUTFITS EN FILA */
     .outfit-dia {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        padding: 24px 40px;
         align-items: start;
     }
+
 
     /* título ocupa toda la fila */
     .outfit-dia h2,
     .outfit-dia p {
         grid-column: 1 / -1;
         text-align: center;
-    }
-
-    /* tarjetas más grandes */
-    .imagen-outfit {
-        height: 280px;
     }
 
     /* botón inferior ancho completo */
@@ -429,18 +428,6 @@ body {
 
     .categoria span {
         font-size: 0.6rem;
-    }
-
-    /* OUTFITS MÁS COMPACTOS */
-    .outfit-dia {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    /* TARJETA IMAGEN MÁS BAJA */
-    .imagen-outfit {
-        height: 165px;
     }
 
     /* BOTÓN FINAL */
