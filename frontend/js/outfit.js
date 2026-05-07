@@ -86,9 +86,10 @@ async function cargarOutfit() {
         const token = getToken();
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const r = await fetch(`${API}/api/outfits/${id}`, { headers });
+        const data = await r.json().catch(() => ({}));
 
-        if (!r.ok) throw new Error('Outfit not found');
-        const outfit = await r.json();
+        if (!r.ok) throw new Error(`Error ${r.status}: ${data.error || 'Outfit not found'}`);
+        const outfit = data;
 
         // Foto principal
         fotoEl.src = outfit.imageUrl || 'images/temporada.jfif';
