@@ -21,6 +21,7 @@ const outfitSchema = new mongoose.Schema({
   cloudinaryPublicId: { type: String, default: '' },
   pieces: [prendaSchema],
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  savedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Outfit', outfitSchema);

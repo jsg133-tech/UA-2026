@@ -269,7 +269,7 @@ async function quitarDelArmario(idOutfit, boton, tarjeta) {
     boton.disabled = true;
 
     try {
-        const r = await fetch(`${API}/api/outfits/${idOutfit}`, {
+        const r = await fetch(`${API}/api/armario/${idOutfit}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` },
         });
