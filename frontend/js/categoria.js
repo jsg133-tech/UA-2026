@@ -73,15 +73,20 @@ async function cargarResultados() {
     const params   = new URLSearchParams(window.location.search);
     const tipo     = params.get('tipo');
     const v        = params.get('v');
-    const tituloEl = document.getElementById('titulo-filtro');
-    const grid     = document.getElementById('grid-resultados');
+    const tituloEl  = document.getElementById('titulo-filtro');
+    const tipoEl    = document.getElementById('header-tipo');
+    const subEl     = document.getElementById('subtitulo-filtro');
+    const grid      = document.getElementById('grid-resultados');
 
     if (!tipo || !v) {
         grid.innerHTML = '<p style="padding:20px;font-family:Cormorant Garamond,serif;color:#7a5060;grid-column:1/-1">No filter selected.</p>';
         return;
     }
 
+    const tipoLabels = { season: 'SEASON', category: 'CATEGORY', color: 'COLOR', mood: 'MOOD' };
     if (tituloEl) tituloEl.textContent = v.toUpperCase();
+    if (tipoEl)   tipoEl.textContent   = tipoLabels[tipo] || 'COLLECTION';
+    if (subEl)    subEl.textContent    = `${tipoLabels[tipo] || ''} · ${v.toUpperCase()}`;
 
     try {
         let outfits = [];

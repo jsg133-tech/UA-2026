@@ -1,48 +1,93 @@
-/* resultados.css - Basado en el estilo de Armario */
+/* ============================================================
+   RESULTADO — BELLAVESTE
+   ============================================================ */
 
 .contenedor-app {
     width: 100%;
-    padding: 20px 14px;
+    padding: 0 0 20px;
 }
 
-/* CABECERA DE LA SECCIÓN */
+/* ── CABECERA EDITORIAL ───────────────────────────────────── */
+
 .seccion-header {
-    text-align: center;
-    margin-bottom: 25px;
-    padding: 0 10px;
-}
-
-.seccion-header h2 {
-    font-family: "Cinzel", serif;
-    font-size: 1.4rem;
-    color: #6d303e;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     position: relative;
-    display: inline-block;
-    margin-bottom: 8px;
+    text-align: center;
+    padding: 36px 20px 28px;
+    margin-bottom: 24px;
+    background:
+        linear-gradient(160deg, rgba(255,248,243,0.95) 0%, rgba(240,229,221,0.9) 100%);
+    border-bottom: 1px solid rgba(90, 13, 22, 0.1);
+    overflow: hidden;
 }
 
-/* Líneas decorativas laterales */
-.seccion-header h2::before,
-.seccion-header h2::after {
+/* Detalle decorativo de fondo */
+.seccion-header::before {
     content: "";
     position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 1px;
-    background: rgba(118, 60, 72, 0.45);
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(90,13,22,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(90,13,22,0.04) 0%, transparent 60%);
+    pointer-events: none;
 }
 
-.seccion-header h2::before { right: 105%; }
-.seccion-header h2::after  { left: 105%; }
+/* Enlace volver */
+.header-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Cinzel", serif;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    color: rgba(90, 13, 22, 0.5);
+    text-decoration: none;
+    margin-bottom: 18px;
+    transition: color 0.2s;
+}
+.header-back:hover { color: #5a0d16; }
+.header-back i { font-size: 0.6rem; }
 
+/* Etiqueta tipo (SEASON / COLOR / MOOD) */
+.header-tipo {
+    display: block;
+    font-family: "Cinzel", serif;
+    font-size: 0.52rem;
+    letter-spacing: 5px;
+    color: rgba(90, 13, 22, 0.45);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Título principal */
+.seccion-header h2 {
+    font-family: "Cinzel", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #3d0a11;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin: 0 0 18px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Línea decorativa bajo el título */
+.header-divider {
+    width: 40px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #5a0d16, transparent);
+    margin: 0 auto 14px;
+}
+
+/* Subtítulo */
 #subtitulo-filtro {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
-    font-size: 1rem;
-    color: #6f4a52;
-    opacity: 0.8;
+    font-size: 0.95rem;
+    color: rgba(103, 66, 73, 0.7);
+    letter-spacing: 0.5px;
+    margin: 0;
 }
 
 /* GRID DE RESULTADOS (Idéntico a grid-armario) */
@@ -141,28 +186,55 @@ footer {
     color: #6f4a52;
 }
 
-/* RESPONSIVE: TABLET & DESKTOP */
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+    .seccion-header {
+        padding: 26px 14px 22px;
+    }
+
+    .seccion-header h2 {
+        font-size: 1.4rem;
+        letter-spacing: 2.5px;
+    }
+
+    .header-tipo {
+        font-size: 0.48rem;
+        letter-spacing: 3px;
+    }
+}
+
 @media (min-width: 768px) {
+    .seccion-header {
+        padding: 48px 40px 36px;
+    }
+
+    .seccion-header h2 {
+        font-size: 2.6rem;
+        letter-spacing: 6px;
+    }
+
     .grid-armario {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+        padding: 0 20px;
     }
-    
-    .seccion-header h2 { font-size: 1.8rem; }
-    .seccion-header h2::before, .seccion-header h2::after { width: 80px; }
 }
 
 @media (min-width: 1024px) {
-    .contenedor-app {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 40px 20px;
+    .seccion-header {
+        padding: 60px 60px 44px;
+    }
+
+    .seccion-header h2 {
+        font-size: 3rem;
     }
 
     .grid-armario {
-        grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
-        gap: 25px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        padding: 0 40px;
     }
 
-    .nombre-outfit { font-size: 0.75rem; }
+    .nombre-outfit { font-size: 0.72rem; }
 }

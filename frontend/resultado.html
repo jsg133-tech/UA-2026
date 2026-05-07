@@ -15,8 +15,9 @@
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <link rel="stylesheet" href="css/armario.css">
+    <link rel="stylesheet" href="css/resultado.css">
 
-    <script type="module" src="js/barra-usuario.js"></script>
+    <script type="module" src="js/categoria.js"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                     <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./post.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
                     <li><i class="icon-moon"></i>DARK MODE</li>
                     <li><i class="icon-setting"></i>SETTING</li>
                 </ul>
@@ -66,8 +67,13 @@
 
     <main class="contenedor-app">
         <header class="seccion-header">
+            <a href="inicio-categoria.html" class="header-back">
+                <i class="icon-left-open"></i> COLLECTIONS
+            </a>
+            <span class="header-tipo" id="header-tipo">COLLECTION</span>
             <h2 id="titulo-filtro">RESULTS</h2>
-            <p id="subtitulo-filtro">Curated selection from your wardrobe</p>
+            <div class="header-divider"></div>
+            <p id="subtitulo-filtro">Curated selection for your style</p>
         </header>
 
         <section id="grid-resultados" class="grid-armario">
