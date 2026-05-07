@@ -39,6 +39,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/outfits/mine — debe ir ANTES de /:id para que Express no lo capture
+router.get('/mine', authMiddleware, async (req, res) => {
+  try {
+    const outfits = await Outfit.find({ userId: req.userId }).sort({ createdAt: -1 });
+    res.json(outfits);
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // GET /api/outfits/:id  (público)
 router.get('/:id', async (req, res) => {
   try {
@@ -51,16 +61,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.use(authMiddleware);
-
-// GET /api/outfits/mine  →  outfits creados por el usuario logueado
-router.get('/mine', async (req, res) => {
-  try {
-    const outfits = await Outfit.find({ userId: req.userId }).sort({ createdAt: -1 });
-    res.json(outfits);
-  } catch {
-    res.status(500).json({ error: 'Server error' });
-  }
-});
 
 // POST /api/outfits
 router.post('/', upload.any(), async (req, res) => {
