@@ -115,8 +115,8 @@ async function cargarOutfit() {
         }
 
         // Mostrar contenido
-        loadingEl.hidden = true;
-        contenidoEl.hidden = false;
+        loadingEl.classList.remove('visible');
+        contenidoEl.style.display = 'block';
 
         // Botón guardar en armario
         btnGuardar.addEventListener('click', async () => {
@@ -139,7 +139,7 @@ async function cargarOutfit() {
         });
 
     } catch (err) {
-        loadingEl.innerHTML = `<p style="font-family:Cormorant Garamond,serif;color:#7a5060;">${err.message}</p>`;
+        loadingEl.innerHTML = `<p style="font-family:Cormorant Garamond,serif;color:#7a5060;padding:20px;">${err.message}</p>`;
     }
 }
 
