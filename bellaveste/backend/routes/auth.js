@@ -123,8 +123,15 @@ router.delete('/me', require('../middleware/auth'), async (req, res) => {
     const match = await user.comparePassword(password);
     if (!match) return res.status(401).json({ error: 'Wrong password' });
     
-    // Eliminar usuario (hook automáticamente eliminará outfits y categorías)
-    await User.findOneAndDelete({ _id: req.userId });
+    // Eliminar datos anidados ANTES de eliminar el usuario
+    const Outfit = require('../models/Outfit');
+    const CategoryModel = require('../models/Category');
+    
+    await Outfit.deleteMany({ userId: req.userId });
+    await CategoryModel.deleteMany({ userId: req.userId });
+    
+    // Finalmente, eliminar el usuario
+    await User.findByIdAndDelete(req.userId);
     
     res.json({ message: 'Account and all associated data deleted successfully' });
   } catch (err) {

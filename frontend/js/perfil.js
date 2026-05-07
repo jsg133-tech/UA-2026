@@ -135,20 +135,39 @@ btnLogout?.addEventListener('click', () => {
 
 // ── ELIMINAR CUENTA ───────────────────────────────────────────
 btnDelete?.addEventListener('click', () => {
+    const passwordInput = prompt('Enter your password to confirm account deletion:');
+    if (!passwordInput) return; // Usuario canceló
+
     mostrarConfirm(
-        'This will permanently delete your account and all your outfits.',
+        'This will permanently delete your account and all your outfits. This action cannot be undone.',
         async () => {
             const token = getToken();
             try {
-                await fetch(`${API}/api/auth/me`, {
+                const response = await fetch(`${API}/api/auth/me`, {
                     method: 'DELETE',
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ password: passwordInput }),
                 });
-            } catch { /* silencioso */ }
-            clearAuthSession();
-            window.location.href = 'inicio.html';
+
+                const data = await response.json().catch(() => ({}));
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Error deleting account');
+                }
+
+                mostrarModal('Your account has been deleted.', 'success', 'Goodbye');
+                setTimeout(() => {
+                    clearAuthSession();
+                    window.location.href = 'inicio.html';
+                }, 1500);
+            } catch (err) {
+                mostrarModal(err.message, 'error', 'Delete Failed');
+            }
         },
-        'Delete account?',
+        'Delete account permanently?',
         'DELETE'
     );
 });
