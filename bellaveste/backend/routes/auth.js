@@ -71,12 +71,39 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// GET /api/auth/me (optional - get current user)
+// GET /api/auth/me
 router.get('/me', require('../middleware/auth'), async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PUT /api/auth/me  →  actualizar perfil del usuario
+router.put('/me', require('../middleware/auth'), async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const { name, email, newPassword, currentPassword, avatar } = req.body;
+
+    // Si quiere cambiar contraseña o email, verificar la actual
+    if (newPassword || email) {
+      if (!currentPassword) return res.status(400).json({ error: 'Current password is required' });
+      const match = await user.comparePassword(currentPassword);
+      if (!match) return res.status(401).json({ error: 'Wrong password' });
+    }
+
+    if (name)        user.name  = name.trim();
+    if (email)       user.email = email.trim().toLowerCase();
+    if (newPassword) user.password = newPassword;
+    if (avatar)      user.avatar = avatar;
+
+    await user.save();
+    res.json({ id: user._id, name: user.name, email: user.email, avatar: user.avatar });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

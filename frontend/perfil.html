@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/comun.css">
     <link rel="stylesheet" href="css/perfil.css">
 
-    <script type="module" src="js/barra-usuario.js"></script>
+    <link rel="stylesheet" href="css/modal.css">
+    <script type="module" src="js/perfil.js"></script>
 </head>
 <body>
     <header class="barra-superior">
@@ -50,8 +51,8 @@
             <input type="checkbox" id="chkPerfil">
 
             <label for="chkPerfil" class="perfil-trigger">
-                <span class="nombre-usuario">MIRANDA WANDA</span>
-                <img class="avatar" src="images/perfil.jfif" alt="Usuario">
+                <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
+                <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
 
             <ul class="menu-perfil">
@@ -82,31 +83,25 @@
                     </label>
                     <input type="file" id="inputFoto" accept="image/*" style="display: none;">
                 </div>
-                <div class="nombre-destacado">
-                    MIRANDA WANDA
-                </div>
+                <div class="nombre-destacado" id="perfil-nombre-display">—</div>
             </div>
 
-            <form class="form-perfil">
+            <form class="form-perfil" id="form-perfil">
                 <div class="campo">
                     <label><i class="icon-user-circle"></i> NAME:</label>
-                    <input type="text" placeholder="New name...">
-                </div>
-                <div class="campo">
-                    <label><i class="icon-user-circle"></i> USERNAME:</label>
-                    <input type="text" placeholder="New username...">
+                    <input type="text" id="input-name" placeholder="New name...">
                 </div>
                 <div class="campo">
                     <label><i class="icon-mail"></i> E-MAIL:</label>
-                    <input type="email" value="mirandawanda@gmail.com">
+                    <input type="email" id="input-email" placeholder="Email...">
                 </div>
                 <div class="campo">
-                    <label><i class="icon-key"></i> NEW PASSWORD</label> 
-                    <input type="password" placeholder="New password...">
+                    <label><i class="icon-key"></i> NEW PASSWORD</label>
+                    <input type="password" id="input-new-password" placeholder="Leave blank to keep current">
                 </div>
                 <div class="campo">
-                    <label><i class="icon-key"></i> PASSWORD</label>
-                    <input type="password" placeholder="To confirm the changes you must put your password">
+                    <label><i class="icon-key"></i> CURRENT PASSWORD</label>
+                    <input type="password" id="input-current-password" placeholder="Required to save changes">
                 </div>
                 <button type="submit" class="btn-update">UPDATE</button>
             </form>
