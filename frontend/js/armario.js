@@ -2,11 +2,19 @@ import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth
 
 const API = 'https://ua-2026.onrender.com';
 
-const gridArmario      = document.getElementById('grid-armario');
-const categoriasBarra  = document.getElementById('categorias-bar');
-const nombreUsuarioEl  = document.getElementById('nombre-usuario');
-const avatarUsuarioEl  = document.getElementById('avatar-usuario');
-const logoutLinkEl     = document.getElementById('logout-link');
+const gridArmario         = document.getElementById('grid-armario');
+const categoriasBarra     = document.getElementById('categorias-bar');
+const categoriasDropdown  = document.getElementById('categorias-dropdown');
+const btnToggleCats       = document.getElementById('btn-toggle-categorias');
+const iconoToggle         = document.getElementById('icono-toggle');
+const btnNuevaCat         = document.getElementById('btn-nueva-categoria');
+const nuevaCatForm        = document.getElementById('nueva-cat-form');
+const nuevaCatInput       = document.getElementById('nueva-cat-input');
+const nuevaCatOk          = document.getElementById('nueva-cat-ok');
+const nuevaCatX           = document.getElementById('nueva-cat-x');
+const nombreUsuarioEl     = document.getElementById('nombre-usuario');
+const avatarUsuarioEl     = document.getElementById('avatar-usuario');
+const logoutLinkEl        = document.getElementById('logout-link');
 
 let categoriaActiva     = null;
 let categoriasUsuario   = [];   // { _id, name }[]
@@ -35,17 +43,10 @@ async function cargarCategorias() {
 
 function renderizarBarra() {
     categoriasBarra.innerHTML = '';
-
-    // ALL
     categoriasBarra.appendChild(crearPill('ALL', null, !categoriaActiva));
-
-    // Categorías del usuario
     categoriasUsuario.forEach(cat => {
         categoriasBarra.appendChild(crearPill(cat.name, cat.name, categoriaActiva === cat.name));
     });
-
-    // Pill "+"
-    categoriasBarra.appendChild(crearPillNueva());
 }
 
 function crearPill(texto, valor, activa = false) {
@@ -60,71 +61,40 @@ function crearPill(texto, valor, activa = false) {
     return btn;
 }
 
-function crearPillNueva() {
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'display:flex;align-items:center;gap:6px;flex-shrink:0';
+// ── TOGGLE DROPDOWN CATEGORÍAS ───────────────────────────────────────────────
 
-    const btnMas = document.createElement('button');
-    btnMas.className = 'pill-cat-nueva';
-    btnMas.title = 'Nueva categoría';
-    btnMas.innerHTML = '<i class="icon-plus"></i>';
+let dropdownAbierto = false;
 
-    const inputWrapper = document.createElement('div');
-    inputWrapper.className = 'pill-input-wrapper';
-    inputWrapper.hidden = true;
+btnToggleCats.addEventListener('click', () => {
+    dropdownAbierto = !dropdownAbierto;
+    categoriasDropdown.classList.toggle('abierto', dropdownAbierto);
+    iconoToggle.classList.toggle('rotado', dropdownAbierto);
+});
 
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'pill-input';
-    input.placeholder = 'Nueva categoría...';
-    input.maxLength = 30;
+// ── NUEVA CATEGORÍA ───────────────────────────────────────────────────────────
 
-    const btnOk = document.createElement('button');
-    btnOk.type = 'button';
-    btnOk.className = 'pill-btn-ok';
-    btnOk.innerHTML = '<i class="icon-ok"></i>';
+let formNuevaAbierto = false;
 
-    const btnX = document.createElement('button');
-    btnX.type = 'button';
-    btnX.className = 'pill-btn-x';
-    btnX.innerHTML = '<i class="icon-cancel"></i>';
+btnNuevaCat.addEventListener('click', () => {
+    formNuevaAbierto = !formNuevaAbierto;
+    nuevaCatForm.classList.toggle('abierto', formNuevaAbierto);
+    if (formNuevaAbierto) {
+        nuevaCatInput.value = '';
+        nuevaCatInput.focus();
+    }
+});
 
-    inputWrapper.append(input, btnOk, btnX);
-    wrapper.append(btnMas, inputWrapper);
+nuevaCatX.addEventListener('click', () => {
+    formNuevaAbierto = false;
+    nuevaCatForm.classList.remove('abierto');
+});
 
-    btnMas.addEventListener('click', () => {
-        btnMas.hidden = true;
-        inputWrapper.hidden = false;
-        input.value = '';
-        input.focus();
-    });
-
-    btnX.addEventListener('click', () => {
-        inputWrapper.hidden = true;
-        btnMas.hidden = false;
-    });
-
-    const confirmar = async () => {
-        const nombre = input.value.trim();
-        if (!nombre) return;
-        btnOk.disabled = true;
-        await crearCategoria(nombre);
-        btnOk.disabled = false;
-    };
-
-    btnOk.addEventListener('click', confirmar);
-    input.addEventListener('keydown', e => {
-        if (e.key === 'Enter')  confirmar();
-        if (e.key === 'Escape') { inputWrapper.hidden = true; btnMas.hidden = false; }
-    });
-
-    return wrapper;
-}
-
-async function crearCategoria(nombre) {
-    const token = obtenerToken();
-    if (!token) return;
+const confirmarNuevaCat = async () => {
+    const nombre = nuevaCatInput.value.trim();
+    if (!nombre) return;
+    nuevaCatOk.disabled = true;
     try {
+        const token = obtenerToken();
         const r = await fetch(`${API}/api/armario/categorias`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -134,8 +104,25 @@ async function crearCategoria(nombre) {
         const nueva = await r.json();
         categoriasUsuario.push(nueva);
         renderizarBarra();
+        nuevaCatInput.value = '';
+        formNuevaAbierto = false;
+        nuevaCatForm.classList.remove('abierto');
+        // Abrir el dropdown para que se vea la nueva categoría
+        dropdownAbierto = true;
+        categoriasDropdown.classList.add('abierto');
+        iconoToggle.classList.add('rotado');
     } catch { /* silencioso */ }
-}
+    nuevaCatOk.disabled = false;
+};
+
+nuevaCatOk.addEventListener('click', confirmarNuevaCat);
+nuevaCatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter')  confirmarNuevaCat();
+    if (e.key === 'Escape') {
+        formNuevaAbierto = false;
+        nuevaCatForm.classList.remove('abierto');
+    }
+});
 
 // ── TARJETA ──────────────────────────────────────────────────────────────────
 
