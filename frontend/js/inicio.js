@@ -11,6 +11,15 @@ const logoutLinkEl = document.getElementById('logout-link');
 const CANTIDAD_INICIAL_OUTFITS = 4;
 const CANTIDAD_POR_BOTON = 4;
 
+// Delegación: click en cualquier tarjeta navega al detalle del outfit
+outfitSectionEl.addEventListener('click', (e) => {
+	if (e.target.closest('.btn-anadir-armario')) return;
+	const tarjeta = e.target.closest('.tarjeta-outfit');
+	if (tarjeta?.dataset.id) {
+		window.location.href = `outfit.html?id=${tarjeta.dataset.id}`;
+	}
+});
+
 let outfitsCargados = [];
 let cantidadVisible = CANTIDAD_INICIAL_OUTFITS;
 let botonMostrarMas = null;
@@ -65,6 +74,7 @@ function formatearTextoCampo(valor, textoPorDefecto) {
 function crearTarjetaOutfit(outfit, userName, userAvatar) {
 	const article = document.createElement('article');
 	article.className = 'tarjeta-outfit';
+	article.dataset.id = outfit._id;
 
 	const imageUrl = obtenerImagenOutfit(outfit);
 	const title = formatearTextoCampo(outfit.name, 'OUTFIT');
@@ -100,7 +110,10 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 	`;
 
 	const btnAnadir = article.querySelector('.btn-anadir-armario');
-	btnAnadir.addEventListener('click', () => agregarArmario(outfit, btnAnadir));
+	btnAnadir.addEventListener('click', (e) => {
+		e.stopPropagation();
+		agregarArmario(outfit, btnAnadir);
+	});
 
 	return article;
 }

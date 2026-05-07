@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit — Bellaveste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/comun.css">
+    <link rel="stylesheet" href="css/outfit.css">
+    <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
+    <script type="module" src="js/outfit.js"></script>
+</head>
+<body>
+    <header class="barra-superior">
+        <div class="fila-marca">
+            <nav>
+                <label for="chkMenu"><i class="icon-menu"></i></label>
+                <input type="checkbox" id="chkMenu">
+                <ul id="menu">
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                </ul>
+            </nav>
+            <div class="marca"><h1>BELLAVESTE</h1><p>SPAIN</p></div>
+            <div class="iconos-acciones">
+                <a class="boton-icono" href="buscar.html"><i class="icon-search"></i></a>
+                <a class="boton-icono" href="armario.html"><i class="icon-shopping-bag"></i></a>
+            </div>
+        </div>
+        <div class="usuario-barra">
+            <input type="checkbox" id="chkPerfil">
+            <label for="chkPerfil" class="perfil-trigger">
+                <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
+                <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
+            </label>
+            <ul class="menu-perfil">
+                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="contenedor-outfit">
+
+        <div class="outfit-loading" id="outfit-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading outfit...</p>
+        </div>
+
+        <div class="outfit-contenido" id="outfit-contenido" hidden>
+
+            <!-- HERO -->
+            <section class="outfit-hero">
+                <div class="hero-foto-wrap">
+                    <img class="hero-foto" id="outfit-foto" src="" alt="Outfit">
+                </div>
+                <div class="hero-info">
+                    <span class="hero-categoria" id="outfit-categoria"></span>
+                    <h1 class="hero-titulo" id="outfit-nombre"></h1>
+                    <div class="hero-autor">
+                        <img id="autor-avatar" src="images/perfil.jfif" alt="">
+                        <span id="autor-nombre"></span>
+                    </div>
+                    <time class="hero-fecha" id="outfit-fecha"></time>
+                    <button class="btn-guardar" id="btn-guardar">
+                        <i class="icon-heart"></i> SAVE TO MY CLOSET
+                    </button>
+                </div>
+            </section>
+
+            <!-- PRENDAS -->
+            <div class="seccion-titulo">
+                <span>PIECES</span>
+            </div>
+
+            <section class="prendas-lista" id="prendas-lista"></section>
+
+        </div>
+
+        <footer>
+            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+        </footer>
+    </main>
+</body>
+</html>

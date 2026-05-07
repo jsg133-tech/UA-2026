@@ -153,9 +153,15 @@ function crearTarjetaOutfit(outfit) {
         e.stopPropagation();
         mostrarMenuCategoria(e.currentTarget, outfit._id, outfit.category);
     });
-    div.querySelector('.btn-favorito').addEventListener('click', () =>
-        quitarDelArmario(outfit._id, div.querySelector('.btn-favorito'), div)
-    );
+    div.querySelector('.btn-favorito').addEventListener('click', e => {
+        e.stopPropagation();
+        quitarDelArmario(outfit._id, div.querySelector('.btn-favorito'), div);
+    });
+
+    div.addEventListener('click', () => {
+        window.location.href = `outfit.html?id=${outfit._id}`;
+    });
+    div.style.cursor = 'pointer';
 
     return div;
 }

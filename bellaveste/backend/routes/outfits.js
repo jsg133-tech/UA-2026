@@ -39,6 +39,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/outfits/:id  (público)
+router.get('/:id', async (req, res) => {
+  try {
+    const outfit = await Outfit.findById(req.params.id).populate('userId', 'name avatar');
+    if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+    res.json(outfit);
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 router.use(authMiddleware);
 
 // POST /api/outfits
