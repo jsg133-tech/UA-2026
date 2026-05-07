@@ -1,8 +1,6 @@
 import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
 
-const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:3000'
-    : 'https://ua-2026.onrender.com';
+const API = 'https://ua-2026.onrender.com';
 
 const gridArmario      = document.getElementById('grid-armario');
 const categoriasBarra  = document.getElementById('categorias-bar');
