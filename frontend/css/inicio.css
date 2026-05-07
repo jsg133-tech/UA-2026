@@ -24,34 +24,11 @@ body {
 /* ── NAV SUPERIOR (desktop) ───────────────────────────────── */
 
 .nav-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 22px 32px;
-    pointer-events: none;
+    display: none;
 }
 
 .nav-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    pointer-events: auto;
-}
-
-.nav-menu span {
-    display: block;
-    width: 26px;
-    height: 1px;
-    background: #111;
+    display: none;
 }
 
 .nav-acciones {
@@ -104,14 +81,16 @@ body {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 24px 32px;
     position: relative;
-    overflow: hidden;
     min-height: 0;
 }
 
 .hero-panel {
     overflow: hidden;
     position: relative;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.16);
 }
 
 .hero-panel img {
@@ -124,56 +103,110 @@ body {
 }
 
 .hero-panel:hover img { transform: scale(1.03); }
-.hero-panel--izq { border-right: 2px solid #f5f0ec; }
 
-/* BELLAVESTE sobre las fotos */
-.hero-marca {
+/* Bloque central: BELLAVESTE + botones — entre los dos paneles */
+.hero-centro {
     position: absolute;
-    bottom: 13%;
     left: 0;
     right: 0;
-    text-align: center;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
     pointer-events: none;
     user-select: none;
+    z-index: 10;
 }
 
 .marca-texto {
     font-family: "Cinzel", serif;
     font-weight: 300;
-    font-size: clamp(4rem, 10vw, 9rem);
-    letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.9);
-    text-shadow: 0 2px 30px rgba(0,0,0,0.2);
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    letter-spacing: 0.2em;
+    color: #fff;
     line-height: 1;
     mix-blend-mode: overlay;
+    opacity: 0.45;
+}
+
+/* Botones sobre el hero */
+.hero-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    pointer-events: auto;
+}
+
+.hero-btn-login {
+    padding: 14px 48px;
+    font-family: "Cinzel", serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--vino-oscuro);
+    background: rgba(244, 236, 228, 0.92);
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.hero-btn-login:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.28);
+}
+
+.hero-btn-register {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.7);
+    background: transparent;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.hero-btn-register:hover {
+    color: rgba(255,255,255,0.95);
+    border-color: rgba(255,255,255,0.7);
 }
 
 /* SPAIN + tagline en la base */
 .hero-bottom {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 32px;
+    bottom: 40px;
+    left: 48px;
+    right: 48px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    background: linear-gradient(transparent, rgba(0,0,0,0.2));
+    pointer-events: none;
+    z-index: 5;
 }
 
 .hero-spain {
-    font-size: 0.52rem;
+    font-size: 0.5rem;
     letter-spacing: 5px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(61,10,17,0.4);
 }
 
 .hero-tagline {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.65);
+    font-size: 0.85rem;
+    color: rgba(61,10,17,0.45);
 }
+
+/* ── SCROLL HINT (solo móvil, oculto en desktop) ─────────── */
+
+.scroll-hint { display: none; }
 
 /* ── BLOQUE MÓVIL (oculto en desktop) ────────────────────── */
 
@@ -218,13 +251,39 @@ body {
 
     .hero-panel--der img { object-position: center 15%; }
 
-    /* BELLAVESTE más pequeño */
+    /* En móvil ocultar botones del hero (se muestran abajo) */
+    .hero-btns { display: none; }
+
     .marca-texto {
         font-size: clamp(2.4rem, 12vw, 3.8rem);
         letter-spacing: 0.08em;
+        mix-blend-mode: normal;
+        color: rgba(255,255,255,0.88);
     }
 
     .hero-bottom { padding: 14px 18px; }
+
+    /* Scroll hint animado */
+    .scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        right: 0;
+    }
+
+    .scroll-hint span {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.7);
+        animation: bounceDown 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+        0%, 100% { transform: translateY(0); opacity: 0.7; }
+        50%       { transform: translateY(6px); opacity: 1; }
+    }
 
     /* Mostrar bloque de acciones */
     .movil-cta {
