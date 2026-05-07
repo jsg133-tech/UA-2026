@@ -15,7 +15,7 @@ const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
   fileFilter: (req, file, cb) => {
-    const allowed = /jpeg|jpg|png|gif|webp/;
+    const allowed = /jpeg|jpg|png|gif|webp|jfif/;
     const ok = allowed.test(path.extname(file.originalname).toLowerCase()) &&
                 allowed.test(file.mimetype);
     ok ? cb(null, true) : cb(new Error('Only image files allowed'));
@@ -37,20 +37,21 @@ router.get('/', async (req, res) => {
 // POST /api/outfits
 router.use(authMiddleware);
 
-// Helper para subir a Cloudinary
+// Helper para subir a Cloudinary — devuelve '' si falla en vez de lanzar
 async function uploadToCloudinary(file, folder, publicId) {
   if (!file) return '';
   try {
     const dataUriString = parser.format(path.extname(file.originalname).toString(), file.buffer);
+    if (!dataUriString || !dataUriString.content) return '';
     const result = await cloudinary.uploader.upload(dataUriString.content, {
-      folder: folder,
+      folder,
       public_id: publicId,
       overwrite: true,
     });
     return result.secure_url;
   } catch (err) {
-    console.error('uploadToCloudinary error:', err && err.stack ? err.stack : err);
-    throw err;
+    console.error('Cloudinary upload failed:', err.message);
+    return '';
   }
 }
 

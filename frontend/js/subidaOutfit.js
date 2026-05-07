@@ -4,9 +4,30 @@ import { mostrarModal } from './modal.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 import { getToken } from './auth-storage.js';
 
-const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:3000'
-    : 'https://ua-2026.onrender.com';
+const API = 'https://ua-2026.onrender.com';
+
+// Convierte cualquier imagen a JPEG para evitar rechazos del servidor
+function toJpeg(file) {
+    return new Promise((resolve) => {
+        const ext = file.name.split('.').pop().toLowerCase();
+        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext) && file.type !== 'image/jfif') {
+            return resolve(file);
+        }
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            URL.revokeObjectURL(url);
+            canvas.toBlob((blob) => {
+                resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+            }, 'image/jpeg', 0.92);
+        };
+        img.src = url;
+    });
+}
 
 // Elementos del formulario - OUTFIT
 const form = document.getElementById('form-subida');
@@ -112,6 +133,10 @@ btnAgregarPrenda.addEventListener('click', (e) => {
                 <i class="icon-trash"></i>
             </button>
         </div>
+        <div class="campo-prenda campo-descripcion">
+            <label class="label-mini">Description</label>
+            <textarea class="input-prenda input-descripcion" placeholder="Describe this piece..." rows="2"></textarea>
+        </div>
         <div class="prenda-foto-section">
             <label for="prenda-picture-${contadorPrendas}" class="etiqueta-foto-prenda">
                 <i class="icon-picture"></i> Piece Photo
@@ -136,6 +161,7 @@ btnAgregarPrenda.addEventListener('click', (e) => {
     const inputSize = item.querySelector('.input-size');
     const inputColor = item.querySelector('.input-color');
     const inputSeason = item.querySelector('.input-season');
+    const inputDescripcion = item.querySelector('.input-descripcion');
     const inputFotoPrenda = item.querySelector('.input-archivo-prenda');
     const previewPrenda = item.querySelector(`#preview-${id}`);
 
@@ -153,6 +179,7 @@ btnAgregarPrenda.addEventListener('click', (e) => {
                 size: inputSize.value.trim(),
                 color: inputColor.value,
                 season: inputSeason.value,
+                descripcion: inputDescripcion.value.trim(),
                 foto: inputFotoPrenda.files[0] || null,
             };
 
@@ -175,6 +202,7 @@ btnAgregarPrenda.addEventListener('click', (e) => {
     inputSize.addEventListener('blur', guardarPrenda);
     inputColor.addEventListener('change', guardarPrenda);
     inputSeason.addEventListener('change', guardarPrenda);
+    inputDescripcion.addEventListener('blur', guardarPrenda);
 
     // Manejar foto de la prenda
     inputFotoPrenda.addEventListener('change', (e) => {
@@ -264,16 +292,17 @@ form.addEventListener('submit', async (e) => {
         // Crear FormData para enviar archivo
         const formData = new FormData();
         formData.append('name', inputNombre.value.trim());
-        formData.append('category', 'CASUAL'); // Categoría por defecto
-        formData.append('image', inputFoto.files[0]);
-        
+        formData.append('category', 'CASUAL');
+        formData.append('image', await toJpeg(inputFoto.files[0]));
+
         // Agregar fotos de las prendas
-        prendas.forEach((prenda, index) => {
+        for (let index = 0; index < prendas.length; index++) {
+            const prenda = prendas[index];
             if (prenda.foto) {
-                formData.append(`piece-image-${index}`, prenda.foto);
+                formData.append(`piece-image-${index}`, await toJpeg(prenda.foto));
                 console.log(`Agregada foto de prenda ${index}:`, prenda.nombre);
             }
-        });
+        }
         
         // Crear estructura de prendas sin las fotos (ya que van como archivos separados)
         const prendaszSinFotos = prendas.map(({ foto, ...prenda }) => prenda);
