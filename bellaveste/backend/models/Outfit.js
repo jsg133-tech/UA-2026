@@ -7,6 +7,7 @@ const prendaSchema = new mongoose.Schema({
   size: { type: String, default: '' },
   color: { type: String, default: '' },
   season: { type: String, default: '' },
+  descripcion: { type: String, default: '' },
   imageUrl: { type: String, default: '' },
   cloudinaryPublicId: { type: String, default: '' },
 }, { _id: true });

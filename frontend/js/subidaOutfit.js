@@ -250,29 +250,44 @@ btnCancelar.addEventListener('click', (e) => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Validar campos requeridos del outfit
     if (!inputNombre.value.trim()) {
         mostrarModal('Please enter an outfit name.', 'error');
         return;
     }
-
     if (!inputFoto.files.length) {
         mostrarModal('Please select an outfit picture.', 'error');
         return;
     }
 
-    // Validar que haya al menos una prenda
-    if (prendas.length === 0) {
+    // Leer prendas directamente del DOM en el momento de enviar
+    const items = listaPrendas.querySelectorAll('.item-prenda');
+    if (!items.length) {
         mostrarModal('Please add at least one piece to the outfit.', 'error');
         return;
     }
 
-    // Validar que todas las prendas tengan foto
-    for (const prenda of prendas) {
-        if (!prenda.foto) {
-            mostrarModal(`Please upload a photo for the "${prenda.nombre}" piece.`, 'error');
+    const prendasDOM = [];
+    for (const item of items) {
+        const nombre = item.querySelector('.input-nombre')?.value.trim();
+        const fotoInput = item.querySelector('.input-archivo-prenda');
+        if (!nombre) {
+            mostrarModal('Each piece needs a name.', 'error');
             return;
         }
+        if (!fotoInput?.files.length) {
+            mostrarModal(`Please upload a photo for "${nombre}".`, 'error');
+            return;
+        }
+        prendasDOM.push({
+            nombre,
+            marca:       item.querySelector('.input-marca')?.value.trim()      || '',
+            link:        item.querySelector('.input-link')?.value.trim()       || '',
+            size:        item.querySelector('.input-size')?.value.trim()       || '',
+            color:       item.querySelector('.input-color')?.value             || '',
+            season:      item.querySelector('.input-season')?.value            || '',
+            descripcion: item.querySelector('.input-descripcion')?.value.trim()|| '',
+            foto:        fotoInput.files[0],
+        });
     }
 
     btnUpload.disabled = true;
@@ -280,33 +295,19 @@ form.addEventListener('submit', async (e) => {
 
     try {
         const token = getToken();
+        if (!token) throw new Error('You are not authenticated. Please log in.');
 
-        if (!token) {
-            throw new Error('You are not authenticated. Please log in.');
-        }
-
-        console.log('Iniciando upload del outfit...');
-        console.log('Outfit name:', inputNombre.value.trim());
-        console.log('Número de prendas:', prendas.length);
-
-        // Crear FormData para enviar archivo
         const formData = new FormData();
         formData.append('name', inputNombre.value.trim());
         formData.append('category', 'CASUAL');
         formData.append('image', await toJpeg(inputFoto.files[0]));
 
-        // Agregar fotos de las prendas
-        for (let index = 0; index < prendas.length; index++) {
-            const prenda = prendas[index];
-            if (prenda.foto) {
-                formData.append(`piece-image-${index}`, await toJpeg(prenda.foto));
-                console.log(`Agregada foto de prenda ${index}:`, prenda.nombre);
-            }
+        for (let i = 0; i < prendasDOM.length; i++) {
+            formData.append(`piece-image-${i}`, await toJpeg(prendasDOM[i].foto));
         }
-        
-        // Crear estructura de prendas sin las fotos (ya que van como archivos separados)
-        const prendaszSinFotos = prendas.map(({ foto, ...prenda }) => prenda);
-        formData.append('pieces', JSON.stringify(prendaszSinFotos));
+
+        const piezasSinFoto = prendasDOM.map(({ foto, ...p }) => p);
+        formData.append('pieces', JSON.stringify(piezasSinFoto));
         
         console.log('FormData preparado, enviando...');
 
