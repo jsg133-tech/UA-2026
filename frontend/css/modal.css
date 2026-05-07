@@ -73,6 +73,26 @@
   border-top: 4px solid #5a0d16;
 }
 
+.bv-modal-input {
+  width: 100%;
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(90, 13, 22, 0.2);
+  border-radius: 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  color: #3d0a11;
+  background: rgba(255,255,255,0.75);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.bv-modal-input:focus {
+  border-color: rgba(90, 13, 22, 0.5);
+  box-shadow: 0 0 0 3px rgba(90, 13, 22, 0.08);
+}
+.bv-modal-input::placeholder { color: rgba(61,10,17,0.35); font-style: italic; }
+
 .bv-modal-actions {
   display: flex;
   gap: 10px;

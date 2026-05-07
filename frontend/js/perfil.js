@@ -1,5 +1,5 @@
 import { getToken, getStoredUser, saveAuthSession, clearAuthSession, setStoredUser } from './auth-storage.js';
-import { mostrarModal, mostrarConfirm } from './modal.js';
+import { mostrarModal, mostrarConfirm, mostrarPrompt } from './modal.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 
 const API = 'https://ua-2026.onrender.com';
@@ -135,12 +135,9 @@ btnLogout?.addEventListener('click', () => {
 
 // ── ELIMINAR CUENTA ───────────────────────────────────────────
 btnDelete?.addEventListener('click', () => {
-    const passwordInput = prompt('Enter your password to confirm account deletion:');
-    if (!passwordInput) return; // Usuario canceló
-
-    mostrarConfirm(
+    mostrarPrompt(
         'This will permanently delete your account and all your outfits. This action cannot be undone.',
-        async () => {
+        async (password) => {
             const token = getToken();
             try {
                 const response = await fetch(`${API}/api/auth/me`, {
@@ -149,25 +146,19 @@ btnDelete?.addEventListener('click', () => {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
                     },
-                    body: JSON.stringify({ password: passwordInput }),
+                    body: JSON.stringify({ password }),
                 });
-
                 const data = await response.json().catch(() => ({}));
-                
-                if (!response.ok) {
-                    throw new Error(data.error || 'Error deleting account');
-                }
+                if (!response.ok) throw new Error(data.error || 'Error deleting account');
 
                 mostrarModal('Your account has been deleted.', 'success', 'Goodbye');
-                setTimeout(() => {
-                    clearAuthSession();
-                    window.location.href = 'inicio.html';
-                }, 1500);
+                setTimeout(() => { clearAuthSession(); window.location.href = 'inicio.html'; }, 1500);
             } catch (err) {
                 mostrarModal(err.message, 'error', 'Delete Failed');
             }
         },
         'Delete account permanently?',
+        'Enter your password to confirm',
         'DELETE'
     );
 });

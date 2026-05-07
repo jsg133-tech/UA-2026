@@ -21,6 +21,56 @@
  * @param {string} [titulo]
  * @param {string} [textoConfirmar]
  */
+/**
+ * Modal con input de contraseña. Llama a alConfirmar(valor) con el texto introducido.
+ */
+export function mostrarPrompt(mensaje, alConfirmar, titulo = 'Confirm', placeholder = 'Password', textoConfirmar = 'CONFIRM') {
+  const overlay = document.createElement('div');
+  overlay.className = 'bv-modal-overlay';
+
+  overlay.innerHTML = `
+    <div class="bv-modal bv-modal--confirm" role="dialog" aria-modal="true" aria-labelledby="bv-modal-title">
+      <div class="bv-modal-icon">✕</div>
+      <p class="bv-modal-title" id="bv-modal-title">${titulo}</p>
+      <p class="bv-modal-msg">${mensaje}</p>
+      <input class="bv-modal-input" id="bv-modal-input" type="password" placeholder="${placeholder}" autocomplete="current-password">
+      <div class="bv-modal-actions">
+        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">CANCEL</button>
+        <button class="bv-modal-btn bv-modal-btn--delete" id="bv-modal-confirm">${textoConfirmar}</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const inputEl = overlay.querySelector('#bv-modal-input');
+  setTimeout(() => inputEl.focus(), 50);
+
+  let cerrado = false;
+  const cerrar = () => {
+    if (cerrado) return;
+    cerrado = true;
+    document.removeEventListener('keydown', onKey);
+    overlay.style.animation = 'bvFadeIn .15s ease reverse';
+    setTimeout(() => overlay.remove(), 140);
+  };
+
+  overlay.querySelector('#bv-modal-cancel').addEventListener('click', cerrar);
+  overlay.querySelector('#bv-modal-confirm').addEventListener('click', () => {
+    const valor = inputEl.value;
+    if (!valor) { inputEl.focus(); return; }
+    alConfirmar(valor);
+    cerrar();
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrar(); });
+
+  const onKey = (e) => {
+    if (e.key === 'Escape') cerrar();
+    if (e.key === 'Enter') overlay.querySelector('#bv-modal-confirm').click();
+  };
+  document.addEventListener('keydown', onKey);
+}
+
 export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', textoConfirmar = 'DELETE') {
   const overlay = document.createElement('div');
   overlay.className = 'bv-modal-overlay';
