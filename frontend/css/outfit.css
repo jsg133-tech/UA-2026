@@ -306,19 +306,50 @@
     }
 
     .hero-info {
-        padding: 20px 16px;
+        padding: 18px 14px;
+        gap: 10px;
     }
 
     .hero-titulo {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
+    }
+
+    .btn-guardar {
+        font-size: 0.56rem;
+        padding: 9px 16px;
     }
 
     .prenda-card {
-        grid-template-columns: 100px 1fr;
+        grid-template-columns: 90px 1fr;
     }
 
     .prenda-detalle {
-        padding: 12px 12px 12px 14px;
+        padding: 10px 10px 10px 12px;
+        gap: 6px;
+    }
+
+    .prenda-nombre {
+        font-size: 0.7rem;
+    }
+
+    .campo-label {
+        min-width: 44px;
+        font-size: 0.48rem;
+    }
+
+    .campo-valor {
+        font-size: 0.82rem;
+    }
+
+    .prenda-link {
+        font-size: 0.5rem;
+        padding: 4px 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .prenda-card {
+        grid-template-columns: 75px 1fr;
     }
 }
 

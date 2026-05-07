@@ -179,6 +179,92 @@
     font-weight: bold;
 }
 
+/* ── RESPONSIVE MÓVIL ────────────────────────────────────── */
+
+@media (max-width: 480px) {
+    .main-perfil {
+        padding: 14px 10px 24px;
+    }
+
+    .contenedor-ajustes {
+        padding: 16px 14px;
+        border-radius: 10px;
+    }
+
+    .divisor-titulo span {
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    .tarjeta-usuario {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    .avatar-grande img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .nombre-destacado {
+        font-size: 0.78rem;
+        padding: 10px 14px;
+        text-align: center;
+        word-break: break-word;
+    }
+
+    /* Tabs: scroll horizontal si no caben */
+    .tabs-perfil {
+        overflow-x: auto;
+        scrollbar-width: none;
+        gap: 4px;
+        padding: 0 0 10px;
+        justify-content: flex-start;
+    }
+    .tabs-perfil::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+        font-size: 0.62rem;
+        letter-spacing: 0.5px;
+        padding: 6px 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .form-perfil .campo {
+        margin-bottom: 12px;
+    }
+
+    .form-perfil label {
+        font-size: 0.78rem;
+    }
+
+    .form-perfil input {
+        padding: 9px 10px;
+        font-size: 0.95rem;
+    }
+
+    .btn-update {
+        width: 75%;
+        padding: 11px;
+        font-size: 0.72rem;
+    }
+
+    .botones-peligro {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-logout, .btn-delete {
+        width: 100%;
+        padding: 11px;
+        font-size: 0.68rem;
+        text-align: center;
+    }
+}
+
 /* Estilos para el contenido de Ajustes */
 .ajustes-placeholder {
     padding: 30px 10px;

@@ -385,55 +385,66 @@ body {
 }
 
 @media (max-width: 480px) {
-
-    body {
-        padding: 0;
-    }
+    body { padding: 0; }
 
     .contenedor-app {
         width: 100%;
         border-radius: 0;
     }
 
-    /* SECCIONES MÁS COMPACTAS */
     .colecciones,
     .outfit-dia {
-        padding: 15px 12px;
-    }
-
-    /* ARREGLAR LÍNEAS EN MÓVIL */
-    .colecciones h2::before,
-    .colecciones h2::after,
-    .outfit-dia h2::before,
-    .outfit-dia h2::after {
-        width: 25%;
-        /* más cortas */
+        padding: 12px 10px;
     }
 
     .colecciones h2,
     .outfit-dia h2 {
-        font-size: 1.1rem;
-        /* opcional: más pequeño */
+        font-size: 1rem;
     }
 
-    /* CATEGORÍAS MÁS PEQUEÑAS */
+    .colecciones h2::before,
+    .colecciones h2::after,
+    .outfit-dia h2::before,
+    .outfit-dia h2::after {
+        width: 18%;
+    }
+
+    /* 1 columna en móvil pequeño */
+    .outfit-dia {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* CATEGORÍAS: 2 col en vez de 3 */
     .categorias {
-        gap: 8px;
-        margin-top: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 12px;
     }
 
     .categoria img {
-        width: 70px;
+        width: 64px;
     }
 
     .categoria span {
-        font-size: 0.6rem;
+        font-size: 0.58rem;
     }
 
-    /* BOTÓN FINAL */
+    .btn-mostrar-mas {
+        font-size: 0.72rem;
+        padding: 10px 20px;
+    }
+
     .boton-armario {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding: 10px;
-        margin-top: 15px;
+        margin-top: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .outfit-dia {
+        padding: 10px 8px;
+        gap: 10px;
     }
 }

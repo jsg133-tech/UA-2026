@@ -41,16 +41,17 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 18px;
+    padding: 10px 18px;
     border-radius: 999px;
     background: linear-gradient(135deg, #5a0d16, #7a1525);
     color: #f4ece4;
     font-family: "Cinzel", serif;
-    font-size: 0.58rem;
+    font-size: 0.6rem;
     letter-spacing: 2px;
     text-decoration: none;
     transition: box-shadow 0.2s, transform 0.15s;
     box-shadow: 0 3px 12px rgba(90, 13, 22, 0.28);
+    min-height: 38px;
 }
 
 .btn-nuevo-outfit:hover {
@@ -214,6 +215,22 @@
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────────── */
+
+@media (max-width: 400px) {
+    .subidos-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 12px 16px;
+    }
+
+    .subidos-header {
+        padding: 16px 12px 8px;
+    }
+
+    .subidos-header h2 {
+        font-size: 1rem;
+    }
+}
 
 @media (min-width: 600px) {
     .subidos-grid {
