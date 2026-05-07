@@ -100,17 +100,17 @@ const confirmarNuevaCat = async () => {
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
             body: JSON.stringify({ name: nombre }),
         });
-        if (!r.ok) return;
-        const nueva = await r.json();
-        categoriasUsuario.push(nueva);
-        renderizarBarra();
-        nuevaCatInput.value = '';
-        formNuevaAbierto = false;
-        nuevaCatForm.classList.remove('abierto');
-        // Abrir el dropdown para que se vea la nueva categoría
-        dropdownAbierto = true;
-        categoriasDropdown.classList.add('abierto');
-        iconoToggle.classList.add('rotado');
+        if (r.ok) {
+            const nueva = await r.json();
+            categoriasUsuario.push(nueva);
+            renderizarBarra();
+            nuevaCatInput.value = '';
+            formNuevaAbierto = false;
+            nuevaCatForm.classList.remove('abierto');
+            dropdownAbierto = true;
+            categoriasDropdown.classList.add('abierto');
+            iconoToggle.classList.add('rotado');
+        }
     } catch { /* silencioso */ }
     nuevaCatOk.disabled = false;
 };
