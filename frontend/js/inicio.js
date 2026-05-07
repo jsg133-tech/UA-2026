@@ -1,7 +1,9 @@
 import { mostrarModal } from './modal.js';
 import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
 
-const API = 'https://ua-2026.onrender.com';
+const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:3000'
+    : 'https://ua-2026.onrender.com';
 
 const nombreUsuarioEl = document.getElementById('nombre-usuario');
 const avatarUsuarioEl = document.getElementById('avatar-usuario');
