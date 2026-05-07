@@ -14,6 +14,51 @@
  * @param {string} [titulo]  - Título opcional (por defecto según tipo)
  * @param {{ textoBoton?: string, alConfirmar?: () => void }} [opciones] - Opciones del modal
  */
+/**
+ * Modal de confirmación con dos botones: Cancel y una acción destructiva.
+ * @param {string} mensaje
+ * @param {() => void} alConfirmar  - Callback si el usuario confirma
+ * @param {string} [titulo]
+ * @param {string} [textoConfirmar]
+ */
+export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', textoConfirmar = 'DELETE') {
+  const overlay = document.createElement('div');
+  overlay.className = 'bv-modal-overlay';
+
+  overlay.innerHTML = `
+    <div class="bv-modal bv-modal--confirm" role="dialog" aria-modal="true" aria-labelledby="bv-modal-title">
+      <div class="bv-modal-icon">✕</div>
+      <p class="bv-modal-title" id="bv-modal-title">${titulo}</p>
+      <p class="bv-modal-msg">${mensaje}</p>
+      <div class="bv-modal-actions">
+        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">CANCEL</button>
+        <button class="bv-modal-btn bv-modal-btn--delete" id="bv-modal-confirm">${textoConfirmar}</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  let cerrado = false;
+  const cerrar = () => {
+    if (cerrado) return;
+    cerrado = true;
+    document.removeEventListener('keydown', onKey);
+    overlay.style.animation = 'bvFadeIn .15s ease reverse';
+    setTimeout(() => overlay.remove(), 140);
+  };
+
+  overlay.querySelector('#bv-modal-cancel').addEventListener('click', cerrar);
+  overlay.querySelector('#bv-modal-confirm').addEventListener('click', () => {
+    alConfirmar();
+    cerrar();
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrar(); });
+
+  const onKey = (e) => { if (e.key === 'Escape') cerrar(); };
+  document.addEventListener('keydown', onKey);
+}
+
 export function mostrarModal(mensaje, tipo = 'error', titulo = '', opciones = {}) {
   // Título por defecto según tipo
   if (!titulo) {
