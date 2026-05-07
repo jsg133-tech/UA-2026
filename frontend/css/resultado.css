@@ -1,0 +1,168 @@
+/* resultados.css - Basado en el estilo de Armario */
+
+.contenedor-app {
+    width: 100%;
+    padding: 20px 14px;
+}
+
+/* CABECERA DE LA SECCIÓN */
+.seccion-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 0 10px;
+}
+
+.seccion-header h2 {
+    font-family: "Cinzel", serif;
+    font-size: 1.4rem;
+    color: #6d303e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* Líneas decorativas laterales */
+.seccion-header h2::before,
+.seccion-header h2::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: rgba(118, 60, 72, 0.45);
+}
+
+.seccion-header h2::before { right: 105%; }
+.seccion-header h2::after  { left: 105%; }
+
+#subtitulo-filtro {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #6f4a52;
+    opacity: 0.8;
+}
+
+/* GRID DE RESULTADOS (Idéntico a grid-armario) */
+.grid-armario {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas en móvil */
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.tarjeta-armario {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #e8ddd6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-armario:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-armario img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* INFO SOBREPUESTA EN LA IMAGEN */
+.tarjeta-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 10px 12px;
+    background: linear-gradient(transparent, rgba(61, 10, 17, 0.75));
+}
+
+.tarjeta-info-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nombre-outfit {
+    color: #f4e9df;
+    font-family: "Cinzel", serif;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tag-pequeno {
+    color: rgba(244, 233, 223, 0.8);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+/* BOTÓN INFERIOR */
+footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.boton-armario {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #5a0d16;
+    color: #f4e9df;
+    font-family: "Cinzel", serif;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.boton-armario:hover {
+    background: #3d0a11;
+}
+
+/* MENSAJE VACÍO */
+.armario-vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+    color: #6f4a52;
+}
+
+/* RESPONSIVE: TABLET & DESKTOP */
+@media (min-width: 768px) {
+    .grid-armario {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .seccion-header h2 { font-size: 1.8rem; }
+    .seccion-header h2::before, .seccion-header h2::after { width: 80px; }
+}
+
+@media (min-width: 1024px) {
+    .contenedor-app {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .grid-armario {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas en PC */
+        gap: 25px;
+    }
+
+    .nombre-outfit { font-size: 0.75rem; }
+}

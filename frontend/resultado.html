@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bellaveste - Mood Experience</title>
+    <title>Bellaveste - Results</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
-    <link rel="stylesheet" href="css/categoria-mood.css">
+    <link rel="stylesheet" href="css/armario.css">
 
-    <script type="module" src="js/inicio.js"></script>
+    <script type="module" src="js/barra-usuario.js"></script>
 </head>
 
 <body>
@@ -25,6 +25,7 @@
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
+
                 <ul id="menu">
                     <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
                     <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
@@ -51,10 +52,12 @@
 
         <div class="usuario-barra">
             <input type="checkbox" id="chkPerfil">
+
             <label for="chkPerfil" class="perfil-trigger">
                 <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
+
             <ul class="menu-perfil">
                 <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
             </ul>
@@ -63,22 +66,18 @@
 
     <main class="contenedor-app">
         <header class="seccion-header">
-            <h2>SHOP BY MOOD</h2>
-            <p>Adaptive style for your attitude</p>
+            <h2 id="titulo-filtro">RESULTS</h2>
+            <p id="subtitulo-filtro">Curated selection from your wardrobe</p>
         </header>
 
-        <section class="grid-experiencia-mood">
-            <a href="resultado.html?tipo=mood&v=CASUAL" class="card-mood casual"><span>CASUAL</span></a>
-            <a href="resultado.html?tipo=mood&v=ELEGANT" class="card-mood elegant"><span>ELEGANT</span></a>
-            <a href="resultado.html?tipo=mood&v=STREETWEAR" class="card-mood streetwear"><span>STREETWEAR</span></a>
-            <a href="resultado.html?tipo=mood&v=BOHO CHIC" class="card-mood bohochic"><span>BOHO CHIC</span></a>
-            <a href="resultado.html?tipo=mood&v=ATHLEISURE" class="card-mood athleisure"><span>ATHLEISURE</span></a>
-            <a href="resultado.html?tipo=mood&v=MINIMAL" class="card-mood minimal"><span>MINIMAL</span></a>
-        </section>
+        <section id="grid-resultados" class="grid-armario">
+            </section>
 
         <footer>
-            <a class="boton-armario" href="./armario.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="./inicio-categoria.html">BACK TO COLLECTIONS</a>
         </footer>
     </main>
+
+    <script type="module" src="js/categoria.js"></script>
 </body>
 </html>
