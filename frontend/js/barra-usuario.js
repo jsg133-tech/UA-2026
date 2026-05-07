@@ -1,20 +1,12 @@
+import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
 const API = 'https://ua-2026.onrender.com';
-const CLAVE_TOKEN = 'token';
-const CLAVE_USUARIO = 'user';
 
 function obtenerToken() {
-  return localStorage.getItem(CLAVE_TOKEN);
+  return getToken();
 }
 
 function obtenerUsuarioGuardado() {
-  const raw = localStorage.getItem(CLAVE_USUARIO);
-  if (!raw) return null;
-
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return null;
-  }
+  return getStoredUser();
 }
 
 function mostrarUsuarioEnBarra(usuario) {
@@ -31,8 +23,7 @@ function mostrarUsuarioEnBarra(usuario) {
 }
 
 function cerrarSesion() {
-  localStorage.removeItem(CLAVE_TOKEN);
-  localStorage.removeItem(CLAVE_USUARIO);
+  clearAuthSession();
   window.location.href = 'inicio.html';
 }
 
@@ -64,8 +55,10 @@ async function pedirUsuarioActual() {
 
 export async function inicializarBarraUsuario() {
   const token = obtenerToken();
+  console.log('🔐 Token en barra-usuario:', token ? 'Existe' : 'NO EXISTE');
+  
   if (!token) {
-    window.location.href = 'login.html';
+    console.warn('❌ No hay token, se muestra modo invitado');
     return;
   }
 
@@ -78,11 +71,13 @@ export async function inicializarBarraUsuario() {
 
   try {
     const usuarioActual = await pedirUsuarioActual();
-    localStorage.setItem(CLAVE_USUARIO, JSON.stringify(usuarioActual));
+    setStoredUser(usuarioActual);
     mostrarUsuarioEnBarra(usuarioActual);
-  } catch {
-    // Si el token no es valido, cerramos sesion para evitar estados inconsistentes.
-    cerrarSesion();
+    console.log('✅ Usuario cargado correctamente:', usuarioActual.name);
+  } catch (err) {
+    console.error('❌ Error al cargar usuario:', err.message);
+    clearAuthSession();
+    console.warn('⚠️ Token inválido o expirado - sesión limpiada');
   }
 }
 

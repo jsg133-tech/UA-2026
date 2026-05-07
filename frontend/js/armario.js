@@ -1,5 +1,6 @@
+import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
+
 const API       = 'https://ua-2026.onrender.com';
-const TOKEN_KEY = 'token';
 
 const gridArmario      = document.getElementById('grid-armario');
 const categoriasBarra  = document.getElementById('categorias-bar');
@@ -11,11 +12,10 @@ let categoriaActiva     = null;
 let categoriasUsuario   = [];   // { _id, name }[]
 let menuCategoriaActivo = null;
 
-function obtenerToken() { return localStorage.getItem(TOKEN_KEY); }
+function obtenerToken() { return getToken(); }
 
 function cerrarSesion() {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem('user');
+    clearAuthSession();
     window.location.href = 'inicio.html';
 }
 
@@ -325,10 +325,10 @@ async function cargarOutfits() {
 async function cargarUsuario() {
     const token = obtenerToken();
     if (!token) return;
-    const guardado = localStorage.getItem('user');
+    const guardado = getStoredUser();
     if (guardado) {
         try {
-            const u = JSON.parse(guardado);
+            const u = guardado;
             nombreUsuarioEl.textContent = (u.name || 'USUARIO').toUpperCase();
             avatarUsuarioEl.src = u.avatar || 'images/perfil.jfif';
         } catch { /* continúa */ }
@@ -339,7 +339,7 @@ async function cargarUsuario() {
         const u = await r.json();
         nombreUsuarioEl.textContent = (u.name || 'USUARIO').toUpperCase();
         avatarUsuarioEl.src = u.avatar || 'images/perfil.jfif';
-        localStorage.setItem('user', JSON.stringify(u));
+        setStoredUser(u);
     } catch { /* silencioso */ }
 }
 

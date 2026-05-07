@@ -1,4 +1,5 @@
 import { mostrarModal } from './modal.js';
+import { getToken, clearAuthSession, saveAuthSession } from './auth-storage.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -8,10 +9,37 @@ const inputPass = document.getElementById('contrasena');
 const inputRecordarme = document.getElementById('recordarme');
 const btnLogin = document.getElementById('btn-login');
 
-// Si ya hay sesión activa, ir directo a la app
-if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
-  window.location.href = 'inicio-logueado.html';
+// Si ya hay sesión activa, VALIDAR el token antes de redirigir
+async function validarSesionExistente() {
+  const token = getToken();
+  if (!token) {
+    console.log('❌ No hay token guardado');
+    return;
+  }
+
+  try {
+    console.log('🔐 Validando token existente...');
+    const response = await fetch(`${API}/api/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      console.log('✅ Token válido, redirigiendo a inicio-logueado');
+      window.location.href = 'inicio-logueado.html';
+    } else {
+      console.warn('⚠️ Token inválido, limpiando...');
+      clearAuthSession();
+    }
+  } catch (err) {
+    console.error('❌ Error validando token:', err.message);
+    clearAuthSession();
+  }
 }
+
+// Validar sesión al cargar
+validarSesionExistente();
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -43,18 +71,11 @@ form.addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Failed to log in.');
     }
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('user');
-
-    if (inputRecordarme.checked) {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-    } else {
-      sessionStorage.setItem('token', data.token);
-      sessionStorage.setItem('user', JSON.stringify(data.user));
-    }
+    saveAuthSession({
+      token: data.token,
+      user: data.user,
+      rememberMe: inputRecordarme.checked,
+    });
 
     mostrarModal(
       'You have logged in successfully.',
@@ -77,3 +98,5 @@ form.addEventListener('submit', async (e) => {
     btnLogin.disabled = false;
   }
 });
+
+

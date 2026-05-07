@@ -1,8 +1,7 @@
 import { mostrarModal } from './modal.js';
+import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
 
 const API = 'https://ua-2026.onrender.com';
-const TOKEN_KEY = 'token';
-const USER_KEY = 'user';
 
 const nombreUsuarioEl = document.getElementById('nombre-usuario');
 const avatarUsuarioEl = document.getElementById('avatar-usuario');
@@ -17,18 +16,11 @@ let cantidadVisible = CANTIDAD_INICIAL_OUTFITS;
 let botonMostrarMas = null;
 
 function obtenerToken() {
-	return localStorage.getItem(TOKEN_KEY);
+	return getToken();
 }
 
 function obtenerUsuarioGuardado() {
-	const raw = localStorage.getItem(USER_KEY);
-	if (!raw) return null;
-
-	try {
-		return JSON.parse(raw);
-	} catch {
-		return null;
-	}
+	return getStoredUser();
 }
 
 function mostrarUsuarioEnInterfaz(user) {
@@ -40,8 +32,7 @@ function mostrarUsuarioEnInterfaz(user) {
 }
 
 function cerrarSesionYIrAInicio() {
-	localStorage.removeItem(TOKEN_KEY);
-	localStorage.removeItem(USER_KEY);
+	clearAuthSession();
 	window.location.href = 'inicio.html';
 }
 
@@ -237,8 +228,10 @@ async function peticionConAutorizacion(path) {
 
 async function iniciarPagina() {
 	const token = obtenerToken();
+	console.log('📄 Iniciando página, token:', token ? 'Existe ✓' : 'NO EXISTE ✗');
+	
 	if (!token) {
-		window.location.href = 'login.html';
+		console.warn('⚠️ No hay token guardado');
 		return;
 	}
 
@@ -255,12 +248,16 @@ async function iniciarPagina() {
 
 	try {
 		const user = await peticionConAutorizacion('/api/auth/me');
-		localStorage.setItem(USER_KEY, JSON.stringify(user));
+		setStoredUser(user);
 		mostrarUsuarioEnInterfaz(user);
+		console.log('✅ Usuario autenticado:', user.name);
 	} catch (err) {
+		console.error('❌ Error al obtener usuario:', err.message);
 		if (/token|expired|invalid|401/i.test(err.message)) {
+			console.warn('⚠️ Token inválido o expirado');
+			clearAuthSession();
 			mostrarModal('Your session has expired. Please log in again.', 'error');
-			setTimeout(() => cerrarSesionYIrAInicio(), 400);
+			// NO redirijir automáticamente para permitir debugging
 		}
 	}
 }

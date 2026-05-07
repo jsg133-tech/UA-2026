@@ -1,4 +1,5 @@
 import { mostrarModal } from './modal.js';
+import { clearAuthSession } from './auth-storage.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -86,9 +87,8 @@ form.addEventListener('submit', async (e) => {
             {
                 textoBoton: 'IR A LOGIN',
                 alConfirmar: () => {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    window.location.href = 'login.html';
+                    clearAuthSession();
+                    window.location.href = 'inicio.html';
                 },
             }
         );

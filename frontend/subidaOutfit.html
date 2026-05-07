@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Outfit - Bellaveste</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/comun.css">
+    <link rel="stylesheet" href="css/subidaOutfit.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
+
+    <script type="module" src="js/subidaOutfit.js"></script>
+</head>
+
+<body>
+    <!-- ENCABEZADO -->
+    <header class="barra-superior">
+        <div class="fila-marca">
+            <nav>
+                <label for="chkMenu"><i class="icon-menu"></i></label>
+                <input type="checkbox" id="chkMenu">
+
+                <ul id="menu">
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li><i class="icon-moon"></i>DARK MODE</li>
+                    <li><i class="icon-setting"></i>SETTING</li>
+                </ul>
+            </nav>
+
+            <div class="marca">
+                <h1>BELLAVESTE</h1>
+                <p>SPAIN</p>
+            </div>
+
+            <div class="iconos-acciones">
+                <a class="boton-icono" href="buscar.html"><i class="icon-search"></i></a>
+                <a class="boton-icono" href="armario.html"><i class="icon-shopping-bag"></i></a>
+            </div>
+        </div>
+
+        <div class="usuario-barra">
+            <input type="checkbox" id="chkPerfil">
+
+            <label for="chkPerfil" class="perfil-trigger">
+                <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
+                <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
+            </label>
+
+            <ul class="menu-perfil">
+                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor-app">
+        <section class="subida-outfit">
+            <div class="formulario-outfit">
+                <form id="form-subida" class="form-outfit">
+                    <!-- SECCIÓN 1: OUTFIT (Contenedor) -->
+                    <div class="seccion-outfit">
+                        <h3 class="titulo-seccion">Outfit Information</h3>
+                        
+                        <!-- Nombre del outfit -->
+                        <div class="grupo-campo">
+                            <label for="outfit-name" class="etiqueta-campo">Name</label>
+                            <input 
+                                type="text" 
+                                id="outfit-name" 
+                                name="outfit-name" 
+                                class="campo-input"
+                                placeholder="Introduce the outfit's name"
+                                required
+                            >
+                        </div>
+
+                        <!-- Foto del outfit -->
+                        <div class="grupo-campo campo-archivo">
+                            <label for="outfit-picture" class="etiqueta-campo">
+                                <i class="icon-picture"></i>
+                                Picture
+                            </label>
+                            <input 
+                                type="file" 
+                                id="outfit-picture" 
+                                name="outfit-picture" 
+                                class="input-archivo"
+                                accept="image/*"
+                                required
+                            >
+                            <div class="preview-imagen" id="preview-picture"></div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN 2: PRENDAS (Componentes) -->
+                    <div class="seccion-prendas">
+                        <h3 class="titulo-seccion">Pieces</h3>
+                        <div id="lista-prendas" class="lista-prendas"></div>
+                        <button type="button" id="btn-agregar-prenda" class="boton-agregar-prenda">
+                            <i class="icon-plus"></i> Add Piece
+                        </button>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="grupo-botones">
+                        <button type="button" id="btn-cancelar" class="boton-cancelar">Cancel</button>
+                        <button type="submit" id="btn-upload" class="boton-upload">
+                            <i class="icon-upload"></i> Upload
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- BOTON FINAL -->
+        <footer>
+            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+        </footer>
+
+    </main>
+    </body>
+</html>

@@ -22,6 +22,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Bellaveste API running 🌿' });
 });
 
+// Global error handler - return JSON for unexpected errors
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err && err.stack ? err.stack : err);
+  if (res.headersSent) return next(err);
+  res.status(err && err.status ? err.status : 500).json({ error: err && err.message ? err.message : 'Server error' });
+});
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)

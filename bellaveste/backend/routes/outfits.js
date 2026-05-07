@@ -1,19 +1,16 @@
 const express = require('express');
 const multer = require('multer');
+const DataUri = require('datauri/parser');
 const path = require('path');
+const cloudinary = require('../config/cloudinary');
 const Outfit = require('../models/Outfit');
 const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
+const parser = new DataUri();
 
-// Multer config — store in uploads/
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads')),
-  filename: (req, file, cb) => {
-    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, unique + path.extname(file.originalname));
-  },
-});
+// Multer config — guardar en memoria
+const storage = multer.memoryStorage();
 const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
@@ -40,24 +37,85 @@ router.get('/', async (req, res) => {
 // POST /api/outfits
 router.use(authMiddleware);
 
-router.post('/', upload.single('image'), async (req, res) => {
+// Helper para subir a Cloudinary
+async function uploadToCloudinary(file, folder, publicId) {
+  if (!file) return '';
   try {
-    const { name, category, size, color, season, imageUrl: imageUrlBody } = req.body;
-    if (!name || !category) {
-      return res.status(400).json({ error: 'Name and category are required' });
+    const dataUriString = parser.format(path.extname(file.originalname).toString(), file.buffer);
+    const result = await cloudinary.uploader.upload(dataUriString.content, {
+      folder: folder,
+      public_id: publicId,
+      overwrite: true,
+    });
+    return result.secure_url;
+  } catch (err) {
+    console.error('uploadToCloudinary error:', err && err.stack ? err.stack : err);
+    throw err;
+  }
+}
+
+router.post('/', upload.any(), async (req, res) => {
+  try {
+    const { name, category, pieces: piecesStr } = req.body;
+    
+    if (!name) {
+      return res.status(400).json({ error: 'Name is required' });
     }
 
-    const imageUrl = req.file
-      ? `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
-      : (imageUrlBody || '');
+    // Encontrar archivo de imagen del outfit
+    const mainImageFile = req.files?.find(f => f.fieldname === 'image');
+    
+    // Subir imagen del outfit a Cloudinary
+    const outfitId = `outfit-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const imageUrl = mainImageFile 
+      ? await uploadToCloudinary(mainImageFile, 'bellaveste/outfits', outfitId)
+      : '';
+
+    // Procesar prendas
+    let pieces = [];
+    if (piecesStr) {
+      try {
+        const parsedPieces = JSON.parse(piecesStr);
+        if (Array.isArray(parsedPieces)) {
+          for (let index = 0; index < parsedPieces.length; index++) {
+            const prenda = parsedPieces[index];
+            const prendaImageFile = req.files?.find(f => f.fieldname === `piece-image-${index}`);
+            
+            // Subir imagen de la prenda
+            const prendaId = `piece-${Date.now()}-${index}-${Math.random().toString(36).substr(2, 9)}`;
+            const prendaImageUrl = prendaImageFile
+              ? await uploadToCloudinary(prendaImageFile, 'bellaveste/pieces', prendaId)
+              : '';
+            
+            pieces.push({
+              nombre: prenda.nombre || 'Piece',
+              marca: prenda.marca || '',
+              link: prenda.link || '',
+              size: prenda.size || '',
+              color: prenda.color || '',
+              season: prenda.season || '',
+              imageUrl: prendaImageUrl,
+              cloudinaryPublicId: prendaImageUrl ? prendaId : '',
+            });
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing pieces:', e);
+      }
+    }
 
     const outfit = await Outfit.create({
-      name, category, size, color, season, imageUrl,
+      name,
+      category: category || 'CASUAL',
+      imageUrl,
+      cloudinaryPublicId: imageUrl ? outfitId : '',
+      pieces,
       userId: req.userId,
     });
+    
     res.status(201).json(outfit);
   } catch (err) {
-    console.error(err);
+    console.error('POST /api/outfits error:', err && err.stack ? err.stack : err);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -90,6 +148,21 @@ router.delete('/:id', async (req, res) => {
   try {
     const outfit = await Outfit.findOneAndDelete({ _id: req.params.id, userId: req.userId });
     if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+    
+    // Eliminar imagen del outfit de Cloudinary
+    if (outfit.cloudinaryPublicId) {
+      await cloudinary.uploader.destroy(outfit.cloudinaryPublicId);
+    }
+    
+    // Eliminar imágenes de las prendas de Cloudinary
+    if (outfit.pieces && Array.isArray(outfit.pieces)) {
+      for (const prenda of outfit.pieces) {
+        if (prenda.cloudinaryPublicId) {
+          await cloudinary.uploader.destroy(prenda.cloudinaryPublicId);
+        }
+      }
+    }
+    
     res.json({ message: 'Outfit deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

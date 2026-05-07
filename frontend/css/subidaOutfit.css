@@ -1,0 +1,494 @@
+/* PÁGINA DE SUBIDA DE OUTFIT - SUBIDAOUTFIT.CSS */
+
+.contenedor-subida {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 14px;
+    min-height: calc(100vh - 200px);
+}
+
+.formulario-outfit {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-formulario {
+    font-family: "Cinzel", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--vino-oscuro);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.form-outfit {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ==================== SECCIÓN OUTFIT ==================== */
+
+.seccion-outfit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(90, 13, 22, 0.1);
+}
+
+.titulo-seccion {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--vino-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* ==================== GRUPOS DE CAMPO ==================== */
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.etiqueta-campo {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vino-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.etiqueta-campo i {
+    font-size: 12px;
+    color: var(--vino);
+}
+
+/* ==================== INPUTS DE TEXTO ==================== */
+
+.campo-input {
+    padding: 12px 14px;
+    border: 2px solid rgba(90, 13, 22, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    color: var(--vino-oscuro);
+    transition: all 0.3s ease;
+}
+
+.campo-input:focus {
+    outline: none;
+    border-color: var(--vino);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(90, 13, 22, 0.1);
+}
+
+/* Estados de validación */
+.campo-input.valido {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.campo-input.valido:focus {
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.campo-input.invalido {
+    border-color: #f44336;
+    background: rgba(244, 67, 54, 0.05);
+}
+
+.campo-input.invalido:focus {
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+}
+
+.campo-input::placeholder {
+    color: rgba(61, 10, 17, 0.5);
+    font-style: italic;
+}
+
+/* ==================== CAMPO DE ARCHIVO ==================== */
+
+.campo-archivo {
+    gap: 12px;
+}
+
+.input-archivo {
+    display: none;
+}
+
+.etiqueta-campo[for="outfit-picture"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(90, 13, 22, 0.05);
+    border: 2px dashed rgba(90, 13, 22, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 8px;
+    min-height: 60px;
+}
+
+.etiqueta-campo[for="outfit-picture"]:hover {
+    background: rgba(90, 13, 22, 0.1);
+    border-color: var(--vino);
+    color: var(--vino);
+}
+
+.preview-imagen {
+    width: 100%;
+    height: 250px;
+    background: rgba(90, 13, 22, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--vino-oscuro);
+    margin-top: 12px;
+}
+
+.preview-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==================== SECCIÓN DE PRENDAS ==================== */
+
+.seccion-prendas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(90, 13, 22, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(90, 13, 22, 0.1);
+}
+
+.lista-prendas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ==================== ITEM PRENDA ==================== */
+
+.item-prenda {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(90, 13, 22, 0.1);
+    animation: slideIn 0.3s ease;
+    position: relative;
+}
+
+.prenda-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.prenda-foto-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(90, 13, 22, 0.1);
+}
+
+.prenda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.campo-prenda {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label-mini {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--vino-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.input-prenda {
+    padding: 10px 12px;
+    border: 1px solid rgba(90, 13, 22, 0.15);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 12px;
+    color: var(--vino-oscuro);
+    transition: all 0.2s ease;
+}
+
+.input-prenda:focus {
+    outline: none;
+    border-color: var(--vino);
+    background: white;
+    box-shadow: 0 0 0 2px rgba(90, 13, 22, 0.1);
+}
+
+.input-prenda.valido {
+    border-color: #4CAF50;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.input-prenda::placeholder {
+    color: rgba(61, 10, 17, 0.4);
+    font-size: 11px;
+}
+
+.input-prenda[type="color"] {
+    padding: 6px;
+    cursor: pointer;
+    height: 38px;
+}
+
+.boton-eliminar-prenda {
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.boton-eliminar-prenda:hover {
+    background: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.etiqueta-foto-prenda {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--vino-oscuro);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.input-archivo-prenda {
+    display: none;
+}
+
+.preview-prenda {
+    width: 100%;
+    height: 150px;
+    background: rgba(90, 13, 22, 0.05);
+    border: 2px dashed rgba(90, 13, 22, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--vino-oscuro);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.preview-prenda:hover {
+    background: rgba(90, 13, 22, 0.1);
+    border-color: var(--vino);
+}
+
+.preview-prenda i {
+    font-size: 24px;
+    color: var(--vino);
+}
+
+.preview-prenda img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.boton-agregar-prenda {
+    padding: 12px 16px;
+    background: rgba(90, 13, 22, 0.1);
+    border: 1px dashed rgba(90, 13, 22, 0.3);
+    border-radius: 6px;
+    color: var(--vino);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.boton-agregar-prenda:hover {
+    background: rgba(90, 13, 22, 0.2);
+    border-color: var(--vino);
+}
+
+/* ==================== GRUPO DE BOTONES ==================== */
+
+.grupo-botones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.boton-cancelar,
+.boton-upload {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.boton-cancelar {
+    background: rgba(90, 13, 22, 0.1);
+    color: var(--vino-oscuro);
+    border: 1px solid rgba(90, 13, 22, 0.2);
+}
+
+.boton-cancelar:hover {
+    background: rgba(90, 13, 22, 0.2);
+    border-color: var(--vino);
+}
+
+.boton-upload {
+    background: linear-gradient(135deg, var(--vino), #a01a2e);
+    color: white;
+    box-shadow: 0 4px 12px rgba(90, 13, 22, 0.3);
+}
+
+.boton-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(90, 13, 22, 0.4);
+}
+
+.boton-upload:active {
+    transform: translateY(0);
+}
+
+.boton-upload:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ==================== ANIMACIONES ==================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 600px) {
+    .prenda-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .contenedor-subida {
+        margin: 15px auto;
+        padding: 0 12px;
+    }
+
+    .formulario-outfit {
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .titulo-formulario {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .grupo-botones {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .boton-cancelar,
+    .boton-upload {
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+
+    .prenda-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .item-prenda {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .boton-eliminar-prenda {
+        top: 8px;
+        right: 8px;
+    }
+}
