@@ -2,7 +2,7 @@
 node_modules/
 
 # Variables de entorno (NO subir al repo — contiene contraseñas)
-.env
+
 
 # Imágenes subidas por usuarios
 bellaveste/backend/uploads/*
