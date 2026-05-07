@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search — Bellaveste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/comun.css">
+    <link rel="stylesheet" href="css/buscar.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="icon" href="./images/color.jfif">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
+    <script type="module" src="js/buscar.js"></script>
+</head>
+<body>
+    <header class="barra-superior">
+        <div class="fila-marca">
+            <nav>
+                <label for="chkMenu"><i class="icon-menu"></i></label>
+                <input type="checkbox" id="chkMenu">
+                <ul id="menu">
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                </ul>
+            </nav>
+            <div class="marca"><h1>BELLAVESTE</h1><p>SPAIN</p></div>
+            <div class="iconos-acciones">
+                <a class="boton-icono" href="buscar.html"><i class="icon-search"></i></a>
+                <a class="boton-icono" href="armario.html"><i class="icon-shopping-bag"></i></a>
+            </div>
+        </div>
+        <div class="usuario-barra">
+            <input type="checkbox" id="chkPerfil">
+            <label for="chkPerfil" class="perfil-trigger">
+                <span class="nombre-usuario" id="nombre-usuario">USUARIO</span>
+                <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
+            </label>
+            <ul class="menu-perfil">
+                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="buscar-main">
+
+        <!-- BARRA DE BÚSQUEDA -->
+        <div class="buscar-barra-wrap">
+            <div class="buscar-input-wrap">
+                <input
+                    type="text"
+                    id="buscar-input"
+                    class="buscar-input"
+                    placeholder="Search outfits..."
+                    autocomplete="off"
+                >
+                <button class="buscar-btn" id="buscar-btn" type="button">
+                    <i class="icon-search"></i>
+                </button>
+
+                <!-- AUTOCOMPLETE -->
+                <ul class="buscar-sugerencias" id="buscar-sugerencias"></ul>
+            </div>
+
+            <!-- BOTÓN ADVANCED SEARCH -->
+            <button class="btn-advanced" id="btn-advanced" type="button">
+                <i class="icon-sliders"></i> Advanced search
+                <i class="icon-down-open advanced-arrow" id="advanced-arrow"></i>
+            </button>
+        </div>
+
+        <!-- FILTROS AVANZADOS -->
+        <div class="filtros-avanzados" id="filtros-avanzados">
+            <div class="filtros-grid">
+                <div class="filtro-campo">
+                    <label class="filtro-label"><i class="icon-resize-full-alt"></i> SIZE</label>
+                    <input type="text" id="f-size" class="filtro-input" placeholder="e.g. M, S, XL">
+                </div>
+                <div class="filtro-campo">
+                    <label class="filtro-label"><i class="icon-palette"></i> COLOUR</label>
+                    <input type="text" id="f-color" class="filtro-input" placeholder="e.g. black, beige">
+                </div>
+                <div class="filtro-campo">
+                    <label class="filtro-label"><i class="icon-tag"></i> BRAND</label>
+                    <input type="text" id="f-brand" class="filtro-input" placeholder="e.g. Zara, H&M">
+                </div>
+                <div class="filtro-campo">
+                    <label class="filtro-label"><i class="icon-sun"></i> SEASON</label>
+                    <select id="f-season" class="filtro-input">
+                        <option value="">All seasons</option>
+                        <option value="spring">Spring</option>
+                        <option value="summer">Summer</option>
+                        <option value="autumn">Autumn</option>
+                        <option value="winter">Winter</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-aplicar" id="btn-aplicar" type="button">
+                APPLY FILTERS
+            </button>
+        </div>
+
+        <!-- RESULTADOS / RECOMENDADOS -->
+        <section class="buscar-resultados">
+            <div class="resultados-header">
+                <h2 class="resultados-titulo" id="resultados-titulo">RECOMMENDED OUTFITS</h2>
+                <span class="resultados-count" id="resultados-count"></span>
+            </div>
+            <div class="resultados-grid" id="resultados-grid">
+                <!-- renderizado por JS -->
+            </div>
+        </section>
+
+        <footer>
+            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+        </footer>
+
+    </main>
+</body>
+</html>
