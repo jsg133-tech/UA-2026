@@ -116,18 +116,9 @@ async function agregarArmario(outfit, boton) {
 	boton.disabled = true;
 
 	try {
-		const formData = new FormData();
-		formData.append('name',     outfit.name     || 'Outfit');
-		formData.append('category', outfit.category || 'CASUAL');
-		formData.append('season',   outfit.season   || '');
-		formData.append('size',     outfit.size     || '');
-		formData.append('color',    outfit.color    || '');
-		if (outfit.imageUrl) formData.append('imageUrl', outfit.imageUrl);
-
-		const respuesta = await fetch(`${API}/api/outfits`, {
+		const respuesta = await fetch(`${API}/api/armario/${outfit._id}`, {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${token}` },
-			body: formData,
 		});
 
 		const datos = await respuesta.json().catch(() => ({}));
