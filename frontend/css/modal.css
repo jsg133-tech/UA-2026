@@ -69,6 +69,35 @@
   border-top: 4px solid #c9b2a3;
 }
 
+.bv-modal--confirm {
+  border-top: 4px solid #5a0d16;
+}
+
+.bv-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.bv-modal-btn--cancel {
+  background: transparent;
+  color: #5a0d16;
+  border: 1px solid rgba(90, 13, 22, 0.3);
+}
+
+.bv-modal-btn--cancel:hover {
+  background: rgba(90, 13, 22, 0.06);
+}
+
+.bv-modal-btn--delete {
+  background: linear-gradient(135deg, #5a0d16, #7a1525);
+  box-shadow: 0 3px 10px rgba(90, 13, 22, 0.3);
+}
+
+.bv-modal-btn--delete:hover {
+  background: #3d0a11;
+}
+
 @keyframes bvFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

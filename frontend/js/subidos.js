@@ -1,5 +1,6 @@
 import { getToken } from './auth-storage.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
+import { mostrarConfirm } from './modal.js';
 
 const API  = 'https://ua-2026.onrender.com';
 const grid = document.getElementById('subidos-grid');
@@ -36,23 +37,27 @@ function crearTarjeta(outfit) {
         window.location.href = `outfit.html?id=${outfit._id}`;
     });
 
-    div.querySelector('.btn-eliminar-outfit').addEventListener('click', async (e) => {
+    div.querySelector('.btn-eliminar-outfit').addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!confirm(`Delete "${outfit.name}"?`)) return;
-
-        const token = getToken();
-        try {
-            const r = await fetch(`${API}/api/outfits/${outfit._id}`, {
-                method: 'DELETE',
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            if (r.ok) {
-                div.style.transition = 'opacity 0.3s, transform 0.3s';
-                div.style.opacity = '0';
-                div.style.transform = 'scale(0.9)';
-                setTimeout(() => div.remove(), 320);
-            }
-        } catch { /* silencioso */ }
+        mostrarConfirm(
+            `"${outfit.name}" will be permanently deleted.`,
+            async () => {
+                const token = getToken();
+                try {
+                    const r = await fetch(`${API}/api/outfits/${outfit._id}`, {
+                        method: 'DELETE',
+                        headers: { Authorization: `Bearer ${token}` },
+                    });
+                    if (r.ok) {
+                        div.style.transition = 'opacity 0.3s, transform 0.3s';
+                        div.style.opacity = '0';
+                        div.style.transform = 'scale(0.9)';
+                        setTimeout(() => div.remove(), 320);
+                    }
+                } catch { /* silencioso */ }
+            },
+            'Delete outfit?'
+        );
     });
 
     return div;
