@@ -141,3 +141,56 @@
 
 .btn-logout { background-color: #8c6460; }
 .btn-delete { background-color: #3d0000; }
+
+/* Estilo del menú de pestañas - SIN FONDO GRANATE */
+.tabs-perfil {
+    display: flex;
+    justify-content: space-between; /* Distribuye los botones */
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(103, 66, 73, 0.2); /* Línea sutil inferior */
+    padding: 0 10px 10px 10px;
+    background: none !important; /* Nos aseguramos de que no haya fondo */
+}
+
+/* Estilo de los botones individuales del menú */
+.tab-btn {
+    background: none !important; /* Sin fondo */
+    border: none !important;     /* Sin bordes */
+    border-bottom: 2px solid transparent !important; /* Para la línea de 'activo' */
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: #674249; /* Color de texto original */
+    cursor: pointer;
+    padding: 5px 0;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    outline: none; /* Quita el contorno de enfoque */
+}
+
+/* Efecto hover */
+.tab-btn:hover {
+    color: #3d0a11;
+}
+
+/* Estilo para la pestaña activa */
+.tab-btn.active {
+    color: #3d0a11 !important;
+    border-bottom: 2px solid #3d0a11 !important; /* Línea inferior granate */
+    font-weight: bold;
+}
+
+/* Estilos para el contenido de Ajustes */
+.ajustes-placeholder {
+    padding: 30px 10px;
+    color: #3d0a11;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.ajustes-placeholder p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

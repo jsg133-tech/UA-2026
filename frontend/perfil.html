@@ -61,16 +61,23 @@
     </header>
 
     <main class="main-perfil">
-        <div class="contenedor-ajustes">
-            <div class="divisor-titulo">
-                <span>YOUR ACCOUNT</span>
-            </div>
+    <div class="contenedor-ajustes">
+        <div class="divisor-titulo">
+            <span>YOUR ACCOUNT</span>
+        </div>
 
+        <nav class="tabs-perfil">
+            <button class="tab-btn active" data-target="seccion-editar">EDIT PROFILE</button>
+            <button class="tab-btn" onclick="location.href='subidos.html'">MY POSTS</button>
+            <button class="tab-btn" onclick="location.href='armario.html'">CLOSET</button>
+            <button class="tab-btn" data-target="seccion-ajustes">SETTINGS</button>
+        </nav>
+
+        <div id="seccion-editar" class="tab-content">
             <div class="tarjeta-usuario">
                 <div class="avatar-grande">
                     <img src="images/perfil.jfif" alt="Avatar" id="vistaPrevia">
-                    
-                    <label for="inputFoto" class="cambiar-foto" style="cursor: pointer;">
+                    <label for="inputFoto" class="cambiar-foto">
                         <i class="icon-camera"></i>New Photo
                     </label>
                     <input type="file" id="inputFoto" accept="image/*" style="display: none;">
@@ -80,55 +87,45 @@
                 </div>
             </div>
 
-            <script>
-                document.getElementById('inputFoto').addEventListener('change', function(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            // Esto cambia la imagen de la pantalla por la que acabas de elegir
-                            document.getElementById('vistaPrevia').src = e.target.result;
-                        }
-                        reader.readAsDataURL(file);
-                    }
-                });
-            </script>
-
             <form class="form-perfil">
                 <div class="campo">
                     <label><i class="icon-user-circle"></i> NAME:</label>
                     <input type="text" placeholder="New name...">
                 </div>
-
                 <div class="campo">
                     <label><i class="icon-user-circle"></i> USERNAME:</label>
                     <input type="text" placeholder="New username...">
                 </div>
-
                 <div class="campo">
                     <label><i class="icon-mail"></i> E-MAIL:</label>
                     <input type="email" value="mirandawanda@gmail.com">
                 </div>
-
                 <div class="campo">
                     <label><i class="icon-key"></i> NEW PASSWORD</label> 
                     <input type="password" placeholder="New password...">
                 </div>
-
                 <div class="campo">
                     <label><i class="icon-key"></i> PASSWORD</label>
                     <input type="password" placeholder="To confirm the changes you must put your password">
                 </div>
-
                 <button type="submit" class="btn-update">UPDATE</button>
             </form>
+        </div>
 
-            <div class="botones-peligro">
-                <button class="btn-logout" type="button">LOGOUT</button>
-                <button class="btn-delete" type="button">DELETE ACCOUNT</button>
+        <div id="seccion-ajustes" class="tab-content" style="display: none;">
+            <div class="ajustes-placeholder">
+                <p><i class="icon-cog"></i> Notification Settings</p>
+                <p><i class="icon-lock"></i> Privacy & Security</p>
+                <p><i class="icon-help"></i> Help Center</p>
             </div>
         </div>
-    </main>
+
+        <div class="botones-peligro">
+            <button class="btn-logout" type="button">LOGOUT</button>
+            <button class="btn-delete" type="button">DELETE ACCOUNT</button>
+        </div>
+    </div>
+</main>
 
     <footer>
         <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
