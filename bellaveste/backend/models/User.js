@@ -19,4 +19,20 @@ userSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
+// Hook: al eliminar un usuario, eliminar sus outfits y categorías
+userSchema.pre('findOneAndDelete', async function (next) {
+  const userId = this.getFilter()._id;
+  try {
+    const Outfit = require('./Outfit');
+    const Category = require('./Category');
+    // Eliminar todos los outfits del usuario
+    await Outfit.deleteMany({ userId });
+    // Eliminar todas las categorías del usuario
+    await Category.deleteMany({ userId });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = mongoose.model('User', userSchema);

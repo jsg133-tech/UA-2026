@@ -109,4 +109,28 @@ router.put('/me', require('../middleware/auth'), async (req, res) => {
   }
 });
 
+// DELETE /api/auth/me  →  eliminar cuenta del usuario y todos sus datos asociados
+router.delete('/me', require('../middleware/auth'), async (req, res) => {
+  try {
+    const { password } = req.body;
+    
+    // Verificar contraseña para confirmar eliminación
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    
+    if (!password) return res.status(400).json({ error: 'Password is required to delete account' });
+    
+    const match = await user.comparePassword(password);
+    if (!match) return res.status(401).json({ error: 'Wrong password' });
+    
+    // Eliminar usuario (hook automáticamente eliminará outfits y categorías)
+    await User.findOneAndDelete({ _id: req.userId });
+    
+    res.json({ message: 'Account and all associated data deleted successfully' });
+  } catch (err) {
+    console.error('DELETE /api/auth/me error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
