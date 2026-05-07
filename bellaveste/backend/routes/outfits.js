@@ -29,7 +29,8 @@ function toBase64(file) {
 router.get('/', async (req, res) => {
   try {
     const filter = {};
-    if (req.query.category) filter.category = req.query.category;
+    if (req.query.category) filter.category = new RegExp(`^${req.query.category}$`, 'i');
+    if (req.query.season)   filter.season   = new RegExp(`^${req.query.season}$`,   'i');
     const outfits = await Outfit.find(filter)
       .populate('userId', 'name avatar')
       .sort({ createdAt: -1 });
