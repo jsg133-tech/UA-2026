@@ -335,11 +335,7 @@ function actualizarSeccionPrendas() {
                 sc.categoria && sc.categoria.toUpperCase() === categoriaActiva.toUpperCase()
             );
           })
-        : todasLasPrendas.filter(({ piece }) => {
-            // Sin filtro: mostrar solo las que no tienen categoría asignada
-            // O todas si ninguna tiene categoría
-            return !piece.savedCategories || !piece.savedCategories.some(sc => sc.categoria);
-          });
+        : todasLasPrendas; // ALL: mostrar todas
 
     if (!filtradas.length) { prendasSeccion.style.display = 'none'; return; }
 
