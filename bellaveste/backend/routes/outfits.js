@@ -146,4 +146,58 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// GET /api/outfits/pieces/saved  →  prendas guardadas por el usuario
+router.get('/pieces/saved', async (req, res) => {
+  try {
+    const outfits = await Outfit.find({ 'pieces.savedBy': req.userId });
+    const saved = [];
+    outfits.forEach(outfit => {
+      outfit.pieces.forEach(piece => {
+        if (piece.savedBy && piece.savedBy.includes(req.userId)) {
+          saved.push({
+            piece,
+            outfitId:   outfit._id,
+            outfitName: outfit.name,
+          });
+        }
+      });
+    });
+    res.json(saved);
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/outfits/:outfitId/pieces/:pieceId/save
+router.post('/:outfitId/pieces/:pieceId/save', async (req, res) => {
+  try {
+    const outfit = await Outfit.findById(req.params.outfitId);
+    if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+    const piece = outfit.pieces.id(req.params.pieceId);
+    if (!piece) return res.status(404).json({ error: 'Piece not found' });
+    if (!piece.savedBy.includes(req.userId)) {
+      piece.savedBy.push(req.userId);
+      await outfit.save();
+    }
+    res.json({ message: 'Piece saved' });
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// DELETE /api/outfits/:outfitId/pieces/:pieceId/save
+router.delete('/:outfitId/pieces/:pieceId/save', async (req, res) => {
+  try {
+    const outfit = await Outfit.findById(req.params.outfitId);
+    if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+    const piece = outfit.pieces.id(req.params.pieceId);
+    if (!piece) return res.status(404).json({ error: 'Piece not found' });
+    piece.savedBy.pull(req.userId);
+    await outfit.save();
+    res.json({ message: 'Piece unsaved' });
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

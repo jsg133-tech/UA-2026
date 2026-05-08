@@ -10,6 +10,7 @@ const prendaSchema = new mongoose.Schema({
   descripcion: { type: String, default: '' },
   imageUrl: { type: String, default: '' },
   cloudinaryPublicId: { type: String, default: '' },
+  savedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 }, { _id: true });
 
 const outfitSchema = new mongoose.Schema({

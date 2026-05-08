@@ -214,12 +214,41 @@
     justify-content: center;
 }
 
+.prenda-detalle-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
 .prenda-nombre {
     font-family: "Cinzel", serif;
     font-size: 0.78rem;
     font-weight: 500;
     color: #3d0a11;
     letter-spacing: 0.8px;
+    flex: 1;
+}
+
+.btn-guardar-prenda {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(90, 13, 22, 0.35);
+    font-size: 1rem;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.btn-guardar-prenda:hover {
+    color: #5a0d16;
+    transform: scale(1.15);
+}
+
+.btn-guardar-prenda.guardada {
+    color: #5a0d16;
 }
 
 .prenda-descripcion {

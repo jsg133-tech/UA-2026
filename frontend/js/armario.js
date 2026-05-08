@@ -338,8 +338,57 @@ async function cargarUsuario() {
 
 logoutLinkEl.addEventListener('click', e => { e.preventDefault(); cerrarSesion(); });
 
+// ── PRENDAS GUARDADAS ─────────────────────────────────────────────────────────
+
+const prendasSeccion = document.getElementById('prendas-guardadas-seccion');
+const prendasGrid    = document.getElementById('prendas-guardadas-grid');
+
+async function cargarPrendasGuardadas() {
+    const token = obtenerToken();
+    if (!token) return;
+    try {
+        const r = await fetch(`${API}/api/outfits/pieces/saved`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!r.ok) return;
+        const items = await r.json();
+        if (!items.length) return;
+
+        prendasSeccion.style.display = 'block';
+        prendasGrid.innerHTML = '';
+
+        items.forEach(({ piece, outfitId, outfitName }) => {
+            const card = document.createElement('div');
+            card.className = 'prenda-guardada-card';
+
+            const foto = piece.imageUrl || 'images/temporada.jfif';
+            const nombre = (piece.nombre || 'Piece').toUpperCase();
+            const marca = piece.marca || '';
+
+            card.innerHTML = `
+                <div class="prenda-guardada-foto">
+                    <img src="${foto}" alt="${nombre}" loading="lazy">
+                </div>
+                <div class="prenda-guardada-info">
+                    <span class="prenda-guardada-nombre">${nombre}</span>
+                    ${marca ? `<span class="prenda-guardada-marca">${marca}</span>` : ''}
+                    <span class="prenda-guardada-outfit">${(outfitName || '').toUpperCase()}</span>
+                </div>
+            `;
+
+            card.addEventListener('click', () => {
+                window.location.href = `outfit.html?id=${outfitId}`;
+            });
+            card.style.cursor = 'pointer';
+
+            prendasGrid.appendChild(card);
+        });
+    } catch { /* silencioso */ }
+}
+
 // ── INICIO ────────────────────────────────────────────────────────────────────
 
 cargarUsuario();
 cargarCategorias();
 cargarOutfits();
+cargarPrendasGuardadas();

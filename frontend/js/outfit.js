@@ -19,7 +19,7 @@ function formatearFecha(iso) {
     return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-function renderPrenda(prenda) {
+function renderPrenda(prenda, outfitId, token) {
     const card = document.createElement('article');
     card.className = 'prenda-card';
 
@@ -60,7 +60,12 @@ function renderPrenda(prenda) {
             <img src="${fotoSrc}" alt="${prenda.nombre}" loading="lazy">
         </div>
         <div class="prenda-detalle">
-            <h3 class="prenda-nombre">${prenda.nombre.toUpperCase()}</h3>
+            <div class="prenda-detalle-top">
+                <h3 class="prenda-nombre">${prenda.nombre.toUpperCase()}</h3>
+                <button class="btn-guardar-prenda" title="Save piece" type="button">
+                    <i class="icon-heart"></i>
+                </button>
+            </div>
             ${descHtml}
             <div class="prenda-campos">
                 ${camposHtml}
@@ -69,6 +74,46 @@ function renderPrenda(prenda) {
             ${linkHtml}
         </div>
     `;
+
+    // Lógica del botón guardar prenda
+    const btnSave = card.querySelector('.btn-guardar-prenda');
+    let guardada = prenda.savedBy && token && prenda.savedBy.some(id => id === getToken());
+
+    if (guardada) {
+        btnSave.classList.add('guardada');
+        btnSave.querySelector('i').className = 'icon-heart';
+    }
+
+    btnSave.addEventListener('click', async () => {
+        if (!token) { window.location.href = 'inicio.html'; return; }
+        btnSave.disabled = true;
+        try {
+            if (!guardada) {
+                const r = await fetch(`${API}/api/outfits/${outfitId}/pieces/${prenda._id}/save`, {
+                    method: 'POST',
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                if (r.ok) {
+                    guardada = true;
+                    btnSave.classList.add('guardada');
+                    btnSave.querySelector('i').className = 'icon-heart';
+                    btnSave.title = 'Saved';
+                }
+            } else {
+                const r = await fetch(`${API}/api/outfits/${outfitId}/pieces/${prenda._id}/save`, {
+                    method: 'DELETE',
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                if (r.ok) {
+                    guardada = false;
+                    btnSave.classList.remove('guardada');
+                    btnSave.querySelector('i').className = 'icon-heart-empty';
+                    btnSave.title = 'Save piece';
+                }
+            }
+        } catch { /* silencioso */ }
+        btnSave.disabled = false;
+    });
 
     return card;
 }
@@ -109,7 +154,7 @@ async function cargarOutfit() {
         // Prendas
         prendasListaEl.innerHTML = '';
         if (outfit.pieces && outfit.pieces.length) {
-            outfit.pieces.forEach(p => prendasListaEl.appendChild(renderPrenda(p)));
+            outfit.pieces.forEach(p => prendasListaEl.appendChild(renderPrenda(p, outfit._id, token)));
         } else {
             prendasListaEl.innerHTML = '<p style="padding:20px;text-align:center;font-family:Cormorant Garamond,serif;color:#7a5060;">No pieces added to this outfit.</p>';
         }
