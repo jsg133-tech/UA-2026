@@ -10,6 +10,26 @@ const inputEmail = document.getElementById('email');
 const inputPass = document.getElementById('contrasena');
 const inputConfirm = document.getElementById('confirmar-contrasena');
 const passwordToggles = document.querySelectorAll('.toggle-password');
+const LANG_STORAGE_KEY = 'bellaveste-language';
+
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function textoRegistro(clave) {
+    const textos = {
+        en: {
+            registering: 'REGISTERING...',
+            register: 'REGISTER',
+        },
+        es: {
+            registering: 'REGISTRANDO...',
+            register: 'REGISTRARME',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 function alternarVisibilidadPassword(input, boton) {
     const mostrando = input.type === 'text';
@@ -83,7 +103,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     const boton = form.querySelector('button[type="submit"]');
-    boton.textContent = 'REGISTERING...';
+    boton.textContent = textoRegistro('registering');
     boton.disabled = true;
 
     try {
@@ -116,12 +136,12 @@ form.addEventListener('submit', async (e) => {
         );
 
         form.reset();
-        boton.textContent = 'REGISTER';
+        boton.textContent = textoRegistro('register');
         boton.disabled = false;
 
     } catch (err) {
         mostrarModal(err.message, 'error', 'Registration error');
-        boton.textContent = 'REGISTER';
+        boton.textContent = textoRegistro('register');
         boton.disabled = false;
     }
 });

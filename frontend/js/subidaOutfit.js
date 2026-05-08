@@ -5,6 +5,70 @@ import { inicializarBarraUsuario } from './barra-usuario.js';
 import { getToken } from './auth-storage.js';
 
 const API = 'https://ua-2026.onrender.com';
+const LANG_STORAGE_KEY = 'bellaveste-language';
+
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function tUpload(clave) {
+    const textos = {
+        en: {
+            discardChanges: 'Discard changes?',
+            enterName: 'Please enter an outfit name.',
+            selectPicture: 'Please select an outfit picture.',
+            addPiece: 'Please add at least one piece to the outfit.',
+            eachPieceName: 'Each piece needs a name.',
+            piecePhotoPrefix: 'Please upload a photo for',
+            notAuthenticated: 'You are not authenticated. Please log in.',
+            uploaded: 'Outfit uploaded successfully!',
+            uploadFailed: 'Upload Failed',
+            uploading: 'UPLOADING...',
+            upload: 'UPLOAD',
+            selectSeason: 'Select',
+            clickUpload: 'Click to upload',
+            piece: 'Piece',
+            brand: 'Brand',
+            link: 'Link',
+            size: 'Size',
+            color: 'Color',
+            season: 'Season',
+            description: 'Description',
+            piecePhoto: 'Piece Photo',
+            deletePiece: 'Delete piece',
+            pieceNamePlaceholder: 'e.g., T-shirt',
+            descriptionPlaceholder: 'Describe this piece...',
+        },
+        es: {
+            discardChanges: 'Descartar cambios?',
+            enterName: 'Por favor introduce el nombre del outfit.',
+            selectPicture: 'Por favor selecciona una foto del outfit.',
+            addPiece: 'Agrega al menos una prenda al outfit.',
+            eachPieceName: 'Cada prenda necesita un nombre.',
+            piecePhotoPrefix: 'Sube una foto para',
+            notAuthenticated: 'No estas autenticado. Inicia sesion.',
+            uploaded: 'Outfit subido correctamente!',
+            uploadFailed: 'Error al subir',
+            uploading: 'SUBIENDO...',
+            upload: 'SUBIR',
+            selectSeason: 'Seleccionar',
+            clickUpload: 'Haz clic para subir',
+            piece: 'Prenda',
+            brand: 'Marca',
+            link: 'Enlace',
+            size: 'Talla',
+            color: 'Color',
+            season: 'Temporada',
+            description: 'Descripcion',
+            piecePhoto: 'Foto de prenda',
+            deletePiece: 'Eliminar prenda',
+            pieceNamePlaceholder: 'ej. Camiseta',
+            descriptionPlaceholder: 'Describe esta prenda...',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 // Convierte cualquier imagen a JPEG para evitar rechazos del servidor
 function toJpeg(file) {
@@ -102,29 +166,29 @@ btnAgregarPrenda.addEventListener('click', (e) => {
         <div class="prenda-header">
             <div class="prenda-grid">
                 <div class="campo-prenda">
-                    <label class="label-mini">Piece</label>
-                    <input type="text" class="input-prenda input-nombre" placeholder="e.g., T-shirt" required>
+                    <label class="label-mini">${tUpload('piece')}</label>
+                    <input type="text" class="input-prenda input-nombre" placeholder="${tUpload('pieceNamePlaceholder')}" required>
                 </div>
                 <div class="campo-prenda">
-                    <label class="label-mini">Brand</label>
-                    <input type="text" class="input-prenda input-marca" placeholder="Brand">
+                    <label class="label-mini">${tUpload('brand')}</label>
+                    <input type="text" class="input-prenda input-marca" placeholder="${tUpload('brand')}">
                 </div>
                 <div class="campo-prenda">
-                    <label class="label-mini">Link</label>
-                    <input type="url" class="input-prenda input-link" placeholder="Link">
+                    <label class="label-mini">${tUpload('link')}</label>
+                    <input type="url" class="input-prenda input-link" placeholder="${tUpload('link')}">
                 </div>
                 <div class="campo-prenda">
-                    <label class="label-mini">Size</label>
-                    <input type="text" class="input-prenda input-size" placeholder="Size">
+                    <label class="label-mini">${tUpload('size')}</label>
+                    <input type="text" class="input-prenda input-size" placeholder="${tUpload('size')}">
                 </div>
                 <div class="campo-prenda">
-                    <label class="label-mini">Color</label>
+                    <label class="label-mini">${tUpload('color')}</label>
                     <input type="color" class="input-prenda input-color" value="#5a0d16">
                 </div>
                 <div class="campo-prenda">
-                    <label class="label-mini">Season</label>
+                    <label class="label-mini">${tUpload('season')}</label>
                     <select class="input-prenda input-season">
-                        <option value="">Select</option>
+                        <option value="">${tUpload('selectSeason')}</option>
                         <option value="spring">Spring</option>
                         <option value="summer">Summer</option>
                         <option value="autumn">Autumn</option>
@@ -132,17 +196,17 @@ btnAgregarPrenda.addEventListener('click', (e) => {
                     </select>
                 </div>
             </div>
-            <button type="button" class="boton-eliminar-prenda" title="Delete piece">
+            <button type="button" class="boton-eliminar-prenda" title="${tUpload('deletePiece')}">
                 <i class="icon-trash"></i>
             </button>
         </div>
         <div class="campo-prenda campo-descripcion">
-            <label class="label-mini">Description</label>
-            <textarea class="input-prenda input-descripcion" placeholder="Describe this piece..." rows="2"></textarea>
+            <label class="label-mini">${tUpload('description')}</label>
+            <textarea class="input-prenda input-descripcion" placeholder="${tUpload('descriptionPlaceholder')}" rows="2"></textarea>
         </div>
         <div class="prenda-foto-section">
             <label for="prenda-picture-${contadorPrendas}" class="etiqueta-foto-prenda">
-                <i class="icon-picture"></i> Piece Photo
+                <i class="icon-picture"></i> ${tUpload('piecePhoto')}
             </label>
             <input 
                 type="file" 
@@ -228,7 +292,7 @@ btnAgregarPrenda.addEventListener('click', (e) => {
 
     // Mostrar placeholder si no hay foto
     if (!inputFotoPrenda.files.length) {
-        previewPrenda.innerHTML = '<i class="icon-picture"></i> Click to upload';
+        previewPrenda.innerHTML = `<i class="icon-picture"></i> ${tUpload('clickUpload')}`;
     }
 
     // Eliminar prenda
@@ -244,7 +308,7 @@ btnAgregarPrenda.addEventListener('click', (e) => {
 // Cancelar
 btnCancelar.addEventListener('click', (e) => {
     e.preventDefault();
-    if (confirm('¿Descartar cambios?')) {
+    if (confirm(tUpload('discardChanges'))) {
         window.location.href = 'inicio-logueado.html';
     }
 });
@@ -254,18 +318,18 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!inputNombre.value.trim()) {
-        mostrarModal('Please enter an outfit name.', 'error');
+        mostrarModal(tUpload('enterName'), 'error');
         return;
     }
     if (!inputFoto.files.length) {
-        mostrarModal('Please select an outfit picture.', 'error');
+        mostrarModal(tUpload('selectPicture'), 'error');
         return;
     }
 
     // Leer prendas directamente del DOM en el momento de enviar
     const items = listaPrendas.querySelectorAll('.item-prenda');
     if (!items.length) {
-        mostrarModal('Please add at least one piece to the outfit.', 'error');
+        mostrarModal(tUpload('addPiece'), 'error');
         return;
     }
 
@@ -274,11 +338,11 @@ form.addEventListener('submit', async (e) => {
         const nombre = item.querySelector('.input-nombre')?.value.trim();
         const fotoInput = item.querySelector('.input-archivo-prenda');
         if (!nombre) {
-            mostrarModal('Each piece needs a name.', 'error');
+            mostrarModal(tUpload('eachPieceName'), 'error');
             return;
         }
         if (!fotoInput?.files.length) {
-            mostrarModal(`Please upload a photo for "${nombre}".`, 'error');
+            mostrarModal(`${tUpload('piecePhotoPrefix')} "${nombre}".`, 'error');
             return;
         }
         prendasDOM.push({
@@ -294,11 +358,11 @@ form.addEventListener('submit', async (e) => {
     }
 
     btnUpload.disabled = true;
-    btnUpload.textContent = 'UPLOADING...';
+    btnUpload.textContent = tUpload('uploading');
 
     try {
         const token = getToken();
-        if (!token) throw new Error('You are not authenticated. Please log in.');
+        if (!token) throw new Error(tUpload('notAuthenticated'));
 
         const formData = new FormData();
         formData.append('name',     inputNombre.value.trim());
@@ -345,7 +409,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         console.log('Upload exitoso, redireccionando...');
-        mostrarModal('Outfit uploaded successfully!', 'success', 'Success');
+        mostrarModal(tUpload('uploaded'), 'success', 'Success');
         
         // Éxito - redireccionar automáticamente
         setTimeout(() => {
@@ -354,9 +418,9 @@ form.addEventListener('submit', async (e) => {
 
     } catch (err) {
         console.error('Error en upload:', err);
-        mostrarModal(err.message, 'error', 'Upload Failed');
+        mostrarModal(err.message, 'error', tUpload('uploadFailed'));
         btnUpload.disabled = false;
-        btnUpload.textContent = 'UPLOAD';
+        btnUpload.textContent = tUpload('upload');
         return;
     }
 });

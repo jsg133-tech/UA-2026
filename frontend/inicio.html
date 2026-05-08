@@ -11,7 +11,7 @@
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
 </head>
-<body>
+<body data-page="inicio">
 
     <!-- NAV SUPERIOR -->
     <nav class="nav-top">
@@ -21,7 +21,7 @@
         </button>
 
         <div class="nav-acciones">
-            <a href="buscar.html">SEARCH</a>
+            <a href="buscar.html" data-i18n="navSearch">SEARCH</a>
         </div>
     </nav>
 
@@ -42,15 +42,15 @@
         <div class="hero-centro">
             <span class="marca-texto">BELLAVESTE</span>
             <div class="hero-btns">
-                <a href="login.html" class="hero-btn-login">LOGIN</a>
-                <a href="registrar.html" class="hero-btn-register">Create account</a>
+                <a href="login.html" class="hero-btn-login" data-i18n="login">LOGIN</a>
+                <a href="registrar.html" class="hero-btn-register" data-i18n="createAccount">Create account</a>
             </div>
         </div>
 
         <!-- SPAIN + tagline abajo -->
         <div class="hero-bottom">
-            <span class="hero-spain">SPAIN</span>
-            <p class="hero-tagline">Your wardrobe, <em>curated.</em></p>
+            <span class="hero-spain" data-i18n="footer">SPAIN</span>
+            <p class="hero-tagline" data-i18n="tagline">Your wardrobe, curated.</p>
         </div>
 
         <!-- Indicador scroll (solo móvil) -->
@@ -66,12 +66,14 @@
             <h1>BELLAVESTE</h1>
             <p>SPAIN</p>
         </div>
-        <p class="movil-tagline">Your wardrobe, <em>curated.</em></p>
+        <p class="movil-tagline" data-i18n="tagline">Your wardrobe, curated.</p>
         <div class="movil-botones">
-            <a href="login.html" class="movil-btn-login">LOGIN</a>
-            <a href="registrar.html" class="movil-btn-register">Create an account</a>
+            <a href="login.html" class="movil-btn-login" data-i18n="login">LOGIN</a>
+            <a href="registrar.html" class="movil-btn-register" data-i18n="createAccountMobile">Create an account</a>
         </div>
     </div>
+
+    <script type="module" src="js/i18n-global.js"></script>
 
 </body>
 </html>
