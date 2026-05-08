@@ -132,7 +132,7 @@ function crearTarjetaOutfit(outfit) {
 
     const imagen   = outfit.imageUrl || 'images/temporada.jfif';
     const nombre   = (outfit.name || 'OUTFIT').toUpperCase();
-    const catLabel = outfit.category || null;
+    const catLabel = outfit.armarioCategoria || null;
 
     div.innerHTML = `
         <img src="${imagen}" alt="${nombre}">
@@ -246,20 +246,23 @@ async function cambiarCategoriaOutfit(idOutfit, nuevaCategoria, btnTag) {
     if (!token) return;
 
     btnTag.style.opacity = '0.5';
-    const fd = new FormData();
-    fd.append('category', nuevaCategoria);
 
     try {
-        const r = await fetch(`${API}/api/outfits/${idOutfit}`, {
+        const r = await fetch(`${API}/api/armario/${idOutfit}/categoria`, {
             method: 'PUT',
-            headers: { Authorization: `Bearer ${token}` },
-            body: fd,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ categoria: nuevaCategoria }),
         });
         if (!r.ok) throw new Error();
 
-        btnTag.innerHTML = `<i class="icon-tag"></i>${nuevaCategoria.toUpperCase()}`;
+        // Actualizar el span del botón
+        btnTag.querySelector('span').textContent = nuevaCategoria.toUpperCase();
         btnTag.style.opacity = '1';
 
+        // Si hay filtro activo y no coincide, sacar la tarjeta del grid
         if (categoriaActiva && categoriaActiva.toUpperCase() !== nuevaCategoria.toUpperCase()) {
             const tarjeta = btnTag.closest('.tarjeta-armario');
             tarjeta.style.transition = 'opacity 0.3s, transform 0.3s';
@@ -306,7 +309,7 @@ let todosLosOutfits = [];
 
 function renderizarGrid() {
     const outfits = categoriaActiva
-        ? todosLosOutfits.filter(o => (o.category || '').toUpperCase() === categoriaActiva.toUpperCase())
+        ? todosLosOutfits.filter(o => (o.armarioCategoria || '').toUpperCase() === categoriaActiva.toUpperCase())
         : todosLosOutfits;
 
     gridArmario.innerHTML = '';
