@@ -19,26 +19,26 @@
     <script type="module" src="js/barra-usuario.js"></script>
 </head>
 
-<body>
+<body data-page="categoria-color">
     <header class="barra-superior">
         <div class="fila-marca">
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
                 </ul>
             </nav>
 
             <div class="marca">
                 <h1>BELLAVESTE</h1>
-                <p>SPAIN</p>
+                <p data-i18n="location">SPAIN</p>
             </div>
 
             <div class="iconos-acciones">
@@ -54,15 +54,15 @@
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
 
     <main class="contenedor-app">
         <header class="seccion-header">
-            <h2>CHOSE BY COLOR</h2>
-            <p>Curated tones for your personal style</p>
+            <h2 data-i18n="title">CHOSE BY COLOR</h2>
+            <p data-i18n="subtitle">Curated tones for your personal style</p>
         </header>
 
         <section class="grid-experiencia-color">
@@ -81,10 +81,10 @@
         </section>
 
         <footer>
-            <a class="boton-armario" href="./armario.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="./armario.html" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
     </main>
 
-    <script type="module" src="js/categorias.js"></script>
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 </html>

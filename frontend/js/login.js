@@ -9,6 +9,26 @@ const inputPass = document.getElementById('contrasena');
 const inputRecordarme = document.getElementById('recordarme');
 const btnLogin = document.getElementById('btn-login');
 const passwordToggle = document.querySelector('.toggle-password[data-target="contrasena"]');
+const LANG_STORAGE_KEY = 'bellaveste-language';
+
+function idiomaActual() {
+  return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function textoLogin(clave) {
+  const textos = {
+    en: {
+      loggingIn: 'LOGGING IN...',
+      login: 'LOGIN',
+    },
+    es: {
+      loggingIn: 'ENTRANDO...',
+      login: 'INICIAR SESION',
+    },
+  };
+
+  return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 function alternarVisibilidadPassword(input, boton) {
   const mostrando = input.type === 'text';
@@ -67,7 +87,7 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  btnLogin.textContent = 'LOGGING IN...';
+  btnLogin.textContent = textoLogin('loggingIn');
   btnLogin.disabled = true;
 
   try {
@@ -104,12 +124,12 @@ form.addEventListener('submit', async (e) => {
       }
     );
 
-    btnLogin.textContent = 'LOGIN';
+    btnLogin.textContent = textoLogin('login');
     btnLogin.disabled = false;
 
   } catch (err) {
     mostrarModal(err.message, 'error', 'Access denied');
-    btnLogin.textContent = 'LOGIN';
+    btnLogin.textContent = textoLogin('login');
     btnLogin.disabled = false;
   }
 });

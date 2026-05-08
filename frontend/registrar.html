@@ -14,37 +14,35 @@
     <link rel="stylesheet" href="css/modal.css">
 </head>
 
-<body>
+<body data-page="registrar">
     <header class="barra-superior">
         <div class="marca">
             <h1>BELLAVESTE</h1>
-            <p>SPAIN</p>
-        </div>
-
+                <p data-i18n="location">SPAIN</p>
         <div class="subtitulo">
-            <h2>REGISTER AN ACCOUNT</h2>
+            <h2 data-i18n="subtitle">REGISTER AN ACCOUNT</h2>
         </div>
     </header>
 
     <main class="contenedor">
         <form class="formulario">
             <div class="campo">
-                <label for="nombre">NAME</label>
+                <label for="nombre" data-i18n="name">NAME</label>
                 <input type="text" id="nombre" name="nombre" minlength="2" maxlength="60" required>
             </div>
 
             <div class="campo">
-                <label for="username">USERNAME</label>
+                <label for="username" data-i18n="username">USERNAME</label>
                 <input type="text" id="username" name="username" minlength="3" maxlength="20" required>
             </div>
 
             <div class="campo">
-                <label for="email">EMAIL</label>
+                <label for="email" data-i18n="email">EMAIL</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="campo">
-                <label for="contrasena">PASSWORD</label>
+                <label for="contrasena" data-i18n="password">PASSWORD</label>
                 <div class="password-wrapper">
                     <input type="password" id="contrasena" name="contrasena" required>
                     <button type="button" class="toggle-password" data-target="contrasena" aria-label="Show password" aria-pressed="false">
@@ -54,7 +52,7 @@
             </div>
 
             <div class="campo">
-                <label for="confirmar-contrasena">CONFIRM PASSWORD</label>
+                <label for="confirmar-contrasena" data-i18n="confirmPassword">CONFIRM PASSWORD</label>
                 <div class="password-wrapper">
                     <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" required>
                     <button type="button" class="toggle-password" data-target="confirmar-contrasena" aria-label="Show password" aria-pressed="false">
@@ -63,15 +61,16 @@
                 </div>
             </div>
 
-            <button class="boton-registrar" type="submit">REGISTER</button>
+            <button class="boton-registrar" type="submit" data-i18n="registerBtn">REGISTER</button>
         </form>
 
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
 
+    <script type="module" src="js/i18n-global.js"></script>
     <script type="module" src="js/registrar.js"></script>
 </body>
 

@@ -50,12 +50,50 @@ router.delete('/categorias/:id', async (req, res) => {
 // GET /api/armario
 router.get('/', async (req, res) => {
   try {
-    const filtro = { savedBy: req.userId };
-    if (req.query.categoria) filtro.category = req.query.categoria.toUpperCase();
-    const outfits = await Outfit.find(filtro).populate('userId', 'name avatar').sort({ createdAt: -1 });
-    res.json(outfits);
+    const outfits = await Outfit.find({ savedBy: req.userId })
+      .populate('userId', 'name avatar').sort({ createdAt: -1 });
+
+    const resultado = outfits.map(o => {
+      const obj = o.toObject();
+      const entry = (o.savedByCategories || []).find(
+        e => e.userId?.toString() === req.userId?.toString()
+      );
+      obj.armarioCategoria = entry?.categoria || '';
+      return obj;
+    });
+
+    if (req.query.categoria) {
+      const cat = req.query.categoria.toUpperCase();
+      return res.json(resultado.filter(o => (o.armarioCategoria || '').toUpperCase() === cat));
+    }
+
+    res.json(resultado);
   } catch {
     res.status(500).json({ error: 'Error al obtener los outfits' });
+  }
+});
+
+// PUT /api/armario/:id/categoria  →  asignar categoría de armario al outfit guardado
+router.put('/:id/categoria', async (req, res) => {
+  try {
+    const { categoria } = req.body;
+    const outfit = await Outfit.findById(req.params.id);
+    if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+
+    // Guardar en savedByCategories (añadimos al modelo si no existe)
+    if (!outfit.savedByCategories) outfit.savedByCategories = [];
+    const entry = outfit.savedByCategories.find(e => e.userId?.toString() === req.userId?.toString());
+    if (entry) {
+      entry.categoria = categoria;
+    } else {
+      outfit.savedByCategories.push({ userId: req.userId, categoria });
+    }
+    outfit.markModified('savedByCategories');
+    await outfit.save();
+    res.json({ message: 'Category assigned' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

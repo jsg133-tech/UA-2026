@@ -9,24 +9,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/comun.css">
     <link rel="stylesheet" href="css/outfit.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="./images/color.jfif">
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <script type="module" src="js/outfit.js"></script>
 </head>
-<body>
+<body data-page="outfit">
     <header class="barra-superior">
         <div class="fila-marca">
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
                 </ul>
             </nav>
             <div class="marca"><h1>BELLAVESTE</h1><p>SPAIN</p></div>
@@ -42,7 +43,7 @@
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -51,7 +52,7 @@
 
         <div class="outfit-loading visible" id="outfit-loading">
             <div class="loading-spinner"></div>
-            <p>Loading outfit...</p>
+            <p data-i18n="loading">Loading outfit...</p>
         </div>
 
         <div class="outfit-contenido" id="outfit-contenido" style="display:none">
@@ -70,23 +71,69 @@
                     </div>
                     <time class="hero-fecha" id="outfit-fecha"></time>
                     <button class="btn-guardar" id="btn-guardar">
-                        <i class="icon-heart"></i> SAVE TO MY CLOSET
+                        <i class="icon-heart"></i> <span data-i18n="saveCloset">SAVE TO MY CLOSET</span>
                     </button>
                 </div>
             </section>
 
             <!-- PRENDAS -->
             <div class="seccion-titulo">
-                <span>PIECES</span>
+                <span data-i18n="pieces">PIECES</span>
             </div>
 
             <section class="prendas-lista" id="prendas-lista"></section>
 
+            <!-- COMENTARIOS Y VALORACIONES -->
+            <div class="seccion-titulo">
+                <span>REVIEWS</span>
+            </div>
+
+            <section class="reviews-seccion">
+
+                <!-- Resumen de valoración -->
+                <div class="reviews-resumen" id="reviews-resumen" style="display:none">
+                    <div class="resumen-nota" id="resumen-nota">—</div>
+                    <div class="resumen-estrellas" id="resumen-estrellas"></div>
+                    <span class="resumen-total" id="resumen-total"></span>
+                </div>
+
+                <!-- Lista de comentarios -->
+                <div class="reviews-lista" id="reviews-lista"></div>
+
+                <!-- Formulario nuevo comentario -->
+                <div class="review-form-wrap" id="review-form-wrap">
+                    <p class="review-form-titulo">Leave a review</p>
+
+                    <div class="review-stars-input" id="review-stars-input">
+                        <button type="button" class="star-btn" data-v="1">★</button>
+                        <button type="button" class="star-btn" data-v="2">★</button>
+                        <button type="button" class="star-btn" data-v="3">★</button>
+                        <button type="button" class="star-btn" data-v="4">★</button>
+                        <button type="button" class="star-btn" data-v="5">★</button>
+                    </div>
+
+                    <textarea
+                        id="review-texto"
+                        class="review-textarea"
+                        placeholder="Share your thoughts about this outfit..."
+                        rows="3"
+                        maxlength="500"
+                    ></textarea>
+
+                    <button class="review-submit" id="review-submit" type="button">
+                        POST REVIEW
+                    </button>
+                </div>
+
+            </section>
+
         </div>
 
         <footer>
-            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="armario.html" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
     </main>
+
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 </html>

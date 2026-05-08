@@ -131,28 +131,31 @@ function crearTarjetaOutfit(outfit) {
     div.className = 'tarjeta-armario';
 
     const imagen   = outfit.imageUrl || 'images/temporada.jfif';
-    const nombre   = (outfit.name     || 'OUTFIT').toUpperCase();
-    const catLabel = (outfit.category || '—').toUpperCase();
+    const nombre   = (outfit.name || 'OUTFIT').toUpperCase();
+    const catLabel = outfit.armarioCategoria || null;
 
     div.innerHTML = `
         <img src="${imagen}" alt="${nombre}">
-        <div class="tarjeta-info">
-            <div class="tarjeta-info-texto">
+        <div class="tarjeta-overlay">
+            <div class="tarjeta-top">
                 <span class="nombre-outfit">${nombre}</span>
-                <button class="btn-categoria-tag" type="button" title="Mover a categoría">
-                    <i class="icon-tag"></i>${catLabel}
+                <button class="btn-favorito" title="Remove from closet" type="button">
+                    <i class="icon-heart"></i>
                 </button>
             </div>
-            <button class="btn-favorito" title="Quitar del armario" type="button">
-                <i class="icon-heart"></i>
-            </button>
         </div>
+        <button class="btn-categorizar" type="button" title="Add to category">
+            <i class="icon-folder"></i>
+            <span>${catLabel ? catLabel.toUpperCase() : 'ADD TO CATEGORY'}</span>
+            <i class="icon-right-open btn-cat-arrow"></i>
+        </button>
     `;
 
-    div.querySelector('.btn-categoria-tag').addEventListener('click', e => {
+    div.querySelector('.btn-categorizar').addEventListener('click', e => {
         e.stopPropagation();
-        mostrarMenuCategoria(e.currentTarget, outfit._id, outfit.category);
+        abrirBottomSheet(outfit._id, 'outfit', div.querySelector('.btn-categorizar'));
     });
+
     div.querySelector('.btn-favorito').addEventListener('click', e => {
         e.stopPropagation();
         quitarDelArmario(outfit._id, div.querySelector('.btn-favorito'), div);
@@ -166,57 +169,75 @@ function crearTarjetaOutfit(outfit) {
     return div;
 }
 
-// ── MENÚ FLOTANTE ─────────────────────────────────────────────────────────────
+// ── BOTTOM SHEET CATEGORÍAS ───────────────────────────────────────────────────
 
-function mostrarMenuCategoria(btnTag, idOutfit, categoriaActualOutfit) {
-    cerrarMenuCategoria();
+let bottomSheetActivo = null;
 
-    const rect = btnTag.getBoundingClientRect();
-    const menu = document.createElement('div');
-    menu.className = 'menu-categoria-global';
+function abrirBottomSheet(itemId, tipo, btnCat, outfitId = null) {
+    cerrarBottomSheet();
 
-    // Lista de categorías existentes
-    if (categoriasUsuario.length) {
-        const ul = document.createElement('ul');
-        ul.className = 'menu-cat-lista';
-        categoriasUsuario.forEach(cat => {
-            const li = document.createElement('li');
-            li.textContent = cat.name.toUpperCase();
-            const esActual = cat.name.toUpperCase() === (categoriaActualOutfit || '').toUpperCase();
-            if (esActual) li.classList.add('activa');
-            li.addEventListener('click', () => {
-                cerrarMenuCategoria();
-                cambiarCategoriaOutfit(idOutfit, cat.name, btnTag);
-            });
-            ul.appendChild(li);
+    const overlay = document.createElement('div');
+    overlay.className = 'bs-overlay';
+
+    const sheet = document.createElement('div');
+    sheet.className = 'bs-sheet';
+
+    const titulo = tipo === 'outfit' ? 'MOVE OUTFIT TO' : 'MOVE PIECE TO';
+
+    const opciones = categoriasUsuario.length
+        ? categoriasUsuario.map(cat => `
+            <button class="bs-opcion" data-cat="${cat.name}" type="button">
+                <i class="icon-folder"></i>
+                <span>${cat.name.toUpperCase()}</span>
+                <i class="icon-ok bs-check" style="display:none"></i>
+            </button>`).join('')
+        : `<p class="bs-vacio">Create a category first using the NEW button above.</p>`;
+
+    sheet.innerHTML = `
+        <div class="bs-handle"></div>
+        <p class="bs-titulo">${titulo}</p>
+        <div class="bs-opciones">${opciones}</div>
+        <button class="bs-cancelar" type="button">CANCEL</button>
+    `;
+
+    overlay.appendChild(sheet);
+    document.body.appendChild(overlay);
+    bottomSheetActivo = overlay;
+
+    requestAnimationFrame(() => sheet.classList.add('bs-sheet--open'));
+
+    sheet.querySelectorAll('.bs-opcion').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const cat = btn.dataset.cat;
+            cerrarBottomSheet();
+            if (tipo === 'outfit') {
+                cambiarCategoriaOutfit(itemId, cat, btnCat);
+            } else if (tipo === 'piece' && outfitId) {
+                const token = obtenerToken();
+                try {
+                    await fetch(`${API}/api/outfits/${outfitId}/pieces/${itemId}/category`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                        body: JSON.stringify({ categoria: cat }),
+                    });
+                    btnCat.querySelector('span').textContent = cat.toUpperCase();
+                    // Recargar prendas para reflejar el cambio
+                    await cargarPrendasGuardadas();
+                } catch { /* silencioso */ }
+            }
         });
-        menu.appendChild(ul);
-    } else {
-        const info = document.createElement('p');
-        info.className = 'menu-cat-vacio';
-        info.textContent = 'You have to create a category first';
-        menu.appendChild(info);
-    }
+    });
 
-    document.body.appendChild(menu);
-
-    const margen = 8;
-    let top  = rect.bottom + 5;
-    let left = rect.left;
-    if (left + 160 > window.innerWidth - margen) left = window.innerWidth - 160 - margen;
-    if (top  + 200 > window.innerHeight - margen) top  = rect.top - menu.offsetHeight - 5;
-
-    menu.style.top  = `${top}px`;
-    menu.style.left = `${left}px`;
-    menuCategoriaActivo = menu;
+    sheet.querySelector('.bs-cancelar').addEventListener('click', cerrarBottomSheet);
+    overlay.addEventListener('click', e => { if (e.target === overlay) cerrarBottomSheet(); });
 }
 
-function cerrarMenuCategoria() {
-    menuCategoriaActivo?.remove();
-    menuCategoriaActivo = null;
+function cerrarBottomSheet() {
+    if (!bottomSheetActivo) return;
+    const sheet = bottomSheetActivo.querySelector('.bs-sheet');
+    sheet.classList.remove('bs-sheet--open');
+    setTimeout(() => { bottomSheetActivo?.remove(); bottomSheetActivo = null; }, 280);
 }
-
-document.addEventListener('click', cerrarMenuCategoria);
 
 // ── CAMBIAR CATEGORÍA ─────────────────────────────────────────────────────────
 
@@ -225,29 +246,45 @@ async function cambiarCategoriaOutfit(idOutfit, nuevaCategoria, btnTag) {
     if (!token) return;
 
     btnTag.style.opacity = '0.5';
-    const fd = new FormData();
-    fd.append('category', nuevaCategoria);
 
     try {
-        const r = await fetch(`${API}/api/outfits/${idOutfit}`, {
+        const r = await fetch(`${API}/api/armario/${idOutfit}/categoria`, {
             method: 'PUT',
-            headers: { Authorization: `Bearer ${token}` },
-            body: fd,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ categoria: nuevaCategoria }),
         });
-        if (!r.ok) throw new Error();
 
-        btnTag.innerHTML = `<i class="icon-tag"></i>${nuevaCategoria.toUpperCase()}`;
+        if (!r.ok) {
+            const err = await r.json().catch(() => ({}));
+            throw new Error(err.error || `Error ${r.status}`);
+        }
+
+        // Actualizar el span del botón
+        const span = btnTag.querySelector('span');
+        if (span) span.textContent = nuevaCategoria.toUpperCase();
         btnTag.style.opacity = '1';
 
+        // Actualizar el array en memoria para que el filtrado funcione sin recargar
+        const outfit = todosLosOutfits.find(o => o._id === idOutfit);
+        if (outfit) outfit.armarioCategoria = nuevaCategoria;
+
+        // Si hay filtro activo y no coincide, animar la salida
         if (categoriaActiva && categoriaActiva.toUpperCase() !== nuevaCategoria.toUpperCase()) {
             const tarjeta = btnTag.closest('.tarjeta-armario');
-            tarjeta.style.transition = 'opacity 0.3s, transform 0.3s';
-            tarjeta.style.opacity = '0';
-            tarjeta.style.transform = 'scale(0.93)';
-            setTimeout(() => tarjeta.remove(), 320);
+            if (tarjeta) {
+                tarjeta.style.transition = 'opacity 0.3s, transform 0.3s';
+                tarjeta.style.opacity = '0';
+                tarjeta.style.transform = 'scale(0.93)';
+                setTimeout(() => tarjeta.remove(), 320);
+            }
         }
-    } catch {
+    } catch (err) {
         btnTag.style.opacity = '1';
+        console.error('Error asignando categoría:', err.message);
+        alert(`Could not assign category: ${err.message}`);
     }
 }
 
@@ -285,15 +322,39 @@ let todosLosOutfits = [];
 
 function renderizarGrid() {
     const outfits = categoriaActiva
-        ? todosLosOutfits.filter(o => (o.category || '').toUpperCase() === categoriaActiva.toUpperCase())
+        ? todosLosOutfits.filter(o => (o.armarioCategoria || '').toUpperCase() === categoriaActiva.toUpperCase())
         : todosLosOutfits;
 
     gridArmario.innerHTML = '';
     if (!outfits.length) {
         gridArmario.innerHTML = '<p class="armario-vacio">You haven\'t saved any outfits yet.</p>';
-        return;
+    } else {
+        outfits.forEach(o => gridArmario.appendChild(crearTarjetaOutfit(o)));
     }
-    outfits.forEach(o => gridArmario.appendChild(crearTarjetaOutfit(o)));
+
+    // Filtrar prendas por categoría activa
+    actualizarSeccionPrendas();
+}
+
+function actualizarSeccionPrendas() {
+    if (!prendasSeccion) return;
+    if (!todasLasPrendas.length) { prendasSeccion.style.display = 'none'; return; }
+
+    const token = obtenerToken();
+    const filtradas = categoriaActiva
+        ? todasLasPrendas.filter(({ piece }) => {
+            if (!piece.savedCategories) return false;
+            return piece.savedCategories.some(sc =>
+                sc.categoria && sc.categoria.toUpperCase() === categoriaActiva.toUpperCase()
+            );
+          })
+        : todasLasPrendas; // ALL: mostrar todas
+
+    if (!filtradas.length) { prendasSeccion.style.display = 'none'; return; }
+
+    prendasSeccion.style.display = 'block';
+    prendasGrid.innerHTML = '';
+    filtradas.forEach(item => prendasGrid.appendChild(crearTarjetaPrenda(item)));
 }
 
 async function cargarOutfits() {
@@ -342,6 +403,45 @@ logoutLinkEl.addEventListener('click', e => { e.preventDefault(); cerrarSesion()
 
 const prendasSeccion = document.getElementById('prendas-guardadas-seccion');
 const prendasGrid    = document.getElementById('prendas-guardadas-grid');
+let todasLasPrendas  = [];
+
+function crearTarjetaPrenda({ piece, outfitId, outfitName }) {
+    const card = document.createElement('div');
+    card.className = 'prenda-guardada-card';
+
+    const foto   = piece.imageUrl || 'images/temporada.jfif';
+    const nombre = (piece.nombre || 'Piece').toUpperCase();
+    const marca  = piece.marca || '';
+    const token  = obtenerToken();
+
+    // Categoría actual de esta prenda para este usuario
+    const catActual = piece.savedCategories?.find(sc => sc.userId === sc.userId)?.categoria || null;
+
+    card.innerHTML = `
+        <div class="prenda-guardada-foto">
+            <img src="${foto}" alt="${nombre}" loading="lazy">
+        </div>
+        <div class="prenda-guardada-info">
+            <span class="prenda-guardada-nombre">${nombre}</span>
+            ${marca ? `<span class="prenda-guardada-marca">${marca}</span>` : ''}
+            <span class="prenda-guardada-outfit">${(outfitName || '').toUpperCase()}</span>
+        </div>
+        <button class="btn-categorizar btn-categorizar--prenda" type="button" title="Add to category">
+            <i class="icon-folder"></i>
+            <span>${catActual ? catActual.toUpperCase() : 'ADD TO CATEGORY'}</span>
+            <i class="icon-right-open btn-cat-arrow"></i>
+        </button>
+    `;
+
+    card.querySelector('.btn-categorizar--prenda').addEventListener('click', e => {
+        e.stopPropagation();
+        abrirBottomSheet(piece._id, 'piece', e.currentTarget, outfitId);
+    });
+
+    card.addEventListener('click', () => { window.location.href = `outfit.html?id=${outfitId}`; });
+    card.style.cursor = 'pointer';
+    return card;
+}
 
 async function cargarPrendasGuardadas() {
     const token = obtenerToken();
@@ -351,38 +451,8 @@ async function cargarPrendasGuardadas() {
             headers: { Authorization: `Bearer ${token}` },
         });
         if (!r.ok) return;
-        const items = await r.json();
-        if (!items.length) return;
-
-        prendasSeccion.style.display = 'block';
-        prendasGrid.innerHTML = '';
-
-        items.forEach(({ piece, outfitId, outfitName }) => {
-            const card = document.createElement('div');
-            card.className = 'prenda-guardada-card';
-
-            const foto = piece.imageUrl || 'images/temporada.jfif';
-            const nombre = (piece.nombre || 'Piece').toUpperCase();
-            const marca = piece.marca || '';
-
-            card.innerHTML = `
-                <div class="prenda-guardada-foto">
-                    <img src="${foto}" alt="${nombre}" loading="lazy">
-                </div>
-                <div class="prenda-guardada-info">
-                    <span class="prenda-guardada-nombre">${nombre}</span>
-                    ${marca ? `<span class="prenda-guardada-marca">${marca}</span>` : ''}
-                    <span class="prenda-guardada-outfit">${(outfitName || '').toUpperCase()}</span>
-                </div>
-            `;
-
-            card.addEventListener('click', () => {
-                window.location.href = `outfit.html?id=${outfitId}`;
-            });
-            card.style.cursor = 'pointer';
-
-            prendasGrid.appendChild(card);
-        });
+        todasLasPrendas = await r.json();
+        actualizarSeccionPrendas();
     } catch { /* silencioso */ }
 }
 

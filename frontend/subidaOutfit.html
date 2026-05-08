@@ -21,7 +21,7 @@
     <script type="module" src="js/subidaOutfit.js"></script>
 </head>
 
-<body>
+<body data-page="subida-outfit">
     <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
@@ -30,21 +30,21 @@
                 <input type="checkbox" id="chkMenu">
 
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
                 </ul>
             </nav>
 
             <div class="marca">
                 <h1>BELLAVESTE</h1>
-                <p>SPAIN</p>
+                <p data-i18n="location">SPAIN</p>
             </div>
 
             <div class="iconos-acciones">
@@ -62,7 +62,7 @@
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -74,17 +74,18 @@
                 <form id="form-subida" class="form-outfit">
                     <!-- SECCIÓN 1: OUTFIT (Contenedor) -->
                     <div class="seccion-outfit">
-                        <h3 class="titulo-seccion">Outfit Information</h3>
+                        <h3 class="titulo-seccion" data-i18n="outfitInfo">Outfit Information</h3>
                         
                         <!-- Nombre del outfit -->
                         <div class="grupo-campo">
-                            <label for="outfit-name" class="etiqueta-campo">Name</label>
+                            <label for="outfit-name" class="etiqueta-campo" data-i18n="name">Name</label>
                             <input 
                                 type="text" 
                                 id="outfit-name" 
                                 name="outfit-name" 
                                 class="campo-input"
                                 placeholder="Introduce the outfit's name"
+                                data-i18n-placeholder="namePlaceholder"
                                 required
                             >
                         </div>
@@ -92,7 +93,7 @@
                         <!-- Grid de campos: categoría, temporada, color -->
                         <div class="outfit-campos-grid">
                             <div class="grupo-campo">
-                                <label for="outfit-category" class="etiqueta-campo">Category</label>
+                                <label for="outfit-category" class="etiqueta-campo" data-i18n="category">Category</label>
                                 <select id="outfit-category" name="outfit-category" class="campo-input">
                                     <option value="CASUAL">Casual</option>
                                     <option value="FORMAL">Formal</option>
@@ -105,9 +106,9 @@
                                 </select>
                             </div>
                             <div class="grupo-campo">
-                                <label for="outfit-season" class="etiqueta-campo">Season</label>
+                                <label for="outfit-season" class="etiqueta-campo" data-i18n="season">Season</label>
                                 <select id="outfit-season" name="outfit-season" class="campo-input">
-                                    <option value="">All seasons</option>
+                                    <option value="" data-i18n="allSeasons">All seasons</option>
                                     <option value="spring">Spring</option>
                                     <option value="summer">Summer</option>
                                     <option value="autumn">Autumn</option>
@@ -115,7 +116,7 @@
                                 </select>
                             </div>
                             <div class="grupo-campo">
-                                <label for="outfit-color" class="etiqueta-campo">Main Color</label>
+                                <label for="outfit-color" class="etiqueta-campo" data-i18n="mainColor">Main Color</label>
                                 <input type="color" id="outfit-color" name="outfit-color" class="campo-input campo-color" value="#5a0d16">
                             </div>
                         </div>
@@ -124,7 +125,7 @@
                         <div class="grupo-campo campo-archivo">
                             <label for="outfit-picture" class="etiqueta-campo">
                                 <i class="icon-picture"></i>
-                                Picture
+                                <span data-i18n="picture">Picture</span>
                             </label>
                             <input 
                                 type="file" 
@@ -140,18 +141,18 @@
 
                     <!-- SECCIÓN 2: PRENDAS (Componentes) -->
                     <div class="seccion-prendas">
-                        <h3 class="titulo-seccion">Pieces</h3>
+                        <h3 class="titulo-seccion" data-i18n="pieces">Pieces</h3>
                         <div id="lista-prendas" class="lista-prendas"></div>
                         <button type="button" id="btn-agregar-prenda" class="boton-agregar-prenda">
-                            <i class="icon-plus"></i> Add Piece
+                            <i class="icon-plus"></i> <span data-i18n="addPiece">Add Piece</span>
                         </button>
                     </div>
 
                     <!-- Botones de acción -->
                     <div class="grupo-botones">
-                        <button type="button" id="btn-cancelar" class="boton-cancelar">Cancel</button>
+                        <button type="button" id="btn-cancelar" class="boton-cancelar" data-i18n="cancel">Cancel</button>
                         <button type="submit" id="btn-upload" class="boton-upload">
-                            <i class="icon-upload"></i> Upload
+                            <i class="icon-upload"></i> <span data-i18n="upload">Upload</span>
                         </button>
                     </div>
                 </form>
@@ -160,9 +161,10 @@
 
         <!-- BOTON FINAL -->
         <footer>
-            <a class="boton-armario" href="inicio-logueado.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="inicio-logueado.html" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
+    <script type="module" src="js/i18n-global.js"></script>
     </body>
 </html>

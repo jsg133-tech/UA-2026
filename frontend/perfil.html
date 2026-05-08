@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/modal.css">
     <script type="module" src="js/perfil.js"></script>
 </head>
-<body>
+<body data-page="perfil">
     <header class="barra-superior">
         <div class="fila-marca">
 
@@ -38,7 +38,7 @@
 
             <div class="marca">
                 <h1>BELLAVESTE</h1>
-                <p>SPAIN</p>
+                <p data-i18n="location">SPAIN</p>
             </div>
 
             <div class="iconos-acciones">
@@ -64,14 +64,14 @@
     <main class="main-perfil">
     <div class="contenedor-ajustes">
         <div class="divisor-titulo">
-            <span>YOUR ACCOUNT</span>
+            <span data-i18n="mainTitle">YOUR ACCOUNT</span>
         </div>
 
         <nav class="tabs-perfil">
-            <button class="tab-btn active" data-target="seccion-editar">EDIT PROFILE</button>
-            <button class="tab-btn" onclick="location.href='subidos.html'">MY POSTS</button>
-            <button class="tab-btn" onclick="location.href='armario.html'">CLOSET</button>
-            <button class="tab-btn" data-target="seccion-ajustes">SETTINGS</button>
+            <button class="tab-btn active" data-target="seccion-editar" data-i18n="editProfile">EDIT PROFILE</button>
+            <button class="tab-btn" onclick="location.href='subidos.html'" data-i18n="myPosts">MY POSTS</button>
+            <button class="tab-btn" onclick="location.href='armario.html'" data-i18n="closet">CLOSET</button>
+            <button class="tab-btn" data-target="seccion-ajustes" data-i18n="settings">SETTINGS</button>
         </nav>
 
         <div id="seccion-editar" class="tab-content">
@@ -79,7 +79,7 @@
                 <div class="avatar-grande">
                     <img src="images/perfil.jfif" alt="Avatar" id="vistaPrevia">
                     <label for="inputFoto" class="cambiar-foto">
-                        <i class="icon-camera"></i>New Photo
+                        <i class="icon-camera"></i><span data-i18n="newPhoto">New Photo</span>
                     </label>
                     <input type="file" id="inputFoto" accept="image/*" style="display: none;">
                 </div>
@@ -88,52 +88,65 @@
 
             <form class="form-perfil" id="form-perfil">
                 <div class="campo">
-                    <label><i class="icon-user-circle"></i> NAME:</label>
-                    <input type="text" id="input-name" placeholder="New name...">
+                    <label><i class="icon-user-circle"></i> <span data-i18n="name">NAME:</span></label>
+                    <input type="text" id="input-name" placeholder="New name..." data-i18n-placeholder="placeholderName">
                 </div>
                 <div class="campo">
-                    <label><i class="icon-mail"></i> E-MAIL:</label>
-                    <input type="email" id="input-email" placeholder="Email...">
+                    <label><i class="icon-mail"></i> <span data-i18n="email">E-MAIL:</span></label>
+                    <input type="email" id="input-email" placeholder="Email..." data-i18n-placeholder="placeholderEmail">
                 </div>
                 <div class="campo">
-                    <label><i class="icon-key"></i> NEW PASSWORD</label>
+                    <label><i class="icon-key"></i> <span data-i18n="newPassword">NEW PASSWORD</span></label>
                     <div class="password-wrapper">
-                        <input type="password" id="input-new-password" placeholder="Leave blank to keep current">
+                        <input type="password" id="input-new-password" placeholder="Leave blank to keep current" data-i18n-placeholder="placeholderNewPassword">
                         <button type="button" class="toggle-password" data-target="input-new-password" aria-label="Show password" aria-pressed="false">
                             <i class="icon-eye-off" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
                 <div class="campo">
-                    <label><i class="icon-key"></i> CURRENT PASSWORD</label>
+                    <label><i class="icon-key"></i> <span data-i18n="currentPassword">CURRENT PASSWORD</span></label>
                     <div class="password-wrapper">
-                        <input type="password" id="input-current-password" placeholder="Required to save changes">
+                        <input type="password" id="input-current-password" placeholder="Required to save changes" data-i18n-placeholder="placeholderCurrentPassword">
                         <button type="button" class="toggle-password" data-target="input-current-password" aria-label="Show password" aria-pressed="false">
                             <i class="icon-eye-off" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
-                <button type="submit" class="btn-update">UPDATE</button>
+                <button type="submit" class="btn-update" data-i18n="update">UPDATE</button>
             </form>
         </div>
 
         <div id="seccion-ajustes" class="tab-content" style="display: none;">
+            <div class="ajustes-card">
+                <div class="ajustes-cabecera">
+                    <h3 data-i18n="settingsTitle">Language</h3>
+                    <p data-i18n="settingsDescription">Choose the language for this screen.</p>
+                </div>
+
+                <div class="language-selector" role="group" aria-label="Language selector">
+                    <button type="button" class="lang-btn active" data-language="en">English</button>
+                    <button type="button" class="lang-btn" data-language="es">Espanol</button>
+                </div>
+            </div>
+
             <div class="ajustes-placeholder">
-                <p><i class="icon-cog"></i> Notification Settings</p>
-                <p><i class="icon-lock"></i> Privacy & Security</p>
-                <p><i class="icon-help"></i> Help Center</p>
+                <p><i class="icon-cog"></i> <span data-i18n="notificationSettings">Notification Settings</span></p>
+                <p><i class="icon-lock"></i> <span data-i18n="privacySecurity">Privacy & Security</span></p>
+                <p><i class="icon-help"></i> <span data-i18n="helpCenter">Help Center</span></p>
             </div>
         </div>
 
         <div class="botones-peligro">
-            <button class="btn-logout" type="button">LOGOUT</button>
-            <button class="btn-delete" type="button">DELETE ACCOUNT</button>
+            <button class="btn-logout" type="button" data-i18n="logout">LOGOUT</button>
+            <button class="btn-delete" type="button" data-i18n="deleteAccount">DELETE ACCOUNT</button>
         </div>
     </div>
 </main>
 
     <footer>
-        <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+        <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
     </footer>
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 </html>

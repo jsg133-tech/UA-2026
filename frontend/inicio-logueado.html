@@ -21,7 +21,7 @@
     <script type="module" src="js/inicio.js"></script>
 </head>
 
-<body>
+<body data-page="inicio-logueado">
     <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
@@ -31,6 +31,7 @@
                 <input type="checkbox" id="chkMenu">
 
                 <ul id="menu">
+<<<<<<< HEAD
                     <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
                     <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
                     <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
@@ -48,13 +49,25 @@
                     </li>
                     
                     <li><a href="javascript:void(0)"><i class="icon-setting"></i>SETTING</a></li>
+=======
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><a href="./subidos.html"><i class="icon-heart"></i><span data-i18n="myPosts">MY POSTS</span></a></li>
+                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
+>>>>>>> ef19f26ab6fd77663244b1fe54e86294c513ed7a
                 </ul>
 
             </nav>
 
             <div class="marca">
                 <h1>BELLAVESTE</h1>
-                <p>SPAIN</p>
+                <p data-i18n="footer">SPAIN</p>
             </div>
 
             <div class="iconos-acciones">
@@ -72,7 +85,7 @@
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -80,28 +93,28 @@
     <main class="contenedor-app">
         <!-- COLECCIONES -->
         <section class="colecciones">
-            <h2>COLECCIONES</h2>
-            <p>DISCOVER FASHION YOUR WAY</p>
+            <h2 data-i18n="collectionsTitle">COLLECTIONS</h2>
+            <p data-i18n="collectionsSubtitle">DISCOVER FASHION YOUR WAY</p>
 
             <div class="categorias">
                 <article class="categoria">
                     <a href="categoria-temporada.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
                     <img src="images/temporada.jfif" alt="Categoría Temporada">
-                    <span>SEASON</span>
+                    <span data-i18n="season">SEASON</span>
                     </a>
                 </article>
 
                 <article class="categoria">
                     <a href="categoria-color.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
                         <img src="images/color.jfif" alt="Categoría Color">
-                        <span>COLOR</span>
+                        <span data-i18n="color">COLOR</span>
                     </a>
                 </article>
 
                 <article class="categoria">
                     <a href="categoria-mood.html" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
                         <img src="images/ocasion.jfif" alt="Categoría Mood">
-                        <span>MOOD</span>
+                        <span data-i18n="mood">MOOD</span>
                     </a>
                 </article>
             </div>
@@ -109,15 +122,18 @@
 
         <!-- OUTFIT -->
         <section class="outfit-dia">
-            <h2>OUTFIT</h2>
-            <p>WHAT WILL YOU WEAR TODAY?</p>
+            <h2 data-i18n="outfitTitle">OUTFIT</h2>
+            <p data-i18n="outfitSubtitle">WHAT WILL YOU WEAR TODAY?</p>
         </section>
 
         <!-- BOTON FINAL -->
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
+
+    <script type="module" src="js/i18n-global.js"></script>
+    <script type="module" src="js/inicio.js"></script>
 </body>
 </html>

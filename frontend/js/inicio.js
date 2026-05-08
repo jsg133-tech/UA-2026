@@ -7,9 +7,49 @@ const nombreUsuarioEl = document.getElementById('nombre-usuario');
 const avatarUsuarioEl = document.getElementById('avatar-usuario');
 const outfitSectionEl = document.querySelector('.outfit-dia');
 const logoutLinkEl = document.getElementById('logout-link');
+const LANG_STORAGE_KEY = 'bellaveste-language';
 
 const CANTIDAD_INICIAL_OUTFITS = 4;
 const CANTIDAD_POR_BOTON = 4;
+
+function idiomaActual() {
+	return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function textoInicio(clave) {
+	const textos = {
+		en: {
+			outfitDefault: 'OUTFIT',
+			noCategory: 'NO CATEGORY',
+			noSeason: 'NO SEASON',
+			noSize: 'NO SIZE',
+			noColor: 'NO COLOR',
+			addCloset: 'ADD CLOSET',
+			addClosetTitle: 'Add to my closet',
+			addedTitle: 'Added to your closet',
+			showMore: 'SHOW MORE OUTFITS',
+			empty: 'You do not have any outfits created yet.',
+			defaultUser: 'User',
+			dateLocale: 'en-US',
+		},
+		es: {
+			outfitDefault: 'OUTFIT',
+			noCategory: 'SIN CATEGORIA',
+			noSeason: 'SIN TEMPORADA',
+			noSize: 'SIN TALLA',
+			noColor: 'SIN COLOR',
+			addCloset: 'ANADIR ARMARIO',
+			addClosetTitle: 'Anadir a mi armario',
+			addedTitle: 'Anadido a tu armario',
+			showMore: 'MOSTRAR MAS OUTFITS',
+			empty: 'Aun no tienes outfits creados.',
+			defaultUser: 'Usuario',
+			dateLocale: 'es-ES',
+		},
+	};
+
+	return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 // Delegación: click en cualquier tarjeta navega al detalle del outfit
 outfitSectionEl.addEventListener('click', (e) => {
@@ -51,7 +91,7 @@ function formatearFecha(value) {
 	const d = new Date(value);
 	if (Number.isNaN(d.getTime())) return '';
 
-	return d.toLocaleDateString('es-ES', {
+	return d.toLocaleDateString(textoInicio('dateLocale'), {
 		day: '2-digit',
 		month: 'long',
 		year: 'numeric',
@@ -77,11 +117,11 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 	article.dataset.id = outfit._id;
 
 	const imageUrl = obtenerImagenOutfit(outfit);
-	const title = formatearTextoCampo(outfit.name, 'OUTFIT');
-	const category = formatearTextoCampo(outfit.category, 'SIN CATEGORIA');
-	const season = formatearTextoCampo(outfit.season, 'SIN TEMPORADA');
-	const size = formatearTextoCampo(outfit.size, 'SIN TALLA');
-	const color = formatearTextoCampo(outfit.color, 'SIN COLOR');
+	const title = formatearTextoCampo(outfit.name, textoInicio('outfitDefault'));
+	const category = formatearTextoCampo(outfit.category, textoInicio('noCategory'));
+	const season = formatearTextoCampo(outfit.season, textoInicio('noSeason'));
+	const size = formatearTextoCampo(outfit.size, textoInicio('noSize'));
+	const color = formatearTextoCampo(outfit.color, textoInicio('noColor'));
 	const created = formatearFecha(outfit.createdAt);
 
 	article.innerHTML = `
@@ -102,8 +142,8 @@ function crearTarjetaOutfit(outfit, userName, userAvatar) {
 					<img src="${userAvatar}" alt="${userName}">
 					<span>${userName}</span>
 				</div>
-				<button class="btn-anadir-armario" title="Añadir a mi armario" type="button">
-					<i class="icon-t-shirt"></i><span>ADD CLOSET</span>
+				<button class="btn-anadir-armario" title="${textoInicio('addClosetTitle')}" type="button">
+					<i class="icon-t-shirt"></i><span>${textoInicio('addCloset')}</span>
 				</button>
 			</div>
 		</div>
@@ -140,12 +180,12 @@ async function agregarArmario(outfit, boton) {
 		boton.classList.remove('cargando');
 		boton.classList.add('anadido');
 		boton.innerHTML = '<i class="icon-ok"></i>';
-		boton.title = 'Añadido a tu armario';
+		boton.title = textoInicio('addedTitle');
 
 		setTimeout(() => {
 			boton.classList.remove('anadido');
-			boton.innerHTML = '<i class="icon-t-shirt"></i>';
-			boton.title = 'Añadir a mi armario';
+			boton.innerHTML = `<i class="icon-t-shirt"></i><span>${textoInicio('addCloset')}</span>`;
+			boton.title = textoInicio('addClosetTitle');
 			boton.disabled = false;
 		}, 2200);
 
@@ -179,7 +219,7 @@ function crearBotonMostrarMas(user) {
 	const boton = document.createElement('button');
 	boton.type = 'button';
 	boton.className = 'btn-mostrar-mas';
-	boton.textContent = 'SHOW MORE OUTFITS';
+	boton.textContent = textoInicio('showMore');
 
 	boton.addEventListener('click', () => {
 		cantidadVisible += CANTIDAD_POR_BOTON;
@@ -195,7 +235,7 @@ function actualizarListaOutfits(user) {
 	if (!Array.isArray(outfitsCargados) || outfitsCargados.length === 0) {
 		const empty = document.createElement('p');
 		empty.className = 'outfits-empty';
-		empty.textContent = 'You do not have any outfits created yet.';
+		empty.textContent = textoInicio('empty');
 		outfitSectionEl.appendChild(empty);
 		return;
 	}
@@ -204,7 +244,7 @@ function actualizarListaOutfits(user) {
 
 	outfitsVisibles.forEach((outfit) => {
 		const outfitUser = outfit.userId;
-		const outfitUserName = (outfitUser?.name || 'Usuario').toUpperCase();
+		const outfitUserName = (outfitUser?.name || textoInicio('defaultUser')).toUpperCase();
 		const outfitUserAvatar = outfitUser?.avatar || 'images/perfil.jfif';
 		outfitSectionEl.appendChild(crearTarjetaOutfit(outfit, outfitUserName, outfitUserAvatar));
 	});
@@ -273,6 +313,7 @@ logoutLinkEl.addEventListener('click', (e) => {
 
 iniciarPagina();
 
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", () => {
     const darkModeBtn = document.getElementById("dark-mode-toggle");
     
@@ -309,3 +350,9 @@ btn.onclick = (e) => {
         localStorage.setItem("theme", "dark");
     }
 };
+=======
+document.addEventListener('bellaveste:language-changed', () => {
+	const user = obtenerUsuarioGuardado() || {};
+	actualizarListaOutfits(user);
+});
+>>>>>>> ef19f26ab6fd77663244b1fe54e86294c513ed7a

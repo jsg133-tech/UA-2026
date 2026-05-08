@@ -1,6 +1,7 @@
 import { inicializarBarraUsuario } from './barra-usuario.js';
 
 const API = 'https://ua-2026.onrender.com';
+const LANG_STORAGE_KEY = 'bellaveste-language';
 
 const COLOR_MAP = {
     'BLACK':      '#1a1a1a',
@@ -25,6 +26,37 @@ const MOOD_MAP = {
     'ATHLEISURE': 'SPORT',
     'MINIMAL':    'MINIMALIST',
 };
+
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function tResultado(clave) {
+    const textos = {
+        en: {
+            noFilter: 'No filter selected.',
+            collection: 'COLLECTION',
+            noOutfits: 'No outfits found for this collection yet.',
+            loadError: 'Could not load results.',
+            season: 'SEASON',
+            category: 'CATEGORY',
+            color: 'COLOR',
+            mood: 'MOOD',
+        },
+        es: {
+            noFilter: 'No hay filtro seleccionado.',
+            collection: 'COLECCION',
+            noOutfits: 'No se encontraron outfits para esta coleccion.',
+            loadError: 'No se pudieron cargar los resultados.',
+            season: 'TEMPORADA',
+            category: 'CATEGORIA',
+            color: 'COLOR',
+            mood: 'ESTADO',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 function hexToRgb(hex) {
     const h = hex.replace('#', '');
@@ -79,13 +111,18 @@ async function cargarResultados() {
     const grid      = document.getElementById('grid-resultados');
 
     if (!tipo || !v) {
-        grid.innerHTML = '<p style="padding:20px;font-family:Cormorant Garamond,serif;color:#7a5060;grid-column:1/-1">No filter selected.</p>';
+        grid.innerHTML = `<p style="padding:20px;font-family:Cormorant Garamond,serif;color:#7a5060;grid-column:1/-1">${tResultado('noFilter')}</p>`;
         return;
     }
 
-    const tipoLabels = { season: 'SEASON', category: 'CATEGORY', color: 'COLOR', mood: 'MOOD' };
+    const tipoLabels = {
+        season: tResultado('season'),
+        category: tResultado('category'),
+        color: tResultado('color'),
+        mood: tResultado('mood'),
+    };
     if (tituloEl) tituloEl.textContent = v.toUpperCase();
-    if (tipoEl)   tipoEl.textContent   = tipoLabels[tipo] || 'COLLECTION';
+    if (tipoEl)   tipoEl.textContent   = tipoLabels[tipo] || tResultado('collection');
     if (subEl)    subEl.textContent    = `${tipoLabels[tipo] || ''} · ${v.toUpperCase()}`;
 
     try {
@@ -119,7 +156,7 @@ async function cargarResultados() {
             grid.innerHTML = `
                 <div style="grid-column:1/-1;padding:40px 20px;text-align:center;
                     font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(61,10,17,0.45);">
-                    No outfits found for this collection yet.
+                    ${tResultado('noOutfits')}
                 </div>
             `;
             return;
@@ -128,11 +165,15 @@ async function cargarResultados() {
         outfits.forEach(o => grid.appendChild(crearTarjeta(o)));
 
     } catch {
-        grid.innerHTML = '<p style="padding:20px;grid-column:1/-1;font-family:Cormorant Garamond,serif;color:#7a5060;">Could not load results.</p>';
+        grid.innerHTML = `<p style="padding:20px;grid-column:1/-1;font-family:Cormorant Garamond,serif;color:#7a5060;">${tResultado('loadError')}</p>`;
     }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     try { await inicializarBarraUsuario(); } catch { /* silencioso */ }
+    cargarResultados();
+});
+
+document.addEventListener('bellaveste:language-changed', () => {
     cargarResultados();
 });

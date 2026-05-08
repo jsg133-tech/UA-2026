@@ -148,6 +148,63 @@
     font-style: italic;
 }
 
+.ajustes-card {
+    background: #f2e7e1;
+    border-radius: 12px;
+    padding: 18px 16px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+}
+
+.ajustes-cabecera {
+    margin-bottom: 14px;
+}
+
+.ajustes-cabecera h3 {
+    color: #3d0a11;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.ajustes-cabecera p {
+    color: #674249;
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.language-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.lang-btn {
+    border: 1px solid rgba(90, 13, 22, 0.18);
+    background: #fff;
+    color: #5a0d16;
+    border-radius: 999px;
+    padding: 11px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.lang-btn:hover,
+.lang-btn:focus-visible {
+    background: rgba(90, 13, 22, 0.08);
+    outline: none;
+}
+
+.lang-btn.active {
+    background: #5a0d16;
+    color: #fff;
+    border-color: #5a0d16;
+}
+
 /* Botones de acción */
 .btn-update {
     width: 55%;

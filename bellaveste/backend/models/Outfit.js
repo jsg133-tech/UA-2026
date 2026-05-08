@@ -11,6 +11,10 @@ const prendaSchema = new mongoose.Schema({
   imageUrl: { type: String, default: '' },
   cloudinaryPublicId: { type: String, default: '' },
   savedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  savedCategories: [{
+    userId:    { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    categoria: { type: String, default: '' },
+  }],
 }, { _id: true });
 
 const outfitSchema = new mongoose.Schema({
@@ -24,6 +28,10 @@ const outfitSchema = new mongoose.Schema({
   pieces: [prendaSchema],
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   savedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  savedByCategories: [{
+    userId:    { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    categoria: { type: String, default: '' },
+  }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Outfit', outfitSchema);

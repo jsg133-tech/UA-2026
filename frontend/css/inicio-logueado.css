@@ -220,6 +220,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     padding-top: 10px;
     border-top: 1px solid rgba(90, 13, 22, 0.10);
 }
@@ -229,6 +230,8 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    flex: 1;
+    min-width: 0;
     background: none;
     padding: 0;
     border-radius: 0;
@@ -246,14 +249,21 @@ body {
     font-size: 0.78rem;
     color: #7a5060;
     letter-spacing: 0.3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* BOTÓN ADD CLOSET */
 .btn-anadir-armario {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
-    padding: 5px 13px;
+    flex: 0 0 clamp(126px, 44%, 164px);
+    max-width: clamp(126px, 44%, 164px);
+    min-height: 30px;
+    padding: 5px 10px;
     border-radius: 999px;
     border: 1px solid #5a0d16;
     background: transparent;
@@ -264,6 +274,13 @@ body {
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-anadir-armario span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .btn-anadir-armario:hover {
@@ -448,6 +465,14 @@ body {
     .btn-mostrar-mas {
         font-size: 0.72rem;
         padding: 10px 20px;
+    }
+
+    .btn-anadir-armario {
+        flex-basis: 136px;
+        max-width: 136px;
+        font-size: 0.56rem;
+        letter-spacing: 0.8px;
+        gap: 4px;
     }
 
     .boton-armario {
