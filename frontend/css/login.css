@@ -94,6 +94,47 @@ body {
     border-radius: 4px;
 }
 
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 52px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--vino);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: 0.2s ease;
+}
+
+.toggle-password:hover,
+.toggle-password:focus-visible {
+    background: rgba(90, 13, 22, 0.08);
+    outline: none;
+}
+
+.toggle-password i {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.toggle-password.is-visible {
+    color: var(--vino-oscuro);
+}
+
 .campo input:focus {
     background: #fff;
     box-shadow: 0 0 0 1.5px var(--vino);

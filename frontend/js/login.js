@@ -8,6 +8,21 @@ const inputEmail = document.getElementById('email');
 const inputPass = document.getElementById('contrasena');
 const inputRecordarme = document.getElementById('recordarme');
 const btnLogin = document.getElementById('btn-login');
+const passwordToggle = document.querySelector('.toggle-password[data-target="contrasena"]');
+
+function alternarVisibilidadPassword(input, boton) {
+  const mostrando = input.type === 'text';
+  input.type = mostrando ? 'password' : 'text';
+  boton.classList.toggle('is-visible', !mostrando);
+  boton.setAttribute('aria-pressed', String(!mostrando));
+  boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+}
+
+if (passwordToggle) {
+  passwordToggle.addEventListener('click', () => {
+    alternarVisibilidadPassword(inputPass, passwordToggle);
+  });
+}
 
 // Si ya hay sesión activa, VALIDAR el token antes de redirigir
 async function validarSesionExistente() {

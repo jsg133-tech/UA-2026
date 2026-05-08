@@ -9,6 +9,28 @@ const inputUser = document.getElementById('username');
 const inputEmail = document.getElementById('email');
 const inputPass = document.getElementById('contrasena');
 const inputConfirm = document.getElementById('confirmar-contrasena');
+const passwordToggles = document.querySelectorAll('.toggle-password');
+
+function alternarVisibilidadPassword(input, boton) {
+    const mostrando = input.type === 'text';
+    input.type = mostrando ? 'password' : 'text';
+    boton.classList.toggle('is-visible', !mostrando);
+    boton.setAttribute('aria-pressed', String(!mostrando));
+    boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+}
+
+passwordToggles.forEach((boton) => {
+    const targetId = boton.dataset.target;
+    const input = document.getElementById(targetId);
+
+    if (!input) {
+        return;
+    }
+
+    boton.addEventListener('click', () => {
+        alternarVisibilidadPassword(input, boton);
+    });
+});
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const USER_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
