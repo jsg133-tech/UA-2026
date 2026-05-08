@@ -15,8 +15,30 @@ const inputCurrentPass  = document.getElementById('input-current-password');
 const formPerfil        = document.getElementById('form-perfil');
 const btnLogout         = document.querySelector('.btn-logout');
 const btnDelete         = document.querySelector('.btn-delete');
+const passwordToggles   = document.querySelectorAll('.toggle-password');
 
 let avatarBase64 = null;
+
+function alternarVisibilidadPassword(input, boton) {
+    const mostrando = input.type === 'text';
+    input.type = mostrando ? 'password' : 'text';
+    boton.classList.toggle('is-visible', !mostrando);
+    boton.setAttribute('aria-pressed', String(!mostrando));
+    boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+}
+
+passwordToggles.forEach((boton) => {
+    const targetId = boton.dataset.target;
+    const input = document.getElementById(targetId);
+
+    if (!input) {
+        return;
+    }
+
+    boton.addEventListener('click', () => {
+        alternarVisibilidadPassword(input, boton);
+    });
+});
 
 // ── TABS ─────────────────────────────────────────────────────
 document.querySelectorAll('.tab-btn[data-target]').forEach(btn => {

@@ -97,11 +97,21 @@
                 </div>
                 <div class="campo">
                     <label><i class="icon-key"></i> NEW PASSWORD</label>
-                    <input type="password" id="input-new-password" placeholder="Leave blank to keep current">
+                    <div class="password-wrapper">
+                        <input type="password" id="input-new-password" placeholder="Leave blank to keep current">
+                        <button type="button" class="toggle-password" data-target="input-new-password" aria-label="Show password" aria-pressed="false">
+                            <i class="icon-eye-off" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="campo">
                     <label><i class="icon-key"></i> CURRENT PASSWORD</label>
-                    <input type="password" id="input-current-password" placeholder="Required to save changes">
+                    <div class="password-wrapper">
+                        <input type="password" id="input-current-password" placeholder="Required to save changes">
+                        <button type="button" class="toggle-password" data-target="input-current-password" aria-label="Show password" aria-pressed="false">
+                            <i class="icon-eye-off" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="btn-update">UPDATE</button>
             </form>

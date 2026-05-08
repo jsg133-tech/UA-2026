@@ -102,6 +102,47 @@
     font-family: 'Cormorant Garamond', serif;
 }
 
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 48px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #5a0d16;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: 0.2s ease;
+}
+
+.toggle-password:hover,
+.toggle-password:focus-visible {
+    background: rgba(90, 13, 22, 0.08);
+    outline: none;
+}
+
+.toggle-password i {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.toggle-password.is-visible {
+    color: #3d0a11;
+}
+
 .form-perfil input::placeholder {
     color: #bbb;
     font-style: italic;
