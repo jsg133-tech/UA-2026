@@ -349,7 +349,7 @@ form.addEventListener('submit', async (e) => {
         
         // Éxito - redireccionar automáticamente
         setTimeout(() => {
-            window.location.href = 'armario.html';
+            window.location.href = 'subidos.html';
         }, 1500);
 
     } catch (err) {

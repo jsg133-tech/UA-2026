@@ -87,30 +87,45 @@ body {
 
 /* CATEGORIAS */
 .categorias {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 28px;
+    padding: 0 14px;
 }
 
 .categoria {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    flex: 1;
+    max-width: 110px;
 }
 
 .categoria img {
-    width: 100px;
+    width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    box-shadow: 0 3px 12px rgba(90,13,22,0.12);
+}
+
+.categoria:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(90,13,22,0.2);
 }
 
 .categoria span {
     font-family: "Cinzel", serif;
-    font-size: .75rem;
+    font-size: 0.62rem;
+    letter-spacing: 1.5px;
+    color: #6d303e;
+    text-align: center;
 }
 
 /* TARJETA OUTFIT */
@@ -415,19 +430,19 @@ body {
         gap: 12px;
     }
 
-    /* CATEGORÍAS: 2 col en vez de 3 */
     .categorias {
-        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        margin-top: 12px;
+        margin-top: 16px;
+        padding: 0 10px;
     }
 
-    .categoria img {
-        width: 64px;
+    .categoria {
+        max-width: 80px;
     }
 
     .categoria span {
-        font-size: 0.58rem;
+        font-size: 0.55rem;
+        letter-spacing: 1px;
     }
 
     .btn-mostrar-mas {
