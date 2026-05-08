@@ -82,6 +82,50 @@
 
             <section class="prendas-lista" id="prendas-lista"></section>
 
+            <!-- COMENTARIOS Y VALORACIONES -->
+            <div class="seccion-titulo">
+                <span>REVIEWS</span>
+            </div>
+
+            <section class="reviews-seccion">
+
+                <!-- Resumen de valoración -->
+                <div class="reviews-resumen" id="reviews-resumen" style="display:none">
+                    <div class="resumen-nota" id="resumen-nota">—</div>
+                    <div class="resumen-estrellas" id="resumen-estrellas"></div>
+                    <span class="resumen-total" id="resumen-total"></span>
+                </div>
+
+                <!-- Lista de comentarios -->
+                <div class="reviews-lista" id="reviews-lista"></div>
+
+                <!-- Formulario nuevo comentario -->
+                <div class="review-form-wrap" id="review-form-wrap">
+                    <p class="review-form-titulo">Leave a review</p>
+
+                    <div class="review-stars-input" id="review-stars-input">
+                        <button type="button" class="star-btn" data-v="1">★</button>
+                        <button type="button" class="star-btn" data-v="2">★</button>
+                        <button type="button" class="star-btn" data-v="3">★</button>
+                        <button type="button" class="star-btn" data-v="4">★</button>
+                        <button type="button" class="star-btn" data-v="5">★</button>
+                    </div>
+
+                    <textarea
+                        id="review-texto"
+                        class="review-textarea"
+                        placeholder="Share your thoughts about this outfit..."
+                        rows="3"
+                        maxlength="500"
+                    ></textarea>
+
+                    <button class="review-submit" id="review-submit" type="button">
+                        POST REVIEW
+                    </button>
+                </div>
+
+            </section>
+
         </div>
 
         <footer>

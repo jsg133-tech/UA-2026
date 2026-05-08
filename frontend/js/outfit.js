@@ -207,10 +207,7 @@ async function cargarOutfit() {
 
         // Boton guardar en armario
         btnGuardar.onclick = async () => {
-            if (!token) {
-                alert(tOutfit('loginToSave'));
-                return;
-            }
+            if (!token) { alert(tOutfit('loginToSave')); return; }
             btnGuardar.disabled = true;
             try {
                 const res = await fetch(`${API}/api/armario/${id}`, {
@@ -225,8 +222,152 @@ async function cargarOutfit() {
             btnGuardar.disabled = false;
         };
 
+        // Cargar comentarios
+        cargarReviews(id, token);
+
     } catch (err) {
         loadingEl.innerHTML = `<p style="font-family:Cormorant Garamond,serif;color:#7a5060;padding:20px;">${err.message}</p>`;
+    }
+}
+
+// ── REVIEWS ────────────────────────────────────────────────────────────────────
+
+function estrellas(n, total = 5) {
+    return Array.from({ length: total }, (_, i) =>
+        `<span style="color:${i < Math.round(n) ? '#c8963e' : 'rgba(90,13,22,0.2)'}">★</span>`
+    ).join('');
+}
+
+function fechaCorta(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+async function cargarReviews(outfitId, token) {
+    const listaEl    = document.getElementById('reviews-lista');
+    const resumenEl  = document.getElementById('reviews-resumen');
+    const notaEl     = document.getElementById('resumen-nota');
+    const estrellasEl = document.getElementById('resumen-estrellas');
+    const totalEl    = document.getElementById('resumen-total');
+    const formWrap   = document.getElementById('review-form-wrap');
+    const starsInput = document.getElementById('review-stars-input');
+    const textoEl    = document.getElementById('review-texto');
+    const submitBtn  = document.getElementById('review-submit');
+
+    if (!listaEl) return;
+
+    // Ocultar formulario si no está logueado
+    if (!token && formWrap) formWrap.style.display = 'none';
+
+    const renderLista = async () => {
+        try {
+            const r = await fetch(`${API}/api/outfits/${outfitId}/comments`);
+            const { comments, avg, total } = await r.json();
+
+            // Resumen
+            if (total > 0) {
+                notaEl.textContent     = avg;
+                estrellasEl.innerHTML  = estrellas(avg);
+                totalEl.textContent    = `${total} review${total !== 1 ? 's' : ''}`;
+                resumenEl.style.display = 'flex';
+            }
+
+            // Lista
+            listaEl.innerHTML = '';
+            if (!comments.length) {
+                listaEl.innerHTML = `<p class="reviews-vacio">Be the first to review this outfit.</p>`;
+                return;
+            }
+
+            comments.forEach(c => {
+                const div = document.createElement('div');
+                div.className = 'review-item';
+                const esPropio = token && c.userId?._id && c.userId._id === getStoredUser()?._id;
+
+                div.innerHTML = `
+                    <div class="review-header">
+                        <img class="review-avatar" src="${c.userId?.avatar || 'images/perfil.jfif'}" alt="">
+                        <div class="review-meta">
+                            <span class="review-autor">${(c.userId?.name || 'User').toUpperCase()}</span>
+                            <time class="review-fecha">${fechaCorta(c.createdAt)}</time>
+                        </div>
+                        <div class="review-estrellas">${estrellas(c.rating)}</div>
+                    </div>
+                    <p class="review-texto">${c.texto}</p>
+                    ${esPropio ? `<button class="review-borrar" data-id="${c._id}">DELETE</button>` : ''}
+                `;
+
+                if (esPropio) {
+                    div.querySelector('.review-borrar').addEventListener('click', async () => {
+                        await fetch(`${API}/api/outfits/${outfitId}/comments/${c._id}`, {
+                            method: 'DELETE',
+                            headers: { Authorization: `Bearer ${token}` },
+                        });
+                        renderLista();
+                    });
+                }
+
+                listaEl.appendChild(div);
+            });
+        } catch { /* silencioso */ }
+    };
+
+    await renderLista();
+
+    // Estrellas interactivas
+    let ratingSeleccionado = 0;
+    if (starsInput) {
+        starsInput.querySelectorAll('.star-btn').forEach(btn => {
+            btn.addEventListener('mouseover', () => {
+                const v = +btn.dataset.v;
+                starsInput.querySelectorAll('.star-btn').forEach(b => {
+                    b.classList.toggle('activa', +b.dataset.v <= v);
+                });
+            });
+            btn.addEventListener('mouseleave', () => {
+                starsInput.querySelectorAll('.star-btn').forEach(b => {
+                    b.classList.toggle('activa', +b.dataset.v <= ratingSeleccionado);
+                });
+            });
+            btn.addEventListener('click', () => {
+                ratingSeleccionado = +btn.dataset.v;
+                starsInput.querySelectorAll('.star-btn').forEach(b => {
+                    b.classList.toggle('activa', +b.dataset.v <= ratingSeleccionado);
+                });
+            });
+        });
+    }
+
+    // Enviar comentario
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async () => {
+            const texto = textoEl?.value.trim();
+            if (!ratingSeleccionado) { alert('Please select a star rating.'); return; }
+            if (!texto) { alert('Please write a comment.'); return; }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'POSTING...';
+
+            try {
+                const res = await fetch(`${API}/api/outfits/${outfitId}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                    body: JSON.stringify({ texto, rating: ratingSeleccionado }),
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) throw new Error(data.error || 'Error posting review');
+
+                textoEl.value = '';
+                ratingSeleccionado = 0;
+                starsInput?.querySelectorAll('.star-btn').forEach(b => b.classList.remove('activa'));
+                await renderLista();
+            } catch (err) {
+                alert(err.message);
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'POST REVIEW';
+        });
     }
 }
 

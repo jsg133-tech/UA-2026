@@ -16,6 +16,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/outfits', require('./routes/outfits'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/armario', require('./routes/armario'));
+app.use('/api/outfits/:outfitId/comments', require('./routes/comments'));
 
 // Health check
 app.get('/', (req, res) => {
