@@ -272,3 +272,40 @@ logoutLinkEl.addEventListener('click', (e) => {
 });
 
 iniciarPagina();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const darkModeBtn = document.getElementById("dark-mode-toggle");
+    
+    // Al cargar, mirar si ya estaba en dark
+    if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+    }
+
+    if (darkModeBtn) {
+        darkModeBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const html = document.documentElement;
+            
+            if (html.getAttribute("data-theme") === "dark") {
+                html.removeAttribute("data-theme");
+                localStorage.setItem("theme", "light");
+            } else {
+                html.setAttribute("data-theme", "dark");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+    }
+});
+
+const btn = document.getElementById("dark-mode-toggle");
+btn.onclick = (e) => {
+    e.preventDefault();
+    const isDark = document.documentElement.hasAttribute("data-theme");
+    if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("theme", "light");
+    } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+    }
+};

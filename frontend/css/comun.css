@@ -2,7 +2,75 @@
     --vino: #5a0d16;
     --vino-oscuro: #3d0a11;
     --claro: #f4ece4;
-    --fondo: #d9d8de;
+}
+
+[data-theme="dark"] {
+    --bg-puro: #000000;
+    --bg-seccion: #3d0a11; /* Tu vino oscuro */
+    --texto-claro: #f4ece4;
+}
+
+/* --- AJUSTES MODO OSCURO --- */
+
+[data-theme="dark"] body {
+    background: var(--bg-puro) !important;
+}
+
+/* 1. QUITAR EL CUADRADO DEL MENÚ (icon-menu) */
+[data-theme="dark"] nav > label,
+[data-theme="dark"] .boton-icono {
+    background: none !important; /* Adiós al cuadrado */
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. CÍRCULOS CON BORDE CLARO (SEASON, COLOR, MOOD) */
+[data-theme="dark"] .categoria img {
+    border: 2px solid var(--claro); /* Círculo claro alrededor */
+    padding: 2px; /* Espacio sutil entre foto y borde */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 3. QUITAR ESQUINAS REDONDEADAS DE LAS SECCIONES */
+[data-theme="dark"] .colecciones, 
+[data-theme="dark"] .outfit-dia {
+    background: var(--bg-seccion) !important;
+    border-radius: 0 !important; /* Esquinas rectas y radicales */
+    margin: 0 !important; /* Para que ocupen todo el ancho si quieres */
+    border: none !important;
+    padding: 40px 20px;
+}
+
+/* --- TEXTOS Y LOGO --- */
+
+[data-theme="dark"] .barra-superior {
+    background: var(--claro) !important;
+}
+
+[data-theme="dark"] .marca h1 {
+    color: var(--vino) !important;
+}
+
+[data-theme="dark"] .marca p,
+[data-theme="dark"] nav > label i {
+    color: var(--vino-oscuro) !important; /* Las tres líneas en vino oscuro */
+}
+
+[data-theme="dark"] .colecciones h2,
+[data-theme="dark"] .colecciones p,
+[data-theme="dark"] .categoria span,
+[data-theme="dark"] .outfit-dia h2,
+[data-theme="dark"] .outfit-dia p {
+    color: var(--texto-claro) !important;
+}
+
+/* BOTÓN FINAL SIN ESQUINAS */
+[data-theme="dark"] .boton-armario {
+    background: var(--claro) !important;
+    color: var(--vino) !important;
+    border-radius: 0 !important; 
+    margin: 0 !important;
 }
 
 html,
