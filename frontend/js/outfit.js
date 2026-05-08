@@ -1,5 +1,6 @@
 import { getToken, getStoredUser } from './auth-storage.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
+import { mostrarModal } from './modal.js';
 
 const API = 'https://ua-2026.onrender.com';
 const LANG_STORAGE_KEY = 'bellaveste-language';
@@ -207,7 +208,7 @@ async function cargarOutfit() {
 
         // Boton guardar en armario
         btnGuardar.onclick = async () => {
-            if (!token) { alert(tOutfit('loginToSave')); return; }
+            if (!token) { mostrarModal(tOutfit('loginToSave'), 'error'); return; }
             btnGuardar.disabled = true;
             try {
                 const res = await fetch(`${API}/api/armario/${id}`, {
@@ -217,8 +218,10 @@ async function cargarOutfit() {
                 if (res.ok) {
                     btnGuardar.classList.add('guardado');
                     btnGuardar.innerHTML = `<i class="icon-ok"></i> ${tOutfit('saved')}`;
+                } else {
+                    mostrarModal('Could not save outfit. Try again.', 'error');
                 }
-            } catch { /* silencioso */ }
+            } catch { mostrarModal('Connection error.', 'error'); }
             btnGuardar.disabled = false;
         };
 
@@ -342,8 +345,8 @@ async function cargarReviews(outfitId, token) {
     if (submitBtn) {
         submitBtn.addEventListener('click', async () => {
             const texto = textoEl?.value.trim();
-            if (!ratingSeleccionado) { alert('Please select a star rating.'); return; }
-            if (!texto) { alert('Please write a comment.'); return; }
+            if (!ratingSeleccionado) { mostrarModal('Please select a star rating.', 'error'); return; }
+            if (!texto) { mostrarModal('Please write your review before posting.', 'error'); return; }
 
             submitBtn.disabled = true;
             submitBtn.textContent = 'POSTING...';
@@ -360,9 +363,10 @@ async function cargarReviews(outfitId, token) {
                 textoEl.value = '';
                 ratingSeleccionado = 0;
                 starsInput?.querySelectorAll('.star-btn').forEach(b => b.classList.remove('activa'));
+                mostrarModal('Your review has been posted.', 'success', 'Thank you!');
                 await renderLista();
             } catch (err) {
-                alert(err.message);
+                mostrarModal(err.message, 'error', 'Could not post review');
             }
 
             submitBtn.disabled = false;
