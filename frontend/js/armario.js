@@ -256,22 +256,35 @@ async function cambiarCategoriaOutfit(idOutfit, nuevaCategoria, btnTag) {
             },
             body: JSON.stringify({ categoria: nuevaCategoria }),
         });
-        if (!r.ok) throw new Error();
+
+        if (!r.ok) {
+            const err = await r.json().catch(() => ({}));
+            throw new Error(err.error || `Error ${r.status}`);
+        }
 
         // Actualizar el span del botón
-        btnTag.querySelector('span').textContent = nuevaCategoria.toUpperCase();
+        const span = btnTag.querySelector('span');
+        if (span) span.textContent = nuevaCategoria.toUpperCase();
         btnTag.style.opacity = '1';
 
-        // Si hay filtro activo y no coincide, sacar la tarjeta del grid
+        // Actualizar el array en memoria para que el filtrado funcione sin recargar
+        const outfit = todosLosOutfits.find(o => o._id === idOutfit);
+        if (outfit) outfit.armarioCategoria = nuevaCategoria;
+
+        // Si hay filtro activo y no coincide, animar la salida
         if (categoriaActiva && categoriaActiva.toUpperCase() !== nuevaCategoria.toUpperCase()) {
             const tarjeta = btnTag.closest('.tarjeta-armario');
-            tarjeta.style.transition = 'opacity 0.3s, transform 0.3s';
-            tarjeta.style.opacity = '0';
-            tarjeta.style.transform = 'scale(0.93)';
-            setTimeout(() => tarjeta.remove(), 320);
+            if (tarjeta) {
+                tarjeta.style.transition = 'opacity 0.3s, transform 0.3s';
+                tarjeta.style.opacity = '0';
+                tarjeta.style.transform = 'scale(0.93)';
+                setTimeout(() => tarjeta.remove(), 320);
+            }
         }
-    } catch {
+    } catch (err) {
         btnTag.style.opacity = '1';
+        console.error('Error asignando categoría:', err.message);
+        alert(`Could not assign category: ${err.message}`);
     }
 }
 
