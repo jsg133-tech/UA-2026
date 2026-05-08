@@ -89,13 +89,16 @@
 .minimal { background-image: url('../images/minimal.jpg'); }
 
 .card-mood span {
-    color: #ffffff; 
+    color: #ffffff;
     font-family: 'Cinzel', serif;
     font-weight: 600;
-    font-size: 1.1rem;
-    letter-spacing: 3px;
+    font-size: clamp(0.6rem, 2.5vw, 1.1rem);
+    letter-spacing: clamp(1px, 0.5vw, 3px);
     z-index: 2;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8); 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    text-align: center;
+    padding: 0 6px;
+    word-break: break-word;
 }
 
 /* Capa oscura para legibilidad */
@@ -120,4 +123,17 @@
 footer {
     margin-top: 60px;
     padding-bottom: 20px;
+}
+
+@media (max-width: 520px) {
+    .grid-experiencia-mood {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 14px;
+    }
+
+    .card-mood span {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
 }

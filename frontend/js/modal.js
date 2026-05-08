@@ -112,10 +112,10 @@ export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', t
 export function mostrarModal(mensaje, tipo = 'error', titulo = '', opciones = {}) {
   // Título por defecto según tipo
   if (!titulo) {
-    titulo = tipo === 'success' ? 'Listo' : 'Atención';
+    titulo = tipo === 'success' ? 'Ready' : 'Attention';
   }
 
-  const textoBoton = opciones.textoBoton || 'ACEPTAR';
+  const textoBoton = opciones.textoBoton || 'ACCEPT';
   const alConfirmar = typeof opciones.alConfirmar === 'function' ? opciones.alConfirmar : null;
   const icono = tipo === 'success' ? '✓' : '✕';
 
