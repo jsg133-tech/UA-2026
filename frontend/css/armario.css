@@ -228,7 +228,161 @@
 }
 .nueva-cat-btn-x:hover { background: rgba(90, 13, 22, 0.16); }
 
-/* MENÚ FLOTANTE DE CATEGORÍAS (appended to body) */
+/* ── BOTÓN CATEGORIZAR (visible en cada tarjeta) ─────────── */
+
+.btn-categorizar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    padding: 9px 12px;
+    background: rgba(255,255,255,0.65);
+    border: none;
+    border-top: 1px solid rgba(90,13,22,0.08);
+    font-family: "Cinzel", serif;
+    font-size: 0.55rem;
+    letter-spacing: 1.5px;
+    color: rgba(61,10,17,0.65);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.18s, color 0.18s;
+    backdrop-filter: blur(4px);
+}
+
+.btn-categorizar:hover {
+    background: rgba(90,13,22,0.08);
+    color: #3d0a11;
+}
+
+.btn-categorizar span { flex: 1; }
+
+.btn-cat-arrow {
+    font-size: 0.6rem;
+    opacity: 0.4;
+}
+
+.btn-categorizar--prenda {
+    border-radius: 0 0 10px 10px;
+}
+
+/* ── BOTTOM SHEET ─────────────────────────────────────────── */
+
+.bs-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,2,4,0.45);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    backdrop-filter: blur(2px);
+    animation: bsFadeIn 0.2s ease;
+}
+
+@keyframes bsFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.bs-sheet {
+    width: 100%;
+    background: #f4ece4;
+    border-radius: 20px 20px 0 0;
+    padding: 12px 20px 32px;
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.bs-sheet--open {
+    transform: translateY(0);
+}
+
+.bs-handle {
+    width: 36px;
+    height: 4px;
+    background: rgba(90,13,22,0.2);
+    border-radius: 2px;
+    margin: 0 auto 18px;
+}
+
+.bs-titulo {
+    font-family: "Cinzel", serif;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: rgba(61,10,17,0.5);
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.bs-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.bs-opcion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(90,13,22,0.1);
+    border-radius: 10px;
+    font-family: "Cinzel", serif;
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    color: #3d0a11;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.18s, border-color 0.18s, transform 0.15s;
+    width: 100%;
+}
+
+.bs-opcion i:first-child {
+    font-size: 1rem;
+    color: rgba(90,13,22,0.45);
+}
+
+.bs-opcion:hover {
+    background: rgba(90,13,22,0.07);
+    border-color: rgba(90,13,22,0.25);
+    transform: translateX(3px);
+}
+
+.bs-opcion span { flex: 1; }
+
+.bs-check { color: #5a0d16; }
+
+.bs-cancelar {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    background: rgba(90,13,22,0.06);
+    border: 1px solid rgba(90,13,22,0.12);
+    border-radius: 10px;
+    font-family: "Cinzel", serif;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    color: rgba(61,10,17,0.55);
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.bs-cancelar:hover { background: rgba(90,13,22,0.1); }
+
+.bs-vacio {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    color: rgba(61,10,17,0.45);
+    text-align: center;
+    padding: 16px;
+    font-size: 0.95rem;
+}
+
+/* ── MENÚ FLOTANTE DE CATEGORÍAS (appended to body) ──────── */
+
 .menu-categoria-global {
     position: fixed;
     list-style: none;
@@ -291,17 +445,42 @@
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    aspect-ratio: 3/4;
     background: #e8ddd6;
+    display: flex;
+    flex-direction: column;
 }
 
 .tarjeta-armario img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 3/4;
     object-fit: cover;
     display: block;
+    flex-shrink: 0;
 }
 
+/* overlay encima de la foto */
+.tarjeta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(transparent 55%, rgba(61,10,17,0.65));
+    pointer-events: none;
+}
+
+.tarjeta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 8px 8px 8px;
+    pointer-events: auto;
+}
+
+/* compatibilidad con tarjeta-info legacy */
 .tarjeta-info {
     position: absolute;
     bottom: 0;

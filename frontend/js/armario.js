@@ -131,28 +131,31 @@ function crearTarjetaOutfit(outfit) {
     div.className = 'tarjeta-armario';
 
     const imagen   = outfit.imageUrl || 'images/temporada.jfif';
-    const nombre   = (outfit.name     || 'OUTFIT').toUpperCase();
-    const catLabel = (outfit.category || '—').toUpperCase();
+    const nombre   = (outfit.name || 'OUTFIT').toUpperCase();
+    const catLabel = outfit.category || null;
 
     div.innerHTML = `
         <img src="${imagen}" alt="${nombre}">
-        <div class="tarjeta-info">
-            <div class="tarjeta-info-texto">
+        <div class="tarjeta-overlay">
+            <div class="tarjeta-top">
                 <span class="nombre-outfit">${nombre}</span>
-                <button class="btn-categoria-tag" type="button" title="Mover a categoría">
-                    <i class="icon-tag"></i>${catLabel}
+                <button class="btn-favorito" title="Remove from closet" type="button">
+                    <i class="icon-heart"></i>
                 </button>
             </div>
-            <button class="btn-favorito" title="Quitar del armario" type="button">
-                <i class="icon-heart"></i>
-            </button>
         </div>
+        <button class="btn-categorizar" type="button" title="Add to category">
+            <i class="icon-folder"></i>
+            <span>${catLabel ? catLabel.toUpperCase() : 'ADD TO CATEGORY'}</span>
+            <i class="icon-right-open btn-cat-arrow"></i>
+        </button>
     `;
 
-    div.querySelector('.btn-categoria-tag').addEventListener('click', e => {
+    div.querySelector('.btn-categorizar').addEventListener('click', e => {
         e.stopPropagation();
-        mostrarMenuCategoria(e.currentTarget, outfit._id, outfit.category);
+        abrirBottomSheet(outfit._id, 'outfit', div.querySelector('.btn-categorizar'));
     });
+
     div.querySelector('.btn-favorito').addEventListener('click', e => {
         e.stopPropagation();
         quitarDelArmario(outfit._id, div.querySelector('.btn-favorito'), div);
@@ -166,57 +169,61 @@ function crearTarjetaOutfit(outfit) {
     return div;
 }
 
-// ── MENÚ FLOTANTE ─────────────────────────────────────────────────────────────
+// ── BOTTOM SHEET CATEGORÍAS ───────────────────────────────────────────────────
 
-function mostrarMenuCategoria(btnTag, idOutfit, categoriaActualOutfit) {
-    cerrarMenuCategoria();
+let bottomSheetActivo = null;
 
-    const rect = btnTag.getBoundingClientRect();
-    const menu = document.createElement('div');
-    menu.className = 'menu-categoria-global';
+function abrirBottomSheet(itemId, tipo, btnCat) {
+    cerrarBottomSheet();
 
-    // Lista de categorías existentes
-    if (categoriasUsuario.length) {
-        const ul = document.createElement('ul');
-        ul.className = 'menu-cat-lista';
-        categoriasUsuario.forEach(cat => {
-            const li = document.createElement('li');
-            li.textContent = cat.name.toUpperCase();
-            const esActual = cat.name.toUpperCase() === (categoriaActualOutfit || '').toUpperCase();
-            if (esActual) li.classList.add('activa');
-            li.addEventListener('click', () => {
-                cerrarMenuCategoria();
-                cambiarCategoriaOutfit(idOutfit, cat.name, btnTag);
-            });
-            ul.appendChild(li);
+    const overlay = document.createElement('div');
+    overlay.className = 'bs-overlay';
+
+    const sheet = document.createElement('div');
+    sheet.className = 'bs-sheet';
+
+    const titulo = tipo === 'outfit' ? 'MOVE OUTFIT TO' : 'MOVE PIECE TO';
+
+    const opciones = categoriasUsuario.length
+        ? categoriasUsuario.map(cat => `
+            <button class="bs-opcion" data-cat="${cat.name}" type="button">
+                <i class="icon-folder"></i>
+                <span>${cat.name.toUpperCase()}</span>
+                <i class="icon-ok bs-check" style="display:none"></i>
+            </button>`).join('')
+        : `<p class="bs-vacio">Create a category first using the NEW button above.</p>`;
+
+    sheet.innerHTML = `
+        <div class="bs-handle"></div>
+        <p class="bs-titulo">${titulo}</p>
+        <div class="bs-opciones">${opciones}</div>
+        <button class="bs-cancelar" type="button">CANCEL</button>
+    `;
+
+    overlay.appendChild(sheet);
+    document.body.appendChild(overlay);
+    bottomSheetActivo = overlay;
+
+    requestAnimationFrame(() => sheet.classList.add('bs-sheet--open'));
+
+    sheet.querySelectorAll('.bs-opcion').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const cat = btn.dataset.cat;
+            cerrarBottomSheet();
+            if (tipo === 'outfit') cambiarCategoriaOutfit(itemId, cat, btnCat);
         });
-        menu.appendChild(ul);
-    } else {
-        const info = document.createElement('p');
-        info.className = 'menu-cat-vacio';
-        info.textContent = 'You have to create a category first';
-        menu.appendChild(info);
-    }
+    });
 
-    document.body.appendChild(menu);
-
-    const margen = 8;
-    let top  = rect.bottom + 5;
-    let left = rect.left;
-    if (left + 160 > window.innerWidth - margen) left = window.innerWidth - 160 - margen;
-    if (top  + 200 > window.innerHeight - margen) top  = rect.top - menu.offsetHeight - 5;
-
-    menu.style.top  = `${top}px`;
-    menu.style.left = `${left}px`;
-    menuCategoriaActivo = menu;
+    sheet.querySelector('.bs-cancelar').addEventListener('click', cerrarBottomSheet);
+    overlay.addEventListener('click', e => { if (e.target === overlay) cerrarBottomSheet(); });
 }
 
-function cerrarMenuCategoria() {
-    menuCategoriaActivo?.remove();
-    menuCategoriaActivo = null;
+function cerrarBottomSheet() {
+    if (!bottomSheetActivo) return;
+    const sheet = bottomSheetActivo.querySelector('.bs-sheet');
+    sheet.classList.remove('bs-sheet--open');
+    setTimeout(() => { bottomSheetActivo?.remove(); bottomSheetActivo = null; }, 280);
 }
-
-document.addEventListener('click', cerrarMenuCategoria);
 
 // ── CAMBIAR CATEGORÍA ─────────────────────────────────────────────────────────
 
@@ -374,7 +381,17 @@ async function cargarPrendasGuardadas() {
                     ${marca ? `<span class="prenda-guardada-marca">${marca}</span>` : ''}
                     <span class="prenda-guardada-outfit">${(outfitName || '').toUpperCase()}</span>
                 </div>
+                <button class="btn-categorizar btn-categorizar--prenda" type="button" title="Add to category">
+                    <i class="icon-folder"></i>
+                    <span>ADD TO CATEGORY</span>
+                    <i class="icon-right-open btn-cat-arrow"></i>
+                </button>
             `;
+
+            card.querySelector('.btn-categorizar--prenda').addEventListener('click', e => {
+                e.stopPropagation();
+                abrirBottomSheet(piece._id, 'piece', e.currentTarget);
+            });
 
             card.addEventListener('click', () => {
                 window.location.href = `outfit.html?id=${outfitId}`;
