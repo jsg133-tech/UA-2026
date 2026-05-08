@@ -2,6 +2,7 @@ import { getToken } from './auth-storage.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 
 const API = 'https://ua-2026.onrender.com';
+const LANG_STORAGE_KEY = 'bellaveste-language';
 
 const buscarInput    = document.getElementById('buscar-input');
 const buscarBtn      = document.getElementById('buscar-btn');
@@ -22,6 +23,39 @@ const fSeason = document.getElementById('f-season');
 let todosLosOutfits = [];
 let advancedAbierto = false;
 
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function tBuscar(clave) {
+    const textos = {
+        en: {
+            recommended: 'RECOMMENDED OUTFITS',
+            filtered: 'FILTERED OUTFITS',
+            resultsFor: 'RESULTS FOR',
+            outfitsSingular: 'outfit',
+            outfitsPlural: 'outfits',
+            loadError: 'Could not load outfits.',
+            noResults: 'No outfits found for your search.',
+            saveTitle: 'Save to closet',
+            defaultOutfit: 'Outfit',
+        },
+        es: {
+            recommended: 'OUTFITS RECOMENDADOS',
+            filtered: 'OUTFITS FILTRADOS',
+            resultsFor: 'RESULTADOS PARA',
+            outfitsSingular: 'outfit',
+            outfitsPlural: 'outfits',
+            loadError: 'No se pudieron cargar los outfits.',
+            noResults: 'No se encontraron outfits para tu busqueda.',
+            saveTitle: 'Guardar en armario',
+            defaultOutfit: 'Outfit',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
+
 // ── TOGGLE ADVANCED ───────────────────────────────────────────
 btnAdvanced.addEventListener('click', () => {
     advancedAbierto = !advancedAbierto;
@@ -35,9 +69,9 @@ async function cargarOutfits() {
     try {
         const r = await fetch(`${API}/api/outfits`);
         todosLosOutfits = await r.json();
-        mostrarGrid(todosLosOutfits, 'RECOMMENDED OUTFITS');
+        mostrarGrid(todosLosOutfits, tBuscar('recommended'));
     } catch {
-        mostrarVacio('Could not load outfits.');
+        mostrarVacio(tBuscar('loadError'));
     }
 }
 
@@ -119,8 +153,8 @@ function buscar() {
     });
 
     const titulo = query
-        ? `RESULTS FOR "${query.toUpperCase()}"`
-        : 'FILTERED OUTFITS';
+        ? `${tBuscar('resultsFor')} "${query.toUpperCase()}"`
+        : tBuscar('filtered');
 
     mostrarGrid(resultados, titulo);
     ocultarSugerencias();
@@ -136,12 +170,12 @@ buscarInput.addEventListener('keydown', (e) => {
 function mostrarGrid(outfits, titulo) {
     tituloEl.textContent = titulo;
     countEl.textContent  = outfits.length
-        ? `${outfits.length} outfit${outfits.length !== 1 ? 's' : ''}`
+        ? `${outfits.length} ${outfits.length !== 1 ? tBuscar('outfitsPlural') : tBuscar('outfitsSingular')}`
         : '';
     grid.innerHTML = '';
 
     if (!outfits.length) {
-        mostrarVacio('No outfits found for your search.');
+        mostrarVacio(tBuscar('noResults'));
         return;
     }
 
@@ -158,13 +192,13 @@ function crearTarjeta(outfit) {
     card.className = 'resultado-card';
 
     const img = outfit.imageUrl || 'images/temporada.jfif';
-    const nombre = (outfit.name || 'Outfit').toUpperCase();
+    const nombre = (outfit.name || tBuscar('defaultOutfit')).toUpperCase();
 
     card.innerHTML = `
         <img src="${img}" alt="${nombre}" loading="lazy">
         <div class="resultado-overlay">
             <span class="resultado-nombre">${nombre}</span>
-            <button class="resultado-heart" title="Save to closet">
+            <button class="resultado-heart" title="${tBuscar('saveTitle')}">
                 <i class="icon-heart"></i>
             </button>
         </div>
@@ -199,4 +233,12 @@ function crearTarjeta(outfit) {
 document.addEventListener('DOMContentLoaded', async () => {
     try { await inicializarBarraUsuario(); } catch { /* silencioso */ }
     cargarOutfits();
+});
+
+document.addEventListener('bellaveste:language-changed', () => {
+    if (buscarInput.value.trim() || fSize.value || fColor.value || fBrand.value || fSeason.value) {
+        buscar();
+        return;
+    }
+    mostrarGrid(todosLosOutfits, tBuscar('recommended'));
 });

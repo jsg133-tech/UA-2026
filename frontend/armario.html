@@ -20,7 +20,7 @@
     <script type="module" src="js/armario.js"></script>
 </head>
 
-<body>
+<body data-page="armario">
     <!-- ENCABEZADO -->
     <header class="barra-superior">
         <div class="fila-marca">
@@ -30,15 +30,15 @@
                 <input type="checkbox" id="chkMenu">
 
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
                 </ul>
             </nav>
 
@@ -62,7 +62,7 @@
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -70,16 +70,16 @@
     <main class="contenedor-armario">
         <section class="mi-armario">
             <div class="armario-header">
-                <h2>MY CLOSET</h2>
+                <h2 data-i18n="closetTitle">MY CLOSET</h2>
                 <div class="armario-acciones">
                     <button class="btn-toggle-categorias" id="btn-toggle-categorias">
                         <i class="icon-tag"></i>
-                        <span>CATEGORIES</span>
+                        <span data-i18n="categories">CATEGORIES</span>
                         <i class="icon-down-open icono-toggle" id="icono-toggle"></i>
                     </button>
                     <button class="btn-nueva-categoria" id="btn-nueva-categoria">
                         <i class="icon-plus"></i>
-                        <span>NEW</span>
+                        <span data-i18n="new">NEW</span>
                     </button>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <!-- FORMULARIO NUEVA CATEGORÍA (oculto por defecto) -->
             <div class="nueva-cat-form" id="nueva-cat-form">
                 <input type="text" id="nueva-cat-input" class="nueva-cat-input"
-                    placeholder="Category name..." maxlength="30" autocomplete="off">
+                    placeholder="Category name..." maxlength="30" autocomplete="off" data-i18n-placeholder="categoryPlaceholder">
                 <button type="button" id="nueva-cat-ok" class="nueva-cat-btn-ok">
                     <i class="icon-ok"></i>
                 </button>
@@ -115,9 +115,10 @@
 
         <!-- BOTON FINAL -->
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
     </main>
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 
 </html>

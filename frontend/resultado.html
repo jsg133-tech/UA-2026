@@ -17,10 +17,9 @@
     <link rel="stylesheet" href="css/armario.css">
     <link rel="stylesheet" href="css/resultado.css">
 
-    <script type="module" src="js/categoria.js"></script>
 </head>
 
-<body>
+<body data-page="resultado">
     <header class="barra-superior">
         <div class="fila-marca">
             <nav>
@@ -28,15 +27,15 @@
                 <input type="checkbox" id="chkMenu">
 
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
                 </ul>
             </nav>
 
@@ -60,7 +59,7 @@
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -68,22 +67,23 @@
     <main class="contenedor-app">
         <header class="seccion-header">
             <a href="inicio-categoria.html" class="header-back">
-                <i class="icon-left-open"></i> COLLECTIONS
+                <i class="icon-left-open"></i> <span data-i18n="backCollections">COLLECTIONS</span>
             </a>
-            <span class="header-tipo" id="header-tipo">COLLECTION</span>
-            <h2 id="titulo-filtro">RESULTS</h2>
+            <span class="header-tipo" id="header-tipo" data-i18n="collectionType">COLLECTION</span>
+            <h2 id="titulo-filtro" data-i18n="results">RESULTS</h2>
             <div class="header-divider"></div>
-            <p id="subtitulo-filtro">Curated selection for your style</p>
+            <p id="subtitulo-filtro" data-i18n="subtitle">Curated selection for your style</p>
         </header>
 
         <section id="grid-resultados" class="grid-armario">
             </section>
 
         <footer>
-            <a class="boton-armario" href="./inicio-categoria.html">BACK TO COLLECTIONS</a>
+            <a class="boton-armario" href="./inicio-categoria.html" data-i18n="backToCollections">BACK TO COLLECTIONS</a>
         </footer>
     </main>
 
+    <script type="module" src="js/i18n-global.js"></script>
     <script type="module" src="js/categoria.js"></script>
 </body>
 </html>

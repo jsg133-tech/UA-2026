@@ -15,7 +15,7 @@
     <script type="module" src="js/barra-usuario.js"></script>
 </head>
 
-<body>
+<body data-page="inicio-categoria">
 
     <header class="barra-superior">
         <div class="fila-marca">
@@ -25,15 +25,15 @@
                 <input type="checkbox" id="chkMenu">
 
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./colecciones.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
                 </ul>
             </nav>
 
@@ -57,29 +57,29 @@
             </label>
 
             <ul class="menu-perfil">
-                <li><a href="./inicio.html">LOGOUT</a></li>
+                <li><a href="./inicio.html" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
 
     <main>
         <section class="colecciones">
-            <h2>COLLECTIONS</h2>
-            <p>DISCOVER YOUR STYLE</p>
+            <h2 data-i18n="collectionsTitle">COLLECTIONS</h2>
+            <p data-i18n="collectionsSubtitle">DISCOVER YOUR STYLE</p>
 
             <div class="colecciones-grid">
 
                 <a href="categoria-temporada.html" class="coleccion-card">
                     <img src="images/temporada.jfif" alt="">
-                    <div class="contenido"><span>SEASON</span></div>
+                    <div class="contenido"><span data-i18n="season">SEASON</span></div>
                 </a>
                 <a href="categoria-color.html" class="coleccion-card">
                     <img src="images/color.jfif" alt="">
-                    <div class="contenido"><span>COLOR</span></div>
+                    <div class="contenido"><span data-i18n="color">COLOR</span></div>
                 </a>
                 <a href="categoria-mood.html" class="coleccion-card">
                     <img src="images/ocasion.jfif" alt="">
-                    <div class="contenido"><span>MOOD</span></div>
+                    <div class="contenido"><span data-i18n="mood">MOOD</span></div>
                 </a>
                 <a href="resultado.html?tipo=category&v=CASUAL" class="coleccion-card">
                     <img src="images/casual.jfif" alt="">
@@ -98,10 +98,12 @@
         </section>
 
         <footer>
-            <a class="boton-armario" href="#">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
+
+    <script type="module" src="js/i18n-global.js"></script>
 
 </body>
 

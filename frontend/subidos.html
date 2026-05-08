@@ -14,20 +14,20 @@
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <script type="module" src="js/subidos.js"></script>
 </head>
-<body>
+<body data-page="subidos">
     <header class="barra-superior">
         <div class="fila-marca">
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
                 </ul>
             </nav>
             <div class="marca"><h1>BELLAVESTE</h1><p>SPAIN</p></div>
@@ -43,7 +43,7 @@
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -51,9 +51,9 @@
     <main class="contenedor-subidos">
 
         <div class="subidos-header">
-            <h2>MY OUTFITS</h2>
+            <h2 data-i18n="myOutfits">MY OUTFITS</h2>
             <a href="subidaOutfit.html" class="btn-nuevo-outfit">
-                <i class="icon-plus"></i> NEW OUTFIT
+                <i class="icon-plus"></i> <span data-i18n="newOutfit">NEW OUTFIT</span>
             </a>
         </div>
 
@@ -62,9 +62,11 @@
         </div>
 
         <footer>
-            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="armario.html" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
+
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ import { getToken, getStoredUser } from './auth-storage.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 
 const API = 'https://ua-2026.onrender.com';
+const LANG_STORAGE_KEY = 'bellaveste-language';
 
 const loadingEl      = document.getElementById('outfit-loading');
 const contenidoEl    = document.getElementById('outfit-contenido');
@@ -14,9 +15,50 @@ const autorAvatarEl  = document.getElementById('autor-avatar');
 const prendasListaEl = document.getElementById('prendas-lista');
 const btnGuardar     = document.getElementById('btn-guardar');
 
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function tOutfit(clave) {
+    const textos = {
+        en: {
+            brand: 'Brand',
+            size: 'Size',
+            season: 'Season',
+            color: 'Color',
+            viewStore: 'VIEW IN STORE',
+            noOutfit: 'No outfit selected.',
+            notFound: 'Outfit not found',
+            unknown: 'Unknown',
+            noPieces: 'No pieces added to this outfit.',
+            loginToSave: 'You must be logged in to save outfits.',
+            saved: 'SAVED',
+            loadErrorPrefix: 'Error',
+            dateLocale: 'en-US',
+        },
+        es: {
+            brand: 'Marca',
+            size: 'Talla',
+            season: 'Temporada',
+            color: 'Color',
+            viewStore: 'VER EN TIENDA',
+            noOutfit: 'No hay outfit seleccionado.',
+            notFound: 'Outfit no encontrado',
+            unknown: 'Desconocido',
+            noPieces: 'No hay prendas agregadas a este outfit.',
+            loginToSave: 'Debes iniciar sesion para guardar outfits.',
+            saved: 'GUARDADO',
+            loadErrorPrefix: 'Error',
+            dateLocale: 'es-ES',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
+
 function formatearFecha(iso) {
     if (!iso) return '';
-    return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    return new Date(iso).toLocaleDateString(tOutfit('dateLocale'), { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 function renderPrenda(prenda, outfitId, token) {
@@ -26,14 +68,14 @@ function renderPrenda(prenda, outfitId, token) {
     const fotoSrc = prenda.imageUrl || 'images/temporada.jfif';
 
     const campos = [
-        { label: 'Brand',  valor: prenda.marca  },
-        { label: 'Size',   valor: prenda.size   },
-        { label: 'Season', valor: prenda.season },
+        { label: tOutfit('brand'),  valor: prenda.marca  },
+        { label: tOutfit('size'),   valor: prenda.size   },
+        { label: tOutfit('season'), valor: prenda.season },
     ].filter(c => c.valor && c.valor.trim());
 
     const colorHtml = prenda.color
         ? `<div class="prenda-campo">
-               <span class="campo-label">Color</span>
+               <span class="campo-label">${tOutfit('color')}</span>
                <span class="campo-color-swatch" style="background:${prenda.color}"></span>
                <span class="campo-valor">${prenda.color}</span>
            </div>`
@@ -47,7 +89,7 @@ function renderPrenda(prenda, outfitId, token) {
 
     const linkHtml = prenda.link
         ? `<a class="prenda-link" href="${prenda.link}" target="_blank" rel="noopener">
-               <i class="icon-link-ext"></i> VIEW IN STORE
+               <i class="icon-link-ext"></i> ${tOutfit('viewStore')}
            </a>`
         : '';
 
@@ -123,7 +165,7 @@ async function cargarOutfit() {
     const id = params.get('id');
 
     if (!id) {
-        loadingEl.innerHTML = '<p>No outfit selected.</p>';
+        loadingEl.innerHTML = `<p>${tOutfit('noOutfit')}</p>`;
         return;
     }
 
@@ -133,7 +175,7 @@ async function cargarOutfit() {
         const r = await fetch(`${API}/api/outfits/${id}`, { headers });
         const data = await r.json().catch(() => ({}));
 
-        if (!r.ok) throw new Error(`Error ${r.status}: ${data.error || 'Outfit not found'}`);
+        if (!r.ok) throw new Error(`${tOutfit('loadErrorPrefix')} ${r.status}: ${data.error || tOutfit('notFound')}`);
         const outfit = data;
 
         // Foto principal
@@ -147,7 +189,7 @@ async function cargarOutfit() {
 
         // Autor
         if (outfit.userId) {
-            autorNombreEl.textContent = (outfit.userId.name || 'Unknown').toUpperCase();
+            autorNombreEl.textContent = (outfit.userId.name || tOutfit('unknown')).toUpperCase();
             autorAvatarEl.src = outfit.userId.avatar || 'images/perfil.jfif';
         }
 
@@ -156,17 +198,17 @@ async function cargarOutfit() {
         if (outfit.pieces && outfit.pieces.length) {
             outfit.pieces.forEach(p => prendasListaEl.appendChild(renderPrenda(p, outfit._id, token)));
         } else {
-            prendasListaEl.innerHTML = '<p style="padding:20px;text-align:center;font-family:Cormorant Garamond,serif;color:#7a5060;">No pieces added to this outfit.</p>';
+            prendasListaEl.innerHTML = `<p style="padding:20px;text-align:center;font-family:Cormorant Garamond,serif;color:#7a5060;">${tOutfit('noPieces')}</p>`;
         }
 
         // Mostrar contenido
         loadingEl.classList.remove('visible');
         contenidoEl.style.display = 'block';
 
-        // Botón guardar en armario
-        btnGuardar.addEventListener('click', async () => {
+        // Boton guardar en armario
+        btnGuardar.onclick = async () => {
             if (!token) {
-                alert('You must be logged in to save outfits.');
+                alert(tOutfit('loginToSave'));
                 return;
             }
             btnGuardar.disabled = true;
@@ -177,11 +219,11 @@ async function cargarOutfit() {
                 });
                 if (res.ok) {
                     btnGuardar.classList.add('guardado');
-                    btnGuardar.innerHTML = '<i class="icon-ok"></i> SAVED';
+                    btnGuardar.innerHTML = `<i class="icon-ok"></i> ${tOutfit('saved')}`;
                 }
             } catch { /* silencioso */ }
             btnGuardar.disabled = false;
-        });
+        };
 
     } catch (err) {
         loadingEl.innerHTML = `<p style="font-family:Cormorant Garamond,serif;color:#7a5060;padding:20px;">${err.message}</p>`;
@@ -191,5 +233,9 @@ async function cargarOutfit() {
 // Necesitamos la ruta GET /api/outfits/:id en el backend
 document.addEventListener('DOMContentLoaded', async () => {
     try { await inicializarBarraUsuario(); } catch { /* silencioso */ }
+    cargarOutfit();
+});
+
+document.addEventListener('bellaveste:language-changed', () => {
     cargarOutfit();
 });

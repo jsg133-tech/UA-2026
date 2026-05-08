@@ -4,13 +4,43 @@ import { mostrarConfirm } from './modal.js';
 
 const API  = 'https://ua-2026.onrender.com';
 const grid = document.getElementById('subidos-grid');
+const LANG_STORAGE_KEY = 'bellaveste-language';
+
+function idiomaActual() {
+    return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
+}
+
+function tSubidos(clave) {
+    const textos = {
+        en: {
+            defaultOutfit: 'Outfit',
+            deleteTitle: 'Delete outfit',
+            deleteQuestion: 'Delete outfit?',
+            deleteMessage: 'will be permanently deleted.',
+            emptyMessage: 'You have not posted any outfits yet.',
+            firstOutfit: 'POST YOUR FIRST OUTFIT',
+            loadError: 'Could not load your outfits.',
+        },
+        es: {
+            defaultOutfit: 'Outfit',
+            deleteTitle: 'Eliminar outfit',
+            deleteQuestion: 'Eliminar outfit?',
+            deleteMessage: 'se eliminara de forma permanente.',
+            emptyMessage: 'Aun no has publicado outfits.',
+            firstOutfit: 'PUBLICA TU PRIMER OUTFIT',
+            loadError: 'No se pudieron cargar tus outfits.',
+        },
+    };
+
+    return textos[idiomaActual()][clave] || textos.en[clave] || '';
+}
 
 function crearTarjeta(outfit) {
     const div = document.createElement('div');
     div.className = 'subidos-tarjeta';
 
     const foto = outfit.imageUrl || 'images/temporada.jfif';
-    const nombre = (outfit.name || 'Outfit').toUpperCase();
+    const nombre = (outfit.name || tSubidos('defaultOutfit')).toUpperCase();
 
     const pills = [outfit.category, outfit.season]
         .filter(Boolean)
@@ -27,7 +57,7 @@ function crearTarjeta(outfit) {
             <span class="subidos-nombre">${nombre}</span>
             <div class="subidos-meta">${pills}${colorDot}</div>
         </div>
-        <button class="btn-eliminar-outfit" title="Delete outfit">
+        <button class="btn-eliminar-outfit" title="${tSubidos('deleteTitle')}">
             <i class="icon-trash"></i>
         </button>
     `;
@@ -40,7 +70,7 @@ function crearTarjeta(outfit) {
     div.querySelector('.btn-eliminar-outfit').addEventListener('click', (e) => {
         e.stopPropagation();
         mostrarConfirm(
-            `"${outfit.name}" will be permanently deleted.`,
+            `"${outfit.name}" ${tSubidos('deleteMessage')}`,
             async () => {
                 const token = getToken();
                 try {
@@ -56,7 +86,7 @@ function crearTarjeta(outfit) {
                     }
                 } catch { /* silencioso */ }
             },
-            'Delete outfit?'
+            tSubidos('deleteQuestion')
         );
     });
 
@@ -84,8 +114,8 @@ async function cargarSubidos() {
             grid.innerHTML = `
                 <div class="subidos-vacio">
                     <i class="icon-picture"></i>
-                    <p>You haven't posted any outfits yet.</p>
-                    <a href="subidaOutfit.html">POST YOUR FIRST OUTFIT</a>
+                    <p>${tSubidos('emptyMessage')}</p>
+                    <a href="subidaOutfit.html">${tSubidos('firstOutfit')}</a>
                 </div>
             `;
             return;
@@ -96,7 +126,7 @@ async function cargarSubidos() {
     } catch {
         grid.innerHTML = `
             <div class="subidos-vacio">
-                <p>Could not load your outfits.</p>
+                <p>${tSubidos('loadError')}</p>
             </div>
         `;
     }
@@ -104,5 +134,9 @@ async function cargarSubidos() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try { await inicializarBarraUsuario(); } catch { /* silencioso */ }
+    cargarSubidos();
+});
+
+document.addEventListener('bellaveste:language-changed', () => {
     cargarSubidos();
 });

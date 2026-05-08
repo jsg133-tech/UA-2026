@@ -14,20 +14,20 @@
     <link rel="stylesheet" href="fontello/css/fontello.css">
     <script type="module" src="js/buscar.js"></script>
 </head>
-<body>
+<body data-page="buscar">
     <header class="barra-superior">
         <div class="fila-marca">
             <nav>
                 <label for="chkMenu"><i class="icon-menu"></i></label>
                 <input type="checkbox" id="chkMenu">
                 <ul id="menu">
-                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> MENU</label></li>
-                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i>HOME</a></li>
-                    <li><a href="./perfil.html"><i class="icon-login"></i>PROFILE</a></li>
-                    <li><a href="./buscar.html"><i class="icon-search"></i>SEARCH</a></li>
-                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
-                    <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
-                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
+                    <li class="menu-header"><label for="chkMenu"><i class="icon-left-open"></i> <span data-i18n="menu">MENU</span></label></li>
+                    <li><a href="./inicio-logueado.html"><i class="icon-home"></i><span data-i18n="home">HOME</span></a></li>
+                    <li><a href="./perfil.html"><i class="icon-login"></i><span data-i18n="profile">PROFILE</span></a></li>
+                    <li><a href="./buscar.html"><i class="icon-search"></i><span data-i18n="search">SEARCH</span></a></li>
+                    <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
+                    <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
+                    <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
                 </ul>
             </nav>
             <div class="marca"><h1>BELLAVESTE</h1><p>SPAIN</p></div>
@@ -43,7 +43,7 @@
                 <img class="avatar" id="avatar-usuario" src="images/perfil.jfif" alt="Usuario">
             </label>
             <ul class="menu-perfil">
-                <li><a href="./inicio.html" id="logout-link">LOGOUT</a></li>
+                <li><a href="./inicio.html" id="logout-link" data-i18n="logout">LOGOUT</a></li>
             </ul>
         </div>
     </header>
@@ -58,6 +58,7 @@
                     id="buscar-input"
                     class="buscar-input"
                     placeholder="Search outfits..."
+                    data-i18n-placeholder="searchPlaceholder"
                     autocomplete="off"
                 >
                 <button class="buscar-btn" id="buscar-btn" type="button">
@@ -70,7 +71,7 @@
 
             <!-- BOTÓN ADVANCED SEARCH -->
             <button class="btn-advanced" id="btn-advanced" type="button">
-                <i class="icon-sliders"></i> Advanced search
+                <i class="icon-sliders"></i> <span data-i18n="advancedSearch">Advanced search</span>
                 <i class="icon-down-open advanced-arrow" id="advanced-arrow"></i>
             </button>
         </div>
@@ -79,37 +80,37 @@
         <div class="filtros-avanzados" id="filtros-avanzados">
             <div class="filtros-grid">
                 <div class="filtro-campo">
-                    <label class="filtro-label"><i class="icon-resize-full-alt"></i> SIZE</label>
-                    <input type="text" id="f-size" class="filtro-input" placeholder="e.g. M, S, XL">
+                    <label class="filtro-label"><i class="icon-resize-full-alt"></i> <span data-i18n="size">SIZE</span></label>
+                    <input type="text" id="f-size" class="filtro-input" placeholder="e.g. M, S, XL" data-i18n-placeholder="sizePlaceholder">
                 </div>
                 <div class="filtro-campo">
-                    <label class="filtro-label"><i class="icon-palette"></i> COLOUR</label>
-                    <input type="text" id="f-color" class="filtro-input" placeholder="e.g. black, beige">
+                    <label class="filtro-label"><i class="icon-palette"></i> <span data-i18n="colour">COLOUR</span></label>
+                    <input type="text" id="f-color" class="filtro-input" placeholder="e.g. black, beige" data-i18n-placeholder="colorPlaceholder">
                 </div>
                 <div class="filtro-campo">
-                    <label class="filtro-label"><i class="icon-tag"></i> BRAND</label>
-                    <input type="text" id="f-brand" class="filtro-input" placeholder="e.g. Zara, H&M">
+                    <label class="filtro-label"><i class="icon-tag"></i> <span data-i18n="brand">BRAND</span></label>
+                    <input type="text" id="f-brand" class="filtro-input" placeholder="e.g. Zara, H&M" data-i18n-placeholder="brandPlaceholder">
                 </div>
                 <div class="filtro-campo">
-                    <label class="filtro-label"><i class="icon-sun"></i> SEASON</label>
+                    <label class="filtro-label"><i class="icon-sun"></i> <span data-i18n="season">SEASON</span></label>
                     <select id="f-season" class="filtro-input">
-                        <option value="">All seasons</option>
-                        <option value="spring">Spring</option>
-                        <option value="summer">Summer</option>
-                        <option value="autumn">Autumn</option>
-                        <option value="winter">Winter</option>
+                        <option value="" data-i18n="allSeasons">All seasons</option>
+                        <option value="spring" data-i18n="spring">Spring</option>
+                        <option value="summer" data-i18n="summer">Summer</option>
+                        <option value="autumn" data-i18n="autumn">Autumn</option>
+                        <option value="winter" data-i18n="winter">Winter</option>
                     </select>
                 </div>
             </div>
             <button class="btn-aplicar" id="btn-aplicar" type="button">
-                APPLY FILTERS
+                <span data-i18n="applyFilters">APPLY FILTERS</span>
             </button>
         </div>
 
         <!-- RESULTADOS / RECOMENDADOS -->
         <section class="buscar-resultados">
             <div class="resultados-header">
-                <h2 class="resultados-titulo" id="resultados-titulo">RECOMMENDED OUTFITS</h2>
+                <h2 class="resultados-titulo" id="resultados-titulo" data-i18n="recommendedOutfits">RECOMMENDED OUTFITS</h2>
                 <span class="resultados-count" id="resultados-count"></span>
             </div>
             <div class="resultados-grid" id="resultados-grid">
@@ -118,9 +119,10 @@
         </section>
 
         <footer>
-            <a class="boton-armario" href="armario.html">VIRTUAL CLOSET</a>
+            <a class="boton-armario" href="armario.html" data-i18n="footer">VIRTUAL CLOSET</a>
         </footer>
 
     </main>
+    <script type="module" src="js/i18n-global.js"></script>
 </body>
 </html>
