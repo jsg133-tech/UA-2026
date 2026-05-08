@@ -168,6 +168,28 @@ router.get('/pieces/saved', async (req, res) => {
   }
 });
 
+// PUT /api/outfits/:outfitId/pieces/:pieceId/category  →  asignar categoría a prenda guardada
+router.put('/:outfitId/pieces/:pieceId/category', async (req, res) => {
+  try {
+    const { categoria } = req.body;
+    const outfit = await Outfit.findById(req.params.outfitId);
+    if (!outfit) return res.status(404).json({ error: 'Outfit not found' });
+    const piece = outfit.pieces.id(req.params.pieceId);
+    if (!piece) return res.status(404).json({ error: 'Piece not found' });
+
+    const existing = piece.savedCategories.find(sc => sc.userId.toString() === req.userId.toString());
+    if (existing) {
+      existing.categoria = categoria;
+    } else {
+      piece.savedCategories.push({ userId: req.userId, categoria });
+    }
+    await outfit.save();
+    res.json({ message: 'Category assigned' });
+  } catch {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // POST /api/outfits/:outfitId/pieces/:pieceId/save
 router.post('/:outfitId/pieces/:pieceId/save', async (req, res) => {
   try {
