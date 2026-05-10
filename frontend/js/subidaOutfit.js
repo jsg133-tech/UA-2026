@@ -1,6 +1,6 @@
 // Control de subida de outfit - SUBIDAOUTFIT.JS
 
-import { mostrarModal } from './modal.js';
+import { mostrarModal, mostrarConfirm } from './modal.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 import { getToken } from './auth-storage.js';
 
@@ -308,9 +308,12 @@ btnAgregarPrenda.addEventListener('click', (e) => {
 // Cancelar
 btnCancelar.addEventListener('click', (e) => {
     e.preventDefault();
-    if (confirm(tUpload('discardChanges'))) {
-        window.location.href = 'inicio-logueado.html';
-    }
+    mostrarConfirm(
+        'Your changes will be lost.',
+        () => { window.location.href = 'inicio-logueado.html'; },
+        'Discard changes?',
+        'DISCARD'
+    );
 });
 
 // Enviar formulario
