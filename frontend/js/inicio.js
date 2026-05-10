@@ -9,7 +9,7 @@ const outfitSectionEl = document.querySelector('.outfit-dia');
 const logoutLinkEl = document.getElementById('logout-link');
 const LANG_STORAGE_KEY = 'bellaveste-language';
 
-const CANTIDAD_INICIAL_OUTFITS = 4;
+const CANTIDAD_INICIAL_OUTFITS = 6;
 const CANTIDAD_POR_BOTON = 4;
 
 function idiomaActual() {
