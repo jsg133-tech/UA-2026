@@ -1,200 +1,237 @@
+/* ============================================================
+   REGISTRAR — BELLAVESTE  ·  Elegante
+   ============================================================ */
+
 :root {
-    --vino: #5a0d16;
+    --vino:        #5a0d16;
     --vino-oscuro: #3d0a11;
-    --claro: #f4ece4;
-    --beige: #c9b2a3;
-    --texto: #6f4a52;
+    --claro:       #f4ece4;
+    --texto:       #6f4a52;
 }
 
-/* RESET */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: "Cormorant Garamond", serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background:
-        radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
-        linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
+        radial-gradient(ellipse at 25% 15%, #fff5ee 0%, #f0e4da 45%, #e5d3c8 100%),
+        linear-gradient(150deg, #f5ebe3 0%, #e6d3c6 100%);
+    background-blend-mode: multiply;
 }
 
-/* ================= HEADER ================= */
+/* ── HEADER ─────────────────────────────────────────────────── */
 
-.barra-superior {
+.barra-superior { text-align: center; }
+
+.marca {
+    background: linear-gradient(135deg, #3d0a11 0%, #5a0d16 60%, #6b1020 100%);
+    color: var(--claro);
+    padding: 36px 24px 28px;
+    position: relative;
+    overflow: hidden;
     text-align: center;
 }
 
-/* MARCA */
-.marca {
-    background: var(--vino);
-    color: var(--claro);
-    padding: 50px 20px;
+.marca::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(255,255,255,0.06) 0%, transparent 65%);
+    pointer-events: none;
 }
 
 .marca h1 {
     font-family: "Cinzel", serif;
-    font-size: 2.6rem;
-    letter-spacing: 4px;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    color: var(--claro);
+    line-height: 1;
+    position: relative;
 }
 
 .marca p {
-    font-size: 0.9rem;
-    letter-spacing: 3px;
-    opacity: 0.8;
+    font-family: "Cinzel", serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.45em;
+    opacity: 0.55;
+    margin-top: 6px;
+    position: relative;
 }
 
-/* SUBTITULO */
 .subtitulo {
-    background: var(--beige);
-    padding: 15px;
-    border-bottom: 2px solid #a98e7e;
+    background: rgba(244, 236, 228, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 11px 20px;
+    border-bottom: 1px solid rgba(90, 13, 22, 0.1);
+    text-align: center;
 }
 
 .subtitulo h2 {
     font-family: "Cinzel", serif;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    color: var(--vino);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+    color: rgba(90, 13, 22, 0.55);
 }
 
-/* ================= MAIN ================= */
+/* ── CONTENEDOR ──────────────────────────────────────────────── */
 
 .contenedor {
-    max-width: 480px;
-    margin: 70px auto;
-    padding: 0 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 28px 20px 32px;
+    width: 100%;
 }
 
-/* FORMULARIO */
+/* ── FORMULARIO ──────────────────────────────────────────────── */
+
 .formulario {
-    background: var(--beige);
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(244, 236, 228, 0.9);
+    border-top: 2px solid rgba(90, 13, 22, 0.2);
+    border-radius: 20px;
+    padding: 32px 28px 28px;
+    box-shadow:
+        0 8px 40px rgba(61, 10, 17, 0.1),
+        0 2px 8px rgba(61, 10, 17, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* CAMPOS */
+/* ── CAMPOS ──────────────────────────────────────────────────── */
+
 .campo {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 0;
 }
 
 .campo label {
     display: block;
-    margin-bottom: 6px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    color: var(--vino);
+    font-family: "Cinzel", serif;
+    font-size: 0.58rem;
+    letter-spacing: 2.5px;
+    color: rgba(90, 13, 22, 0.6);
+    text-transform: uppercase;
 }
 
-/* INPUTS */
 .campo input {
     width: 100%;
-    padding: 12px;
+    padding: 11px 0;
     border: none;
-    background: #f4ece4;
-    font-family: inherit;
+    border-bottom: 1px solid rgba(90, 13, 22, 0.18);
+    background: transparent;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.05rem;
+    color: var(--vino-oscuro);
     outline: none;
-    transition: 0.2s;
+    transition: border-color 0.25s ease;
+    border-radius: 0;
 }
 
-.password-wrapper {
-    position: relative;
+.campo input:focus {
+    border-bottom-color: var(--vino);
+    background: transparent;
+    box-shadow: none;
 }
 
-.password-wrapper input {
-    padding-right: 52px;
+.campo input::placeholder {
+    color: rgba(61, 10, 17, 0.25);
+    font-style: italic;
 }
+
+/* ── CONTRASEÑA ──────────────────────────────────────────────── */
+
+.password-wrapper { position: relative; }
+
+.password-wrapper input { padding-right: 44px; }
 
 .toggle-password {
     position: absolute;
-    right: 6px;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: var(--vino);
+    color: rgba(90, 13, 22, 0.4);
     cursor: pointer;
     display: grid;
     place-items: center;
-    transition: 0.2s ease;
+    transition: color 0.2s, background 0.2s;
 }
 
 .toggle-password:hover,
 .toggle-password:focus-visible {
-    background: rgba(90, 13, 22, 0.08);
+    color: var(--vino);
+    background: rgba(90, 13, 22, 0.06);
     outline: none;
 }
 
-.toggle-password i {
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1;
-}
+.toggle-password i { font-size: 1rem; line-height: 1; }
+.toggle-password.is-visible { color: var(--vino-oscuro); }
 
-.toggle-password.is-visible {
-    color: var(--vino-oscuro);
-}
+/* ── BOTÓN REGISTER ──────────────────────────────────────────── */
 
-/* EFECTO FOCUS */
-.campo input:focus {
-    background: #fff;
-    box-shadow: 0 0 0 1px var(--vino);
-}
-
-/* BOTON */
 .boton-registrar {
     width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    background: var(--vino);
-    color: white;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--vino) 0%, #7a1525 100%);
+    color: var(--claro);
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-family: "Cinzel", serif;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    font-size: 0.72rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: box-shadow 0.25s, transform 0.15s;
+    box-shadow: 0 4px 18px rgba(90, 13, 22, 0.3);
+    margin-top: 4px;
 }
 
 .boton-registrar:hover {
-    background: var(--vino-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(90, 13, 22, 0.38);
 }
 
-/* BOTON FINAL */
+.boton-registrar:active { transform: translateY(0); }
+.boton-registrar:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+
+footer { padding: 20px; text-align: center; }
+
 .boton-armario {
-    display: block;
-    margin-top: 18px;
-    background: linear-gradient(90deg, #4d0c15, #5f1120);
-    color: #f8eee8;
-    text-decoration: none;
-    text-align: center;
+    display: inline-block;
     font-family: "Cinzel", serif;
-    font-size: 1.8rem;
-    padding: 9px;
+    font-size: 0.55rem;
+    letter-spacing: 4px;
+    color: rgba(90, 13, 22, 0.35);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
-/* ================= RESPONSIVE ================= */
+.boton-armario:hover { color: var(--vino); }
 
-@media (max-width: 768px) {
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
 
-    .marca {
-        padding: 35px 15px;
-    }
-
-    .marca h1 {
-        font-size: 2rem;
-    }
-
-    .contenedor {
-        margin: 40px auto;
-    }
-
-    .formulario {
-        padding: 25px;
-    }
+@media (max-width: 480px) {
+    .marca { padding: 28px 18px 22px; }
+    .formulario { padding: 26px 20px 24px; border-radius: 16px; gap: 18px; }
+    .contenedor { padding: 22px 14px 28px; }
 }
