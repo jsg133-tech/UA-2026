@@ -595,6 +595,13 @@
     gap: 10px;
 }
 
+@media (max-width: 480px) {
+    .prendas-guardadas-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}
+
 .prenda-guardada-card {
     border-radius: 10px;
     overflow: hidden;

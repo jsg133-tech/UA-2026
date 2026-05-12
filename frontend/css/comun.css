@@ -1,107 +1,31 @@
+/* ============================================================
+   COMUN — BELLAVESTE
+   ============================================================ */
+
 :root {
-    --vino: #5a0d16;
+    --vino:        #5a0d16;
     --vino-oscuro: #3d0a11;
     --claro: #f4ece4;
+    --fondo: #d9d8de;
 }
 
-[data-theme="dark"] {
-    --bg-puro: #000000;
-    --bg-seccion: #3d0a11; /* Tu vino oscuro */
-    --texto-claro: #f4ece4;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- AJUSTES MODO OSCURO --- */
-
-[data-theme="dark"] body {
-    background: var(--bg-puro) !important;
-}
-
-/* 1. QUITAR EL CUADRADO DEL MENÚ (icon-menu) */
-[data-theme="dark"] nav > label,
-[data-theme="dark"] .boton-icono {
-    background: none !important; /* Adiós al cuadrado */
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* 2. CÍRCULOS CON BORDE CLARO (SEASON, COLOR, MOOD) */
-[data-theme="dark"] .categoria img {
-    border: 2px solid var(--claro); /* Círculo claro alrededor */
-    padding: 2px; /* Espacio sutil entre foto y borde */
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* 3. QUITAR ESQUINAS REDONDEADAS DE LAS SECCIONES */
-[data-theme="dark"] .colecciones, 
-[data-theme="dark"] .outfit-dia {
-    background: var(--bg-seccion) !important;
-    border-radius: 0 !important; /* Esquinas rectas y radicales */
-    margin: 0 !important; /* Para que ocupen todo el ancho si quieres */
-    border: none !important;
-    padding: 40px 20px;
-}
-
-/* --- TEXTOS Y LOGO --- */
-
-[data-theme="dark"] .barra-superior {
-    background: var(--claro) !important;
-}
-
-[data-theme="dark"] .marca h1 {
-    color: var(--vino) !important;
-}
-
-[data-theme="dark"] .marca p,
-[data-theme="dark"] nav > label i {
-    color: var(--vino-oscuro) !important; /* Las tres líneas en vino oscuro */
-}
-
-[data-theme="dark"] .colecciones h2,
-[data-theme="dark"] .colecciones p,
-[data-theme="dark"] .categoria span,
-[data-theme="dark"] .outfit-dia h2,
-[data-theme="dark"] .outfit-dia p {
-    color: var(--texto-claro) !important;
-}
-
-/* BOTÓN FINAL SIN ESQUINAS */
-[data-theme="dark"] .boton-armario {
-    background: var(--claro) !important;
-    color: var(--vino) !important;
-    border-radius: 0 !important; 
-    margin: 0 !important;
-}
-
-html,
-body {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+html, body { width: 100%; min-height: 100dvh; }
 
 body {
-    min-height: 100vh;
-    min-height: 100dvh;
     font-family: "Cormorant Garamond", serif;
     background:
         radial-gradient(circle at 15% 10%, #fff8f3 0, #f0e5dd 42%, #eadfda 100%),
         linear-gradient(140deg, #f5ebe5 0%, #e6d7cc 100%);
-    padding: 18px 14px 30px;
     overflow-x: hidden;
 }
 
+/* ── BARRA SUPERIOR ──────────────────────────────────────── */
 
-/* BARRA SUPERIOR */
 .barra-superior {
-    background: linear-gradient(120deg, #4d0c15, #5f1120);
-    color: #f4e9df;
+    background: var(--vino-oscuro);
+    color: var(--claro);
 }
 
 .fila-marca {
@@ -109,129 +33,196 @@ body {
     grid-template-columns: 40px 1fr auto;
     align-items: center;
     gap: 10px;
-    padding: 10px 14px 12px;
+    padding: 11px 16px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── MARCA ───────────────────────────────────────────────── */
+
+.marca { text-align: center; }
+
+.marca h1 {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    font-size: 1.4rem;
+    color: var(--claro);
+    line-height: 1;
+}
+
+.marca p {
+    font-family: "Cinzel", serif;
+    letter-spacing: 0.4em;
+    font-size: 0.45rem;
+    color: rgba(244, 236, 228, 0.45);
+    margin-top: 3px;
+}
+
+/* ── ICONOS ──────────────────────────────────────────────── */
+
+.iconos-acciones {
+    display: flex;
+    gap: 14px;
+    align-items: center;
 }
 
 .boton-icono {
     border: none;
     background: none;
-    color: inherit;
-    font-size: 1.4rem;
+    color: rgba(244, 233, 223, 0.65);
+    font-size: 1.15rem;
     cursor: pointer;
-    padding: 0;
+    padding: 4px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    transition: color 0.2s;
 }
 
-.marca {
-    text-align: center;
-}
+.boton-icono:hover { color: var(--claro); }
 
-.marca h1 {
-    font-family: "Cinzel", serif;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-size: 1.6rem;
-}
+/* ── NAV HAMBURGUESA ─────────────────────────────────────── */
 
-.marca p {
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    opacity: .75;
-}
+nav { position: relative; }
 
-.iconos-acciones {
-    display: flex;
-    gap: 10px;
-    font-size: 1.2rem;
-}
-
-nav {
-    background-color: #5a0d16;
-    position: relative;
-}
-
-/* icono hamburguesa */
 nav > label {
     display: block;
-    font-size: 1.4rem;
-    color: #f4e9df;
-    padding: 3px 6px;
+    font-size: 1.1rem;
+    color: rgba(244, 233, 223, 0.65);
+    padding: 4px 6px;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
-/* menú */
+nav > label:hover { color: var(--claro); }
+
+#chkMenu { display: none; }
+
+/* Panel lateral */
 nav ul {
     list-style: none;
     position: fixed;
     top: 0;
     left: -100%;
-    width: 260px;
+    width: 255px;
     height: 100vh;
-    background: #5a0d16;
-
+    height: 100dvh;
+    background: var(--vino-oscuro);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-
-    padding: 24px 20px;
-    gap: 20px;
-
-    transition: 0.3s;
+    padding: 32px 20px 28px;
+    gap: 2px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 999;
+    box-shadow: 6px 0 40px rgba(15, 3, 6, 0.4);
+    overflow-y: auto;
 }
 
-/* Header del menú: ← MENU */
+#chkMenu:checked + ul { left: 0; }
+
+/* Cabecera del panel */
 .menu-header {
     width: 100%;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(244, 233, 223, 0.2);
-    margin-bottom: 4px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(244, 233, 223, 0.1);
 }
 
 .menu-header label {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #f4e9df;
+    color: rgba(244, 233, 223, 0.4);
     font-family: "Cinzel", serif;
-    font-size: 0.95rem;
-    letter-spacing: 2px;
+    font-size: 0.58rem;
+    letter-spacing: 3px;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
-nav ul li {
-    width: 100%;
-}
+.menu-header label:hover { color: rgba(244, 233, 223, 0.7); }
+
+/* Items del menú */
+nav ul li { width: 100%; }
 
 nav ul li a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
-    color: #f4e9df;
+    color: rgba(244, 233, 223, 0.6);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    padding: 10px 10px;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+}
+
+nav ul li a i {
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+    opacity: 0.7;
 }
 
 nav ul li a:hover {
-    color: #d6bfa6;
+    background: rgba(244, 233, 223, 0.07);
+    color: var(--claro);
 }
 
-/* USUARIO */
+/* Items sin enlace (dark mode, settings) */
+nav ul li:not(:has(a)) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(244, 233, 223, 0.28);
+    font-family: "Cinzel", serif;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    padding: 10px 10px;
+    cursor: default;
+}
+
+nav ul li:not(:has(a)) i {
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+}
+
+/* ── BARRA USUARIO ───────────────────────────────────────── */
+
 .usuario-barra {
     position: relative;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-    padding: 7px 12px;
-    background: rgba(240, 214, 196, 0.85);
-    color: #674249;
+    padding: 5px 16px;
+    background: rgba(230, 210, 196, 0.6);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(90, 13, 22, 0.08);
 }
 
+.perfil-trigger {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    padding: 3px 8px 3px 3px;
+    border-radius: 999px;
+    transition: background 0.2s;
+}
+
+.perfil-trigger:hover { background: rgba(90, 13, 22, 0.08); }
+
 .nombre-usuario {
-    font-size: .8rem;
-    font-weight: 600;
+    font-family: "Cinzel", serif;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    color: rgba(61, 10, 17, 0.65);
+    font-weight: 400;
 }
 
 .avatar {
@@ -239,95 +230,70 @@ nav ul li a:hover {
     height: 24px;
     border-radius: 50%;
     object-fit: cover;
+    border: 1.5px solid rgba(90, 13, 22, 0.2);
 }
 
-#chkMenu {
-    display: none;
-}
+#chkPerfil { display: none; }
 
-/* abrir menú */
-#chkMenu:checked+ul {
-    left: 0;
-}
-
-/* ocultar checkbox */
-#chkPerfil {
-    display: none;
-}
-
-/* hacer clicable todo el bloque */
-.perfil-trigger {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 999px;
-    transition: background-color .2s ease;
-}
-
-.perfil-trigger:hover {
-    background: rgba(90, 13, 22, 0.1);
-}
-
-/* menú perfil oculto */
 .menu-perfil {
     position: absolute;
     right: 12px;
-    top: calc(100% + 8px);
-    background: rgba(244, 236, 228, 0.97);
-    border: 1px solid rgba(90, 13, 22, 0.18);
+    top: calc(100% + 6px);
+    background: rgba(248, 242, 236, 0.97);
+    border: 1px solid rgba(90, 13, 22, 0.12);
     border-radius: 12px;
-    padding: 8px;
+    padding: 6px;
     list-style: none;
     display: none;
-    min-width: 150px;
-    z-index: 40;
-    box-shadow: 0 12px 28px rgba(61, 10, 17, 0.2);
-    backdrop-filter: blur(4px);
+    min-width: 140px;
+    z-index: 100;
+    box-shadow: 0 8px 28px rgba(20, 4, 8, 0.2);
+    backdrop-filter: blur(10px);
 }
 
-/* estilo del botón logout */
 .menu-perfil li a {
     display: block;
-    width: 100%;
     text-decoration: none;
-    color: #5a0d16;
+    color: var(--vino);
     font-family: "Cinzel", serif;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    padding: 8px 10px;
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    padding: 9px 12px;
     border-radius: 8px;
-    transition: background-color .2s ease, color .2s ease;
+    transition: background 0.18s, color 0.18s;
 }
 
 .menu-perfil li a:hover {
-    background: #5a0d16;
-    color: #f4ece4;
+    background: var(--vino);
+    color: var(--claro);
 }
 
-/* mostrar cuando está activo */
-#chkPerfil:checked ~ .menu-perfil {
-    display: block;
-}
+#chkPerfil:checked ~ .menu-perfil { display: block; }
 
-/* BOTON FINAL */
+/* ── BOTÓN FOOTER ────────────────────────────────────────── */
+
 .boton-armario {
     display: block;
-    margin-top: 18px;
-    background: linear-gradient(90deg, #4d0c15, #5f1120);
-    color: #f8eee8;
+    padding: 14px 20px;
+    background: var(--vino-oscuro);
+    color: rgba(244, 236, 228, 0.8);
     text-decoration: none;
     text-align: center;
     font-family: "Cinzel", serif;
-    font-size: 1.8rem;
-    padding: 9px;
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    transition: background 0.2s, color 0.2s;
 }
 
+.boton-armario:hover {
+    background: var(--vino);
+    color: var(--claro);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+
 @media (max-width: 768px) {
-    body {
-        padding: 0;
-    }
+    body { padding: 0; }
 
     main,
     .contenedor,

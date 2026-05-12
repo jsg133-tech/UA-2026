@@ -1,4 +1,5 @@
 import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
+import { mostrarModal } from './modal.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -284,7 +285,7 @@ async function cambiarCategoriaOutfit(idOutfit, nuevaCategoria, btnTag) {
     } catch (err) {
         btnTag.style.opacity = '1';
         console.error('Error asignando categoría:', err.message);
-        alert(`Could not assign category: ${err.message}`);
+        mostrarModal(`Could not assign category: ${err.message}`, 'error');
     }
 }
 

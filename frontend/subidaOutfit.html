@@ -37,6 +37,7 @@
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i><span data-i18n="collections">COLLECTIONS</span></a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
                     <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
+                    <li><a href="./subidos.html"><i class="icon-heart"></i><span data-i18n="myPosts">MY POSTS</span></a></li>
                     <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
                     <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
                 </ul>
@@ -69,12 +70,20 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="contenedor-app">
+
+        <!-- CABECERA EDITORIAL -->
+        <div class="subida-page-header">
+            <span class="subida-page-label">BELLAVESTE</span>
+            <h2 class="subida-page-titulo">POST AN OUTFIT</h2>
+            <p class="subida-page-sub">Share your style with the community</p>
+        </div>
+
         <section class="subida-outfit">
             <div class="formulario-outfit">
                 <form id="form-subida" class="form-outfit">
                     <!-- SECCIÓN 1: OUTFIT (Contenedor) -->
                     <div class="seccion-outfit">
-                        <h3 class="titulo-seccion" data-i18n="outfitInfo">Outfit Information</h3>
+                        <h3 class="titulo-seccion"><span class="titulo-num">01</span> Outfit Information</h3>
                         
                         <!-- Nombre del outfit -->
                         <div class="grupo-campo">
@@ -141,7 +150,7 @@
 
                     <!-- SECCIÓN 2: PRENDAS (Componentes) -->
                     <div class="seccion-prendas">
-                        <h3 class="titulo-seccion" data-i18n="pieces">Pieces</h3>
+                        <h3 class="titulo-seccion"><span class="titulo-num">02</span> Pieces</h3>
                         <div id="lista-prendas" class="lista-prendas"></div>
                         <button type="button" id="btn-agregar-prenda" class="boton-agregar-prenda">
                             <i class="icon-plus"></i> <span data-i18n="addPiece">Add Piece</span>
