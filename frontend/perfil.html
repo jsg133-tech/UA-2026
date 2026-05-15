@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="css/modal.css">
     <script type="module" src="js/perfil.js"></script>
+    <link rel="stylesheet" href="css/dark-mode.css">
 </head>
 <body data-page="perfil">
     <header class="barra-superior">
@@ -30,8 +31,8 @@
                     <li><a href="./inicio-categoria.html"><i class="icon-plus"></i>COLLECTIONS</a></li>
                     <li><a href="./armario.html"><i class="icon-logout"></i>MY CLOSET</a></li>
                     <li><a href="./subidaOutfit.html"><i class="icon-plus"></i>POST</a></li>
-                    <li><i class="icon-moon"></i>DARK MODE</li>
-                    <li><i class="icon-setting"></i>SETTING</li>
+                    <li class="dark-mode-btn" style="cursor:pointer"><i class="icon-moon"></i>DARK MODE</li>
+                    <li><a href="./perfil.html?tab=ajustes"><i class="icon-cog"></i><span data-i18n="setting">SETTING</span></a></li>
                 </ul>
 
             </nav>
@@ -148,5 +149,6 @@
         <a class="boton-armario" href="#" data-i18n="footer">VIRTUAL CLOSET</a>
     </footer>
     <script type="module" src="js/i18n-global.js"></script>
+    <script type="module" src="js/dark-mode.js"></script>
 </body>
 </html>

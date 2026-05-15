@@ -41,15 +41,22 @@ passwordToggles.forEach((boton) => {
 });
 
 // ── TABS ─────────────────────────────────────────────────────
+function activarTab(targetId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(s => s.style.display = 'none');
+    const btn = document.querySelector(`.tab-btn[data-target="${targetId}"]`);
+    if (btn) btn.classList.add('active');
+    const section = document.getElementById(targetId);
+    if (section) section.style.display = 'block';
+}
+
 document.querySelectorAll('.tab-btn[data-target]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(s => s.style.display = 'none');
-        btn.classList.add('active');
-        const target = document.getElementById(btn.dataset.target);
-        if (target) target.style.display = 'block';
-    });
+    btn.addEventListener('click', () => activarTab(btn.dataset.target));
 });
+
+// Abrir pestaña desde URL ?tab=ajustes
+const tabParam = new URLSearchParams(location.search).get('tab');
+if (tabParam === 'ajustes') activarTab('seccion-ajustes');
 
 // ── FOTO DE PERFIL ────────────────────────────────────────────
 inputFoto.addEventListener('change', (e) => {

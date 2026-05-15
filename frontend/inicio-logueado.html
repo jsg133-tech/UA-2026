@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="fontello/css/fontello.css">
 
     <script type="module" src="js/inicio.js"></script>
+    <link rel="stylesheet" href="css/dark-mode.css">
 </head>
 
 <body data-page="inicio-logueado">
@@ -39,8 +40,8 @@
                     <li><a href="./armario.html"><i class="icon-logout"></i><span data-i18n="myCloset">MY CLOSET</span></a></li>
                     <li><a href="./subidaOutfit.html"><i class="icon-plus"></i><span data-i18n="post">POST</span></a></li>
                     <li><a href="./subidos.html"><i class="icon-heart"></i><span data-i18n="myPosts">MY POSTS</span></a></li>
-                    <li><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
-                    <li><i class="icon-setting"></i><span data-i18n="setting">SETTING</span></li>
+                    <li class="dark-mode-btn" style="cursor:pointer"><i class="icon-moon"></i><span data-i18n="darkMode">DARK MODE</span></li>
+                    <li><a href="./perfil.html?tab=ajustes"><i class="icon-cog"></i><span data-i18n="setting">SETTING</span></a></li>
                 </ul>
 
             </nav>
@@ -115,5 +116,6 @@
 
     <script type="module" src="js/i18n-global.js"></script>
     <script type="module" src="js/inicio.js"></script>
+    <script type="module" src="js/dark-mode.js"></script>
 </body>
 </html>

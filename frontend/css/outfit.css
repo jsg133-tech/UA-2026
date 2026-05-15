@@ -452,6 +452,15 @@
     display: flex;
     gap: 3px;
     font-size: 1rem;
+}
+
+.resumen-estrellas .star,
+.review-estrellas .star {
+    color: rgba(90, 13, 22, 0.2);
+}
+
+.resumen-estrellas .star.llena,
+.review-estrellas .star.llena {
     color: #c8963e;
 }
 

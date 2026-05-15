@@ -237,7 +237,7 @@ async function cargarOutfit() {
 
 function estrellas(n, total = 5) {
     return Array.from({ length: total }, (_, i) =>
-        `<span style="color:${i < Math.round(n) ? '#c8963e' : 'rgba(90,13,22,0.2)'}">★</span>`
+        `<span class="star${i < Math.round(n) ? ' llena' : ''}">★</span>`
     ).join('');
 }
 

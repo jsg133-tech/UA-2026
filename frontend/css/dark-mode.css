@@ -1,0 +1,831 @@
+/* ============================================================
+   DARK MODE — BELLAVESTE
+   Paleta: fondo marrón oscuro cálido, crema brillante, vino acento
+   ============================================================ */
+
+/* ── FONDO Y TEXTO BASE ──────────────────────────────────── */
+
+body.dark-mode {
+    background:
+        radial-gradient(ellipse at 25% 20%, #2d1820 0%, #1e1015 55%, #180c10 100%) !important;
+    color: #f4ece4;
+}
+
+/* ── HEADER PRINCIPAL — vino medio, claramente sobre el fondo ── */
+
+body.dark-mode .barra-superior {
+    background: #4a2535;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .fila-marca {
+    border-bottom-color: rgba(244, 236, 228, 0.1);
+}
+
+body.dark-mode .marca h1 { color: #f4ece4; }
+body.dark-mode .marca p  { color: rgba(244, 236, 228, 0.6); }
+
+body.dark-mode .boton-icono       { color: rgba(244, 236, 228, 0.85); }
+body.dark-mode .boton-icono:hover { color: #f4ece4; }
+
+/* ── BARRA USUARIO — más clara que la cabecera ───────────── */
+
+body.dark-mode .usuario-barra {
+    background: #5e3048;
+    border-top: 1px solid rgba(244, 236, 228, 0.1);
+    border-bottom: none;
+}
+
+body.dark-mode .nombre-usuario {
+    color: #f4ece4;
+    opacity: 1;
+}
+
+body.dark-mode .avatar { border-color: rgba(244, 236, 228, 0.35); }
+
+body.dark-mode .perfil-trigger:hover {
+    background: rgba(244, 236, 228, 0.1);
+}
+
+body.dark-mode .menu-perfil {
+    background: #4a2535;
+    border-color: rgba(244, 236, 228, 0.15);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .menu-perfil li a { color: #f4ece4; }
+
+body.dark-mode .menu-perfil li a:hover {
+    background: rgba(244, 236, 228, 0.1);
+    color: #f4ece4;
+}
+
+/* ── PANEL LATERAL ───────────────────────────────────────── */
+
+body.dark-mode nav ul {
+    background: #3a1e2c;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .menu-header {
+    border-bottom-color: rgba(244, 236, 228, 0.12);
+}
+
+body.dark-mode .menu-header label { color: rgba(244, 236, 228, 0.55); }
+
+body.dark-mode nav ul li a {
+    color: rgba(244, 236, 228, 0.88);
+}
+
+body.dark-mode nav ul li a:hover {
+    background: rgba(244, 236, 228, 0.1);
+    color: #f4ece4;
+}
+
+body.dark-mode nav ul li:not(:has(a)) {
+    color: rgba(244, 236, 228, 0.35);
+}
+
+/* ── FOOTER — mismo tono que la cabecera ─────────────────── */
+
+body.dark-mode .boton-armario {
+    background: #4a2535;
+    color: rgba(244, 236, 228, 0.8);
+    border-top: 1px solid rgba(244, 236, 228, 0.1);
+}
+
+body.dark-mode .boton-armario:hover {
+    background: #5e3048;
+    color: #f4ece4;
+}
+
+/* ── ÁREAS DE CONTENIDO PRINCIPAL ───────────────────────── */
+
+body.dark-mode .contenedor-app,
+body.dark-mode .contenedor-armario,
+body.dark-mode .contenedor-outfit,
+body.dark-mode .contenedor-subidos,
+body.dark-mode .buscar-main,
+body.dark-mode .main-perfil,
+body.dark-mode main {
+    background: transparent !important;
+}
+
+/* Secciones internas con fondo propio */
+body.dark-mode .mi-armario,
+body.dark-mode .colecciones,
+body.dark-mode .outfit-dia {
+    background: transparent !important;
+}
+
+/* Cabeceras de sección */
+body.dark-mode .armario-header h2,
+body.dark-mode .colecciones h2,
+body.dark-mode .outfit-dia h2,
+body.dark-mode .mi-armario h2 {
+    color: #f4ece4;
+}
+
+body.dark-mode .colecciones p,
+body.dark-mode .outfit-dia p {
+    color: rgba(244, 236, 228, 0.5);
+}
+
+/* Outfit dia */
+body.dark-mode .info-outfit h3 { color: #f4ece4; }
+body.dark-mode .etiquetas span {
+    background: rgba(244, 236, 228, 0.08);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: rgba(244, 236, 228, 0.65);
+}
+
+/* Categorías circulares */
+body.dark-mode .categoria span { color: rgba(244, 236, 228, 0.7); }
+
+/* Colección cards */
+body.dark-mode .coleccion-card .contenido {
+    background: rgba(18, 10, 13, 0.65);
+}
+
+/* ── CARDS Y SUPERFICIES ─────────────────────────────────── */
+
+body.dark-mode .seccion-outfit,
+body.dark-mode .seccion-prendas,
+body.dark-mode .formulario-outfit {
+    background: rgba(42, 24, 32, 0.9);
+    border-color: rgba(244, 236, 228, 0.08);
+    border-top-color: rgba(90, 13, 22, 0.6);
+}
+
+body.dark-mode .tarjeta-armario,
+body.dark-mode .prenda-guardada-card {
+    background: #2a1820;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .tarjeta-outfit {
+    background: #2a1820;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .resultado-card,
+body.dark-mode .subidos-tarjeta {
+    background: #241520;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .prenda-card {
+    background: #241520;
+}
+
+body.dark-mode .item-prenda {
+    background: rgba(42, 24, 32, 0.8);
+    border-color: rgba(244, 236, 228, 0.07);
+}
+
+/* ── INPUTS ──────────────────────────────────────────────── */
+
+body.dark-mode .campo-input,
+body.dark-mode .filtro-input,
+body.dark-mode .input-prenda,
+body.dark-mode .nueva-cat-input,
+body.dark-mode .review-textarea,
+body.dark-mode .buscar-input {
+    background: rgba(30, 16, 21, 0.85);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: #f4ece4;
+}
+
+body.dark-mode .campo-input:focus,
+body.dark-mode .filtro-input:focus,
+body.dark-mode .input-prenda:focus,
+body.dark-mode .buscar-input:focus,
+body.dark-mode .review-textarea:focus {
+    background: rgba(36, 20, 26, 0.95);
+    border-color: rgba(244, 236, 228, 0.35);
+    box-shadow: 0 0 0 3px rgba(244, 236, 228, 0.06);
+}
+
+body.dark-mode .campo-input::placeholder,
+body.dark-mode .filtro-input::placeholder,
+body.dark-mode .input-prenda::placeholder,
+body.dark-mode .buscar-input::placeholder,
+body.dark-mode .review-textarea::placeholder {
+    color: rgba(244, 236, 228, 0.28);
+}
+
+body.dark-mode select.campo-input,
+body.dark-mode select.filtro-input,
+body.dark-mode select.input-prenda {
+    background: rgba(30, 16, 21, 0.85);
+    color: #f4ece4;
+}
+
+/* ── TEXTOS PRINCIPALES ──────────────────────────────────── */
+
+body.dark-mode .titulo-seccion,
+body.dark-mode .titulo-num,
+body.dark-mode .etiqueta-campo,
+body.dark-mode .label-mini,
+body.dark-mode .prenda-nombre,
+body.dark-mode .resultados-titulo,
+body.dark-mode .subidos-nombre,
+body.dark-mode .nombre-outfit,
+body.dark-mode .resumen-nota {
+    color: #f4ece4;
+}
+
+body.dark-mode .campo-valor,
+body.dark-mode .campo-label,
+body.dark-mode .hero-fecha,
+body.dark-mode .prenda-descripcion,
+body.dark-mode .resultados-count,
+body.dark-mode .review-fecha,
+body.dark-mode .review-texto,
+body.dark-mode .autor span {
+    color: rgba(244, 236, 228, 0.55);
+}
+
+body.dark-mode .titulo-seccion::after {
+    background: linear-gradient(90deg, rgba(122, 21, 37, 0.8), transparent);
+}
+
+/* ── ARMARIO CATEGORÍAS ──────────────────────────────────── */
+
+body.dark-mode .armario-header h2 { color: #f4ece4; }
+
+body.dark-mode .categorias-bar {
+    background: rgba(30, 16, 21, 0.8);
+    border-color: rgba(244, 236, 228, 0.08);
+}
+
+body.dark-mode .pill-cat {
+    border-color: rgba(244, 236, 228, 0.15);
+    color: rgba(244, 236, 228, 0.65);
+}
+
+body.dark-mode .pill-cat:hover { background: rgba(244, 236, 228, 0.07); }
+
+body.dark-mode .pill-cat.activa {
+    background: #5a0d16;
+    border-color: #7a1525;
+    color: #f4ece4;
+    box-shadow: 0 2px 10px rgba(90, 13, 22, 0.5);
+}
+
+body.dark-mode .btn-toggle-categorias {
+    background: rgba(30, 16, 21, 0.7);
+    border-color: rgba(244, 236, 228, 0.12);
+    color: rgba(244, 236, 228, 0.7);
+}
+
+body.dark-mode .btn-toggle-categorias:hover {
+    background: rgba(42, 24, 32, 0.9);
+    border-color: rgba(244, 236, 228, 0.25);
+    color: #f4ece4;
+}
+
+body.dark-mode .nueva-cat-input {
+    background: rgba(30, 16, 21, 0.8);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: #f4ece4;
+}
+
+body.dark-mode .nueva-cat-input::placeholder { color: rgba(244, 236, 228, 0.3); }
+
+/* ── HERO OUTFIT ─────────────────────────────────────────── */
+
+body.dark-mode .hero-info {
+    background: rgba(24, 12, 16, 0.88);
+    backdrop-filter: blur(14px);
+}
+
+body.dark-mode .hero-titulo { color: #f4ece4; }
+
+body.dark-mode .hero-categoria { color: rgba(244, 236, 228, 0.5); }
+
+body.dark-mode .hero-autor span { color: rgba(244, 236, 228, 0.5); }
+
+/* ── REVIEWS ─────────────────────────────────────────────── */
+
+body.dark-mode .reviews-resumen,
+body.dark-mode .review-item,
+body.dark-mode .review-form-wrap {
+    background: rgba(42, 24, 32, 0.8);
+    border-color: rgba(244, 236, 228, 0.07);
+}
+
+body.dark-mode .review-item:hover {
+    background: rgba(58, 30, 44, 0.85);
+}
+
+body.dark-mode .review-autor    { color: #f4ece4; }
+body.dark-mode .review-fecha    { color: rgba(244, 236, 228, 0.4); }
+body.dark-mode .review-texto    { color: rgba(244, 236, 228, 0.7); }
+body.dark-mode .review-borrar   { color: rgba(244, 236, 228, 0.35); }
+body.dark-mode .review-borrar:hover { color: #f4ece4; }
+body.dark-mode .reviews-vacio   { color: rgba(244, 236, 228, 0.4); }
+body.dark-mode .review-form-titulo { color: rgba(244, 236, 228, 0.5); }
+
+/* Resumen rating */
+body.dark-mode .resumen-nota    { color: #f4ece4; }
+body.dark-mode .resumen-count   { color: rgba(244, 236, 228, 0.5); }
+
+/* Estrellas — gris crema por defecto, dorado al activar */
+body.dark-mode .resumen-estrellas .star,
+body.dark-mode .review-estrellas .star {
+    color: rgba(244, 236, 228, 0.25);
+}
+
+body.dark-mode .resumen-estrellas .star.llena,
+body.dark-mode .review-estrellas .star.llena {
+    color: #c8963e;
+}
+
+/* Estrellas interactivas del formulario */
+body.dark-mode .star-btn {
+    color: rgba(244, 236, 228, 0.2);
+}
+
+body.dark-mode .star-btn:hover,
+body.dark-mode .star-btn.activa {
+    color: #d4a044;
+}
+
+/* Textarea del formulario */
+body.dark-mode .review-textarea {
+    background: rgba(30, 16, 21, 0.85);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: #f4ece4;
+}
+
+body.dark-mode .review-textarea:focus {
+    border-color: rgba(244, 236, 228, 0.35);
+    box-shadow: 0 0 0 3px rgba(244, 236, 228, 0.06);
+    background: rgba(36, 20, 26, 0.95);
+}
+
+body.dark-mode .review-textarea::placeholder {
+    color: rgba(244, 236, 228, 0.28);
+}
+
+/* ── BÚSQUEDA ────────────────────────────────────────────── */
+
+body.dark-mode .buscar-sugerencias {
+    background: #2a1820;
+    border-color: rgba(244, 236, 228, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .sugerencia-item {
+    border-bottom-color: rgba(244, 236, 228, 0.06);
+}
+
+body.dark-mode .sugerencia-item:hover {
+    background: rgba(244, 236, 228, 0.05);
+}
+
+body.dark-mode .sugerencia-nombre { color: #f4ece4; }
+body.dark-mode .sugerencia-meta { color: rgba(244, 236, 228, 0.5); }
+
+body.dark-mode .btn-advanced {
+    background: rgba(30, 16, 21, 0.7);
+    border-color: rgba(244, 236, 228, 0.12);
+    color: rgba(244, 236, 228, 0.7);
+}
+
+body.dark-mode .btn-advanced:hover {
+    background: rgba(42, 24, 32, 0.9);
+    color: #f4ece4;
+}
+
+/* ── ENLACE VER EN TIENDA ────────────────────────────────── */
+
+body.dark-mode .prenda-link {
+    color: rgba(244, 236, 228, 0.65);
+    border-color: rgba(244, 236, 228, 0.25);
+    background: transparent;
+}
+
+body.dark-mode .prenda-link:hover {
+    background: rgba(244, 236, 228, 0.1);
+    color: #f4ece4;
+    border-color: rgba(244, 236, 228, 0.5);
+}
+
+/* ── BOTÓN CORAZÓN PRENDAS ───────────────────────────────── */
+
+body.dark-mode .btn-guardar-prenda {
+    color: rgba(244, 236, 228, 0.35);
+}
+
+body.dark-mode .btn-guardar-prenda:hover {
+    color: rgba(244, 236, 228, 0.85);
+}
+
+body.dark-mode .btn-guardar-prenda.guardada {
+    color: #d4a044;
+}
+
+/* ── BOTTOM SHEET ────────────────────────────────────────── */
+
+body.dark-mode .bs-overlay {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+body.dark-mode .bs-sheet {
+    background: #2a1820;
+}
+
+body.dark-mode .bs-handle { background: rgba(244, 236, 228, 0.18); }
+body.dark-mode .bs-titulo { color: rgba(244, 236, 228, 0.45); }
+
+body.dark-mode .bs-opcion {
+    background: rgba(36, 21, 26, 0.9);
+    border-color: rgba(244, 236, 228, 0.1);
+    color: rgba(244, 236, 228, 0.8);
+}
+
+body.dark-mode .bs-opcion:hover {
+    background: rgba(90, 13, 22, 0.5);
+    border-color: rgba(122, 21, 37, 0.6);
+    color: #f4ece4;
+}
+
+body.dark-mode .bs-cancelar {
+    background: rgba(244, 236, 228, 0.05);
+    border-color: rgba(244, 236, 228, 0.1);
+    color: rgba(244, 236, 228, 0.45);
+}
+
+/* ── MODALES ─────────────────────────────────────────────── */
+
+body.dark-mode .bv-modal {
+    background: #2a1820;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .bv-modal-title { color: rgba(244, 236, 228, 0.9); }
+body.dark-mode .bv-modal-msg { color: rgba(244, 236, 228, 0.6); }
+body.dark-mode .bv-modal-input {
+    background: rgba(30, 16, 21, 0.8);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: #f4ece4;
+}
+
+/* ── PÁGINA SUBIDA ───────────────────────────────────────── */
+
+body.dark-mode .subida-page-header {
+    background: linear-gradient(160deg, rgba(74, 37, 53, 0.6) 0%, rgba(30, 16, 21, 0.8) 100%);
+    border-bottom-color: rgba(244, 236, 228, 0.1);
+}
+
+body.dark-mode .subida-page-titulo { color: #f4ece4; }
+body.dark-mode .subida-page-label  { color: rgba(244, 236, 228, 0.35); }
+body.dark-mode .subida-page-sub    { color: rgba(244, 236, 228, 0.5); }
+
+/* Secciones del formulario — claramente sobre el fondo */
+body.dark-mode .seccion-outfit,
+body.dark-mode .seccion-prendas {
+    background: rgba(58, 30, 44, 0.75) !important;
+    border: 1px solid rgba(244, 236, 228, 0.12) !important;
+    border-top: 2px solid rgba(122, 21, 37, 0.6) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Inputs — claramente visibles */
+body.dark-mode .campo-input {
+    background: rgba(30, 16, 21, 0.8) !important;
+    border-color: rgba(244, 236, 228, 0.2) !important;
+    color: #f4ece4 !important;
+}
+
+body.dark-mode .campo-input:focus {
+    background: rgba(42, 22, 32, 0.95) !important;
+    border-color: rgba(244, 236, 228, 0.45) !important;
+}
+
+body.dark-mode .campo-input::placeholder {
+    color: rgba(244, 236, 228, 0.3) !important;
+}
+
+/* Select options */
+body.dark-mode select.campo-input option {
+    background: #2a1820;
+    color: #f4ece4;
+}
+
+/* Zona de subida de foto */
+body.dark-mode .etiqueta-campo[for="outfit-picture"] {
+    background: rgba(30, 16, 21, 0.7) !important;
+    border-color: rgba(244, 236, 228, 0.2) !important;
+    color: rgba(244, 236, 228, 0.65) !important;
+}
+
+body.dark-mode .etiqueta-campo[for="outfit-picture"]:hover {
+    background: rgba(42, 22, 32, 0.9) !important;
+    border-color: rgba(244, 236, 228, 0.4) !important;
+}
+
+body.dark-mode .preview-imagen {
+    background: rgba(30, 16, 21, 0.7) !important;
+    border: 1px solid rgba(244, 236, 228, 0.12) !important;
+    color: rgba(244, 236, 228, 0.4) !important;
+}
+
+/* Prendas individuales */
+body.dark-mode .item-prenda {
+    background: rgba(42, 22, 32, 0.7) !important;
+    border-color: rgba(244, 236, 228, 0.1) !important;
+}
+
+body.dark-mode .input-prenda {
+    background: rgba(30, 16, 21, 0.8) !important;
+    border-color: rgba(244, 236, 228, 0.18) !important;
+    color: #f4ece4 !important;
+}
+
+body.dark-mode .input-prenda::placeholder {
+    color: rgba(244, 236, 228, 0.28) !important;
+}
+
+body.dark-mode .preview-prenda {
+    background: rgba(30, 16, 21, 0.7) !important;
+    border-color: rgba(244, 236, 228, 0.15) !important;
+    color: rgba(244, 236, 228, 0.4) !important;
+}
+
+body.dark-mode .boton-agregar-prenda {
+    background: rgba(58, 30, 44, 0.5) !important;
+    border-color: rgba(244, 236, 228, 0.18) !important;
+    color: rgba(244, 236, 228, 0.7) !important;
+}
+
+body.dark-mode .boton-agregar-prenda:hover {
+    background: rgba(74, 37, 53, 0.7) !important;
+    color: #f4ece4 !important;
+}
+
+body.dark-mode .boton-cancelar {
+    background: rgba(244, 236, 228, 0.06) !important;
+    border-color: rgba(244, 236, 228, 0.15) !important;
+    color: rgba(244, 236, 228, 0.7) !important;
+}
+
+body.dark-mode .label-mini,
+body.dark-mode .etiqueta-campo {
+    color: rgba(244, 236, 228, 0.65) !important;
+}
+
+body.dark-mode .titulo-num {
+    color: rgba(244, 236, 228, 0.3) !important;
+}
+
+/* ── CABECERAS EDITORIALES (categorías, resultado) ────────── */
+
+body.dark-mode .seccion-header {
+    background: linear-gradient(160deg, rgba(42, 24, 32, 0.96) 0%, rgba(30, 16, 21, 0.92) 100%);
+    border-bottom-color: rgba(244, 236, 228, 0.07);
+}
+
+body.dark-mode .seccion-header h2 { color: #f4ece4; }
+
+body.dark-mode .header-tipo,
+body.dark-mode .header-back,
+body.dark-mode #subtitulo-filtro {
+    color: rgba(244, 236, 228, 0.45);
+}
+
+body.dark-mode .header-back:hover { color: rgba(244, 236, 228, 0.8); }
+
+/* ── TODOS LOS BOTONES PRIMARIOS ─────────────────────────── */
+
+body.dark-mode .buscar-btn,
+body.dark-mode .btn-aplicar,
+body.dark-mode .boton-upload,
+body.dark-mode .review-submit,
+body.dark-mode .btn-guardar,
+body.dark-mode .btn-nuevo-outfit,
+body.dark-mode .btn-nueva-categoria,
+body.dark-mode .nueva-cat-btn-ok,
+body.dark-mode .bv-modal-btn,
+body.dark-mode .bv-modal-btn--delete,
+body.dark-mode .btn-categorizar,
+body.dark-mode .bs-opcion,
+body.dark-mode .boton-registrar,
+body.dark-mode .boton-login {
+    background: #4a2535 !important;
+    color: #f4ece4 !important;
+    border-color: transparent !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark-mode .buscar-btn:hover,
+body.dark-mode .btn-aplicar:hover,
+body.dark-mode .boton-upload:hover,
+body.dark-mode .review-submit:hover,
+body.dark-mode .btn-guardar:hover,
+body.dark-mode .btn-nuevo-outfit:hover,
+body.dark-mode .btn-nueva-categoria:hover,
+body.dark-mode .nueva-cat-btn-ok:hover,
+body.dark-mode .boton-registrar:hover,
+body.dark-mode .boton-login:hover {
+    background: #5e3048 !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ── BOTONES ESPECÍFICOS ─────────────────────────────────── */
+
+/* ADD CLOSET — borde claro sobre tarjetas oscuras */
+body.dark-mode .btn-anadir-armario {
+    border-color: rgba(244, 236, 228, 0.5);
+    color: rgba(244, 236, 228, 0.85);
+    background: rgba(244, 236, 228, 0.08);
+}
+
+body.dark-mode .btn-anadir-armario:hover {
+    background: rgba(244, 236, 228, 0.18);
+    border-color: rgba(244, 236, 228, 0.8);
+    color: #f4ece4;
+}
+
+body.dark-mode .btn-anadir-armario.anadido {
+    background: rgba(30, 85, 53, 0.4);
+    border-color: rgba(100, 200, 140, 0.5);
+    color: #a0e8b8;
+}
+
+/* MOSTRAR MÁS OUTFITS */
+body.dark-mode .btn-mostrar-mas {
+    background: #4a2535;
+    color: #f4ece4;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .btn-mostrar-mas:hover {
+    background: #5e3048;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* ── PÁGINA PERFIL ───────────────────────────────────────── */
+
+body.dark-mode .contenedor-ajustes {
+    background: #2a1820;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .divisor-titulo {
+    color: rgba(244, 236, 228, 0.7);
+}
+
+body.dark-mode .divisor-titulo::before,
+body.dark-mode .divisor-titulo::after {
+    border-bottom-color: rgba(244, 236, 228, 0.2);
+}
+
+body.dark-mode .tarjeta-usuario {
+    background: #331928;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2), 4px 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .nombre-destacado {
+    background: #5a0d16;
+    color: #f4ece4;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .cambiar-foto {
+    color: rgba(244, 236, 228, 0.6);
+}
+
+body.dark-mode .cambiar-foto:hover {
+    color: #f4ece4;
+}
+
+/* Tabs */
+body.dark-mode .tabs-perfil {
+    border-bottom-color: rgba(244, 236, 228, 0.1);
+}
+
+body.dark-mode .tab-btn {
+    color: rgba(244, 236, 228, 0.5) !important;
+}
+
+body.dark-mode .tab-btn:hover {
+    color: rgba(244, 236, 228, 0.8) !important;
+}
+
+body.dark-mode .tab-btn.active {
+    color: #f4ece4 !important;
+    border-bottom-color: rgba(244, 236, 228, 0.6) !important;
+}
+
+/* Formulario */
+body.dark-mode .form-perfil label {
+    color: rgba(244, 236, 228, 0.65);
+}
+
+body.dark-mode .form-perfil input {
+    background: rgba(30, 16, 21, 0.85);
+    border: 1px solid rgba(244, 236, 228, 0.15);
+    color: #f4ece4;
+}
+
+body.dark-mode .form-perfil input:focus {
+    border-color: rgba(244, 236, 228, 0.35);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 236, 228, 0.06);
+}
+
+body.dark-mode .form-perfil input::placeholder {
+    color: rgba(244, 236, 228, 0.28);
+    font-style: italic;
+}
+
+body.dark-mode .toggle-password {
+    color: rgba(244, 236, 228, 0.5);
+}
+
+body.dark-mode .toggle-password:hover {
+    background: rgba(244, 236, 228, 0.08);
+    color: #f4ece4;
+}
+
+/* Botón actualizar */
+body.dark-mode .btn-update {
+    background: #4a2535 !important;
+    color: #f4ece4 !important;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .btn-update:hover {
+    background: #5e3048 !important;
+}
+
+/* Botones peligro */
+body.dark-mode .btn-logout {
+    background: rgba(100, 70, 66, 0.7);
+    color: rgba(244, 236, 228, 0.85);
+}
+
+body.dark-mode .btn-logout:hover {
+    background: rgba(120, 85, 80, 0.9);
+    color: #f4ece4;
+}
+
+body.dark-mode .btn-delete {
+    background: #5a0d16;
+    color: #f4ece4;
+}
+
+body.dark-mode .btn-delete:hover {
+    background: #7a1525;
+}
+
+/* Ajustes card */
+body.dark-mode .ajustes-card {
+    background: #331928;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .ajustes-cabecera h3 {
+    color: #f4ece4;
+}
+
+body.dark-mode .ajustes-cabecera p {
+    color: rgba(244, 236, 228, 0.55);
+}
+
+body.dark-mode .lang-btn {
+    background: rgba(30, 16, 21, 0.8);
+    border-color: rgba(244, 236, 228, 0.15);
+    color: rgba(244, 236, 228, 0.7);
+}
+
+body.dark-mode .lang-btn:hover {
+    background: rgba(42, 24, 32, 0.9);
+    color: #f4ece4;
+}
+
+body.dark-mode .lang-btn.active {
+    background: #4a2535;
+    border-color: #5e3048;
+    color: #f4ece4;
+}
+
+body.dark-mode .ajustes-placeholder {
+    color: rgba(244, 236, 228, 0.6);
+}
+
+body.dark-mode .ajustes-placeholder p:hover {
+    color: #f4ece4;
+}
+
+/* ── TRANSICIÓN ──────────────────────────────────────────── */
+
+body, body * {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.25s ease !important;
+}
