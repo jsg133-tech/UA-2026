@@ -23,6 +23,56 @@ const fSeason = document.getElementById('f-season');
 let todosLosOutfits = [];
 let advancedAbierto = false;
 
+// ── UTILIDADES DE COLOR ───────────────────────────────────────
+function hexToRgb(hex) {
+    const m = /^#?([0-9a-f]{6})$/i.exec(hex);
+    if (!m) return null;
+    return [parseInt(m[1].slice(0,2),16), parseInt(m[1].slice(2,4),16), parseInt(m[1].slice(4,6),16)];
+}
+
+function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r,g,b), min = Math.min(r,g,b);
+    const l = (max + min) / 2;
+    if (max === min) return [0, 0, l * 100];
+    const d = max - min;
+    const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    let h;
+    if (max === r)      h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+    else if (max === g) h = ((b - r) / d + 2) / 6;
+    else                h = ((r - g) / d + 4) / 6;
+    return [h * 360, s * 100, l * 100];
+}
+
+// Devuelve los nombres (es + en) que corresponden a un hex
+function nombresDeHex(hex) {
+    if (!hex) return [];
+    const rgb = hexToRgb(hex);
+    if (!rgb) return [];
+    const [h, s, l] = rgbToHsl(...rgb);
+
+    if (l < 15)                                  return ['negro', 'black'];
+    if (l > 88 && s < 15)                        return ['blanco', 'white'];
+    if (s < 12)                                  return ['gris', 'gray', 'grey'];
+    if (h >= 25 && h <= 50 && s < 40 && l > 70) return ['beige', 'crema', 'cream'];
+    if (h >= 15 && h <= 45 && l < 50)           return ['marrón', 'marron', 'cafe', 'café', 'brown'];
+    if ((h >= 345 || h <= 15) && s >= 40)        return ['rojo', 'red'];
+    if (h > 15  && h <= 45)                      return ['naranja', 'orange'];
+    if (h > 45  && h <= 70)                      return ['amarillo', 'yellow'];
+    if (h > 70  && h <= 160)                     return ['verde', 'green'];
+    if (h > 160 && h <= 250)                     return ['azul', 'blue'];
+    if (h > 250 && h <= 310)                     return ['morado', 'violeta', 'lila', 'purple', 'violet'];
+    if (h > 310 && h <= 345)                     return ['rosa', 'pink'];
+    return [];
+}
+
+// Comprueba si un hex coincide con el término buscado (nombre o hex parcial)
+function colorCoincide(hex, query) {
+    if (!query) return true;
+    if (hex?.toLowerCase().includes(query)) return true;
+    return nombresDeHex(hex).some(n => n.includes(query));
+}
+
 function idiomaActual() {
     return localStorage.getItem(LANG_STORAGE_KEY) === 'es' ? 'es' : 'en';
 }
@@ -141,8 +191,7 @@ function buscar() {
             const pieces = outfit.pieces || [];
             const tienePrenda = pieces.some(p => {
                 const matchSize  = !size  || p.size?.toLowerCase().includes(size);
-                const matchColor = !color || p.color?.toLowerCase().includes(color) ||
-                                   outfit.color?.toLowerCase().includes(color);
+                const matchColor = !color || colorCoincide(p.color, color) || colorCoincide(outfit.color, color);
                 const matchBrand = !brand || p.marca?.toLowerCase().includes(brand);
                 return matchSize && matchColor && matchBrand;
             });
