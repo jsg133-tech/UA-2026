@@ -12,7 +12,7 @@ function actualizarBotones(oscuro) {
         const icono = btn.querySelector('i');
         const texto = btn.querySelector('span');
         if (icono) icono.className = oscuro ? 'icon-sun' : 'icon-moon';
-        if (texto) texto.textContent = oscuro ? 'DAY MODE' : 'DARK MODE';
+        if (texto) texto.textContent = oscuro ? 'MODO CLARO' : 'MODO OSCURO';
     });
 }
 
