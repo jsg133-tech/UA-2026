@@ -84,6 +84,8 @@
     color: #3d0a11;
     letter-spacing: 1px;
     line-height: 1.3;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .hero-autor {
@@ -228,6 +230,9 @@
     color: #3d0a11;
     letter-spacing: 0.8px;
     flex: 1;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .btn-guardar-prenda {
@@ -419,6 +424,26 @@
     }
 }
 
+/* ── TABLET (481-767px): hero 2 columnas muy estrecho ─────── */
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .outfit-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-foto-wrap {
+        max-height: 380px;
+    }
+
+    .hero-foto {
+        max-height: 380px;
+    }
+
+    .hero-info {
+        padding: 22px 20px;
+    }
+}
+
 /* ── REVIEWS ──────────────────────────────────────────────── */
 
 .reviews-seccion {
@@ -426,13 +451,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 /* RESUMEN */
 .reviews-resumen {
     display: flex;
     align-items: center;
-    gap: 14px;
+    flex-wrap: wrap;
+    gap: 10px 14px;
     padding: 18px 20px;
     background: rgba(255,255,255,0.55);
     border: 1px solid rgba(90,13,22,0.08);
@@ -494,8 +524,14 @@
 
 .review-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
+    flex-wrap: wrap;
+}
+
+.review-meta {
+    flex: 1;
+    min-width: 100px;
 }
 
 .review-avatar {
@@ -519,6 +555,8 @@
     font-size: 0.62rem;
     letter-spacing: 0.8px;
     color: #3d0a11;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .review-fecha {
@@ -539,6 +577,8 @@
     font-size: 0.95rem;
     color: rgba(61,10,17,0.75);
     line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .review-borrar {

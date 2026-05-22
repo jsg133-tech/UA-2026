@@ -24,7 +24,11 @@
 /**
  * Modal con input de contraseña. Llama a alConfirmar(valor) con el texto introducido.
  */
-export function mostrarPrompt(mensaje, alConfirmar, titulo = 'Confirm', placeholder = 'Password', textoConfirmar = 'CONFIRM') {
+import { t } from './i18n-global.js';
+
+export function mostrarPrompt(mensaje, alConfirmar, titulo, placeholder = 'Password', textoConfirmar) {
+  titulo = titulo ?? t('enterPasswordTitle');
+  textoConfirmar = textoConfirmar ?? t('confirm');
   const overlay = document.createElement('div');
   overlay.className = 'bv-modal-overlay';
 
@@ -35,7 +39,7 @@ export function mostrarPrompt(mensaje, alConfirmar, titulo = 'Confirm', placehol
       <p class="bv-modal-msg">${mensaje}</p>
       <input class="bv-modal-input" id="bv-modal-input" type="password" placeholder="${placeholder}" autocomplete="current-password">
       <div class="bv-modal-actions">
-        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">CANCEL</button>
+        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">${t('cancel')}</button>
         <button class="bv-modal-btn bv-modal-btn--delete" id="bv-modal-confirm">${textoConfirmar}</button>
       </div>
     </div>
@@ -71,7 +75,9 @@ export function mostrarPrompt(mensaje, alConfirmar, titulo = 'Confirm', placehol
   document.addEventListener('keydown', onKey);
 }
 
-export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', textoConfirmar = 'DELETE') {
+export function mostrarConfirm(mensaje, alConfirmar, titulo, textoConfirmar) {
+  titulo = titulo ?? t('attention');
+  textoConfirmar = textoConfirmar ?? t('delete');
   const overlay = document.createElement('div');
   overlay.className = 'bv-modal-overlay';
 
@@ -81,7 +87,7 @@ export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', t
       <p class="bv-modal-title" id="bv-modal-title">${titulo}</p>
       <p class="bv-modal-msg">${mensaje}</p>
       <div class="bv-modal-actions">
-        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">CANCEL</button>
+        <button class="bv-modal-btn bv-modal-btn--cancel" id="bv-modal-cancel">${t('cancel')}</button>
         <button class="bv-modal-btn bv-modal-btn--delete" id="bv-modal-confirm">${textoConfirmar}</button>
       </div>
     </div>
@@ -112,10 +118,10 @@ export function mostrarConfirm(mensaje, alConfirmar, titulo = 'Are you sure?', t
 export function mostrarModal(mensaje, tipo = 'error', titulo = '', opciones = {}) {
   // Título por defecto según tipo
   if (!titulo) {
-    titulo = tipo === 'success' ? 'Ready' : 'Attention';
+    titulo = tipo === 'success' ? t('ready') : t('attention');
   }
 
-  const textoBoton = opciones.textoBoton || 'ACCEPT';
+  const textoBoton = opciones.textoBoton || t('accept');
   const alConfirmar = typeof opciones.alConfirmar === 'function' ? opciones.alConfirmar : null;
   const icono = tipo === 'success' ? '✓' : '✕';
 

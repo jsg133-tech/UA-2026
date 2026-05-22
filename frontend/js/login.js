@@ -1,5 +1,6 @@
 import { mostrarModal } from './modal.js';
 import { getToken, clearAuthSession, saveAuthSession } from './auth-storage.js';
+import { t, tError } from './i18n-global.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -35,7 +36,7 @@ function alternarVisibilidadPassword(input, boton) {
   input.type = mostrando ? 'password' : 'text';
   boton.classList.toggle('is-visible', !mostrando);
   boton.setAttribute('aria-pressed', String(!mostrando));
-  boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+  boton.setAttribute('aria-label', mostrando ? t('showPassword') : t('hidePassword'));
 }
 
 if (passwordToggle) {
@@ -83,7 +84,7 @@ form.addEventListener('submit', async (e) => {
   const password = inputPass.value;
 
   if (!email || !password) {
-    mostrarModal('Please fill in all fields.', 'error');
+    mostrarModal(t('fillFields'), 'error');
     return;
   }
 
@@ -101,9 +102,9 @@ form.addEventListener('submit', async (e) => {
 
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error('Invalid username or password.');
+        throw new Error(t('invalidCredentials'));
       }
-      throw new Error(data.error || 'Failed to log in.');
+      throw new Error(tError(data.error) || t('loginError'));
     }
 
     saveAuthSession({
@@ -113,11 +114,11 @@ form.addEventListener('submit', async (e) => {
     });
 
     mostrarModal(
-      'You have logged in successfully.',
+      t('loginSuccess'),
       'success',
-      'Welcome back!',
+      t('welcomeBack'),
       {
-        textoBoton: 'GO TO HOMEPAGE',
+        textoBoton: t('goToHomepage'),
         alConfirmar: () => {
           window.location.href = 'inicio-logueado.html';
         },
@@ -128,7 +129,7 @@ form.addEventListener('submit', async (e) => {
     btnLogin.disabled = false;
 
   } catch (err) {
-    mostrarModal(err.message, 'error', 'Access denied');
+    mostrarModal(err.message, 'error', t('accessDenied'));
     btnLogin.textContent = textoLogin('login');
     btnLogin.disabled = false;
   }

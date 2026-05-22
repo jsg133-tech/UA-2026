@@ -1,6 +1,7 @@
 import { getToken, getStoredUser, saveAuthSession, clearAuthSession, setStoredUser } from './auth-storage.js';
 import { mostrarModal, mostrarConfirm, mostrarPrompt } from './modal.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
+import { t, tError } from './i18n-global.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -24,7 +25,7 @@ function alternarVisibilidadPassword(input, boton) {
     input.type = mostrando ? 'password' : 'text';
     boton.classList.toggle('is-visible', !mostrando);
     boton.setAttribute('aria-pressed', String(!mostrando));
-    boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+    boton.setAttribute('aria-label', mostrando ? t('showPassword') : t('hidePassword'));
 }
 
 passwordToggles.forEach((boton) => {
@@ -88,21 +89,21 @@ async function cargarUsuario() {
         setStoredUser(user);
         rellenarFormulario(user);
     } catch {
-        mostrarModal('Could not load profile data.', 'error');
+        mostrarModal(t('profileLoadError'), 'error');
     }
 }
 
 function rellenarFormulario(user) {
     if (inputName)    inputName.value  = user.name  || '';
     if (inputEmail)   inputEmail.value = user.email || '';
-    if (nombreDisplay) nombreDisplay.textContent = (user.name || 'USUARIO').toUpperCase();
+    if (nombreDisplay) nombreDisplay.textContent = (user.name || t('usuario')).toUpperCase();
     if (vistaPrevia && user.avatar) vistaPrevia.src = user.avatar;
 
     // Actualizar también la barra superior
     const barraAvatar = document.getElementById('avatar-usuario');
     const barraNombre = document.getElementById('nombre-usuario');
     if (barraAvatar && user.avatar) barraAvatar.src = user.avatar;
-    if (barraNombre) barraNombre.textContent = (user.name || 'USUARIO').toUpperCase();
+    if (barraNombre) barraNombre.textContent = (user.name || t('usuario')).toUpperCase();
 }
 
 // ── GUARDAR CAMBIOS ───────────────────────────────────────────
@@ -117,7 +118,7 @@ formPerfil.addEventListener('submit', async (e) => {
     // Si hay cambios que requieren contraseña actual
     const needsPassword = email !== (getStoredUser()?.email || '') || newPassword;
     if (needsPassword && !currentPassword) {
-        mostrarModal('Enter your current password to save changes.', 'error');
+        mostrarModal(t('enterPasswordToSave'), 'error');
         return;
     }
 
@@ -146,26 +147,26 @@ formPerfil.addEventListener('submit', async (e) => {
         inputNewPassword.value  = '';
         inputCurrentPass.value  = '';
         avatarBase64 = null;
-        mostrarModal('Profile updated successfully.', 'success', 'Done');
+        mostrarModal(t('profileUpdated'), 'success', t('ready'));
     } catch (err) {
-        mostrarModal(err.message, 'error');
+        mostrarModal(tError(err.message), 'error');
     }
 });
 
 // ── LOGOUT ────────────────────────────────────────────────────
 btnLogout?.addEventListener('click', () => {
     mostrarConfirm(
-        'You will be logged out of your account.',
+        t('logoutQuestion'),
         () => { clearAuthSession(); window.location.href = 'inicio.html'; },
-        'Log out?',
-        'LOGOUT'
+        t('logoutTitle'),
+        t('logoutBtn')
     );
 });
 
 // ── ELIMINAR CUENTA ───────────────────────────────────────────
 btnDelete?.addEventListener('click', () => {
     mostrarPrompt(
-        'This will permanently delete your account and all your outfits. This action cannot be undone.',
+        t('deleteAccountMsg'),
         async (password) => {
             const token = getToken();
             try {
@@ -178,17 +179,17 @@ btnDelete?.addEventListener('click', () => {
                     body: JSON.stringify({ password }),
                 });
                 const data = await response.json().catch(() => ({}));
-                if (!response.ok) throw new Error(data.error || 'Error deleting account');
+                if (!response.ok) throw new Error(data.error || t('deleteAccountFailed'));
 
-                mostrarModal('Your account has been deleted.', 'success', 'Goodbye');
+                mostrarModal(t('accountDeleted'), 'success', t('goodbye'));
                 setTimeout(() => { clearAuthSession(); window.location.href = 'inicio.html'; }, 1500);
             } catch (err) {
-                mostrarModal(err.message, 'error', 'Delete Failed');
+                mostrarModal(tError(err.message), 'error', t('deleteAccountFailed'));
             }
         },
-        'Delete account permanently?',
-        'Enter your password to confirm',
-        'DELETE'
+        t('deleteAccountTitle'),
+        t('deleteAccountPrompt'),
+        t('delete')
     );
 });
 

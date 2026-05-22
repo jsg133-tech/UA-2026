@@ -1,6 +1,7 @@
 import { getToken, getStoredUser } from './auth-storage.js';
 import { inicializarBarraUsuario } from './barra-usuario.js';
 import { mostrarModal } from './modal.js';
+import { t, tError } from './i18n-global.js';
 
 const API = 'https://ua-2026.onrender.com';
 const LANG_STORAGE_KEY = 'bellaveste-language';
@@ -105,7 +106,7 @@ function renderPrenda(prenda, outfitId, token) {
         <div class="prenda-detalle">
             <div class="prenda-detalle-top">
                 <h3 class="prenda-nombre">${prenda.nombre.toUpperCase()}</h3>
-                <button class="btn-guardar-prenda" title="Save piece" type="button">
+                <button class="btn-guardar-prenda" title="${t('savePiece')}" type="button">
                     <i class="icon-heart"></i>
                 </button>
             </div>
@@ -140,7 +141,7 @@ function renderPrenda(prenda, outfitId, token) {
                     guardada = true;
                     btnSave.classList.add('guardada');
                     btnSave.querySelector('i').className = 'icon-heart';
-                    btnSave.title = 'Saved';
+                    btnSave.title = t('savedPiece');
                 }
             } else {
                 const r = await fetch(`${API}/api/outfits/${outfitId}/pieces/${prenda._id}/save`, {
@@ -151,7 +152,7 @@ function renderPrenda(prenda, outfitId, token) {
                     guardada = false;
                     btnSave.classList.remove('guardada');
                     btnSave.querySelector('i').className = 'icon-heart-empty';
-                    btnSave.title = 'Save piece';
+                    btnSave.title = t('savePiece');
                 }
             }
         } catch { /* silencioso */ }
@@ -219,9 +220,9 @@ async function cargarOutfit() {
                     btnGuardar.classList.add('guardado');
                     btnGuardar.innerHTML = `<i class="icon-ok"></i> ${tOutfit('saved')}`;
                 } else {
-                    mostrarModal('Could not save outfit. Try again.', 'error');
+                    mostrarModal(t('saveOutfitError'), 'error');
                 }
-            } catch { mostrarModal('Connection error.', 'error'); }
+            } catch { mostrarModal(t('connectionError'), 'error'); }
             btnGuardar.disabled = false;
         };
 
@@ -278,7 +279,7 @@ async function cargarReviews(outfitId, token) {
             // Lista
             listaEl.innerHTML = '';
             if (!comments.length) {
-                listaEl.innerHTML = `<p class="reviews-vacio">Be the first to review this outfit.</p>`;
+                listaEl.innerHTML = `<p class="reviews-vacio">${t('beFirstToReview')}</p>`;
                 return;
             }
 
@@ -297,7 +298,7 @@ async function cargarReviews(outfitId, token) {
                         <div class="review-estrellas">${estrellas(c.rating)}</div>
                     </div>
                     <p class="review-texto">${c.texto}</p>
-                    ${esPropio ? `<button class="review-borrar" data-id="${c._id}">DELETE</button>` : ''}
+                    ${esPropio ? `<button class="review-borrar" data-id="${c._id}">${t('deleteReview')}</button>` : ''}
                 `;
 
                 if (esPropio) {
@@ -345,11 +346,11 @@ async function cargarReviews(outfitId, token) {
     if (submitBtn) {
         submitBtn.addEventListener('click', async () => {
             const texto = textoEl?.value.trim();
-            if (!ratingSeleccionado) { mostrarModal('Please select a star rating.', 'error'); return; }
-            if (!texto) { mostrarModal('Please write your review before posting.', 'error'); return; }
+            if (!ratingSeleccionado) { mostrarModal(t('selectRating'), 'error'); return; }
+            if (!texto) { mostrarModal(t('writeReview'), 'error'); return; }
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'POSTING...';
+            submitBtn.textContent = t('posting');
 
             try {
                 const res = await fetch(`${API}/api/outfits/${outfitId}/comments`, {
@@ -363,14 +364,14 @@ async function cargarReviews(outfitId, token) {
                 textoEl.value = '';
                 ratingSeleccionado = 0;
                 starsInput?.querySelectorAll('.star-btn').forEach(b => b.classList.remove('activa'));
-                mostrarModal('Your review has been posted.', 'success', 'Thank you!');
+                mostrarModal(t('reviewPosted'), 'success', t('thankYou'));
                 await renderLista();
             } catch (err) {
-                mostrarModal(err.message, 'error', 'Could not post review');
+                mostrarModal(tError(err.message), 'error', t('couldNotPost'));
             }
 
             submitBtn.disabled = false;
-            submitBtn.textContent = 'POST REVIEW';
+            submitBtn.textContent = t('postReview');
         });
     }
 }

@@ -1,5 +1,221 @@
 const LANG_STORAGE_KEY = 'bellaveste-language';
 
+/* ── TRADUCCIONES COMUNES (usadas desde JS) ─────────────────
+   Importar: import { t } from './i18n-global.js';
+   Usar:     t('cancel')  →  'CANCEL' o 'CANCELAR'
+   ──────────────────────────────────────────────────────────── */
+const COMMON_TRANSLATIONS = {
+  en: {
+    /* Botones de modal */
+    cancel: 'CANCEL',
+    confirm: 'CONFIRM',
+    delete: 'DELETE',
+    accept: 'ACCEPT',
+    /* Títulos de modal */
+    attention: 'Attention',
+    ready: 'Ready',
+    error: 'Error',
+    /* Fallback usuario */
+    usuario: 'USER',
+    /* Armario */
+    removeFromCloset: 'Remove from closet',
+    addToCategory: 'Add to category',
+    addToCategoryBtn: 'ADD TO CATEGORY',
+    moveOutfitTo: 'MOVE OUTFIT TO',
+    createCategoryFirst: 'Create a category first using the NEW button above.',
+    noOutfitsSaved: "You haven't saved any outfits yet.",
+    categoryError: 'Could not assign category.',
+    /* Outfit / Reviews */
+    savePiece: 'Save piece',
+    savedPiece: 'Saved',
+    noPieces: 'No pieces added to this outfit.',
+    saveOutfitError: 'Could not save outfit. Try again.',
+    connectionError: 'Connection error.',
+    beFirstToReview: 'Be the first to review this outfit.',
+    deleteReview: 'DELETE',
+    posting: 'POSTING...',
+    postReview: 'POST REVIEW',
+    reviews: 'REVIEWS',
+    leaveReview: 'LEAVE A REVIEW',
+    noOutfitFound: 'Outfit not found.',
+    /* Perfil */
+    profileLoadError: 'Could not load profile data.',
+    enterPasswordToSave: 'Enter your current password to save changes.',
+    profileUpdated: 'Profile updated successfully.',
+    confirmDeleteTitle: 'Delete account',
+    confirmDeleteMsg: 'Are you sure you want to permanently delete your account? This action cannot be undone.',
+    confirmDeleteBtn: 'DELETE ACCOUNT',
+    enterPasswordTitle: 'Confirm your password',
+    enterPasswordPrompt: 'Enter your current password to confirm:',
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
+    /* Login */
+    fillFields: 'Please fill in all fields.',
+    invalidCredentials: 'Invalid username or password.',
+    loginError: 'Failed to log in.',
+    loginSuccess: 'You have logged in successfully.',
+    welcomeBack: 'Welcome back!',
+    goToHomepage: 'GO TO HOMEPAGE',
+    accessDenied: 'Access denied',
+    /* Registro */
+    fillRequired: 'Please complete all required fields.',
+    nameTooShort: 'The name must have at least 2 characters.',
+    usernameInvalid: 'The username must have 3–20 characters (letters, numbers or _).',
+    invalidEmail: 'Please enter a valid email address.',
+    passwordTooShort: 'The password must have at least 6 characters.',
+    passwordsMismatch: 'The passwords do not match.',
+    registrationSuccess: 'You are registered successfully.',
+    registrationCompleted: 'Registration completed',
+    goToLogin: 'GO TO LOGIN',
+    registrationError: 'Registration error',
+    /* Subidos */
+    outfitFallback: 'Outfit',
+    /* Reviews */
+    selectRating: 'Please select a star rating.',
+    writeReview: 'Please write your review before posting.',
+    reviewPosted: 'Your review has been posted.',
+    thankYou: 'Thank you!',
+    couldNotPost: 'Could not post review',
+    /* Logout/delete perfil */
+    logoutQuestion: 'You will be logged out of your account.',
+    logoutTitle: 'Log out?',
+    logoutBtn: 'LOGOUT',
+    accountDeleted: 'Your account has been deleted.',
+    goodbye: 'Goodbye',
+    deleteAccountMsg: 'This will permanently delete your account and all your outfits. This action cannot be undone.',
+    deleteAccountTitle: 'Delete account permanently?',
+    deleteAccountPrompt: 'Enter your password to confirm',
+    deleteAccountFailed: 'Delete Failed',
+    /* Alto contraste */
+    normalMode: 'NORMAL MODE',
+    highContrast: 'HIGH CONTRAST',
+  },
+  es: {
+    /* Botones de modal */
+    cancel: 'CANCELAR',
+    confirm: 'CONFIRMAR',
+    delete: 'ELIMINAR',
+    accept: 'ACEPTAR',
+    /* Títulos de modal */
+    attention: 'Atención',
+    ready: 'Listo',
+    error: 'Error',
+    /* Fallback usuario */
+    usuario: 'USUARIO',
+    /* Armario */
+    removeFromCloset: 'Quitar del armario',
+    addToCategory: 'Añadir a categoría',
+    addToCategoryBtn: 'AÑADIR A CATEGORÍA',
+    moveOutfitTo: 'MOVER OUTFIT A',
+    createCategoryFirst: 'Crea primero una categoría con el botón NUEVA.',
+    noOutfitsSaved: 'Aún no has guardado ningún outfit.',
+    categoryError: 'No se pudo asignar la categoría.',
+    /* Outfit / Reviews */
+    savePiece: 'Guardar prenda',
+    savedPiece: 'Guardado',
+    noPieces: 'Este outfit no tiene prendas.',
+    saveOutfitError: 'No se pudo guardar el outfit. Inténtalo de nuevo.',
+    connectionError: 'Error de conexión.',
+    beFirstToReview: 'Sé el primero en reseñar este outfit.',
+    deleteReview: 'ELIMINAR',
+    posting: 'ENVIANDO...',
+    postReview: 'PUBLICAR RESEÑA',
+    reviews: 'RESEÑAS',
+    leaveReview: 'DEJA UNA RESEÑA',
+    noOutfitFound: 'Outfit no encontrado.',
+    /* Perfil */
+    profileLoadError: 'No se pudieron cargar los datos del perfil.',
+    enterPasswordToSave: 'Introduce tu contraseña actual para guardar los cambios.',
+    profileUpdated: 'Perfil actualizado correctamente.',
+    confirmDeleteTitle: 'Eliminar cuenta',
+    confirmDeleteMsg: '¿Estás segura de que quieres eliminar tu cuenta permanentemente? Esta acción no se puede deshacer.',
+    confirmDeleteBtn: 'ELIMINAR CUENTA',
+    enterPasswordTitle: 'Confirma tu contraseña',
+    enterPasswordPrompt: 'Introduce tu contraseña actual para confirmar:',
+    showPassword: 'Mostrar contraseña',
+    hidePassword: 'Ocultar contraseña',
+    /* Login */
+    fillFields: 'Por favor, rellena todos los campos.',
+    invalidCredentials: 'Usuario o contraseña incorrectos.',
+    loginError: 'Error al iniciar sesión.',
+    loginSuccess: 'Has iniciado sesión correctamente.',
+    welcomeBack: '¡Bienvenido de nuevo!',
+    goToHomepage: 'IR AL INICIO',
+    accessDenied: 'Acceso denegado',
+    /* Registro */
+    fillRequired: 'Por favor, completa todos los campos requeridos.',
+    nameTooShort: 'El nombre debe tener al menos 2 caracteres.',
+    usernameInvalid: 'El usuario debe tener 3–20 caracteres (letras, números o _).',
+    invalidEmail: 'Por favor, introduce un correo válido.',
+    passwordTooShort: 'La contraseña debe tener al menos 6 caracteres.',
+    passwordsMismatch: 'Las contraseñas no coinciden.',
+    registrationSuccess: 'Te has registrado correctamente.',
+    registrationCompleted: 'Registro completado',
+    goToLogin: 'IR AL LOGIN',
+    registrationError: 'Error de registro',
+    /* Subidos */
+    outfitFallback: 'Outfit',
+    /* Reviews */
+    selectRating: 'Por favor, selecciona una valoración.',
+    writeReview: 'Por favor, escribe tu reseña antes de publicar.',
+    reviewPosted: 'Tu reseña ha sido publicada.',
+    thankYou: '¡Gracias!',
+    couldNotPost: 'No se pudo publicar la reseña',
+    /* Logout/delete perfil */
+    logoutQuestion: 'Se cerrará la sesión de tu cuenta.',
+    logoutTitle: '¿Cerrar sesión?',
+    logoutBtn: 'CERRAR SESION',
+    accountDeleted: 'Tu cuenta ha sido eliminada.',
+    goodbye: 'Hasta luego',
+    deleteAccountMsg: 'Esto eliminará permanentemente tu cuenta y todos tus outfits. Esta acción no se puede deshacer.',
+    deleteAccountTitle: '¿Eliminar cuenta permanentemente?',
+    deleteAccountPrompt: 'Introduce tu contraseña para confirmar',
+    deleteAccountFailed: 'Error al eliminar',
+    /* Alto contraste */
+    normalMode: 'MODO NORMAL',
+    highContrast: 'ALTO CONTRASTE',
+  },
+};
+
+export function t(key) {
+  const lang = getCurrentLanguage();
+  const pageKey = getPageKey();
+  return PAGE_TRANSLATIONS[pageKey]?.[lang]?.[key]
+    ?? COMMON_TRANSLATIONS[lang]?.[key]
+    ?? COMMON_TRANSLATIONS.en[key]
+    ?? key;
+}
+
+/* ── ERRORES DEL BACKEND ─────────────────────────────────────
+   Mapea mensajes en inglés que devuelve la API a la traducción
+   correcta según el idioma activo del usuario.
+   ──────────────────────────────────────────────────────────── */
+const BACKEND_ERROR_MAP = {
+  'You have already reviewed this outfit':  { es: 'Ya has reseñado este outfit.' },
+  'Already saved':                          { es: 'Ya guardado en tu armario.' },
+  'Outfit not found':                       { es: 'Outfit no encontrado.' },
+  'User not found':                         { es: 'Usuario no encontrado.' },
+  'Invalid credentials':                    { es: 'Credenciales incorrectas.' },
+  'Invalid token':                          { es: 'Sesión inválida. Vuelve a iniciar sesión.' },
+  'Token expired':                          { es: 'Sesión expirada. Vuelve a iniciar sesión.' },
+  'Unauthorized':                           { es: 'No autorizado.' },
+  'Email already in use':                   { es: 'Este correo ya está registrado.' },
+  'Username already taken':                 { es: 'Ese nombre de usuario ya está en uso.' },
+  'Incorrect password':                     { es: 'Contraseña incorrecta.' },
+  'Wrong password':                         { es: 'Contraseña incorrecta.' },
+  'Missing fields':                         { es: 'Faltan campos obligatorios.' },
+  'Internal server error':                  { es: 'Error interno del servidor.' },
+  'Network error':                          { es: 'Error de red. Comprueba tu conexión.' },
+};
+
+export function tError(backendMessage) {
+  if (!backendMessage) return '';
+  const lang = getCurrentLanguage();
+  if (lang === 'en') return backendMessage;
+  const entry = BACKEND_ERROR_MAP[backendMessage];
+  return entry?.[lang] ?? backendMessage;
+}
+
 const PAGE_TRANSLATIONS = {
   inicio: {
     en: {
@@ -559,6 +775,9 @@ const PAGE_TRANSLATIONS = {
       notificationSettings: 'Notification Settings',
       privacySecurity: 'Privacy & Security',
       helpCenter: 'Help Center',
+      highContrastTitle: 'High Contrast',
+      highContrastDescription: 'Larger text and stronger colours for easier reading.',
+      highContrast: 'HIGH CONTRAST',
       logout: 'LOGOUT',
       deleteAccount: 'DELETE ACCOUNT',
       location: 'SPAIN',
@@ -597,6 +816,9 @@ const PAGE_TRANSLATIONS = {
       notificationSettings: 'Configuracion de notificaciones',
       privacySecurity: 'Privacidad y seguridad',
       helpCenter: 'Centro de ayuda',
+      highContrastTitle: 'Alto contraste',
+      highContrastDescription: 'Texto más grande y colores más intensos para leer mejor.',
+      highContrast: 'ALTO CONTRASTE',
       logout: 'CERRAR SESION',
       deleteAccount: 'ELIMINAR CUENTA',
       location: 'ESPAÑA',

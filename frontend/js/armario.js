@@ -1,5 +1,6 @@
 import { getToken, getStoredUser, clearAuthSession, setStoredUser } from './auth-storage.js';
 import { mostrarModal } from './modal.js';
+import { t } from './i18n-global.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -140,14 +141,14 @@ function crearTarjetaOutfit(outfit) {
         <div class="tarjeta-overlay">
             <div class="tarjeta-top">
                 <span class="nombre-outfit">${nombre}</span>
-                <button class="btn-favorito" title="Remove from closet" type="button">
+                <button class="btn-favorito" title="${t('removeFromCloset')}" type="button">
                     <i class="icon-heart"></i>
                 </button>
             </div>
         </div>
-        <button class="btn-categorizar" type="button" title="Add to category">
+        <button class="btn-categorizar" type="button" title="${t('addToCategory')}">
             <i class="icon-folder"></i>
-            <span>${catLabel ? catLabel.toUpperCase() : 'ADD TO CATEGORY'}</span>
+            <span>${catLabel ? catLabel.toUpperCase() : t('addToCategoryBtn')}</span>
             <i class="icon-right-open btn-cat-arrow"></i>
         </button>
     `;
@@ -183,7 +184,7 @@ function abrirBottomSheet(itemId, tipo, btnCat, outfitId = null) {
     const sheet = document.createElement('div');
     sheet.className = 'bs-sheet';
 
-    const titulo = tipo === 'outfit' ? 'MOVE OUTFIT TO' : 'MOVE PIECE TO';
+    const titulo = t('moveOutfitTo');
 
     const opciones = categoriasUsuario.length
         ? categoriasUsuario.map(cat => `
@@ -192,13 +193,13 @@ function abrirBottomSheet(itemId, tipo, btnCat, outfitId = null) {
                 <span>${cat.name.toUpperCase()}</span>
                 <i class="icon-ok bs-check" style="display:none"></i>
             </button>`).join('')
-        : `<p class="bs-vacio">Create a category first using the NEW button above.</p>`;
+        : `<p class="bs-vacio">${t('createCategoryFirst')}</p>`;
 
     sheet.innerHTML = `
         <div class="bs-handle"></div>
         <p class="bs-titulo">${titulo}</p>
         <div class="bs-opciones">${opciones}</div>
-        <button class="bs-cancelar" type="button">CANCEL</button>
+        <button class="bs-cancelar" type="button">${t('cancel')}</button>
     `;
 
     overlay.appendChild(sheet);
@@ -285,7 +286,7 @@ async function cambiarCategoriaOutfit(idOutfit, nuevaCategoria, btnTag) {
     } catch (err) {
         btnTag.style.opacity = '1';
         console.error('Error asignando categoría:', err.message);
-        mostrarModal(`Could not assign category: ${err.message}`, 'error');
+        mostrarModal(`${t('categoryError')}: ${err.message}`, 'error');
     }
 }
 
@@ -328,7 +329,7 @@ function renderizarGrid() {
 
     gridArmario.innerHTML = '';
     if (!outfits.length) {
-        gridArmario.innerHTML = '<p class="armario-vacio">You haven\'t saved any outfits yet.</p>';
+        gridArmario.innerHTML = `<p class="armario-vacio">${t('noOutfitsSaved')}</p>`;
     } else {
         outfits.forEach(o => gridArmario.appendChild(crearTarjetaOutfit(o)));
     }
@@ -384,7 +385,7 @@ async function cargarUsuario() {
     if (guardado) {
         try {
             const u = guardado;
-            nombreUsuarioEl.textContent = (u.name || 'USUARIO').toUpperCase();
+            nombreUsuarioEl.textContent = (u.name || t('usuario')).toUpperCase();
             avatarUsuarioEl.src = u.avatar || 'images/perfil.jfif';
         } catch { /* continúa */ }
     }
@@ -392,7 +393,7 @@ async function cargarUsuario() {
         const r = await fetch(`${API}/api/auth/me`, { headers: { Authorization: `Bearer ${token}` } });
         if (!r.ok) return;
         const u = await r.json();
-        nombreUsuarioEl.textContent = (u.name || 'USUARIO').toUpperCase();
+        nombreUsuarioEl.textContent = (u.name || t('usuario')).toUpperCase();
         avatarUsuarioEl.src = u.avatar || 'images/perfil.jfif';
         setStoredUser(u);
     } catch { /* silencioso */ }

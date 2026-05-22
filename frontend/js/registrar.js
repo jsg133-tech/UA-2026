@@ -1,5 +1,6 @@
 import { mostrarModal } from './modal.js';
 import { clearAuthSession } from './auth-storage.js';
+import { t, tError } from './i18n-global.js';
 
 const API = 'https://ua-2026.onrender.com';
 
@@ -36,7 +37,7 @@ function alternarVisibilidadPassword(input, boton) {
     input.type = mostrando ? 'password' : 'text';
     boton.classList.toggle('is-visible', !mostrando);
     boton.setAttribute('aria-pressed', String(!mostrando));
-    boton.setAttribute('aria-label', mostrando ? 'Show password' : 'Hide password');
+    boton.setAttribute('aria-label', mostrando ? t('showPassword') : t('hidePassword'));
 }
 
 passwordToggles.forEach((boton) => {
@@ -63,32 +64,32 @@ function validarFormularioRegistro() {
     const confirm = inputConfirm.value;
 
     if (!nombre || !username || !email || !password || !confirm) {
-        mostrarModal('Please complete all required fields.', 'error', 'Campos incompletos');
+        mostrarModal(t('fillRequired'), 'error', t('attention'));
         return false;
     }
 
     if (nombre.length < 2) {
-        mostrarModal('The name must have at least 2 characters.', 'error');
+        mostrarModal(t('nameTooShort'), 'error');
         return false;
     }
 
     if (!USER_REGEX.test(username)) {
-        mostrarModal('The username must have 3-20 characters and only letters, numbers or _.', 'error');
+        mostrarModal(t('usernameInvalid'), 'error');
         return false;
     }
 
     if (!EMAIL_REGEX.test(email)) {
-        mostrarModal('Please enter a valid email address.', 'error');
+        mostrarModal(t('invalidEmail'), 'error');
         return false;
     }
 
     if (password.length < 6) {
-        mostrarModal('The password must have at least 6 characters.', 'error');
+        mostrarModal(t('passwordTooShort'), 'error');
         return false;
     }
 
     if (password !== confirm) {
-        mostrarModal('The passwords do not match.', 'error');
+        mostrarModal(t('passwordsMismatch'), 'error');
         return false;
     }
 
@@ -120,14 +121,14 @@ form.addEventListener('submit', async (e) => {
 
         const data = await response.json();
 
-        if (!response.ok) throw new Error(data.error || 'Error al registrar');
+        if (!response.ok) throw new Error(tError(data.error) || t('registrationError'));
 
         mostrarModal(
-            'You are registered successfully.',
+            t('registrationSuccess'),
             'success',
-            'Registration completed',
+            t('registrationCompleted'),
             {
-                textoBoton: 'GO TO LOGIN',
+                textoBoton: t('goToLogin'),
                 alConfirmar: () => {
                     clearAuthSession();
                     window.location.href = 'inicio.html';
@@ -140,7 +141,7 @@ form.addEventListener('submit', async (e) => {
         boton.disabled = false;
 
     } catch (err) {
-        mostrarModal(err.message, 'error', 'Registration error');
+        mostrarModal(err.message, 'error', t('registrationError'));
         boton.textContent = textoRegistro('register');
         boton.disabled = false;
     }

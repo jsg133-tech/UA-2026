@@ -1,0 +1,671 @@
+/* ============================================================
+   HIGH CONTRAST — BELLAVESTE
+   Claro: fondo crema, texto vino oscuro, bordes vino
+   Oscuro: fondo vino muy oscuro, texto crema, bordes crema
+   ============================================================ */
+
+html.high-contrast { font-size: 18px; }
+
+body.high-contrast * { transition: none !important; animation: none !important; }
+
+/* ── NUCLEAR: fuerza opacidad 1 en TODO el nav ───────────── */
+body.high-contrast nav ul li,
+body.high-contrast nav ul li * { opacity: 1 !important; }
+
+/* ════════════════════════════════════════════════════════════
+   MODO CLARO + ALTO CONTRASTE
+   ════════════════════════════════════════════════════════════ */
+
+body.high-contrast:not(.dark-mode) {
+    background: #f9f5f0 !important;
+    color: #3d0a11 !important;
+}
+
+/* Header */
+body.high-contrast:not(.dark-mode) .barra-superior,
+body.high-contrast:not(.dark-mode) .fila-marca {
+    background: #5a0d16 !important;
+    box-shadow: 0 3px 0 #3d0a11 !important;
+}
+body.high-contrast:not(.dark-mode) .usuario-barra {
+    background: rgba(244,236,228,0.95) !important;
+}
+body.high-contrast:not(.dark-mode) .marca h1,
+body.high-contrast:not(.dark-mode) .marca p,
+body.high-contrast:not(.dark-mode) .boton-icono,
+body.high-contrast:not(.dark-mode) .boton-icono i,
+body.high-contrast:not(.dark-mode) nav > label,
+body.high-contrast:not(.dark-mode) nav > label i {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+body.high-contrast:not(.dark-mode) .nombre-usuario {
+    color: #3d0a11 !important;
+    opacity: 1 !important;
+}
+
+/* Menú perfil */
+body.high-contrast:not(.dark-mode) .menu-perfil {
+    background: #5a0d16 !important;
+    border: 2px solid #3d0a11 !important;
+    box-shadow: none !important;
+}
+body.high-contrast:not(.dark-mode) .menu-perfil li a { color: #f4ece4 !important; }
+body.high-contrast:not(.dark-mode) .menu-perfil li a:hover {
+    background: #f4ece4 !important;
+    color: #3d0a11 !important;
+}
+
+/* Nav lateral */
+body.high-contrast:not(.dark-mode) nav ul { background: #3d0a11 !important; }
+body.high-contrast:not(.dark-mode) nav ul li,
+body.high-contrast:not(.dark-mode) nav ul li a,
+body.high-contrast:not(.dark-mode) nav ul li a i,
+body.high-contrast:not(.dark-mode) nav ul li a span,
+body.high-contrast:not(.dark-mode) nav ul li:not(:has(a)),
+body.high-contrast:not(.dark-mode) nav ul li:not(:has(a)) i,
+body.high-contrast:not(.dark-mode) nav ul li:not(:has(a)) span,
+body.high-contrast:not(.dark-mode) .menu-header label,
+body.high-contrast:not(.dark-mode) .menu-header label i {
+    color: #f4ece4 !important;
+}
+body.high-contrast:not(.dark-mode) nav ul li a:hover {
+    background: rgba(244,236,228,0.15) !important;
+    color: #f4ece4 !important;
+}
+
+/* Contenedores principales */
+body.high-contrast:not(.dark-mode) main,
+body.high-contrast:not(.dark-mode) .contenedor-app,
+body.high-contrast:not(.dark-mode) .contenedor-armario,
+body.high-contrast:not(.dark-mode) .contenedor-outfit,
+body.high-contrast:not(.dark-mode) .contenedor-subidos,
+body.high-contrast:not(.dark-mode) .buscar-main,
+body.high-contrast:not(.dark-mode) .main-perfil,
+body.high-contrast:not(.dark-mode) .colecciones,
+body.high-contrast:not(.dark-mode) .mi-armario,
+body.high-contrast:not(.dark-mode) .outfit-dia {
+    background: #f9f5f0 !important;
+}
+
+/* ── TÍTULOS DE SECCIÓN (no sobre foto) ──────────────────── */
+body.high-contrast:not(.dark-mode) .colecciones h2,
+body.high-contrast:not(.dark-mode) .colecciones p,
+body.high-contrast:not(.dark-mode) .outfit-dia h2,
+body.high-contrast:not(.dark-mode) .outfit-dia p,
+body.high-contrast:not(.dark-mode) .armario-header h2,
+body.high-contrast:not(.dark-mode) .resultados-titulo,
+body.high-contrast:not(.dark-mode) .subidos-header h2,
+body.high-contrast:not(.dark-mode) .titulo-seccion,
+body.high-contrast:not(.dark-mode) .seccion-titulo,
+body.high-contrast:not(.dark-mode) .subida-page-titulo,
+body.high-contrast:not(.dark-mode) .subida-page-sub,
+body.high-contrast:not(.dark-mode) .subida-page-label,
+body.high-contrast:not(.dark-mode) .hero-titulo,
+body.high-contrast:not(.dark-mode) .prenda-nombre,
+body.high-contrast:not(.dark-mode) .divisor-titulo,
+body.high-contrast:not(.dark-mode) .ajustes-cabecera h3,
+body.high-contrast:not(.dark-mode) .ajustes-cabecera p,
+body.high-contrast:not(.dark-mode) .info-outfit h3 {
+    color: #3d0a11 !important;
+    opacity: 1 !important;
+}
+
+/* Cabecera de sección con fondo propio */
+body.high-contrast:not(.dark-mode) .seccion-header {
+    background: #5a0d16 !important;
+    border-color: #3d0a11 !important;
+}
+body.high-contrast:not(.dark-mode) .seccion-header h2,
+body.high-contrast:not(.dark-mode) .seccion-header p,
+body.high-contrast:not(.dark-mode) .header-tipo,
+body.high-contrast:not(.dark-mode) .header-back,
+body.high-contrast:not(.dark-mode) #subtitulo-filtro {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Textos secundarios */
+body.high-contrast:not(.dark-mode) .hero-categoria,
+body.high-contrast:not(.dark-mode) .hero-autor span,
+body.high-contrast:not(.dark-mode) .hero-fecha,
+body.high-contrast:not(.dark-mode) .filtro-label,
+body.high-contrast:not(.dark-mode) .review-form-titulo,
+body.high-contrast:not(.dark-mode) .etiqueta-campo,
+body.high-contrast:not(.dark-mode) .label-mini,
+body.high-contrast:not(.dark-mode) .campo-label,
+body.high-contrast:not(.dark-mode) .campo-valor,
+body.high-contrast:not(.dark-mode) .review-texto,
+body.high-contrast:not(.dark-mode) .review-autor,
+body.high-contrast:not(.dark-mode) .review-fecha,
+body.high-contrast:not(.dark-mode) .resultados-count,
+body.high-contrast:not(.dark-mode) .prenda-descripcion,
+body.high-contrast:not(.dark-mode) .autor span,
+body.high-contrast:not(.dark-mode) .categoria span,
+body.high-contrast:not(.dark-mode) .sugerencia-nombre,
+body.high-contrast:not(.dark-mode) .sugerencia-meta,
+body.high-contrast:not(.dark-mode) .resumen-nota,
+body.high-contrast:not(.dark-mode) .resumen-count,
+body.high-contrast:not(.dark-mode) .ajustes-placeholder p,
+body.high-contrast:not(.dark-mode) .form-perfil label,
+body.high-contrast:not(.dark-mode) .titulo-num {
+    color: #3d0a11 !important;
+    opacity: 1 !important;
+}
+
+/* ── TEXTOS SOBRE FOTOS — deben quedarse claros ──────────── */
+body.high-contrast:not(.dark-mode) .nombre-outfit,
+body.high-contrast:not(.dark-mode) .tag-pequeno,
+body.high-contrast:not(.dark-mode) .fecha,
+body.high-contrast:not(.dark-mode) .tarjeta-info,
+body.high-contrast:not(.dark-mode) .tarjeta-info *,
+body.high-contrast:not(.dark-mode) .resultado-nombre,
+body.high-contrast:not(.dark-mode) .resultado-heart,
+body.high-contrast:not(.dark-mode) .contenido,
+body.high-contrast:not(.dark-mode) .contenido * {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Cards */
+body.high-contrast:not(.dark-mode) .tarjeta-armario,
+body.high-contrast:not(.dark-mode) .tarjeta-outfit,
+body.high-contrast:not(.dark-mode) .resultado-card,
+body.high-contrast:not(.dark-mode) .subidos-tarjeta,
+body.high-contrast:not(.dark-mode) .prenda-card,
+body.high-contrast:not(.dark-mode) .item-prenda,
+body.high-contrast:not(.dark-mode) .ajustes-card,
+body.high-contrast:not(.dark-mode) .tarjeta-usuario,
+body.high-contrast:not(.dark-mode) .contenedor-ajustes,
+body.high-contrast:not(.dark-mode) .seccion-outfit,
+body.high-contrast:not(.dark-mode) .seccion-prendas,
+body.high-contrast:not(.dark-mode) .reviews-resumen,
+body.high-contrast:not(.dark-mode) .review-item,
+body.high-contrast:not(.dark-mode) .review-form-wrap,
+body.high-contrast:not(.dark-mode) .filtros-avanzados {
+    background: #ffffff !important;
+    border: 2px solid #5a0d16 !important;
+    box-shadow: none !important;
+}
+
+/* Inputs */
+body.high-contrast:not(.dark-mode) input,
+body.high-contrast:not(.dark-mode) select,
+body.high-contrast:not(.dark-mode) textarea,
+body.high-contrast:not(.dark-mode) .buscar-input,
+body.high-contrast:not(.dark-mode) .filtro-input,
+body.high-contrast:not(.dark-mode) .campo-input,
+body.high-contrast:not(.dark-mode) .input-prenda,
+body.high-contrast:not(.dark-mode) .nueva-cat-input,
+body.high-contrast:not(.dark-mode) .review-textarea {
+    background: #ffffff !important;
+    color: #3d0a11 !important;
+    border: 2px solid #5a0d16 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+body.high-contrast:not(.dark-mode) input::placeholder,
+body.high-contrast:not(.dark-mode) textarea::placeholder,
+body.high-contrast:not(.dark-mode) .buscar-input::placeholder,
+body.high-contrast:not(.dark-mode) .filtro-input::placeholder,
+body.high-contrast:not(.dark-mode) .campo-input::placeholder,
+body.high-contrast:not(.dark-mode) .input-prenda::placeholder {
+    color: rgba(61,10,17,0.55) !important;
+    opacity: 1 !important;
+}
+body.high-contrast:not(.dark-mode) input:focus,
+body.high-contrast:not(.dark-mode) select:focus,
+body.high-contrast:not(.dark-mode) textarea:focus {
+    outline: 3px solid #5a0d16 !important;
+    box-shadow: none !important;
+}
+
+/* Botones primarios */
+body.high-contrast:not(.dark-mode) .buscar-btn,
+body.high-contrast:not(.dark-mode) .btn-aplicar,
+body.high-contrast:not(.dark-mode) .boton-upload,
+body.high-contrast:not(.dark-mode) .btn-guardar,
+body.high-contrast:not(.dark-mode) .btn-update,
+body.high-contrast:not(.dark-mode) .btn-nuevo-outfit,
+body.high-contrast:not(.dark-mode) .btn-mostrar-mas,
+body.high-contrast:not(.dark-mode) .review-submit,
+body.high-contrast:not(.dark-mode) .bv-modal-btn,
+body.high-contrast:not(.dark-mode) .boton-registrar,
+body.high-contrast:not(.dark-mode) .boton-login,
+body.high-contrast:not(.dark-mode) .hero-btn-login,
+body.high-contrast:not(.dark-mode) .nueva-cat-btn-ok,
+body.high-contrast:not(.dark-mode) .btn-nueva-categoria,
+body.high-contrast:not(.dark-mode) .btn-logout,
+body.high-contrast:not(.dark-mode) .btn-delete,
+body.high-contrast:not(.dark-mode) .boton-armario {
+    background: #5a0d16 !important;
+    color: #f4ece4 !important;
+    border: 2px solid #3d0a11 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+
+/* Botones secundarios */
+body.high-contrast:not(.dark-mode) .btn-advanced,
+body.high-contrast:not(.dark-mode) .lang-btn,
+body.high-contrast:not(.dark-mode) .pill-cat,
+body.high-contrast:not(.dark-mode) .btn-toggle-categorias,
+body.high-contrast:not(.dark-mode) .btn-anadir-armario,
+body.high-contrast:not(.dark-mode) .hero-btn-register,
+body.high-contrast:not(.dark-mode) .boton-cancelar,
+body.high-contrast:not(.dark-mode) .bs-cancelar,
+body.high-contrast:not(.dark-mode) .tab-btn {
+    background: #ffffff !important;
+    color: #5a0d16 !important;
+    border: 2px solid #5a0d16 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+body.high-contrast:not(.dark-mode) .lang-btn.active,
+body.high-contrast:not(.dark-mode) .pill-cat.activa,
+body.high-contrast:not(.dark-mode) .tab-btn.active {
+    background: #5a0d16 !important;
+    color: #f4ece4 !important;
+    border-color: #3d0a11 !important;
+}
+
+/* Búsqueda */
+body.high-contrast:not(.dark-mode) .buscar-sugerencias {
+    background: #ffffff !important;
+    border: 2px solid #5a0d16 !important;
+    box-shadow: 3px 3px 0 #5a0d16 !important;
+}
+body.high-contrast:not(.dark-mode) .sugerencia-item { border-bottom: 1px solid rgba(90,13,22,0.3) !important; }
+body.high-contrast:not(.dark-mode) .sugerencia-item:hover { background: #f9f5f0 !important; }
+
+/* Tabs */
+body.high-contrast:not(.dark-mode) .tabs-perfil { border-bottom: 2px solid #5a0d16 !important; }
+body.high-contrast:not(.dark-mode) .tab-btn.active {
+    border-bottom: 3px solid #5a0d16 !important;
+    font-weight: 700 !important;
+}
+
+/* Perfil */
+body.high-contrast:not(.dark-mode) .nombre-destacado { background: #5a0d16 !important; color: #f4ece4 !important; }
+body.high-contrast:not(.dark-mode) .categorias-bar { background: #f9f5f0 !important; border: 2px solid #5a0d16 !important; }
+body.high-contrast:not(.dark-mode) .etiquetas span {
+    background: rgba(90,13,22,0.1) !important;
+    border: 1px solid rgba(90,13,22,0.4) !important;
+    color: #5a0d16 !important;
+    opacity: 1 !important;
+}
+
+/* Modales */
+body.high-contrast:not(.dark-mode) .bv-modal { background: #ffffff !important; border: 2px solid #5a0d16 !important; }
+body.high-contrast:not(.dark-mode) .bv-modal-title,
+body.high-contrast:not(.dark-mode) .bv-modal-msg { color: #3d0a11 !important; opacity: 1 !important; }
+body.high-contrast:not(.dark-mode) .bv-modal-input { background: #ffffff !important; border: 2px solid #5a0d16 !important; color: #3d0a11 !important; }
+body.high-contrast:not(.dark-mode) .bs-sheet { background: #f9f5f0 !important; border-top: 3px solid #5a0d16 !important; }
+body.high-contrast:not(.dark-mode) .bs-opcion { background: #ffffff !important; border: 2px solid #5a0d16 !important; color: #3d0a11 !important; opacity: 1 !important; }
+body.high-contrast:not(.dark-mode) .bs-opcion:hover { background: #5a0d16 !important; color: #f4ece4 !important; }
+
+/* Estrellas */
+body.high-contrast:not(.dark-mode) .star,
+body.high-contrast:not(.dark-mode) .star-btn { color: rgba(61,10,17,0.3) !important; opacity: 1 !important; }
+body.high-contrast:not(.dark-mode) .star.llena,
+body.high-contrast:not(.dark-mode) .star-btn.activa { color: #5a0d16 !important; }
+
+/* ════════════════════════════════════════════════════════════
+   MODO OSCURO + ALTO CONTRASTE
+   ════════════════════════════════════════════════════════════ */
+
+body.high-contrast.dark-mode {
+    background: #160709 !important;
+    color: #f8f2ea !important;
+}
+
+/* Header oscuro */
+body.high-contrast.dark-mode .barra-superior,
+body.high-contrast.dark-mode .fila-marca { background: #3d0a11 !important; box-shadow: 0 3px 0 #5a0d16 !important; }
+body.high-contrast.dark-mode .usuario-barra { background: #2a0810 !important; }
+body.high-contrast.dark-mode .marca h1,
+body.high-contrast.dark-mode .marca p,
+body.high-contrast.dark-mode .boton-icono,
+body.high-contrast.dark-mode .boton-icono i,
+body.high-contrast.dark-mode nav > label,
+body.high-contrast.dark-mode nav > label i,
+body.high-contrast.dark-mode .nombre-usuario {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Nav lateral oscuro */
+body.high-contrast.dark-mode nav ul { background: #220a10 !important; }
+body.high-contrast.dark-mode nav ul li,
+body.high-contrast.dark-mode nav ul li a,
+body.high-contrast.dark-mode nav ul li a i,
+body.high-contrast.dark-mode nav ul li a span,
+body.high-contrast.dark-mode nav ul li:not(:has(a)),
+body.high-contrast.dark-mode nav ul li:not(:has(a)) i,
+body.high-contrast.dark-mode nav ul li:not(:has(a)) span,
+body.high-contrast.dark-mode .menu-header label,
+body.high-contrast.dark-mode .menu-header label i {
+    color: #f4ece4 !important;
+}
+body.high-contrast.dark-mode nav ul li a:hover {
+    background: rgba(244,236,228,0.12) !important;
+    color: #f4ece4 !important;
+}
+
+/* Menú perfil oscuro */
+body.high-contrast.dark-mode .menu-perfil { background: #3d0a11 !important; border: 2px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .menu-perfil li a { color: #f4ece4 !important; }
+body.high-contrast.dark-mode .menu-perfil li a:hover { background: #f4ece4 !important; color: #3d0a11 !important; }
+
+/* Contenedores oscuro */
+body.high-contrast.dark-mode main,
+body.high-contrast.dark-mode .contenedor-app,
+body.high-contrast.dark-mode .contenedor-armario,
+body.high-contrast.dark-mode .contenedor-outfit,
+body.high-contrast.dark-mode .contenedor-subidos,
+body.high-contrast.dark-mode .buscar-main,
+body.high-contrast.dark-mode .main-perfil,
+body.high-contrast.dark-mode .colecciones,
+body.high-contrast.dark-mode .mi-armario,
+body.high-contrast.dark-mode .outfit-dia { background: #160709 !important; }
+
+/* ── TÍTULOS DE SECCIÓN OSCURO (no sobre foto) ───────────── */
+body.high-contrast.dark-mode .colecciones h2,
+body.high-contrast.dark-mode .colecciones p,
+body.high-contrast.dark-mode .outfit-dia h2,
+body.high-contrast.dark-mode .outfit-dia p,
+body.high-contrast.dark-mode .armario-header h2,
+body.high-contrast.dark-mode .resultados-titulo,
+body.high-contrast.dark-mode .subidos-header h2,
+body.high-contrast.dark-mode .titulo-seccion,
+body.high-contrast.dark-mode .seccion-titulo,
+body.high-contrast.dark-mode .subida-page-titulo,
+body.high-contrast.dark-mode .subida-page-sub,
+body.high-contrast.dark-mode .subida-page-label,
+body.high-contrast.dark-mode .hero-titulo,
+body.high-contrast.dark-mode .prenda-nombre,
+body.high-contrast.dark-mode .divisor-titulo,
+body.high-contrast.dark-mode .ajustes-cabecera h3,
+body.high-contrast.dark-mode .ajustes-cabecera p,
+body.high-contrast.dark-mode .info-outfit h3,
+body.high-contrast.dark-mode .hero-categoria,
+body.high-contrast.dark-mode .hero-autor span,
+body.high-contrast.dark-mode .hero-fecha,
+body.high-contrast.dark-mode .filtro-label,
+body.high-contrast.dark-mode .review-form-titulo,
+body.high-contrast.dark-mode .etiqueta-campo,
+body.high-contrast.dark-mode .label-mini,
+body.high-contrast.dark-mode .campo-label,
+body.high-contrast.dark-mode .campo-valor,
+body.high-contrast.dark-mode .review-texto,
+body.high-contrast.dark-mode .review-autor,
+body.high-contrast.dark-mode .review-fecha,
+body.high-contrast.dark-mode .resultados-count,
+body.high-contrast.dark-mode .prenda-descripcion,
+body.high-contrast.dark-mode .autor span,
+body.high-contrast.dark-mode .categoria span,
+body.high-contrast.dark-mode .sugerencia-nombre,
+body.high-contrast.dark-mode .sugerencia-meta,
+body.high-contrast.dark-mode .resumen-nota,
+body.high-contrast.dark-mode .resumen-count,
+body.high-contrast.dark-mode .ajustes-placeholder p,
+body.high-contrast.dark-mode .form-perfil label,
+body.high-contrast.dark-mode .titulo-num,
+body.high-contrast.dark-mode .header-tipo,
+body.high-contrast.dark-mode .header-back,
+body.high-contrast.dark-mode #subtitulo-filtro {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Cabecera editorial oscuro */
+body.high-contrast.dark-mode .seccion-header { background: #3d0a11 !important; }
+body.high-contrast.dark-mode .seccion-header h2,
+body.high-contrast.dark-mode .seccion-header p { color: #f4ece4 !important; opacity: 1 !important; }
+
+/* ── TEXTOS SOBRE FOTOS — quedan claros también en oscuro ── */
+body.high-contrast.dark-mode .nombre-outfit,
+body.high-contrast.dark-mode .tag-pequeno,
+body.high-contrast.dark-mode .fecha,
+body.high-contrast.dark-mode .tarjeta-info,
+body.high-contrast.dark-mode .tarjeta-info *,
+body.high-contrast.dark-mode .resultado-nombre,
+body.high-contrast.dark-mode .resultado-heart,
+body.high-contrast.dark-mode .contenido,
+body.high-contrast.dark-mode .contenido * {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Cards oscuro */
+body.high-contrast.dark-mode .tarjeta-armario,
+body.high-contrast.dark-mode .tarjeta-outfit,
+body.high-contrast.dark-mode .resultado-card,
+body.high-contrast.dark-mode .subidos-tarjeta,
+body.high-contrast.dark-mode .prenda-card,
+body.high-contrast.dark-mode .item-prenda,
+body.high-contrast.dark-mode .ajustes-card,
+body.high-contrast.dark-mode .tarjeta-usuario,
+body.high-contrast.dark-mode .contenedor-ajustes,
+body.high-contrast.dark-mode .seccion-outfit,
+body.high-contrast.dark-mode .seccion-prendas,
+body.high-contrast.dark-mode .reviews-resumen,
+body.high-contrast.dark-mode .review-item,
+body.high-contrast.dark-mode .review-form-wrap,
+body.high-contrast.dark-mode .filtros-avanzados {
+    background: #2a0f1a !important;
+    border: 2px solid #f4ece4 !important;
+    box-shadow: none !important;
+}
+
+/* Inputs oscuro */
+body.high-contrast.dark-mode input,
+body.high-contrast.dark-mode select,
+body.high-contrast.dark-mode textarea,
+body.high-contrast.dark-mode .buscar-input,
+body.high-contrast.dark-mode .filtro-input,
+body.high-contrast.dark-mode .campo-input,
+body.high-contrast.dark-mode .input-prenda,
+body.high-contrast.dark-mode .nueva-cat-input,
+body.high-contrast.dark-mode .review-textarea {
+    background: #1e0810 !important;
+    color: #f4ece4 !important;
+    border: 2px solid #f4ece4 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+body.high-contrast.dark-mode input::placeholder,
+body.high-contrast.dark-mode textarea::placeholder,
+body.high-contrast.dark-mode .buscar-input::placeholder,
+body.high-contrast.dark-mode .filtro-input::placeholder,
+body.high-contrast.dark-mode .campo-input::placeholder,
+body.high-contrast.dark-mode .input-prenda::placeholder {
+    color: rgba(244,236,228,0.6) !important;
+    opacity: 1 !important;
+}
+body.high-contrast.dark-mode input:focus,
+body.high-contrast.dark-mode select:focus,
+body.high-contrast.dark-mode textarea:focus { outline: 3px solid #f4ece4 !important; }
+
+/* Botones primarios oscuro */
+body.high-contrast.dark-mode .buscar-btn,
+body.high-contrast.dark-mode .btn-aplicar,
+body.high-contrast.dark-mode .boton-upload,
+body.high-contrast.dark-mode .btn-guardar,
+body.high-contrast.dark-mode .btn-update,
+body.high-contrast.dark-mode .btn-nuevo-outfit,
+body.high-contrast.dark-mode .btn-mostrar-mas,
+body.high-contrast.dark-mode .review-submit,
+body.high-contrast.dark-mode .bv-modal-btn,
+body.high-contrast.dark-mode .boton-registrar,
+body.high-contrast.dark-mode .boton-login,
+body.high-contrast.dark-mode .hero-btn-login,
+body.high-contrast.dark-mode .nueva-cat-btn-ok,
+body.high-contrast.dark-mode .btn-nueva-categoria,
+body.high-contrast.dark-mode .btn-logout,
+body.high-contrast.dark-mode .btn-delete,
+body.high-contrast.dark-mode .boton-armario {
+    background: #f4ece4 !important;
+    color: #3d0a11 !important;
+    border: 2px solid #f4ece4 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+
+/* Botones secundarios oscuro */
+body.high-contrast.dark-mode .btn-advanced,
+body.high-contrast.dark-mode .lang-btn,
+body.high-contrast.dark-mode .pill-cat,
+body.high-contrast.dark-mode .btn-toggle-categorias,
+body.high-contrast.dark-mode .btn-anadir-armario,
+body.high-contrast.dark-mode .hero-btn-register,
+body.high-contrast.dark-mode .boton-cancelar,
+body.high-contrast.dark-mode .bs-cancelar,
+body.high-contrast.dark-mode .tab-btn {
+    background: transparent !important;
+    color: #f4ece4 !important;
+    border: 2px solid #f4ece4 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+}
+body.high-contrast.dark-mode .lang-btn.active,
+body.high-contrast.dark-mode .pill-cat.activa,
+body.high-contrast.dark-mode .tab-btn.active {
+    background: #f4ece4 !important;
+    color: #3d0a11 !important;
+    border-color: #f4ece4 !important;
+}
+
+/* Búsqueda oscuro */
+body.high-contrast.dark-mode .buscar-sugerencias { background: #2a0f1a !important; border: 2px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .sugerencia-item { border-bottom: 1px solid rgba(244,236,228,0.25) !important; }
+body.high-contrast.dark-mode .sugerencia-item:hover { background: #3d0a11 !important; }
+
+/* Tabs oscuro */
+body.high-contrast.dark-mode .tabs-perfil { border-bottom: 2px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .tab-btn.active { border-bottom: 3px solid #f4ece4 !important; font-weight: 700 !important; }
+
+/* Perfil oscuro */
+body.high-contrast.dark-mode .tarjeta-usuario { background: #220a10 !important; }
+body.high-contrast.dark-mode .nombre-destacado { background: #f4ece4 !important; color: #3d0a11 !important; }
+body.high-contrast.dark-mode .categorias-bar { background: #1e0810 !important; border: 2px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .etiquetas span { background: rgba(244,236,228,0.1) !important; border: 1px solid rgba(244,236,228,0.4) !important; color: #f4ece4 !important; opacity: 1 !important; }
+body.high-contrast.dark-mode .form-perfil input { background: #1e0810 !important; border: 2px solid #f4ece4 !important; color: #f4ece4 !important; }
+
+/* Modales oscuro */
+body.high-contrast.dark-mode .bv-modal { background: #2a0f1a !important; border: 2px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .bv-modal-title,
+body.high-contrast.dark-mode .bv-modal-msg { color: #f4ece4 !important; opacity: 1 !important; }
+body.high-contrast.dark-mode .bv-modal-input { background: #1e0810 !important; border: 2px solid #f4ece4 !important; color: #f4ece4 !important; }
+body.high-contrast.dark-mode .bs-sheet { background: #2a0f1a !important; border-top: 3px solid #f4ece4 !important; }
+body.high-contrast.dark-mode .bs-opcion { background: #1e0810 !important; border: 2px solid #f4ece4 !important; color: #f4ece4 !important; opacity: 1 !important; }
+body.high-contrast.dark-mode .bs-opcion:hover { background: #f4ece4 !important; color: #3d0a11 !important; }
+
+/* Estrellas oscuro */
+body.high-contrast.dark-mode .star,
+body.high-contrast.dark-mode .star-btn { color: rgba(244,236,228,0.3) !important; opacity: 1 !important; }
+body.high-contrast.dark-mode .star.llena,
+body.high-contrast.dark-mode .star-btn.activa { color: #f4ece4 !important; }
+
+/* ════════════════════════════════════════════════════════════
+   TARJETAS SOBRE FOTO — aplica en AMBOS modos
+   Las tarjetas de temporada, color y mood tienen overlays
+   muy transparentes (10-30%) — inútiles para personas con
+   poca visión. Los ponemos al 70% en vino oscuro.
+   ════════════════════════════════════════════════════════════ */
+
+/* Overlay oscuro en tarjetas de temporada */
+body.high-contrast .card-temporada::before,
+body.high-contrast .card-temporada:hover::before {
+    background: rgba(61,10,17,0.72) !important;
+}
+
+/* Overlay oscuro en tarjetas de color */
+body.high-contrast .card-color::after,
+body.high-contrast .card-color:hover::after {
+    background: rgba(61,10,17,0.72) !important;
+}
+
+/* Overlay oscuro en tarjetas de mood */
+body.high-contrast .card-mood::after,
+body.high-contrast .card-mood:hover::after {
+    background: rgba(61,10,17,0.72) !important;
+}
+
+/* Overlay oscuro en coleccion-card */
+body.high-contrast .coleccion-card::after {
+    background: linear-gradient(to top, rgba(61,10,17,0.88), rgba(61,10,17,0.45)) !important;
+}
+
+/* Texto sobre todas las tarjetas de categoría: grande, claro, legible */
+body.high-contrast .card-temporada span,
+body.high-contrast .card-color span,
+body.high-contrast .card-mood span {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 4px !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6) !important;
+}
+
+/* Títulos de coleccion-card */
+body.high-contrast .contenido,
+body.high-contrast .contenido * {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+/* Ocultar watermark BELLAVESTE en cabeceras (dificulta la lectura) */
+body.high-contrast .seccion-header::before {
+    display: none !important;
+}
+
+/* Subtítulo de sección: más grande y visible */
+body.high-contrast .seccion-header p {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+    font-size: 1.15rem !important;
+    font-style: italic !important;
+}
+
+/* Título principal de sección: aún más grande en HC */
+body.high-contrast .seccion-header h2 {
+    font-size: 2.4rem !important;
+    letter-spacing: 6px !important;
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Overlay de tarjetas de resultado/búsqueda: gradiente más oscuro */
+body.high-contrast .tarjeta-info {
+    background: linear-gradient(transparent, rgba(61,10,17,0.92)) !important;
+}
+
+/* Nombre outfit sobre foto: más grande */
+body.high-contrast .nombre-outfit {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+}
+
+/* tag-pequeno y fecha sobre foto */
+body.high-contrast .tag-pequeno,
+body.high-contrast .fecha {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+}
+
+/* Resultado-overlay más opaco */
+body.high-contrast .resultado-overlay {
+    background: rgba(61,10,17,0.88) !important;
+}
+body.high-contrast .resultado-nombre {
+    color: #f4ece4 !important;
+    opacity: 1 !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+}

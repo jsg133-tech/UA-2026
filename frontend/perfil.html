@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/modal.css">
     <script type="module" src="js/perfil.js"></script>
     <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/high-contrast.css">
 </head>
 <body data-page="perfil">
     <header class="barra-superior">
@@ -131,6 +132,17 @@
                 </div>
             </div>
 
+            <div class="ajustes-card">
+                <div class="ajustes-cabecera">
+                    <h3 data-i18n="highContrastTitle">High Contrast</h3>
+                    <p data-i18n="highContrastDescription">Larger text and stronger colours for easier reading.</p>
+                </div>
+                <button type="button" class="high-contrast-btn lang-btn" style="margin-top:4px">
+                    <i class="icon-eye-off"></i>
+                    <span data-i18n="highContrast">HIGH CONTRAST</span>
+                </button>
+            </div>
+
             <div class="ajustes-placeholder">
                 <p><i class="icon-cog"></i> <span data-i18n="notificationSettings">Notification Settings</span></p>
                 <p><i class="icon-lock"></i> <span data-i18n="privacySecurity">Privacy & Security</span></p>
@@ -150,5 +162,6 @@
     </footer>
     <script type="module" src="js/i18n-global.js"></script>
     <script type="module" src="js/dark-mode.js"></script>
+    <script type="module" src="js/high-contrast.js"></script>
 </body>
 </html>
