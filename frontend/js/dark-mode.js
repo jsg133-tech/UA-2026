@@ -8,11 +8,25 @@ function aplicarTema(oscuro) {
 }
 
 function actualizarBotones(oscuro) {
+    const lang = localStorage.getItem('bellaveste-language') || 'en';
+    const textDay = lang === 'es' ? 'MODO CLARO' : 'DAY MODE';
+    const textDark = lang === 'es' ? 'MODO OSCURO' : 'DARK MODE';
+
     document.querySelectorAll('.dark-mode-btn').forEach(btn => {
         const icono = btn.querySelector('i');
         const texto = btn.querySelector('span');
         if (icono) icono.className = oscuro ? 'icon-sun' : 'icon-moon';
-        if (texto) texto.textContent = oscuro ? 'MODO CLARO' : 'MODO OSCURO';
+        
+        if (texto) {
+            texto.textContent = oscuro ? textDay : textDark;
+        } else {
+            // Para botones sin span (como en perfil.html)
+            btn.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                    node.textContent = oscuro ? textDay : textDark;
+                }
+            });
+        }
     });
 }
 
@@ -39,4 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sincronizar entre pestañas
 window.addEventListener('storage', e => {
     if (e.key === STORAGE_KEY) aplicarTema(e.newValue === '1');
+});
+
+// Actualizar texto cuando cambie el idioma
+document.addEventListener('bellaveste:language-changed', () => {
+    actualizarBotones(document.body.classList.contains('dark-mode'));
 });
