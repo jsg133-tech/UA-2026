@@ -528,6 +528,15 @@ const PAGE_TRANSLATIONS = {
   perfil: {
     en: {
       pageTitle: 'Your Account - Bellaveste',
+      menu: 'MENU',
+      home: 'HOME',
+      profile: 'PROFILE',
+      search: 'SEARCH',
+      collections: 'COLLECTIONS',
+      myCloset: 'MY CLOSET',
+      post: 'POST',
+      darkMode: 'DARK MODE',
+      setting: 'SETTING',
       mainTitle: 'YOUR ACCOUNT',
       editProfile: 'EDIT PROFILE',
       myPosts: 'MY POSTS',
@@ -557,6 +566,15 @@ const PAGE_TRANSLATIONS = {
     },
     es: {
       pageTitle: 'Tu cuenta - Bellaveste',
+      menu: 'MENU',
+      home: 'INICIO',
+      profile: 'PERFIL',
+      search: 'BUSCAR',
+      collections: 'COLECCIONES',
+      myCloset: 'MI ARMARIO',
+      post: 'PUBLICAR',
+      darkMode: 'MODO OSCURO',
+      setting: 'AJUSTES',
       mainTitle: 'TU CUENTA',
       editProfile: 'EDITAR PERFIL',
       myPosts: 'MIS PUBLICACIONES',
@@ -589,7 +607,7 @@ const PAGE_TRANSLATIONS = {
 
 function getCurrentLanguage() {
   const saved = localStorage.getItem(LANG_STORAGE_KEY);
-  return saved === 'es' ? 'es' : 'en';
+  return saved === 'en' ? 'en' : 'es';
 }
 
 function getPageKey() {
